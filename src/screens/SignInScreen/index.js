@@ -1,5 +1,5 @@
-import { View, TextInput, Text, Pressable } from 'react-native';
-import { useForm, Controller } from 'react-hook-form';
+import { View, Text, Pressable } from 'react-native';
+import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
