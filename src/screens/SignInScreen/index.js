@@ -1,6 +1,8 @@
 import { View, TextInput, Text, Pressable } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import styles from './styles';
+import CustomInput from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton';
 const SignInScreen = () => {
     const {
         control,
@@ -14,60 +16,28 @@ const SignInScreen = () => {
                 <Text style={styles.loginText}>Login</Text>
                 <View style={styles.inputContainer}>
 
-                    <Controller
+                    <CustomInput 
                         control={control}
-                        name='name'
-                        rules={{}}
-                        render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
-                            <>
-                                <View style={styles.inputField}>
-                                    <TextInput
-                                        value={value}
-                                        placeholder='Username'
-                                        secureTextEntry={false}
-                                        style={styles.input}
-                                    />
-                                </View>
-                                {error && (
-                                    <Text style={{ color: 'red', alignSelf: 'stretch' }}>{error.message || 'Error'}</Text>
-                                )}
-
-
-                            </>
-                        )}
-
-
+                        name="username"
+                        placeholder='Username'
+                        rules={{
+                            required: "Username required"
+                        }}
                     />
-                    <Controller
+                    <CustomInput 
                         control={control}
-                        name='name'
-                        rules={{}}
-                        render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
-                            <>
-                                <View style={styles.inputField}>
-                                    <TextInput
-                                        value={value}
-                                        placeholder='Username'
-                                        secureTextEntry={false}
-                                        style={styles.input}
-                                    />
-                                </View>
-                                {error && (
-                                    <Text style={{ color: 'red', alignSelf: 'stretch' }}>{error.message || 'Error'}</Text>
-                                )}
-
-
-                            </>
-                        )}
-
-
+                        name="password"
+                        placeholder='password'
+                        rules={{
+                            required: "Pasword required"
+                        }}
+                        secureTextEntry={true}
                     />
 
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Pressable onPress={() => console.warn('log in')} style={styles.button}>
-                        <Text style={styles.buttonText}>Login</Text>
-                    </Pressable>
+                    
+                    <CustomButton onPress={() => console.warn('log in')} text="Login"/>
                     <Pressable onPress={() => console.warn('Forgot password')}>
                         <Text style={styles.forgotText}>Forgot Password?</Text>
                     </Pressable>

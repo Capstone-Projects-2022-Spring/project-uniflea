@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import {Colors} from '../../styles/Colors'
+
 const styles = StyleSheet.create({
     root: {
         flex: 1,
@@ -19,31 +19,11 @@ const styles = StyleSheet.create({
     pageContainer: {
         padding: 20,
     },
-    inputField: {
-        height: 50,
-        width: '100%',
-        padding: 10,
-        margin: 20,
-        borderWidth: 1,
-        justifyContent: 'center',
-    },
+    
     forgotText: {
         textAlign: 'right',
         marginVertical: 10,
         textDecorationLine: 'underline',
-    },
-    button:{
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: Colors.buttonbackgroundPrimary,
-        height: 40,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: Colors.buttonBorderPrimary,
-        
-    },
-    buttonText: {
-        fontSize: 20,
     },
     buttonContainer: {
         marginVertical: 20,
