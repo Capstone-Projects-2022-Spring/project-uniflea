@@ -2,7 +2,7 @@ import { Controller } from 'react-hook-form';
 import styles from './styles';
 import { View, TextInput, Text, Pressable } from 'react-native';
 
-const CustomInput = ({control, name, placeholder, secureTextEntry=false, rules={}}) => {
+const CustomInput = ({control, name, placeholder, secureTextEntry, rules={}}) => {
     return (
         <Controller
             control={control}
@@ -18,6 +18,7 @@ const CustomInput = ({control, name, placeholder, secureTextEntry=false, rules={
                             placeholder={placeholder}
                             secureTextEntry={secureTextEntry}
                             style={styles.input}
+                            textContentType={'oneTimeCode'}
                         />
                     </View>
                     {error && (

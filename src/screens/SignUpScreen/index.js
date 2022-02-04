@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native';
+import { ScrollView, View, Text, Pressable } from 'react-native';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
@@ -27,88 +27,93 @@ const SignUpScreen = () => {
         handleSubmit,
         formState: { errors },
     } = useForm();
-
+    const onConfirmPressed = (data) => {
+        console.warn('sign up data = ', data)
+    }
     return (
-        <View style={styles.root}>
-            <View style={styles.pageContainer}>
-                <Text style={styles.loginText}>Account Creation</Text>
-                <View style={styles.inputContainer}>
+        <ScrollView>
+            <View style={styles.root}>
+                <View style={styles.pageContainer}>
+                    <Text style={styles.loginText}>Account Creation</Text>
+                    <View style={styles.inputContainer}>
 
-                    <CustomInput
-                        control={control}
-                        name="name"
-                        placeholder='Name'
-                        rules={{
-                            required: "Name required"
-                        }}
-                    />
-                    <CustomInput
-                        control={control}
-                        name="username"
-                        placeholder='Username'
-                        rules={{
-                            required: "Username required"
-                        }}
-                    />
-                    <CustomInput
-                        control={control}
-                        name="email"
-                        placeholder='Email'
-                        rules={{
-                            required: "Email required"
-                        }}
-                    />
-                    <CustomInput
-                        control={control}
-                        name="password"
-                        placeholder='password'
-                        rules={{
-                            required: "Pasword required"
-                        }}
-                        secureTextEntry={true}
-                    />
-                    <CustomInput
-                        control={control}
-                        name="confirmPassword"
-                        placeholder='Confirm Password'
-                        rules={{
-                            required: "Pasword confirmation required"
-                        }}
-                        secureTextEntry={true}
-                    />
-                    
-                    
-                </View>
-                <CustomSelect
+                        <CustomInput
+                            control={control}
+                            name="name"
+                            placeholder='Name'
+                            rules={{
+                                required: "Name required"
+                            }}
+                        />
+                        <CustomInput
+                            control={control}
+                            name="username"
+                            placeholder='Username'
+                            rules={{
+                                required: "Username required"
+                            }}
+                        />
+                        <CustomInput
+                            control={control}
+                            name="email"
+                            placeholder='Email'
+                            rules={{
+                                required: "Email required"
+                            }}
+                        />
+                        <CustomInput
+                            control={control}
+                            name="password"
+                            placeholder='password'
+                            rules={{
+                                required: "Pasword required"
+                            }}
+                            secureTextEntry={true}
+                        />
+
+                        <CustomInput
+                            control={control}
+                            name="confirmPassword"
+                            placeholder='Confirm Password'
+                            rules={{
+                                required: "Pasword confirmation required"
+                            }}
+                            secureTextEntry={true}
+                        />
+                        
+
+
+                    </View>
+                    <CustomSelect
                         control={control}
                         items={COLLEGES}
                         name="uniSelector"
                         rules={{ required: 'Must select university' }}
+                        itemToSelect='University'
                     />
-                <CustomSelect
+                    <CustomSelect
                         control={control}
                         items={GRAD_YEARS}
                         name="gradYear"
                         rules={{ required: 'Must select grad year' }}
+                        itemToSelect='Graduation Year'
                     />
-                <View style={styles.buttonContainer}>
+                    <View style={styles.buttonContainer}>
+                        {/* need handle submit */}
+                        <CustomButton onPress={handleSubmit(onConfirmPressed)} text="Confirm" />
 
-                    <CustomButton onPress={() => console.warn('log in')} text="Login" />
-                    <Pressable onPress={() => console.warn('Forgot password')}>
-                        <Text style={styles.forgotText}>Forgot Password?</Text>
-                    </Pressable>
+                    </View>
+
+
+                </View>
+                <View style={styles.signInContainer}>
+                    <Text>Already have an account?</Text>
+                    <Pressable onPress={() => console.warn('Sign In')}><Text style={styles.signInText}> SIGN IN</Text></Pressable>
                 </View>
 
-
             </View>
-            <View style={styles.signUpContainer}>
-                <Text>Don't have an account?</Text>
-                <Pressable onPress={() => console.warn('Sign Up')}><Text style={styles.signUpText}> SIGN UP</Text></Pressable>
+        </ScrollView>
 
-
-            </View>
-
-        </View>
     );
 }
 

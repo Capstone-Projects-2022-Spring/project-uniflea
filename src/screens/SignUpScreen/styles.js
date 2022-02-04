@@ -28,12 +28,12 @@ const styles = StyleSheet.create({
     buttonContainer: {
         marginVertical: 10,
     },
-    signUpContainer: {
+    signInContainer: {
         justifyContent: 'center',
         flexDirection: 'row',
-      
+        marginBottom: 10,
     },
-    signUpText: {
+    signInText: {
         textDecorationLine:'underline',
     }
 });

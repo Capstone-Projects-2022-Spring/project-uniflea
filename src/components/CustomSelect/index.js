@@ -1,10 +1,10 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Keyboard} from 'react-native';
 import MultiSelect from 'react-native-multiple-select';
 import {Controller} from 'react-hook-form';
 import styles from './styles';
 
-const CustomSelect = ({control, rules={}, name, items}) => {
+const CustomSelect = ({control, rules={}, name, items, itemToSelect}) => {
 
         return (
             <Controller
@@ -20,14 +20,14 @@ const CustomSelect = ({control, rules={}, name, items}) => {
                                 uniqueKey='id'
                                 onSelectedItemsChange={onChange}
                                 selectItems={value}
-                                selectText='Choose your university'
+                                selectText={'Choose your ' + itemToSelect}
                                 single={true} 
                                              
                             />
                         </View>
                         <View style={styles.result}>
                             <View>
-                                <Text>Selected University: {value ? value : "none"}</Text>
+                                <Text>Selected: {value ? value : ""}</Text>
                             </View>
                             {error && (
                                 <Text style={{color: 'red', alignSelf: 'stretch'}}>{error.message || 'Error'}</Text>
