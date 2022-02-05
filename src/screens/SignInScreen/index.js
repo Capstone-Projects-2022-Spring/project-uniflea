@@ -10,6 +10,9 @@ const SignInScreen = () => {
         formState: { errors },
     } = useForm();
 
+    const onSignInPressed = (data) => {
+        console.warn(data)
+    }
     return (
         <View style={styles.root}>
             <View style={styles.pageContainer}>
@@ -37,7 +40,7 @@ const SignInScreen = () => {
                 </View>
                 <View style={styles.buttonContainer}>
                     
-                    <CustomButton onPress={() => console.warn('log in')} text="Login"/>
+                    <CustomButton onPress={handleSubmit(onSignInPressed)} text="Login"/>
                     <Pressable onPress={() => console.warn('Forgot password')}>
                         <Text style={styles.forgotText}>Forgot Password?</Text>
                     </Pressable>

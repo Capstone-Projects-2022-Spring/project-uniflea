@@ -4,6 +4,7 @@ import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import CustomSelect from '../../components/CustomSelect';
+
 const COLLEGES = [
     { id: 'Temple', name: 'Temple' },
     { id: 'Drexel', name: 'Drexel' },
@@ -18,7 +19,12 @@ const GRAD_YEARS = [
     { id: '2024', name: '2024' },
     { id: '2025', name: '2025' },
     { id: '2026', name: '2026' },
-    { id: '2027', name: '2027' }
+    { id: '2027', name: '2027' },
+    { id: '2028', name: '2028' },
+    { id: '2029', name: '2029' },
+    { id: '2030', name: '2030' },
+    { id: '2031', name: '2031' },
+    { id: '2032', name: '2032' },
 ]
 
 const SignUpScreen = () => {
@@ -30,6 +36,7 @@ const SignUpScreen = () => {
     const onConfirmPressed = (data) => {
         console.warn('sign up data = ', data)
     }
+
     return (
         <ScrollView>
             <View style={styles.root}>
@@ -80,8 +87,6 @@ const SignUpScreen = () => {
                             }}
                             secureTextEntry={true}
                         />
-                        
-
 
                     </View>
                     <CustomSelect
@@ -99,7 +104,7 @@ const SignUpScreen = () => {
                         itemToSelect='Graduation Year'
                     />
                     <View style={styles.buttonContainer}>
-                        {/* need handle submit */}
+                     
                         <CustomButton onPress={handleSubmit(onConfirmPressed)} text="Confirm" />
 
                     </View>
