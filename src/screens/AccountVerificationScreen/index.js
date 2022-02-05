@@ -6,10 +6,6 @@ import CustomButton from '../../components/CustomButton';
 
 const AccountVerificationScreen = () => {
 
-    const onSubmit = (data) => {
-        console.warn("submit");
-    }
-
     const {
         control,
         handleSubmit,
@@ -24,8 +20,8 @@ const AccountVerificationScreen = () => {
     return (
         <View style={styles.root}>
             <View style={styles.textContainer}>
-                <Text style={styles.forgotHeader}>Forgot Password</Text>
-                <Text style={styles.forgotText}>If an account exists for this username, you'll be emailed a code to reset your password</Text>
+                <Text style={styles.forgotHeader}>Account Verification</Text>
+                <Text style={styles.forgotText}>Verification code sent to email. Please enter the code below</Text>
             </View>
 
 
