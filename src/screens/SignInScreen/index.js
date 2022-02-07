@@ -3,15 +3,23 @@ import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 const SignInScreen = () => {
+    const navigation = useNavigation();
     const {
         control,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSignInPressed = (data) => {
-        console.warn(data)
+    const onSignInPressed = () => {
+        navigation.navigate('Home');
+    }
+    const onSignUpPressed = () => {
+        navigation.navigate('SignUp');
+    }
+    const onForgotPasswordPressed = () => {
+        navigation.navigate('ForgotPassword');
     }
     return (
         <View style={styles.root}>
@@ -41,7 +49,7 @@ const SignInScreen = () => {
                 <View style={styles.buttonContainer}>
                     
                     <CustomButton onPress={handleSubmit(onSignInPressed)} text="Login"/>
-                    <Pressable onPress={() => console.warn('Forgot password')}>
+                    <Pressable onPress={onForgotPasswordPressed}>
                         <Text style={styles.forgotText}>Forgot Password?</Text>
                     </Pressable>
                 </View>
@@ -50,7 +58,7 @@ const SignInScreen = () => {
             </View>
             <View style={styles.signUpContainer}>
                 <Text>Don't have an account?</Text>
-                <Pressable onPress={() => console.warn('Sign Up')}><Text style={styles.signUpText}> SIGN UP</Text></Pressable>
+                <Pressable onPress={onSignUpPressed}><Text style={styles.signUpText}> SIGN UP</Text></Pressable>
                     
                 
             </View>

@@ -3,12 +3,13 @@ import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-import { TextInput } from 'react-native-web';
+import { useNavigation } from '@react-navigation/native';
 
 const ResetPasswordScreen = () => {
-
+    
+    const navigation = useNavigation();
     const onSubmit = (data) => {
-        console.warn("submit");
+        navigation.navigate('SignIn');
     }
 
     const {

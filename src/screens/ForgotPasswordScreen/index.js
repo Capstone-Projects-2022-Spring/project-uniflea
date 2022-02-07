@@ -3,11 +3,12 @@ import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 const ForgotPasswordScreen = () => {
-
+    const navigation = useNavigation();
     const onSubmit = (data) => {
-        console.warn("submit");
+        navigation.navigate('ResetPassword');
     }
 
     const {

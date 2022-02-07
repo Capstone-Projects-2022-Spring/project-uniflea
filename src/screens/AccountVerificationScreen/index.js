@@ -3,16 +3,16 @@ import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
-
+import { useNavigation } from '@react-navigation/native';
 const AccountVerificationScreen = () => {
-
+    const navigation = useNavigation();
     const {
         control,
         handleSubmit,
         formState: { errors }
     } = useForm();
     const onSubmitPressed = () => {
-        console.warn('Submit pressed')
+        navigation.navigate('SignIn')
     }
     const onResendPress = () => {
         console.warn('resend pressed');

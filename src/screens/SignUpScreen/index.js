@@ -4,7 +4,7 @@ import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import CustomSelect from '../../components/CustomSelect';
-
+import { useNavigation } from '@react-navigation/native';
 const COLLEGES = [
     { id: 'Temple', name: 'Temple' },
     { id: 'Drexel', name: 'Drexel' },
@@ -28,13 +28,19 @@ const GRAD_YEARS = [
 ]
 
 const SignUpScreen = () => {
+    const navigation = useNavigation();
+
     const {
         control,
         handleSubmit,
         formState: { errors },
     } = useForm();
+
     const onConfirmPressed = (data) => {
-        console.warn('sign up data = ', data)
+        navigation.navigate('VerifyAccount');
+    }
+    const onSignInPressed = (data) => {
+        navigation.navigate('SignIn');
     }
 
     return (
@@ -113,7 +119,7 @@ const SignUpScreen = () => {
                 </View>
                 <View style={styles.signInContainer}>
                     <Text>Already have an account?</Text>
-                    <Pressable onPress={() => console.warn('Sign In')}><Text style={styles.signInText}> SIGN IN</Text></Pressable>
+                    <Pressable onPress={onSignInPressed}><Text style={styles.signInText}> SIGN IN</Text></Pressable>
                 </View>
 
             </View>
