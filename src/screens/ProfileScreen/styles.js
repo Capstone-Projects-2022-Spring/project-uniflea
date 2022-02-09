@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-      flex: .7,
+      flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
@@ -10,6 +10,13 @@ const styles = StyleSheet.create({
     space:{
         width:20,
         height:20
+    },
+    profileNameText:{
+      fontSize: 30
+    },
+    topRightPosition:{
+      top:-140,
+      left: 160
     }
   });
 
