@@ -1,65 +1,24 @@
 import React from 'react';
 import { StyleSheet, Text, SafeAreaView, Image, Pressable, View } from 'react-native';
-
+import ProfileScreenButton from '../../components/ProfileScreenButton';
+import styles from './styles'
 
 const ProfilePage = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            
         <Text>hi from ProfilePage</Text>
-        <Image source={require('../../assets/blank_pfp.png')}/>
+        <Image source={require('../../../assets/blank_pfp.png')}/>
+        <ProfileScreenButton onPress={console.log} text="active listing"/>
         <View style={styles.space}/>
-            <Pressable style={styles.button} onPress={console.log}>
-                <Text style={styles.text}>Active Listings</Text>
-            </Pressable>
+        <ProfileScreenButton onPress={console.log} text="Reviews and Ratings"/>
         <View style={styles.space}/>
-            <Pressable style={styles.button}>
-                <Text style={styles.text}>Reviews and Ratings</Text>
-            </Pressable>
+        <ProfileScreenButton onPress={console.log} text="Purchased Items"/>
         <View style={styles.space}/>
-        <Pressable style={styles.button}>
-                <Text style={styles.text}>Purchases Items</Text>
-        </Pressable>
-        <View style={styles.space}/>
-        <Pressable style={styles.button}>
-                <Text style={styles.text}>Sold Items</Text>
-            </Pressable>
-        </SafeAreaView>
+      
+    <ProfileScreenButton onPress={console.log} text="Sold Items"/>
+    </SafeAreaView>
     );
 }
-const createButton = ( string ) =>{
-
-    return (
-        <><View style={styles.space} /><Pressable style={styles.button}>
-            <Text style={styles.text}>
-                string
-            </Text>
-        </Pressable></>
-    );
-}
-
-const styles = StyleSheet.create({
-    container: {
-      flex: .5,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    button: {
-        alignItems: 'center',
-        padding:10,
-        backgroundColor: '#99182e',
-        borderRadius: 4,
-        paddingVertical:12,
-    },
-    text:{
-        color: 'white',
-    },
-    space:{
-        width:20,
-        height:20
-    }
-  });
 
 export default ProfilePage;
