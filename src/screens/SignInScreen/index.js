@@ -21,7 +21,7 @@ const SignInScreen = () => {
         } catch(e){
             Alert.alert('Oops', e.message);
         }
-        navigation.navigate('Home');
+        // navigation.navigate('Home');
     }
     const onSignUpPressed = () => {
         navigation.navigate('SignUp');
