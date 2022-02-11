@@ -1,9 +1,11 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import {Auth} from 'aws-amplify';
+
 const SignInScreen = () => {
     const navigation = useNavigation();
     const {
@@ -12,8 +14,14 @@ const SignInScreen = () => {
         formState: { errors },
     } = useForm();
 
-    const onSignInPressed = () => {
-        navigation.navigate('Home');
+    // This function requires call to amplify to verify user, making it asynchronous
+    const onSignInPressed = async (data) => {
+        try {
+            const response = await Auth.signIn(data.email, data.password);
+        } catch(e){
+            Alert.alert('Oops', e.message);
+        }
+        // navigation.navigate('Home');
     }
     const onSignUpPressed = () => {
         navigation.navigate('SignUp');
@@ -29,10 +37,10 @@ const SignInScreen = () => {
 
                     <CustomInput 
                         control={control}
-                        name="username"
-                        placeholder='Username'
+                        name="email"
+                        placeholder='Email'
                         rules={{
-                            required: "Username required"
+                            required: "Email required"
                         }}
                     />
                     <CustomInput 
