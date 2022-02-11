@@ -1,21 +1,35 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import { Auth } from 'aws-amplify';
 const AccountVerificationScreen = () => {
     const navigation = useNavigation();
     const {
         control,
         handleSubmit,
-        formState: { errors }
+        formState: { errors },
+        watch
     } = useForm();
-    const onSubmitPressed = () => {
-        navigation.navigate('SignIn')
+    const email = watch('email');
+    const onSubmitPressed = async (data) => {
+        try {
+            await Auth.confirmSignUp(data.email, data.code);
+            navigation.navigate('SignIn')
+        } catch(e) {
+            Alert.alert("Oops", e.message);
+        }
+        
     }
-    const onResendPress = () => {
-        console.warn('resend pressed');
+    const onResendPress = async () => {
+        try{
+            await Auth.resendSignUp(email);
+            Alert.alert('Success', 'check email for code');
+        } catch(e) {
+            Alert.alert('Oops', e.message);
+        }
     }
     return (
         <View style={styles.root}>
@@ -27,6 +41,13 @@ const AccountVerificationScreen = () => {
 
 
             <View style={styles.inputContainer}>
+                <CustomInput
+                    control={control}
+                    name="email"
+                    placeholder="Enter email"
+                    secureTextEntry={false}
+                    rules={{ required: 'Email required' }}
+                />
                 <CustomInput
                     control={control}
                     name="code"

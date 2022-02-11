@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form';
 import styles from './styles';
-import { View, TextInput, Text, Pressable } from 'react-native';
+import { View, TextInput, Text } from 'react-native';
 
 const CustomInput = ({control, name, placeholder, secureTextEntry, rules={}}) => {
     return (
@@ -22,7 +22,7 @@ const CustomInput = ({control, name, placeholder, secureTextEntry, rules={}}) =>
                         />
                     </View>
                     {error && (
-                        <Text style={{ color: 'red', alignSelf: 'stretch', marginBottom: 10 }}>{error.message || 'Error'}</Text>
+                        <Text style={{ color: 'red', alignSelf: 'stretch', marginBottom: 10 }}>{error.message || 'Error. Do passwords match?'}</Text>
                     )}
 
 

@@ -20,5 +20,6 @@ const Navigation = () => {
         </NavigationContainer>
     );
 };
+// add amplification from amplify
 
 export default Navigation;
