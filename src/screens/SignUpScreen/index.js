@@ -6,7 +6,7 @@ import CustomButton from '../../components/CustomButton';
 import CustomSelect from '../../components/CustomSelect';
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 
 const COLLEGES = [
     { id: 'Temple', name: 'Temple' },
@@ -29,7 +29,7 @@ const GRAD_YEARS = [
     { id: '2031', name: '2031' },
     { id: '2032', name: '2032' },
 ]
-
+// const client = StreamChat.getInstance('4gqynpstsrwm', 'ee3kx3rc5pmyp58pt5xbnqskttc5fa8b7zha8hzh5su52mv77tgqnksnunqraa9t');
 const SignUpScreen = () => {
     const password = useRef({});
 
@@ -57,12 +57,15 @@ const SignUpScreen = () => {
                     'custom:GradYear': data.gradYear[0],
                 }
             });
-            console.warn("Sign up response = ", response);
+
+
+            navigation.navigate('VerifyAccount');
+
         } catch (e) {
             Alert.alert('Oops', e.message);
         }
 
-        navigation.navigate('VerifyAccount');
+
     }
 
     const validatePassword = (confirmedPassword) => {
