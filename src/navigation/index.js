@@ -2,25 +2,56 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import AuthStack from './AuthStack';
 import HomeScreen from '../screens/HomeScreen';
+import MessagesScreen from '../screens/MessagesScreen';
+
 import { Auth, Hub } from 'aws-amplify';
 import {View, Text} from 'react-native';
+import AuthContext from '../contexts/Authentication';
+import UsersScreen from '../screens/UsersScreen';
+import { useChatContext } from 'stream-chat-expo';
+import ChatScreen from '../screens/ChatScreen';
+
 const Root = createStackNavigator();
 
 const Navigation = () => {
     const [user, setUser] = useState(undefined);
+    // decouple authentication from navigation using context api
+    const {userId, setUserId} = useContext(AuthContext);
 
+    const {client} = useChatContext();
     const checkUser = async () => {
         try {
             // bypasse cache to query the database and make certain the user does not exist
             const currentAuthenticatedUser = await Auth.currentAuthenticatedUser({ bypassCache: true });
+            
+    
+            if (userId.length > 0) {
+                return;
+            }
+            await client.connectUser(
+                {
+                    id: currentAuthenticatedUser.attributes.sub,
+                    name: currentAuthenticatedUser.attributes.name,
+                },
+                client.devToken(currentAuthenticatedUser.attributes.sub) // authentication token that I receive from backend
+            );
+
+            // create a messages channel on user connection
+            // const channel = client.channel("livestream", "live", { name: "Test Live" });
+
+            // // watch loads the initial state, and automatically subscribes for updates when new events occur
+            // await channel.watch();
+            console.log('connected user in navigation screen');
             setUser(currentAuthenticatedUser);
+            setUserId(currentAuthenticatedUser.attributes.sub)
         } catch (e) {
             console.log("No current authenticated user");
             setUser(null);
+            setUserId(null)
         }
 
     }
@@ -53,11 +84,18 @@ const Navigation = () => {
     }
     return (
         <NavigationContainer>
-            <Root.Navigator screenOptions={{ headerShown: false }}>
+            <Root.Navigator >
                 {user ? (
-                    <Root.Screen name="Home" component={HomeScreen} />
+                    <>
+                        <Root.Screen name="Home" component={HomeScreen} />
+                        <Root.Screen name="Messages" component={MessagesScreen} />
+                        <Root.Screen name="Users" component={UsersScreen} />
+                        <Root.Screen name="Chat" component={ChatScreen} />
+                        
+                    </>
+                    
                 ) : (
-                    <Root.Screen name="AuthScreens" component={AuthStack} />
+                    <Root.Screen name="AuthScreens" component={AuthStack} options={{ headerShown: false }}/>
                 )}
                 
                 
