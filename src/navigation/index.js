@@ -1,19 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import React, { useState, useEffect, useContext } from 'react';
-
+import BottomTabNav from './BottomTabNav';
 import AuthStack from './AuthStack';
-import HomeScreen from '../screens/HomeScreen';
-import MessagesScreen from '../screens/MessagesScreen';
-
 import { Auth, Hub } from 'aws-amplify';
 import {View, Text} from 'react-native';
 import AuthContext from '../contexts/Authentication';
-import UsersScreen from '../screens/UsersScreen';
 import { useChatContext } from 'stream-chat-expo';
-import ChatScreen from '../screens/ChatScreen';
+
 
 const Root = createStackNavigator();
 
@@ -87,10 +81,11 @@ const Navigation = () => {
             <Root.Navigator >
                 {user ? (
                     <>
-                        <Root.Screen name="Home" component={HomeScreen} />
+                        <Root.Screen name="HomeTabs" component={BottomTabNav} />
+                        {/* <Root.Screen name="Home" component={HomeScreen} />
                         <Root.Screen name="Messages" component={MessagesScreen} />
                         <Root.Screen name="Users" component={UsersScreen} />
-                        <Root.Screen name="Chat" component={ChatScreen} />
+                        <Root.Screen name="Chat" component={ChatScreen} /> */}
                         
                     </>
                     

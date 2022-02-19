@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, SafeAreaView, Image, Pressable, View } from 'react-native';
+import { Colors } from '../../styles/Colors';
 
 
 const ProfilePage = () => {
@@ -8,7 +9,8 @@ const ProfilePage = () => {
         <SafeAreaView style={styles.container}>
             
         <Text>hi from ProfilePage</Text>
-        <Image source={require('../../assets/blank_pfp.png')}/>
+        {/* asset not found error */}
+        {/* <Image source={require('../../assets/blank_pfp.png')}/> */}
         <View style={styles.space}/>
             <Pressable style={styles.button} onPress={console.log}>
                 <Text style={styles.text}>Active Listings</Text>
@@ -49,7 +51,7 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         padding:10,
-        backgroundColor: '#99182e',
+        backgroundColor: Colors.tabInactiveColor,
         borderRadius: 4,
         paddingVertical:12,
     },
