@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Entypo } from '@expo/vector-icons';
 import { Colors } from '../styles/Colors';
-import HomeScreen from '../screens/HomeScreen';
+import HomeStack from './HomeStack';
 import ProfilePage from '../screens/ProfileScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import SavedItemScreen from '../screens/SavedItemsScreen';
@@ -19,9 +19,10 @@ const BottomTabNav = () => {
             screenOptions={{headerShown: false}}
         >
             <Tab.Screen
-                component={HomeScreen}
+                component={HomeStack}
                 name={"Home"}
                 options={{
+                    headerTitle: 'Home',
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
                         <Entypo name="home" size={24} color={color} />

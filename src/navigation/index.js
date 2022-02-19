@@ -78,7 +78,7 @@ const Navigation = () => {
     }
     return (
         <NavigationContainer>
-            <Root.Navigator >
+            <Root.Navigator screenOptions={{headerShown: false}} >
                 {user ? (
                     <>
                         <Root.Screen name="HomeTabs" component={BottomTabNav} />
