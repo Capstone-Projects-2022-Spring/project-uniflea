@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 const HeaderComponent = ({search, setSearch}) => {
     return (
         <SafeAreaView style={{ backgroundColor: Colors.mainBackground }}>
-            <View style={{ padding: 5, margin: 10, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center'}}>
+            <View style={{ borderRadius: 5, padding: 5, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center'}}>
                 <Feather name="search" size={24} color="black" />
                 <TextInput style={{ height: 40, marginLeft: 10}} placeholder='Search...' value={search} onChangeText={setSearch}/>
             </View>

@@ -37,19 +37,8 @@ const ProductDetails = () => {
     });
 
     const addToSavedList = async() => {
-        const userData = await Auth.currentAuthenticatedUser();
-        console.log('user data  = ', userData)
-        if(!product || !userData){
-            console.warn("Missing product or user data");
-            return;
-        }
-        const newSavedProduct = new SavedProduct({
-            userSub: userData.attributes.sub, 
-            product,
-        });
-
-        DataStore.save(newSavedProduct);
-        Alert.alert("Success", "Saved for later");
+        
+        Alert.alert("Pressed", "Saved listing pressed");
     }
 
     if(!product){
