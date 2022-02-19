@@ -5,8 +5,8 @@ import { Entypo } from '@expo/vector-icons';
 import { Colors } from '../styles/Colors';
 import HomeStack from './HomeStack';
 import ProfilePage from '../screens/ProfileScreen';
-import MessagesScreen from '../screens/MessagesScreen';
-import SavedItemScreen from '../screens/SavedItemsScreen';
+import MessagesStack from './MessagesStack';
+import SavedItemStack from './SavedItemStack';
 import SellItemScreen from '../screens/SellItemScreen';
 
 const Tab = createBottomTabNavigator();
@@ -30,7 +30,7 @@ const BottomTabNav = () => {
                 }}
 
             />
-            <Tab.Screen component={SavedItemScreen} name={"Saved"}
+            <Tab.Screen component={SavedItemStack} name={"Saved"}
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
@@ -40,12 +40,14 @@ const BottomTabNav = () => {
             <Tab.Screen component={SellItemScreen} name={"Sell"}
 
                 options={{
+                    headerShown: true,
+                    headerTitle: 'List an item',
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
                         <Entypo name="squared-plus" size={24} color={color} />
                     ),
                 }} />
-            <Tab.Screen component={MessagesScreen} name={"Messages"}
+            <Tab.Screen component={MessagesStack} name={"Messages"}
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (

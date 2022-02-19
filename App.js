@@ -8,6 +8,7 @@ import Amplify from 'aws-amplify'
 import awsconfig from './src/aws-exports'
 
 import AuthContext from './src/contexts/Authentication';
+import { Colors } from './src/styles/Colors';
 Amplify.configure(awsconfig)
 
 const API_KEY = '4gqynpstsrwm';
@@ -50,6 +51,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: Colors.tabInactiveColor,
     flex: 1,
   },
 });
