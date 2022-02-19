@@ -1,35 +1,87 @@
+// import { Auth } from 'aws-amplify';
+import { Text, View, FlatList } from 'react-native';
 import styles from './styles';
-import React from 'react';
-import {View, Text, Pressable} from 'react-native';
-import {Auth} from 'aws-amplify';
-import { useNavigation } from '@react-navigation/native';
-const HomeScreen = () => {
+import ProductItem from '../../components/ProductItem';
+// import products from '../AmazonAssets/data/products';
+import React, { useEffect, useState } from 'react';
+// import { DataStore } from '@aws-amplify/datastore';
+// import { Product } from '../models';
+const prodData = [
+  {
+    id: 1,
+    title: 'Test1',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/cleanarchitecture.jpg',
+    price: 19.99,
+  },
+  {
+    id: 2,
+    title: 'Test2',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/mouse3.jpg',
+    price: 19.99,
+  },
+  {
+    id: 3,
+    title: 'Test3',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/imac1.jpg',
+    price: 19.99,
+  },
+  {
+    id: 4,
+    title: 'Test4',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/imac2.jpg',
+    price: 19.99,
+  },
+  {
+    id: 5,
+    title: 'Test5',
+    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/keyboard1.jpg',
+    price: 19.99,
+  },
+]
+const HomeScreen = ({ searchValue }) => {
 
-  const navigation = useNavigation();
+  const [products, setProducts] = useState([]);
+
+  console.log(searchValue);
   const signOut = () => {
     Auth.signOut();
   }
+  useEffect(() => {
+    setProducts(prodData)
+    // DataStore.query(Product).then(setProducts);
 
-  const messagesScreen = () => {
-    navigation.navigate('Messages');
-  }
-  const onUsersPressed = () => {
-    navigation.navigate('Users');
-  }
-
+  }, []);
   return (
-    <View>
-        <Text>Home Screen</Text>
-        <Pressable onPress={signOut}>
-          <Text>Sign out</Text>
-        </Pressable>
-        <Pressable onPress={messagesScreen}>
-          <Text>Go to Messages</Text>
-        </Pressable>
-        <Pressable onPress={onUsersPressed}>
-          <Text>Go to Users</Text>
-        </Pressable>
+    <View style={styles.page}>
+
+      <FlatList
+        data={products}
+        renderItem={({ item }) =>
+
+          <ProductItem
+            id={item.id}
+            title={item.title}
+            image={item.image}
+            price={item.price}
+          />
+
+
+        }
+        keyExtractor={product => product.id}
+        showsVerticalScrollIndicator={false}
+      />
+
+      <Text
+        onPress={signOut}
+        style={{
+          width: '100%',
+          textAlign: 'center',
+        }}>
+        Sign out
+      </Text>
+
     </View>
+
   );
 }
 
