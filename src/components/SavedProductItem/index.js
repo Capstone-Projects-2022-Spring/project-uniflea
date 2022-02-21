@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { SavedProduct } from '../../models';
 import { DataStore } from 'aws-amplify';
 
-const SavedProductItem = ({ id, image, title, price, items, setItems }) => {
+const SavedProductItem = ({ id, image, title, price, productId, items, setItems }) => {
     const navigation = useNavigation();
 
     const deleteItemById = async(id) => {
@@ -22,7 +22,8 @@ const SavedProductItem = ({ id, image, title, price, items, setItems }) => {
     };
 
     return (
-        <Pressable onPress={() => navigation.navigate("ProductScreen", { id: id })}>
+        // need to send product id, not savedProduct id
+        <Pressable onPress={() => navigation.navigate("ProductScreen", { id: productId })}>
             <View style={styles.root}>
                 <View style={styles.row}>
                     <Image style={styles.image} source={{ uri: image }} />

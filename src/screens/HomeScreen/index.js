@@ -69,15 +69,17 @@ const HomeScreen = ({ searchValue }) => {
         keyExtractor={product => product.id}
         showsVerticalScrollIndicator={false}
       />
+      <View style={{marginBottom: 'auto', width: '100%', height: 15}}>
+        <Text
+          onPress={signOut}
+          style={{
+            width: '100%',
+            textAlign: 'center',
+          }}>
+          Sign out
+        </Text>
+      </View>
 
-      <Text
-        onPress={signOut}
-        style={{
-          width: '100%',
-          textAlign: 'center',
-        }}>
-        Sign out
-      </Text>
 
     </View>
 

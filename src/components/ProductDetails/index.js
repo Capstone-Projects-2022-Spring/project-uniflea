@@ -30,15 +30,20 @@ const ProductDetails = () => {
     // route allows us to receive the data passed as param from navigator hook
     console.log('route params = ', route.params);
     console.log(route.params.id);
-
-    // query product on render and each time the id parameter changes
-    useEffect(() => {
-
+    
+    const queryProduct = async() => {
         if(!route.params?.id) {
             console.warn("No id matching item");
             return;
         }
-        DataStore.query(Product, route.params.id).then(setProduct)
+        const prod = await DataStore.query(Product, route.params.id);
+        setProduct(prod);
+        console.log("Product = ", product)
+    }
+    // query product on render and each time the id parameter changes
+    useEffect(() => {
+
+        queryProduct();
         
     }, [route.params?.id]);
 

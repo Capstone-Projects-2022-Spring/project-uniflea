@@ -64,6 +64,7 @@ const prodData = [
                   title={item.product.title} 
                   image={item.product.image} 
                   price={item.product.price} 
+                  productId={item.product.id}
                   items={items}
                   setItems={setItems}
                 />
