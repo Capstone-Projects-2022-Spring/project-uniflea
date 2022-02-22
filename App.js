@@ -4,7 +4,6 @@ import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 
 import Navigation from './src/navigation';
-<<<<<<< HEAD
 import Amplify from 'aws-amplify'
 import awsconfig from './src/aws-exports'
 
@@ -15,10 +14,6 @@ Amplify.configure(awsconfig)
 const API_KEY = '4gqynpstsrwm';
 const client = StreamChat.getInstance(API_KEY);
 
-=======
-import ProfilePage from './src/screens/ProfileScreen';
-import OtherProfilePage from './src/screens/OtherProfileScreen';
->>>>>>> ProfileScreen
 export default function App() {
   const [userId, setUserId] = useState('');
   useEffect(() => {
