@@ -1,11 +1,10 @@
-// import { Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { Text, View, FlatList } from 'react-native';
 import styles from './styles';
 import ProductItem from '../../components/ProductItem';
-// import products from '../AmazonAssets/data/products';
 import React, { useEffect, useState } from 'react';
-// import { DataStore } from '@aws-amplify/datastore';
-// import { Product } from '../models';
+import { DataStore } from '@aws-amplify/datastore';
+import { Product } from '../../models';
 const prodData = [
   {
     id: 1,
@@ -47,9 +46,9 @@ const HomeScreen = ({ searchValue }) => {
     Auth.signOut();
   }
   useEffect(() => {
-    setProducts(prodData)
-    // DataStore.query(Product).then(setProducts);
-
+    // query the products in the product list on rendering the page
+    DataStore.query(Product).then(setProducts);
+    console.log('products = ', products);
   }, []);
   return (
     <View style={styles.page}>
@@ -70,15 +69,17 @@ const HomeScreen = ({ searchValue }) => {
         keyExtractor={product => product.id}
         showsVerticalScrollIndicator={false}
       />
+      <View style={{marginBottom: 'auto', width: '100%', height: 15}}>
+        <Text
+          onPress={signOut}
+          style={{
+            width: '100%',
+            textAlign: 'center',
+          }}>
+          Sign out
+        </Text>
+      </View>
 
-      <Text
-        onPress={signOut}
-        style={{
-          width: '100%',
-          textAlign: 'center',
-        }}>
-        Sign out
-      </Text>
 
     </View>
 

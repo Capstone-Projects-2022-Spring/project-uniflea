@@ -4,8 +4,8 @@ import styles from './styles';
 import { useRoute } from '@react-navigation/native';
 import ImageCarousel from '../ImageCarousel';
 import CustomButton from '../CustomButton';
-// import { Auth, DataStore } from 'aws-amplify';
-// import { Product, SavedProduct } from '../../models';
+import { Auth, DataStore } from 'aws-amplify';
+import { Product, SavedProduct } from '../../models';
 const prod = {
     id: '5',
     title: "Logitech MX Master 3 Advanced Wireless Mouse for Mac - Bluetooth/USB",
@@ -30,14 +30,36 @@ const ProductDetails = () => {
     // route allows us to receive the data passed as param from navigator hook
     console.log('route params = ', route.params);
     console.log(route.params.id);
-
-    useEffect(() => {
-        
+    
+    const queryProduct = async() => {
+        if(!route.params?.id) {
+            console.warn("No id matching item");
+            return;
+        }
+        const prod = await DataStore.query(Product, route.params.id);
         setProduct(prod);
-    });
+        console.log("Product = ", product)
+    }
+    // query product on render and each time the id parameter changes
+    useEffect(() => {
+
+        queryProduct();
+        
+    }, [route.params?.id]);
 
     const addToSavedList = async() => {
-        
+        const userData = await Auth.currentAuthenticatedUser();
+        console.log('user data  = ', userData)
+        if(!product || !userData){
+            console.warn("Missing product or user data");
+            return;
+        }
+        const newSavedProduct = new SavedProduct({
+            userSub: userData.attributes.sub, 
+            product,
+        });
+
+        await DataStore.save(newSavedProduct);
         Alert.alert("Pressed", "Saved listing pressed");
     }
 
