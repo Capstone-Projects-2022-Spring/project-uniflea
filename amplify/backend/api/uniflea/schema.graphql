@@ -61,3 +61,4 @@ type Review @model @auth(rules: [{ allow: public }]){
 #   post: Post @belongsTo
 #   content: String!
 # }
+ 

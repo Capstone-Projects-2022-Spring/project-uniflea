@@ -4562,17 +4562,15 @@ cross-spawn@^6.0.0, cross-spawn@^6.0.5:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-<<<<<<< HEAD
 crypto-js@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
   integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
-=======
+
 css-color-keywords@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/css-color-keywords/-/css-color-keywords-1.0.0.tgz#fea2616dc676b2962686b3af8dbdbe180b244e05"
   integrity sha1-/qJhbcZ2spYmhrOvjb2+GAskTgU=
->>>>>>> ProfileScreen
 
 css-in-js-utils@^2.0.0:
   version "2.0.1"
@@ -4582,7 +4580,6 @@ css-in-js-utils@^2.0.0:
     hyphenate-style-name "^1.0.2"
     isobject "^3.0.1"
 
-<<<<<<< HEAD
 css-select@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/css-select/-/css-select-2.1.0.tgz#6a34653356635934a81baca68d0255432105dbef"
@@ -4592,6 +4589,15 @@ css-select@^2.1.0:
     css-what "^3.2.1"
     domutils "^1.7.0"
     nth-check "^1.0.2"
+
+css-to-react-native@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-3.0.0.tgz#62dbe678072a824a689bcfee011fc96e02a7d756"
+  integrity sha512-Ro1yETZA813eoyUp2GDBhG2j+YggidUmzO1/v9eYBKR2EHVEniE2MI/NqpTQ954BMpTPZFsGNPm46qFB9dpaPQ==
+  dependencies:
+    camelize "^1.0.0"
+    css-color-keywords "^1.0.0"
+    postcss-value-parser "^4.0.2"
 
 css-tree@^1.0.0-alpha.39:
   version "1.1.3"
@@ -4615,16 +4621,6 @@ dayjs@1.10.5:
   version "1.10.5"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.10.5.tgz#5600df4548fc2453b3f163ebb2abbe965ccfb986"
   integrity sha512-BUFis41ikLz+65iH6LHQCDm4YPMj5r1YFLdupPIyM4SGcXMmtiLQ7U37i+hGS8urIuqe7I/ou3IS1jVc4nbN4g==
-=======
-css-to-react-native@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/css-to-react-native/-/css-to-react-native-3.0.0.tgz#62dbe678072a824a689bcfee011fc96e02a7d756"
-  integrity sha512-Ro1yETZA813eoyUp2GDBhG2j+YggidUmzO1/v9eYBKR2EHVEniE2MI/NqpTQ954BMpTPZFsGNPm46qFB9dpaPQ==
-  dependencies:
-    camelize "^1.0.0"
-    css-color-keywords "^1.0.0"
-    postcss-value-parser "^4.0.2"
->>>>>>> ProfileScreen
 
 dayjs@^1.8.15:
   version "1.10.7"
@@ -6227,11 +6223,7 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
-<<<<<<< HEAD
-lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.20, lodash@^4.17.21:
-=======
-lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.21:
->>>>>>> ProfileScreen
+lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.20, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -7366,7 +7358,15 @@ react-native-multiple-select@^0.5.7:
   dependencies:
     prop-types "^15.7.2"
 
-<<<<<<< HEAD
+react-native-rating-element@^5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-rating-element/-/react-native-rating-element-5.4.0.tgz#12b25873750cea13bd328aa4eeffae9908092044"
+  integrity sha512-XCbsVS243yZuxmYP50K/qPEaeOoy7IRLOS3QcETlfYHEpuZkuD1WNu8/MWrECrV5pU23Zyl1PkOe4PPoQn6CIQ==
+  dependencies:
+    prop-types "^15.7.2"
+    react-native-vector-icons "^7.0.0"
+    styled-components "^5.1.1"
+
 react-native-reanimated@~2.3.1:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-2.3.2.tgz#3b132db186dac04a5ed710f5e4ed5733c89020c5"
@@ -7390,23 +7390,10 @@ react-native-redash@^16.0.10:
     parse-svg-path "^0.1.2"
 
 react-native-safe-area-context@3.3.2:
-=======
-react-native-rating-element@^5.4.0:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-rating-element/-/react-native-rating-element-5.4.0.tgz#12b25873750cea13bd328aa4eeffae9908092044"
-  integrity sha512-XCbsVS243yZuxmYP50K/qPEaeOoy7IRLOS3QcETlfYHEpuZkuD1WNu8/MWrECrV5pU23Zyl1PkOe4PPoQn6CIQ==
-  dependencies:
-    prop-types "^15.7.2"
-    react-native-vector-icons "^7.0.0"
-    styled-components "^5.1.1"
-
-react-native-safe-area-context@^3.3.2:
->>>>>>> ProfileScreen
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"
   integrity sha512-yOwiiPJ1rk+/nfK13eafbpW6sKW0jOnsRem2C1LPJjM3tfTof6hlvV5eWHATye3XOpu2cJ7N+HdkUvUDGwFD2Q==
 
-<<<<<<< HEAD
 react-native-screens@^3.4.0:
   version "3.11.1"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-3.11.1.tgz#9bca9968986ca9195cb1e7e6fca37543bde64ecb"
@@ -7422,7 +7409,7 @@ react-native-svg@12.1.1:
   dependencies:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
-=======
+
 react-native-vector-icons@^7.0.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-7.1.0.tgz#145487d617b2a81d395d2cf64e6e065fcab3a454"
@@ -7436,7 +7423,6 @@ react-native-vector-icons@^7.0.0:
     lodash.template "^4.5.0"
     prop-types "^15.7.2"
     yargs "^15.0.2"
->>>>>>> ProfileScreen
 
 react-native-web@0.17.1:
   version "0.17.1"
@@ -8165,12 +8151,11 @@ strip-eof@^1.0.0:
   resolved "https://registry.yarnpkg.com/strip-eof/-/strip-eof-1.0.0.tgz#bb43ff5598a6eb05d89b59fcd129c983313606bf"
   integrity sha1-u0P/VZim6wXYm1n80SnJgzE2Br8=
 
-<<<<<<< HEAD
 strnum@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/strnum/-/strnum-1.0.5.tgz#5c4e829fe15ad4ff0d20c3db5ac97b73c9b072db"
   integrity sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==
-=======
+
 styled-components@^5.1.1:
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-5.3.3.tgz#312a3d9a549f4708f0fb0edc829eb34bde032743"
@@ -8186,7 +8171,6 @@ styled-components@^5.1.1:
     hoist-non-react-statics "^3.0.0"
     shallowequal "^1.1.0"
     supports-color "^5.5.0"
->>>>>>> ProfileScreen
 
 sucrase@^3.20.0:
   version "3.20.3"
