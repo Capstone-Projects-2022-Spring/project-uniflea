@@ -1,14 +1,13 @@
 import React from 'react';
-<<<<<<< HEAD
+
 import { StyleSheet, Text, SafeAreaView, Image, Pressable, View } from 'react-native';
 import { Colors } from '../../styles/Colors';
 
-=======
 import { Text, SafeAreaView, Image, View, TouchableOpacity, Pressable } from 'react-native';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
 import styles from './styles'
 import { Rating } from 'react-native-rating-element';
->>>>>>> ProfileScreen
+
 
 const ProfilePage = () => {
 
@@ -16,10 +15,10 @@ const ProfilePage = () => {
         <SafeAreaView style={styles.container}>
         
         <Text>hi from ProfilePage</Text>
-<<<<<<< HEAD
+
         {/* asset not found error */}
         {/* <Image source={require('../../assets/blank_pfp.png')}/> */}
-=======
+
         
         {/*the cogwheel button is sus, need to test with actual onPress behavior to see if it works*/}
         <Pressable onPress={console.log("word")}>
@@ -40,7 +39,7 @@ const ProfilePage = () => {
             size={20}
             ratingColor={'#99182e'}
         />
->>>>>>> ProfileScreen
+
         <View style={styles.space}/>
         <ProfileScreenButton onPress={console.log} text="active listing"/>
         <View style={styles.space}/>
@@ -52,7 +51,7 @@ const ProfilePage = () => {
     </SafeAreaView>
     );
 }
-<<<<<<< HEAD
+
 const createButton = ( string ) =>{
 
     return (
@@ -86,7 +85,6 @@ const styles = StyleSheet.create({
         height:20
     }
   });
-=======
->>>>>>> ProfileScreen
+
 
 export default ProfilePage;
