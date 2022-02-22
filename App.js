@@ -4,6 +4,7 @@ import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 
 import Navigation from './src/navigation';
+<<<<<<< HEAD
 import Amplify from 'aws-amplify'
 import awsconfig from './src/aws-exports'
 
@@ -14,6 +15,10 @@ Amplify.configure(awsconfig)
 const API_KEY = '4gqynpstsrwm';
 const client = StreamChat.getInstance(API_KEY);
 
+=======
+import ProfilePage from './src/screens/ProfileScreen';
+import OtherProfilePage from './src/screens/OtherProfileScreen';
+>>>>>>> ProfileScreen
 export default function App() {
   const [userId, setUserId] = useState('');
   useEffect(() => {
@@ -30,6 +35,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+<<<<<<< HEAD
       <AuthContext.Provider value={{userId, setUserId}}>
 
         <OverlayProvider>
@@ -45,6 +51,13 @@ export default function App() {
 
         </OverlayProvider>
       </AuthContext.Provider>
+=======
+      <StatusBar />
+      {/* Navigation will go here */}
+      {/*<Navigation />*/}
+      {/*<ProfilePage/>*/}
+      <OtherProfilePage/>
+>>>>>>> ProfileScreen
     </SafeAreaView>
   );
 }
