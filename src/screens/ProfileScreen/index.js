@@ -1,8 +1,7 @@
 import React from 'react';
 
+import { StyleSheet, Text, SafeAreaView, Image, Pressable,TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../styles/Colors';
-
-import { Text, SafeAreaView, Image, View, TouchableOpacity, Pressable } from 'react-native';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
 import styles from './styles'
 import { Rating } from 'react-native-rating-element';
