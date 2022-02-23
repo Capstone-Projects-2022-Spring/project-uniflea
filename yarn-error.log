@@ -1,5 +1,5 @@
 Arguments: 
-  /opt/homebrew/Cellar/node/17.3.1/bin/node /opt/homebrew/bin/yarn start
+  /opt/homebrew/Cellar/node/17.3.1/bin/node /opt/homebrew/bin/yarn install
 
 PATH: 
   /Users/joshuahageman/.amplify/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:/Library/Apple/usr/bin:/Users/joshuahageman/Library/Android/sdk/platform-tools:/Users/joshuahageman/.amplify/bin:/Users/joshuahageman/opt/anaconda3/bin:/Users/joshuahageman/opt/anaconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/joshuahageman/Library/Android/sdk/emulator:/Users/joshuahageman/Library/Android/sdk/tools:/Users/joshuahageman/Library/Android/sdk/tools/bin:/Users/joshuahageman/Library/Android/sdk/emulator:/Users/joshuahageman/Library/Android/sdk/tools:/Users/joshuahageman/Library/Android/sdk/tools/bin:/Users/joshuahageman/Library/Android/sdk/platform-tools:/Users/joshuahageman/Library/Android/sdk/emulator:/Users/joshuahageman/Library/Android/sdk/tools:/Users/joshuahageman/Library/Android/sdk/tools/bin:/Users/joshuahageman/Library/Android/sdk/platform-tools
@@ -14,9 +14,12 @@ Platform:
   darwin arm64
 
 Trace: 
-  SyntaxError: /Users/joshuahageman/ReactNativeProjects/UniFlea/package.json: Unexpected string in JSON at position 1372
-      at JSON.parse (<anonymous>)
-      at /opt/homebrew/lib/node_modules/yarn/lib/cli.js:1625:59
+  SyntaxError: Unknown token: { line: 4126, col: 1, type: 'INVALID', value: undefined } 4126:1 in /Users/joshuahageman/ReactNativeProjects/UniFlea/yarn.lock
+      at Parser.unexpected (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:64374:11)
+      at Parser.parse (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:64505:14)
+      at parse (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:64579:21)
+      at module.exports.exports.default (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:64141:96)
+      at Function.<anonymous> (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:3064:63)
       at Generator.next (<anonymous>)
       at step (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:310:30)
       at /opt/homebrew/lib/node_modules/yarn/lib/cli.js:321:13
@@ -58,12 +61,9 @@ npm manifest:
       "react-native": "0.64.3",
       "react-native-gesture-handler": "~2.1.0",
       "react-native-multiple-select": "^0.5.7",
-  
       "react-native-reanimated": "~2.3.1",
-      "react-native-safe-area-context": "3.3.2",
       "react-native-svg": "12.1.1",
-      "react-native-web": "0.17.1",
-      "stream-chat-expo": "^3.10.2"
+      "stream-chat-expo": "^3.10.2",
       "react-native-rating-element": "^5.4.0",
       "react-native-safe-area-context": "^3.3.2",
       "react-native-web": "0.17.1"

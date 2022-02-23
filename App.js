@@ -30,7 +30,6 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-<<<<<<< HEAD
       <AuthContext.Provider value={{userId, setUserId}}>
 
         <OverlayProvider>
@@ -46,13 +45,6 @@ export default function App() {
 
         </OverlayProvider>
       </AuthContext.Provider>
-=======
-      <StatusBar />
-      {/* Navigation will go here */}
-      {/*<Navigation />*/}
-      {/*<ProfilePage/>*/}
-      <OtherProfilePage/>
->>>>>>> ProfileScreen
     </SafeAreaView>
   );
 }

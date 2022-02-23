@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { StyleSheet, Text, SafeAreaView, Image, Pressable, View } from 'react-native';
 import { Colors } from '../../styles/Colors';
 
 import { Text, SafeAreaView, Image, View, TouchableOpacity, Pressable } from 'react-native';
@@ -63,28 +62,6 @@ const createButton = ( string ) =>{
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-      flex: .5,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    button: {
-        alignItems: 'center',
-        padding:10,
-        backgroundColor: Colors.tabInactiveColor,
-        borderRadius: 4,
-        paddingVertical:12,
-    },
-    text:{
-        color: 'white',
-    },
-    space:{
-        width:20,
-        height:20
-    }
-  });
 
 
 export default ProfilePage;
