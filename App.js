@@ -1,11 +1,9 @@
 import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import Navigation from './src/navigation';
+import CreateListingScreen from './src/screens/CreateListingScreen'
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar />
-      {/* Navigation will go here */}
-      <Navigation />
+      <CreateListingScreen/>
     </SafeAreaView>
   );
 }
