@@ -15,7 +15,7 @@ const API_KEY = '4gqynpstsrwm';
 const client = StreamChat.getInstance(API_KEY);
 
 export default function App() {
-  const [userId, setUserId] = useState('');
+  const [user, setUser] = useState('');
   useEffect(() => {
     /*
       Amplify provides a unique user identifier (userSub),
@@ -30,7 +30,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <AuthContext.Provider value={{userId, setUserId}}>
+      <AuthContext.Provider value={{user, setUser}}>
 
         <OverlayProvider>
           {/* 

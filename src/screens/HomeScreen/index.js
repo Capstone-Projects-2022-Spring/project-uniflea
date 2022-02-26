@@ -2,53 +2,26 @@ import { Auth } from 'aws-amplify';
 import { Text, View, FlatList } from 'react-native';
 import styles from './styles';
 import ProductItem from '../../components/ProductItem';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { DataStore } from '@aws-amplify/datastore';
 import { Product } from '../../models';
-const prodData = [
-  {
-    id: 1,
-    title: 'Test1',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/cleanarchitecture.jpg',
-    price: 19.99,
-  },
-  {
-    id: 2,
-    title: 'Test2',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/mouse3.jpg',
-    price: 19.99,
-  },
-  {
-    id: 3,
-    title: 'Test3',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/imac1.jpg',
-    price: 19.99,
-  },
-  {
-    id: 4,
-    title: 'Test4',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/imac2.jpg',
-    price: 19.99,
-  },
-  {
-    id: 5,
-    title: 'Test5',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/keyboard1.jpg',
-    price: 19.99,
-  },
-]
+import AuthContext from '../../contexts/Authentication';
+import { useChatContext } from 'stream-chat-expo';
 const HomeScreen = ({ searchValue }) => {
-
+  const {client} = useChatContext();
   const [products, setProducts] = useState([]);
-
+  const {user, setUser} = useContext(AuthContext);
   console.log(searchValue);
+  console.log('user id homescreen= ', user);
   const signOut = () => {
+    setUser(undefined);
+    client.disconnectUser();
     Auth.signOut();
   }
   useEffect(() => {
     // query the products in the product list on rendering the page
     DataStore.query(Product).then(setProducts);
-    console.log('products = ', products);
+  
   }, []);
   return (
     <View style={styles.page}>

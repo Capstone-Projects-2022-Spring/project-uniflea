@@ -4,27 +4,7 @@ import SavedProductItem from '../../components/SavedProductItem';
 import styles from './styles';
 import { Auth, DataStore } from 'aws-amplify';
 import { SavedProduct } from '../../models';
-const prodData = [
-  {
-    id: 1,
-    product: {
-      id: 1,
-      title: 'Test1',
-      image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/cleanarchitecture.jpg',
-      price: 19.99,
-    }
-  
-  },
-  {
-    id: 2,
-    product: {
-      id: 3,
-      title: 'Test3',
-      image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/imac1.jpg',
-      price: 19.99,
-    }
-  },
-]
+
   const SavedItemScreen = () => {
     const [items, setItems] = useState([]);
 
