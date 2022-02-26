@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
         color: '#403d3d',
         fontFamily: 'Arial',  
     },
+    passwordInfo: {
+        color: 'red',
+    },
     pageContainer: {
         padding: 10,
     },
