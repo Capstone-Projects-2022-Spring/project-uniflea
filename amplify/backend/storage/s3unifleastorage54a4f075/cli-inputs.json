@@ -1,0 +1,12 @@
+{
+  "resourceName": "s3unifleastorage54a4f075",
+  "bucketName": "uniflea-storage-54a4f075",
+  "policyUUID": "515640f1",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}
