@@ -11,6 +11,24 @@ const ProfilePage = () => {
     const navigation = useNavigation();
     
     const [image, setImage] = useState(null);
+
+    const uploadImage = (filename, img) => {
+        Auth.currentCredentials();
+        return Storage.put(filename, img, {
+          level: "public",
+          contentType: "image/jpeg",
+          progressCallback(progress) {
+            setLoading(progress);
+          },
+        })
+          .then((response) => {
+            return response.key;
+          })
+          .catch((error) => {
+            console.log(error);
+            return error.response;
+          });
+    };
     
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -27,7 +45,10 @@ const ProfilePage = () => {
         if (!result.cancelled) {
             setImage(result.uri);
         }
+        uploadImage("pfp", image);
     };
+
+
 
     return (
     
