@@ -1,16 +1,32 @@
 import React, {useState} from 'react';
-
+import Amplify from "@aws-amplify/core";
+import {Storage, Auth} from "aws-amplify";
 import { Text, SafeAreaView, Image, Pressable,TouchableOpacity, View } from 'react-native';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
 import styles from './styles'
 import { Rating } from 'react-native-rating-element';
 import { useNavigation } from '@react-navigation/native';
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from 'expo-image-picker'
+import 'react-native-get-random-values';
+import {v4 as uuidv4} from 'uuid';
+import { S3Image } from 'aws-amplify-react-native';
+
+
 
 const ProfilePage = () => {
     const navigation = useNavigation();
-    
+    let myuuid = uuidv4();
     const [image, setImage] = useState(null);
+    const [percentage, setPercentage] = useState(0);
+
+    const updatePercentage = (number) => {
+        setPercentage(number);
+      };
+
+    const setLoading = (progress) => {
+        const calculated = parseInt((progress.loaded / progress.total) * 100);
+        updatePercentage(calculated); // due to s3 put function scoped
+      };
 
     const uploadImage = (filename, img) => {
         Auth.currentCredentials();
@@ -29,6 +45,13 @@ const ProfilePage = () => {
             return error.response;
           });
     };
+
+    const downloadImage = (uri) => {
+        Storage.get(uri)
+          .then((result) => setImage(result))
+          .catch((err) => console.log(err));
+
+      };
     
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -45,27 +68,26 @@ const ProfilePage = () => {
         if (!result.cancelled) {
             setImage(result.uri);
         }
-        uploadImage("pfp", image);
+        const response = await fetch(result.uri);
+        const blob = await response.blob();
+        const uploadedImage = await Storage.put(myuuid, blob);
+        setImage(uploadedImage.key);
+        
     };
-
-
 
     return (
     
             <SafeAreaView style={styles.container}>
-            
-            <Text>hi from ProfilePage</Text>
-
-            <TouchableOpacity styles = {[styles.topRightPosition]} onPress={console.log}>
+         
+            {/* <TouchableOpacity styles = {styles.topRightPosition} onPress={console.log}>
                 <Image source={require('../../../assets/cogwheel.jpg')} 
                 style={[{width:50, height:50, borderRadius:50/2,}, styles.topRightPosition]}/>
-            </TouchableOpacity>
-
+            </TouchableOpacity> */}
+            
             <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
-            <Image source={{uri: image}} 
-                style={ {width:100, height:100, borderRadius:100/2}}/>
+            
+            <S3Image style={styles.image} imgKey={image} />
             </TouchableOpacity>
-        
             <Text style={styles.profileNameText}>John Doe</Text>
 
             <Rating
@@ -85,18 +107,5 @@ const ProfilePage = () => {
 
     );
 }
-
-const createButton = ( string ) =>{
-
-    return (
-        <><View style={styles.space} /><Pressable style={styles.button}>
-            <Text style={styles.text}>
-                string
-            </Text>
-        </Pressable></>
-    );
-}
-
-
 
 export default ProfilePage;
