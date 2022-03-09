@@ -1,90 +1,56 @@
-import React from 'react'
+import { StatusBar } from 'expo-status-bar';
+import { ScrollView, View, Text, Pressable, Alert } from 'react-native';
+import styles from './styles';
+import CustomInput from './components/CustomInput';
 
-import { StyleSheet, Text, SafeAreaView, Image, Pressable, View } from 'react-native';
-import { Colors } from '../../styles/Colors';
 
-import { Text, SafeAreaView, Image, View, TouchableOpacity, Pressable } from 'react-native';
-import ProfileScreenButton from '../../components/ProfileScreenButton';
-import styles from './styles'
-import { Rating } from 'react-native-rating-element';
+const SignUpScreen = () => {
 
-const SettingsPage = () => {
+  const {
+    control,
+    handleSubmit,
+  } = useForm();
 
-    return(
-        <SafeAreaView>
-            <Pressable>
-                <Image/>
-            </Pressable>
+  return (
+    <ScrollView>
+       <View style={styles.root}>
+        <View style={styles.pageContainer}>
+        <Text style={styles.loginText}>Settings Page</Text>
+          <View style={styles.inputContainer}>
+          
+          <CustomInput
+            control={control}
+            name="Change Name"
+            placeholder='Change Name'
+          />     
+          <CustomInput
+            control={control}
+            name="Change Display Name"
+            placeholder='Change Display Name'
+          /> 
+          <CustomInput
+            control={control}
+            name="Change Profile Name"
+            placeholder='Change Profile Name'
+          />
 
-            <Text styles={}>Settings</Text>
+          <CustomInput
+            control={control}
+            name="Change Password"
+            placeholder='Change Password'
+          />           
+          
 
-            <View>
-                {/* Change Name */}
-                <View>
-                    {/* Change Name Button */}
-                    <View>
+        
+        
+        
+          </View>
+        </View>
+      </View> 
 
-                    </View>
+      </ScrollView>
 
-                    {/* Change Name Container */}
-                    <View>
 
-                    </View>
-                </View>
 
-                {/* Chagne Display Name */}
-                <View>
-                    {/* Change Display Name Button */}
-                    <View>
-
-                    </View>
-
-                    {/* Change Dispaly Name Container */}
-                    <View>
-
-                    </View>
-                </View>
-
-                {/* Change Pronouns */}
-                <View>
-                    {/* Change Pronouns Button */}
-                    <View>
-
-                    </View>
-
-                    {/* Change Pronouns Container */}
-                    <View>
-
-                    </View>
-                </View>
-
-                {/* Change Profile Picture */}
-                <View>
-                    {/* Change Profile Picture Button */}
-                    <View>
-
-                    </View>
-
-                    {/* Change Profile Picture Container */}
-                    <View>
-
-                    </View>
-                </View>
-
-                {/* Change Password */}
-                <View>
-                    {/* Change Password Button */}
-                    <View>
-
-                    </View>
-
-                    {/* Change Password Container */}
-                    <View>
-
-                    </View>
-                </View>
-            </View>
-
-        </SafeAreaView>
-    );
+  );
 }
