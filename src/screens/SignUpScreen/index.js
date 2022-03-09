@@ -68,6 +68,14 @@ const SignUpScreen = () => {
 
     }
 
+    const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
+
     const validatePassword = (confirmedPassword) => {
         return confirmedPassword === password.current;
     };
@@ -129,7 +137,8 @@ const SignUpScreen = () => {
                                 validate: {
                                     checkEmail: v => validatePassword(v) || "Passwords not equivalent"
                                 },
-                                required: "Pasword confirmation required"
+                                required: "Pasword confirmation required" 
+
                             }}
                             secureTextEntry={true}
                         />
