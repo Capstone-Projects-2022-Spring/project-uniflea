@@ -1,56 +1,84 @@
-import { StatusBar } from 'expo-status-bar';
-import { ScrollView, View, Text, Pressable, Alert } from 'react-native';
+import {ScrollView, View, Text, Pressable } from 'react-native';
 import styles from './styles';
-import CustomInput from './components/CustomInput';
+import { useForm } from 'react-hook-form';
+import CustomInput from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
 
-const SignUpScreen = () => {
+
+// import CustomInput from '../../components/CustomInput';
+
+
+
+const SettingsScreen = () => {
+
 
   const {
-    control,
-    handleSubmit,
+    control
   } = useForm();
 
-  return (
+
+  return(
     <ScrollView>
-       <View style={styles.root}>
+      <View style={styles.root}>
         <View style={styles.pageContainer}>
-        <Text style={styles.loginText}>Settings Page</Text>
+          <Text style={styles.settingsText}>Settings</Text>
           <View style={styles.inputContainer}>
-          
-          <CustomInput
-            control={control}
-            name="Change Name"
-            placeholder='Change Name'
-          />     
-          <CustomInput
-            control={control}
-            name="Change Display Name"
-            placeholder='Change Display Name'
-          /> 
-          <CustomInput
-            control={control}
-            name="Change Profile Name"
-            placeholder='Change Profile Name'
-          />
+            
+            <CustomInput
+              control={control}
+                name="name"
+                placeholder='Change Name'
+            />
+            <CustomInput
+              control={control}
+              name="username"
+              placeholder={'Change Username'}
+            />
 
-          <CustomInput
-            control={control}
-            name="Change Password"
-            placeholder='Change Password'
-          />           
-          
+            <CustomInput
+              control={control}
+              name="password"
+              placeholder={'Change Password'}
+            />
+            <CustomInput
+              control={control}
+              name="confirmPassword"
+              placeholder={'Confirm Password'}
+            />
+            <CustomInput
+              control={control}
+              name="email"
+              placeholder={'Change Email'}
+            />
+            <CustomInput
+              control={control}
+              name="phone"
+              placeholder={'Change Phone Number'}
+            />
+            </View>
+            {/* button */}
+            <View style={styles.buttonContainer}>
 
-        
-        
-        
+              <CustomButton text="Save" />
+
+              </View>
+
+
+          
+          
           </View>
+        
         </View>
-      </View> 
 
-      </ScrollView>
+    </ScrollView>
+
+  
+
+);
 
 
-
-  );
 }
+
+export default SettingsScreen

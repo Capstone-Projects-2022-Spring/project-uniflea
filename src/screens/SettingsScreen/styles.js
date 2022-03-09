@@ -2,47 +2,27 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   root: {
-      flex: 1,
-      justifyContent: 'center',
-      padding: 10,
-  },
-
-  inputContainer: {
-      justifyContent: 'center',
-      alignItems: 'center',
+    // flex: 1,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    padding: 10
   },
   pageContainer: {
-      padding: 10,
+    padding: 10,
   },
-  loginText: {
-      fontSize: 24,
-      marginBottom: 10,
-      color: '#403d3d',
-      fontFamily: 'Arial',  
+  settingsText: {
+    fontSize: 24,
+    marginBottom: 10,
+    color: '#403d3d',
+    fontFamily: 'Arial',  
   },
+  inputContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  }, 
   buttonContainer: {
-      marginVertical: 10,
-  },
+    marginVertical: 10,
+},
 
-    buttonText: {
-
-    },
-    fieldButton: {
-
-    },
-    fieldNameText: {
-
-    },
-    submitText: {
-
-    },
-    submitButton: {
-
-    },
-    fieldContainer: {
-        
-    }
-  });
-//Transparency: color: 'light-gray'
-//stretch goal - moderation, settings name and display name
-  export default styles;
+});
+export default styles;
