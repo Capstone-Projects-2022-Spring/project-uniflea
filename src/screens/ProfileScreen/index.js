@@ -1,7 +1,9 @@
+
 import React, {useState} from 'react';
 import Amplify from "@aws-amplify/core";
 import {Storage, Auth} from "aws-amplify";
 import { Text, SafeAreaView, Image, Pressable,TouchableOpacity, View } from 'react-native';
+
 import ProfileScreenButton from '../../components/ProfileScreenButton';
 import styles from './styles'
 import { Rating } from 'react-native-rating-element';
@@ -22,6 +24,7 @@ const ProfilePage = () => {
     const updatePercentage = (number) => {
         setPercentage(number);
       };
+
 
     const setLoading = (progress) => {
         const calculated = parseInt((progress.loaded / progress.total) * 100);
@@ -107,5 +110,6 @@ const ProfilePage = () => {
 
     );
 }
+
 
 export default ProfilePage;
