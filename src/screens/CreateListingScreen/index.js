@@ -2,13 +2,30 @@ import React from 'react';
 import styles from './styles'
 import {SafeAreaView, StyleSheet, TextInput, Pressable, Image, Text, View, TouchableHighlight, TouchableOpacity} from 'react-native';
 import CustomButton from "../../components/CustomButton";
+import * as ImagePicker from 'expo-image-picker';
+
 
 const CreateListingScreen = () => {
     const [titleOfListing] = React.useState(null);
     const [descriptionOfListing] = React.useState(null);
     const [priceOfListing] = React.useState(null);
-    const [notesOfListing] = React.useState(null);
+    const [notesOfListing] = React.useState(null); // make another variable for each field for placeholder and setter
+    const [image, setImage] = React.useState('../../../assets/camera.png');
+    // const [percentage, setPercentage] = useState(0);
 
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: "Images",
+            aspect: [4, 3],
+            quality: 1,
+        });
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage(result.uri);
+        }
+    };
 
     return (
         <SafeAreaView style = {styles.container}>
@@ -19,8 +36,8 @@ const CreateListingScreen = () => {
             {/*           style={styles.cameraFrame}*/}
             {/*    />*/}
             {/*</Pressable>*/}
-            <TouchableOpacity onPress={console.log}>
-                <Image style={styles.cameraFrame} source={require('../../../assets/camera.png')} />
+            <TouchableOpacity onPress={pickImage}>
+                <Image style={styles.cameraFrame} source={{ uri: image }} />
             </TouchableOpacity>
             <TextInput
                 style={styles.input}
