@@ -20,17 +20,16 @@ const styles = StyleSheet.create({
       left: 160,
     },
     profileButton:{
-      width:110,
-      height:110,
-      borderRadius:110,
+      width:100, 
+      height:100,
       borderWidth: 1,
       backgroundColor: "lightgray"
     },
     image:{
-      resizeMode: "contain",
       width:100, 
-      height:100, 
-      borderRadius:100
+      height:100,
+
+      borderWidth: 1
     },
     
   });

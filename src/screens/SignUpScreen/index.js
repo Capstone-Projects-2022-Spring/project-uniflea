@@ -7,6 +7,7 @@ import CustomSelect from '../../components/CustomSelect';
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
 import React, { useRef, useContext } from 'react';
+import { User } from '../../models';
 
 const COLLEGES = [
     { id: 'Temple', name: 'Temple' },
@@ -56,7 +57,16 @@ const SignUpScreen = () => {
                     'custom:University': data.uniSelector[0],
                     'custom:GradYear': data.gradYear[0],
                 }
+              
             });
+            // // await DataStore.save( new User({
+            // //     'displayName': data.name,
+            // //     'university': data.uniSelector[0],
+            // //     'gradYear': data.gradYear[0],
+            // //     'userSub': response.userSub,
+            // // })
+        
+            // )
 
 
             navigation.navigate('VerifyAccount');

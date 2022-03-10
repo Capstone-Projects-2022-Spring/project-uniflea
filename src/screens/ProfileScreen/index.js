@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Storage, Auth, DataStore} from "aws-amplify";
 import { Text, SafeAreaView,TouchableOpacity, View } from 'react-native';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
@@ -10,7 +10,7 @@ import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import { S3Image } from 'aws-amplify-react-native';
 import { User } from '../../models';
-
+import AuthContext from '../../contexts/Authentication';
 
 
 const ProfilePage = () => {
@@ -18,15 +18,16 @@ const ProfilePage = () => {
     let myuuid = uuidv4();
     const [image, setImage] = useState(null);
 
-    const downloadImage = (uri) => {
+    const downloadImage = async()  => {
       const myUser = await Auth.currentAuthenticatedUser();
       //i want the single user in the DB with the correct userSUB
       const user = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
-      await DataStore.save(User.copyOf(user, updated => {updated.image = image}));
-    
-        Storage.get(uri)
-          .then((result) => setImage(result))
-          .catch((err) => console.log(err));
+      //overwrite the og
+      console.log("++++++++++++++++++++" + user);
+   
+
+
+      setImage(updated.image);
       };
     
     const pickImage = async () => {
@@ -47,13 +48,25 @@ const ProfilePage = () => {
         const response = await fetch(result.uri);
         const blob = await response.blob();
         const uploadedImage = await Storage.put(myuuid, blob);
+        
+        const myUser = await Auth.currentAuthenticatedUser();
+        const user = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
+        console.log("+++++++++++ before");
+        console.log("+++++++++" + user);
+        await DataStore.save(
+            User.copyOf(user, updated => {
+                updated.image = uploadedImage.key;
+            })
+        );
+        console.log("++++++++++++ after");
         setImage(uploadedImage.key);
     };
 
+    useEffect(  () => {downloadImage()}, []);
 
     return (
     
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={styles.container} >
          
             {/* <TouchableOpacity styles = {styles.topRightPosition} onPress={console.log}>
                 <Image source={require('../../../assets/cogwheel.jpg')} 
