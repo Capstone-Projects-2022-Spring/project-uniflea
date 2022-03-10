@@ -1,4 +1,4 @@
 export const Colors = {
-    buttonbackgroundPrimary: '#72c1e0',
-    buttonBorderPrimary: 'grey',
+    buttonbackgroundPrimary: '#9D2235',
+    buttonBorderPrimary: '#000000',
 }

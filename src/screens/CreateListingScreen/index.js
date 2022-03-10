@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles'
-import {SafeAreaView, StyleSheet, TextInput, Pressable, Image, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, TextInput, Pressable, Image, Text, View, TouchableHighlight, TouchableOpacity} from 'react-native';
 import CustomButton from "../../components/CustomButton";
 
 const CreateListingScreen = () => {
@@ -11,15 +11,17 @@ const CreateListingScreen = () => {
 
 
     return (
-        <SafeAreaView>
-            <Text Style = {styles.centerTitle}>
-                Create a New Listing
+        <SafeAreaView style = {styles.container}>
+            <Text style = {styles.centerTitle}>Create New Listing
             </Text>
-            <Pressable onPress={console.log("You tapped the camera icon")}>
-                <Image source={require('../../../assets/camera.png')}
-                       style={styles.cameraFrame}
-                />
-            </Pressable>
+            {/*<Pressable onPress={console.log("You tapped the camera icon")}>*/}
+            {/*    <Image source={require('../../../assets/camera.png')}*/}
+            {/*           style={styles.cameraFrame}*/}
+            {/*    />*/}
+            {/*</Pressable>*/}
+            <TouchableOpacity onPress={console.log}>
+                <Image style={styles.cameraFrame} source={require('../../../assets/camera.png')} />
+            </TouchableOpacity>
             <TextInput
                 style={styles.input}
                 value={titleOfListing}
@@ -42,9 +44,9 @@ const CreateListingScreen = () => {
                 placeholder="Notes of Listing"
             />
             <CustomButton onPress= {console.log} text  = "Save Listing as Draft"/>
-            <View style={styles.space}/>
+            {/*<View style={styles.space}/>*/}
             <CustomButton onPress= {console.log} text  = "Publish Listing"/>
-            <View style={styles.space}/>
+            {/*<View style={styles.space}/>*/}
             {/*<Pressable onPress={console.log("You tried to save listing as a draft")}>*/}
             {/*    <Text style = {styles.draftSave}>Save Listing as Draft</Text>*/}
             {/*</Pressable>*/}

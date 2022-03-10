@@ -7,36 +7,36 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        margin: 8,
+        width: 300,
+        margin: 10,
         borderWidth: 1,
         padding: 10,
     },
     input2: {
         height: 100,
-        margin: 8,
+        width: 300,
+        margin: 10,
         borderWidth: 1,
         padding: 10,
     },
     centerTitle: {
-        fontSize: 20,
+        textAlign: 'center', // <-- the magic
+        fontWeight: 'bold',
+        fontSize: 22,
+        marginTop: 10,
+        width: 200,
     },
     cameraFrame: {
         resizeMode: 'contain',
         alignSelf: 'center',
         height: 200,
         width: 200,
-        margin: 8,
+        margin: 10,
         borderWidth: 2,
         padding: 10,
     },
-    draftSave: {
-        height: 60,
-        margin: 8,
-        borderWidth: 1,
-        padding: 10,
-    },
     space:{
-        width:20,
+        width:40,
         height:20
     },
 });
