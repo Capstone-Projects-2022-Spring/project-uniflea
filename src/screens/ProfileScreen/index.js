@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import Amplify from "@aws-amplify/core";
-import {Storage, Auth} from "aws-amplify";
-import { Text, SafeAreaView, Image, Pressable,TouchableOpacity, View } from 'react-native';
+import {Storage, Auth, DataStore} from "aws-amplify";
+import { Text, SafeAreaView,TouchableOpacity, View } from 'react-native';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
 import styles from './styles'
 import { Rating } from 'react-native-rating-element';
@@ -10,6 +9,7 @@ import * as ImagePicker from 'expo-image-picker'
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import { S3Image } from 'aws-amplify-react-native';
+import { User } from '../../models';
 
 
 
@@ -17,40 +17,16 @@ const ProfilePage = () => {
     const navigation = useNavigation();
     let myuuid = uuidv4();
     const [image, setImage] = useState(null);
-    const [percentage, setPercentage] = useState(0);
-
-    const updatePercentage = (number) => {
-        setPercentage(number);
-      };
-
-    const setLoading = (progress) => {
-        const calculated = parseInt((progress.loaded / progress.total) * 100);
-        updatePercentage(calculated); // due to s3 put function scoped
-      };
-
-    const uploadImage = (filename, img) => {
-        Auth.currentCredentials();
-        return Storage.put(filename, img, {
-          level: "public",
-          contentType: "image/jpeg",
-          progressCallback(progress) {
-            setLoading(progress);
-          },
-        })
-          .then((response) => {
-            return response.key;
-          })
-          .catch((error) => {
-            console.log(error);
-            return error.response;
-          });
-    };
 
     const downloadImage = (uri) => {
+      const myUser = await Auth.currentAuthenticatedUser();
+      //i want the single user in the DB with the correct userSUB
+      const user = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
+      await DataStore.save(User.copyOf(user, updated => {updated.image = image}));
+    
         Storage.get(uri)
           .then((result) => setImage(result))
           .catch((err) => console.log(err));
-
       };
     
     const pickImage = async () => {
@@ -72,8 +48,8 @@ const ProfilePage = () => {
         const blob = await response.blob();
         const uploadedImage = await Storage.put(myuuid, blob);
         setImage(uploadedImage.key);
-        
     };
+
 
     return (
     
@@ -85,7 +61,7 @@ const ProfilePage = () => {
             </TouchableOpacity> */}
             
             <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
-            
+  
             <S3Image style={styles.image} imgKey={image} />
             </TouchableOpacity>
             <Text style={styles.profileNameText}>John Doe</Text>
