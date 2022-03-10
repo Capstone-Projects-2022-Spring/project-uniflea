@@ -31,7 +31,9 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <AuthContext.Provider value={{user, setUser}}>
+
+      <AuthContext.Provider value={{userId, setUserId}}>
+
 
         <OverlayProvider>
           {/* 

@@ -40,7 +40,10 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
-    "stream-chat-expo": "^3.10.2"
+
+    "stream-chat-expo": "^3.10.2",
+    "swot-node": "^2.0.380"
+
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
