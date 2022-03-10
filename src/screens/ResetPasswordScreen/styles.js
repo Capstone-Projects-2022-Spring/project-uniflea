@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    passwordInfo: {
+        color: 'red',
+    },
     resetHeader: {
         fontSize: 28,
         marginBottom: 30,

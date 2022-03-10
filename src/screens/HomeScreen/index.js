@@ -1,58 +1,83 @@
 import { Auth } from 'aws-amplify';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, Modal, Picker } from 'react-native';
 import styles from './styles';
 import ProductItem from '../../components/ProductItem';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { DataStore } from '@aws-amplify/datastore';
 import { Product } from '../../models';
-const prodData = [
-  {
-    id: 1,
-    title: 'Test1',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/cleanarchitecture.jpg',
-    price: 19.99,
-  },
-  {
-    id: 2,
-    title: 'Test2',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/mouse3.jpg',
-    price: 19.99,
-  },
-  {
-    id: 3,
-    title: 'Test3',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/imac1.jpg',
-    price: 19.99,
-  },
-  {
-    id: 4,
-    title: 'Test4',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/imac2.jpg',
-    price: 19.99,
-  },
-  {
-    id: 5,
-    title: 'Test5',
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/keyboard1.jpg',
-    price: 19.99,
-  },
-]
+import AuthContext from '../../contexts/Authentication';
+import { useChatContext } from 'stream-chat-expo';
+import { AntDesign } from '@expo/vector-icons'; 
+import { Feather } from '@expo/vector-icons'; 
 const HomeScreen = ({ searchValue }) => {
-
+  const {client} = useChatContext();
   const [products, setProducts] = useState([]);
-
+  const {user, setUser} = useContext(AuthContext);
   console.log(searchValue);
+  console.log('user id homescreen= ', user);
   const signOut = () => {
+    setUser(undefined);
+    client.disconnectUser();
     Auth.signOut();
   }
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const toggleModalOpen = () => {
+    setModalOpen(!modalOpen);
+  }
+  const [selectedValue, setSelectedValue] = useState("Category 1");
+
   useEffect(() => {
     // query the products in the product list on rendering the page
     DataStore.query(Product).then(setProducts);
-    console.log('products = ', products);
+  
   }, []);
   return (
     <View style={styles.page}>
 
+    {/*Modal used to display filter tab*/}
+    <Modal visible={modalOpen} animationType='slide'>
+      <View style={styles.modalContent}>
+        <View style={{alignItems: 'flex-end'}}>
+          <Feather
+            name='check'
+            size={40}
+            color='gray'
+            onPress={toggleModalOpen}
+            /> 
+        </View>
+
+        <View style={{alignItems: 'flex-start'}}>
+
+          <Picker
+            style = {{width: '100%', borderTopWidth: 0}}
+            itemStyle={{fontSize:20}}
+            selectedValue={selectedValue}
+            onValueChange={(itemValue, itemIndex)=> setSelectedValue(itemValue)}
+            >
+              <Picker.Item label ="Category 1" value="category1"/>
+              <Picker.Item label ="Category 2" value="category2"/>
+              <Picker.Item label ="Category 3" value="category3"/>
+              <Picker.Item label ="Category 4" value="category4"/>
+              <Picker.Item label ="Category 5" value="category5"/>
+
+          </Picker>
+        </View>
+
+      </View>
+
+    </Modal>  
+
+      {/*Filter Button*/}
+      <View style={{alignItems: 'flex-end'}}>
+      <AntDesign 
+        name='filter'
+        size={40}
+        color='gray'
+        onPress={toggleModalOpen}
+        />
+      </View>
+      
       <FlatList
         data={products}
         renderItem={({ item }) =>
@@ -76,7 +101,7 @@ const HomeScreen = ({ searchValue }) => {
             width: '100%',
             textAlign: 'center',
           }}>
-          Sign out
+          Sign Out
         </Text>
       </View>
 

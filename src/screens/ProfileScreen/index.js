@@ -1,8 +1,17 @@
 import React from 'react';
+
 import { Text, SafeAreaView, Image, View, TouchableOpacity, Pressable } from 'react-native';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
 import styles from './styles'
 import { Rating } from 'react-native-rating-element';
+
+
+import { StyleSheet, Text, SafeAreaView, Image, Pressable,TouchableOpacity, View } from 'react-native';
+import { Colors } from '../../styles/Colors';
+import ProfileScreenButton from '../../components/ProfileScreenButton';
+import styles from './styles'
+import { Rating } from 'react-native-rating-element';
+
 
 const ProfilePage = () => {
 
@@ -10,6 +19,7 @@ const ProfilePage = () => {
         <SafeAreaView style={styles.container}>
         
         <Text>hi from ProfilePage</Text>
+
         
         {/*the cogwheel button is sus, need to test with actual onPress behavior to see if it works*/}
         <Pressable onPress={console.log("word")}>
@@ -30,6 +40,7 @@ const ProfilePage = () => {
             size={20}
             ratingColor={'#99182e'}
         />
+
         <View style={styles.space}/>
         <ProfileScreenButton onPress={console.log} text="active listing"/>
         <View style={styles.space}/>
@@ -41,5 +52,6 @@ const ProfilePage = () => {
     </SafeAreaView>
     );
 }
+
 
 export default ProfilePage;

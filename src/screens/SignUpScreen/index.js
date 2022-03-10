@@ -123,6 +123,12 @@ const SignUpScreen = () => {
                                 },
                             }}
                         />
+                        <View>
+                            <Text style={styles.passwordInfo}>Minimum 8 characters</Text>
+                            <Text style={styles.passwordInfo}>Must include special characters</Text>
+                            <Text style={styles.passwordInfo}>Must include upper and lower case characters</Text>
+                            <Text style={styles.passwordInfo}>Must include numerals</Text>
+                        </View>
                         <CustomInput
                             control={control}
                             name="password"
@@ -150,6 +156,22 @@ const SignUpScreen = () => {
                             }}
                             secureTextEntry={true}
                         />
+                        <CustomInput
+                            control={control}
+                            name="phone"
+                            placeholder='Enter phone number: xxx-xxx-xxxx'
+                            rules={{
+                                required: "Phone number required"
+                            }}
+                        />
+                        <CustomInput
+                            control={control}
+                            name="birthdate"
+                            placeholder='Enter birthdate: mm/dd/yyyy'
+                            rules={{
+                                required: "birthdate required"
+                            }}
+                        />
 
                     </View>
                     <CustomSelect
@@ -166,6 +188,7 @@ const SignUpScreen = () => {
                         rules={{ required: 'Must select grad year' }}
                         itemToSelect='Graduation Year'
                     />
+
                     <View style={styles.buttonContainer}>
 
                         <CustomButton onPress={handleSubmit(onConfirmPressed)} text="Confirm" />
