@@ -1,9 +1,18 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import {Auth} from 'aws-amplify';
+import {useChatContext} from 'stream-chat-expo';
+import AuthContext from '../../contexts/Authentication';
+import React, {useContext} from 'react';
+import {StreamChat} from 'stream-chat';
+
+const API_KEY = '4gqynpstsrwm';
+const SECRET = 'ee3kx3rc5pmyp58pt5xbnqskttc5fa8b7zha8hzh5su52mv77tgqnksnunqraa9t';
+// const client = StreamChat.getInstance(API_KEY, SECRET);
 const SignInScreen = () => {
     const navigation = useNavigation();
     const {
@@ -12,8 +21,18 @@ const SignInScreen = () => {
         formState: { errors },
     } = useForm();
 
-    const onSignInPressed = () => {
-        navigation.navigate('Home');
+    const { client } = useChatContext();
+    const {setUserId} = useContext(AuthContext);
+    // This function requires call to amplify to verify user, making it asynchronous
+    const onSignInPressed = async (data) => {
+        try {
+            console.log("Signing in...");
+            const response = await Auth.signIn(data.email, data.password);
+            console.log('result = ', response);
+        } catch(e){
+            Alert.alert('Oops', e.message);
+        }
+        // navigation.navigate('Home');
     }
     const onSignUpPressed = () => {
         navigation.navigate('SignUp');
@@ -29,10 +48,10 @@ const SignInScreen = () => {
 
                     <CustomInput 
                         control={control}
-                        name="username"
-                        placeholder='Username'
+                        name="email"
+                        placeholder='Email'
                         rules={{
-                            required: "Username required"
+                            required: "Email required"
                         }}
                     />
                     <CustomInput 

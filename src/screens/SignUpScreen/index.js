@@ -1,10 +1,13 @@
-import { ScrollView, View, Text, Pressable } from 'react-native';
+import { ScrollView, View, Text, Pressable, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import CustomSelect from '../../components/CustomSelect';
 import { useNavigation } from '@react-navigation/native';
+import { Auth } from 'aws-amplify';
+import React, { useRef, useContext } from 'react';
+
 const COLLEGES = [
     { id: 'Temple', name: 'Temple' },
     { id: 'Drexel', name: 'Drexel' },
@@ -26,19 +29,49 @@ const GRAD_YEARS = [
     { id: '2031', name: '2031' },
     { id: '2032', name: '2032' },
 ]
-
+// const client = StreamChat.getInstance('4gqynpstsrwm', 'ee3kx3rc5pmyp58pt5xbnqskttc5fa8b7zha8hzh5su52mv77tgqnksnunqraa9t');
 const SignUpScreen = () => {
+    const password = useRef({});
+
     const navigation = useNavigation();
 
     const {
         control,
         handleSubmit,
         formState: { errors },
+        watch
     } = useForm();
+    // use ref hook to track the value of the password field for validation with confirmPassword field
+    password.current = watch("password");
 
-    const onConfirmPressed = (data) => {
-        navigation.navigate('VerifyAccount');
+    const onConfirmPressed = async (data) => {
+        try {
+            const response = await Auth.signUp({
+                'username': data.email,
+                'password': data.password,
+                'attributes': {
+                    'name': data.name,
+                    'email': data.email,
+                    'preferred_username': data.username,
+                    'custom:University': data.uniSelector[0],
+                    'custom:GradYear': data.gradYear[0],
+                }
+            });
+
+
+            navigation.navigate('VerifyAccount');
+
+        } catch (e) {
+            Alert.alert('Oops', e.message);
+        }
+
+
     }
+
+    const validatePassword = (confirmedPassword) => {
+        return confirmedPassword === password.current;
+    };
+
     const onSignInPressed = (data) => {
         navigation.navigate('SignIn');
     }
@@ -74,12 +107,22 @@ const SignUpScreen = () => {
                                 required: "Email required"
                             }}
                         />
+                        <View>
+                            <Text style={styles.passwordInfo}>Minimum 8 characters</Text>
+                            <Text style={styles.passwordInfo}>Must include special characters</Text>
+                            <Text style={styles.passwordInfo}>Must include upper and lower case characters</Text>
+                            <Text style={styles.passwordInfo}>Must include numerals</Text>
+                        </View>
                         <CustomInput
                             control={control}
                             name="password"
                             placeholder='password'
                             rules={{
-                                required: "Pasword required"
+                                required: "Pasword required",
+                                minLength: {
+                                    value: 8,
+                                    message: "Password must have at least 8 characters"
+                                },
                             }}
                             secureTextEntry={true}
                         />
@@ -89,9 +132,28 @@ const SignUpScreen = () => {
                             name="confirmPassword"
                             placeholder='Confirm Password'
                             rules={{
+                                validate: {
+                                    checkEmail: v => validatePassword(v) || "Passwords not equivalent"
+                                },
                                 required: "Pasword confirmation required"
                             }}
                             secureTextEntry={true}
+                        />
+                        <CustomInput
+                            control={control}
+                            name="phone"
+                            placeholder='Enter phone number: xxx-xxx-xxxx'
+                            rules={{
+                                required: "Phone number required"
+                            }}
+                        />
+                        <CustomInput
+                            control={control}
+                            name="birthdate"
+                            placeholder='Enter birthdate: mm/dd/yyyy'
+                            rules={{
+                                required: "birthdate required"
+                            }}
                         />
 
                     </View>
@@ -109,8 +171,9 @@ const SignUpScreen = () => {
                         rules={{ required: 'Must select grad year' }}
                         itemToSelect='Graduation Year'
                     />
+
                     <View style={styles.buttonContainer}>
-                     
+
                         <CustomButton onPress={handleSubmit(onConfirmPressed)} text="Confirm" />
 
                     </View>

@@ -1,14 +1,22 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import styles from './styles';
 import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import { Auth } from 'aws-amplify';
 
 const ForgotPasswordScreen = () => {
     const navigation = useNavigation();
-    const onSubmit = (data) => {
-        navigation.navigate('ResetPassword');
+    const onSubmit = async (data) => {
+        try{
+            await Auth.forgotPassword(data.email)
+            navigation.navigate('ResetPassword');
+        } catch(e) {
+            Alert.alert('Oops', e.message);
+        }
+        
+
     }
 
     const {
@@ -28,10 +36,10 @@ const ForgotPasswordScreen = () => {
                 <View style={styles.inputContainer}>
                     <CustomInput
                         control={control}
-                        name="username"
-                        placeholder="Enter username"
+                        name="email"
+                        placeholder="Enter email"
                         secureTextEntry={false}
-                        rules={{ required: 'Username required' }}
+                        rules={{ required: 'Email required' }}
                     />
                 </View>
 
