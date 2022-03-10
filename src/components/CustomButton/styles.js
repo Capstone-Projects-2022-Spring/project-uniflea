@@ -6,13 +6,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: Colors.buttonbackgroundPrimary,
         height: 40,
+        width: 300,
         borderRadius: 20,
-        borderWidth: 1,
+        borderWidth: 1.5,
         borderColor: Colors.buttonBorderPrimary,
-        
+        margin: 10,
+
     },
     buttonText: {
         fontSize: 20,
+        color: '#FFFFFF',
     },
 });
 

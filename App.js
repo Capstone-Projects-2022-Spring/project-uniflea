@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import CreateListingScreen from './src/screens/CreateListingScreen'
 import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 

@@ -4,4 +4,5 @@ export const Colors = {
     tabInactiveColor: '#bf1b36',
     tabSelectedColor: '#570614',
     mainBackground: '#e3e1e1',
+
 }
