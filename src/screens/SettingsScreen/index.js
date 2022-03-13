@@ -1,90 +1,84 @@
-import React from 'react'
+import {ScrollView, View, Text, Pressable } from 'react-native';
+import styles from './styles';
+import { useForm } from 'react-hook-form';
+import CustomInput from '../../components/CustomInput';
+import CustomButton from '../../components/CustomButton';
+import { useNavigation } from '@react-navigation/native';
 
-import { StyleSheet, Text, SafeAreaView, Image, Pressable, View } from 'react-native';
-import { Colors } from '../../styles/Colors';
 
-import { Text, SafeAreaView, Image, View, TouchableOpacity, Pressable } from 'react-native';
-import ProfileScreenButton from '../../components/ProfileScreenButton';
-import styles from './styles'
-import { Rating } from 'react-native-rating-element';
 
-const SettingsPage = () => {
+// import CustomInput from '../../components/CustomInput';
 
-    return(
-        <SafeAreaView>
-            <Pressable>
-                <Image/>
-            </Pressable>
 
-            <Text styles={}>Settings</Text>
 
-            <View>
-                {/* Change Name */}
-                <View>
-                    {/* Change Name Button */}
-                    <View>
+const SettingsScreen = () => {
 
-                    </View>
 
-                    {/* Change Name Container */}
-                    <View>
+  const {
+    control
+  } = useForm();
 
-                    </View>
-                </View>
 
-                {/* Chagne Display Name */}
-                <View>
-                    {/* Change Display Name Button */}
-                    <View>
+  return(
+    <ScrollView>
+      <View style={styles.root}>
+        <View style={styles.pageContainer}>
+          <Text style={styles.settingsText}>Settings</Text>
+          <View style={styles.inputContainer}>
+            
+            <CustomInput
+              control={control}
+                name="name"
+                placeholder='Change Name'
+            />
+            <CustomInput
+              control={control}
+              name="username"
+              placeholder={'Change Username'}
+            />
 
-                    </View>
-
-                    {/* Change Dispaly Name Container */}
-                    <View>
-
-                    </View>
-                </View>
-
-                {/* Change Pronouns */}
-                <View>
-                    {/* Change Pronouns Button */}
-                    <View>
-
-                    </View>
-
-                    {/* Change Pronouns Container */}
-                    <View>
-
-                    </View>
-                </View>
-
-                {/* Change Profile Picture */}
-                <View>
-                    {/* Change Profile Picture Button */}
-                    <View>
-
-                    </View>
-
-                    {/* Change Profile Picture Container */}
-                    <View>
-
-                    </View>
-                </View>
-
-                {/* Change Password */}
-                <View>
-                    {/* Change Password Button */}
-                    <View>
-
-                    </View>
-
-                    {/* Change Password Container */}
-                    <View>
-
-                    </View>
-                </View>
+            <CustomInput
+              control={control}
+              name="password"
+              placeholder={'Change Password'}
+            />
+            <CustomInput
+              control={control}
+              name="confirmPassword"
+              placeholder={'Confirm Password'}
+            />
+            <CustomInput
+              control={control}
+              name="email"
+              placeholder={'Change Email'}
+            />
+            <CustomInput
+              control={control}
+              name="phone"
+              placeholder={'Change Phone Number'}
+            />
             </View>
+            {/* button */}
+            <View style={styles.buttonContainer}>
 
-        </SafeAreaView>
-    );
+              <CustomButton text="Save" />
+
+              </View>
+
+
+          
+          
+          </View>
+        
+        </View>
+
+    </ScrollView>
+
+  
+
+);
+
+
 }
+
+export default SettingsScreen

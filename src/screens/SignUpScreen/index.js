@@ -78,6 +78,19 @@ const SignUpScreen = () => {
 
     }
 
+    function validateEmail(input) {
+        const validEmails = ["temple.edu", "drexel.edu", "pennstate.edu", "upenn.edu", "villanova.edu"];
+        const valid = input.split("@");
+        const uni = valid[valid.length-1];
+        if (validEmails.includes(uni)) {
+            alert("Valid email address");
+            return true;
+        } else {
+            alert("Invalid email address");
+            return false;
+        }
+    }
+
     const validatePassword = (confirmedPassword) => {
         return confirmedPassword === password.current;
     };
@@ -114,7 +127,10 @@ const SignUpScreen = () => {
                             name="email"
                             placeholder='Email'
                             rules={{
-                                required: "Email required"
+                                required: "Email required",
+                                validate: {
+                                    checkEmail: e => validateEmail(e) || "Invalid University Email"
+                                },
                             }}
                         />
                         <View>
@@ -143,9 +159,10 @@ const SignUpScreen = () => {
                             placeholder='Confirm Password'
                             rules={{
                                 validate: {
-                                    checkEmail: v => validatePassword(v) || "Passwords not equivalent"
+                                    checkPassword: v => validatePassword(v) || "Passwords not equivalent"
                                 },
-                                required: "Pasword confirmation required"
+                                required: "Pasword confirmation required" 
+
                             }}
                             secureTextEntry={true}
                         />

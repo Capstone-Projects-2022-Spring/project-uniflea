@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 import React, {useEffect, useState} from 'react';
 import {Storage, Auth, DataStore} from "aws-amplify";
 import { Text, SafeAreaView,TouchableOpacity, View } from 'react-native';
+=======
+
+import React, {useState} from 'react';
+import Amplify from "@aws-amplify/core";
+import {Storage, Auth} from "aws-amplify";
+import { Text, SafeAreaView, Image, Pressable,TouchableOpacity, View } from 'react-native';
+
+>>>>>>> 4fb23b98a307a0b87b83b484283a31469ad29acc
 import ProfileScreenButton from '../../components/ProfileScreenButton';
 import styles from './styles'
 import { Rating } from 'react-native-rating-element';
@@ -17,6 +26,43 @@ const ProfilePage = () => {
     const navigation = useNavigation();
     let myuuid = uuidv4();
     const [image, setImage] = useState(null);
+<<<<<<< HEAD
+=======
+    const [percentage, setPercentage] = useState(0);
+
+    const updatePercentage = (number) => {
+        setPercentage(number);
+      };
+
+
+    const setLoading = (progress) => {
+        const calculated = parseInt((progress.loaded / progress.total) * 100);
+        updatePercentage(calculated); // due to s3 put function scoped
+      };
+
+    const uploadImage = (filename, img) => {
+        Auth.currentCredentials();
+        return Storage.put(filename, img, {
+          level: "public",
+          contentType: "image/jpeg",
+          progressCallback(progress) {
+            setLoading(progress);
+          },
+        })
+          .then((response) => {
+            return response.key;
+          })
+          .catch((error) => {
+            console.log(error);
+            return error.response;
+          });
+    };
+
+    const downloadImage = (uri) => {
+        Storage.get(uri)
+          .then((result) => setImage(result))
+          .catch((err) => console.log(err));
+>>>>>>> 4fb23b98a307a0b87b83b484283a31469ad29acc
 
     const downloadImage = async()  => {
       const myUser = await Auth.currentAuthenticatedUser();
@@ -96,5 +142,6 @@ const ProfilePage = () => {
 
     );
 }
+
 
 export default ProfilePage;
