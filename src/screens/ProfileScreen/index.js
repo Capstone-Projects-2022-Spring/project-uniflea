@@ -10,7 +10,7 @@ import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import { S3Image } from 'aws-amplify-react-native';
 import { User } from '../../models';
-import AuthContext from '../../contexts/Authentication';
+import { or } from 'react-native-reanimated';
 
 
 const ProfilePage = () => {
@@ -22,12 +22,11 @@ const ProfilePage = () => {
       const myUser = await Auth.currentAuthenticatedUser();
       //i want the single user in the DB with the correct userSUB
       const user = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
-      //overwrite the og
-      console.log("++++++++++++++++++++" + user);
-   
-
-
-      setImage(updated.image);
+      //i want the pfp of that user
+      const image = user[0].image;
+      
+        
+      setImage(image);
       };
     
     const pickImage = async () => {
@@ -45,20 +44,21 @@ const ProfilePage = () => {
         if (!result.cancelled) {
             setImage(result.uri);
         }
+        //uploads to s3
         const response = await fetch(result.uri);
         const blob = await response.blob();
         const uploadedImage = await Storage.put(myuuid, blob);
         
+        //upload to amplify
         const myUser = await Auth.currentAuthenticatedUser();
-        const user = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
-        console.log("+++++++++++ before");
-        console.log("+++++++++" + user);
+        const original = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
+
         await DataStore.save(
-            User.copyOf(user, updated => {
-                updated.image = uploadedImage.key;
+            User.copyOf(original[0], updated => {
+                updated.image = uploadedImage.key
             })
-        );
-        console.log("++++++++++++ after");
+        )
+
         setImage(uploadedImage.key);
     };
 
