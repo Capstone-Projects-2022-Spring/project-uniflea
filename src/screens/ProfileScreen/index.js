@@ -68,10 +68,10 @@ const ProfilePage = () => {
     
             <SafeAreaView style={styles.container} >
          
-            {/* <TouchableOpacity styles = {styles.topRightPosition} onPress={console.log}>
+            <TouchableOpacity styles = {styles.topRightPosition} onPress={console.log}>
                 <Image source={require('../../../assets/cogwheel.jpg')} 
                 style={[{width:50, height:50, borderRadius:50/2,}, styles.topRightPosition]}/>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
             
             <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
   
