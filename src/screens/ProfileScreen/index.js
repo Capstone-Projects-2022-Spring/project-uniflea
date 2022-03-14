@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Storage, Auth, DataStore} from "aws-amplify";
-import { Text, SafeAreaView,TouchableOpacity, View } from 'react-native';
+import { Text, SafeAreaView,TouchableOpacity, View, Image } from 'react-native';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
 import styles from './styles'
 import { Rating } from 'react-native-rating-element';
@@ -10,7 +10,7 @@ import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import { S3Image } from 'aws-amplify-react-native';
 import { User } from '../../models';
-import { or } from 'react-native-reanimated';
+
 
 
 const ProfilePage = () => {
