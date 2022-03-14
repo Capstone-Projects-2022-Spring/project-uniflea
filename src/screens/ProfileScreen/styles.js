@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const styles = StyleSheet.create({
     container: {
@@ -16,8 +17,21 @@ const styles = StyleSheet.create({
     },
     topRightPosition:{
       top:-140,
-      left: 160
-    }
+      left: 160,
+    },
+    profileButton:{
+      width:100, 
+      height:100,
+      borderWidth: 1,
+      backgroundColor: "lightgray"
+    },
+    image:{
+      width:100, 
+      height:100,
+
+      borderWidth: 1
+    },
+    
   });
 
   export default styles;

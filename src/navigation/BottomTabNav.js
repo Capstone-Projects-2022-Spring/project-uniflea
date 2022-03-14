@@ -8,6 +8,7 @@ import ProfilePage from '../screens/ProfileScreen';
 import MessagesStack from './MessagesStack';
 import SavedItemStack from './SavedItemStack';
 import SellItemScreen from '../screens/SellItemScreen';
+import ProfileScreenStack from './ProfileStack';
 
 const Tab = createBottomTabNavigator();
 const BottomTabNav = () => {
@@ -54,7 +55,7 @@ const BottomTabNav = () => {
                         <Entypo name="message" size={24} color={color} />
                     ),
                 }} />
-            <Tab.Screen component={ProfilePage} name={"Profile"}
+            <Tab.Screen component={ProfileScreenStack} name={"Profile"}
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
