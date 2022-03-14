@@ -41,25 +41,25 @@ Users can test the release in the following ways
 
 * Test that other input fields are validated
   1. Click the sign up button
-  2. enter no sign up information
+  2. Enter no sign up information
   3. Click submit
   4. You will be greeted with errors for each field
   5. Enter valid values for the fields
   6. Check your email for the validation code
-  7. enter the code and press submit
+  7. Enter the code and press submit
   8. You will be redirected to the sign in page, enter your validated email and password
   9. You will now be on the home page
 
 * Test that user can change profile image
   1. Navigate to profile page (bottom righ tab) 
   2. Click the profile picture icon at the top of the page
-  3. select the image you would liek to use
-  4. you can now see that image being displayed
+  3. Select the image you would like to use
+  4. You can now see that image being displayed
   
 * Test user can change password
   1. Navigate to profile page (bottom righ tab) 
-  2. 2. Click the change password button
+  2. Click the change password button
   3. Input your email
-  4. enter the code sent to your email, and your new password on the next screen
+  4. Enter the code sent to your email, and your new password on the next screen
 
 [Link to source code](src)
