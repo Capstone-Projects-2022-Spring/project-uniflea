@@ -21,7 +21,7 @@ or by navigating to related pages to chang their password, or view their active 
 # Installation Instructions
 <br>
 To install/run UniFlea, first proceed to https://expo.dev/client and download the appropriate Expo application for your mobile device. 
-From here, there are two options: <br />
+From here, there are two options:  
 
 Option One (QR Code Scan): Scan the QR Code below. Upon scanning, you may be prompted to open the UniFlea application in Expo. Otherwise, it will automatically do so, and UniFlea will be running on your mobile device.
 
