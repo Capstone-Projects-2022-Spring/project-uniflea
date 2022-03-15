@@ -6,17 +6,19 @@ import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
 
+import React, {useRef} from 'react';
+
 const ResetPasswordScreen = () => {
     const password = useRef({});
     const navigation = useNavigation();
     const onSubmit = async (data) => {
-        try{
+        try {
             await Auth.forgotPasswordSubmit(data.email, data.code, data.password);
             navigation.navigate("SignIn");
-        } catch(e) {
+        } catch (e) {
             Alert.alert('Oops', e.message);
         }
-   
+
     }
 
     const {
@@ -50,6 +52,12 @@ const ResetPasswordScreen = () => {
                         secureTextEntry={false}
                         rules={{ required: 'Code required' }}
                     />
+                    <View>
+                        <Text style={styles.passwordInfo}>Minimum 8 characters</Text>
+                        <Text style={styles.passwordInfo}>Must include special characters</Text>
+                        <Text style={styles.passwordInfo}>Must include upper and lower case characters</Text>
+                        <Text style={styles.passwordInfo}>Must include numerals</Text>
+                    </View>
                     <CustomInput
                         control={control}
                         name="password"

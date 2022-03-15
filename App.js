@@ -1,26 +1,22 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import CreateListingScreen from './src/screens/CreateListingScreen'
 import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 
 import Navigation from './src/navigation';
-<<<<<<< HEAD
 import Amplify from 'aws-amplify'
 import awsconfig from './src/aws-exports'
 
 import AuthContext from './src/contexts/Authentication';
-import { Colors } from './src/styles/Colors';
+
 Amplify.configure(awsconfig)
 
 const API_KEY = '4gqynpstsrwm';
 const client = StreamChat.getInstance(API_KEY);
 
-=======
-import ProfilePage from './src/screens/ProfileScreen';
-import OtherProfilePage from './src/screens/OtherProfileScreen';
->>>>>>> ProfileScreen
 export default function App() {
-  const [userId, setUserId] = useState('');
+  const [user, setUser] = useState('');
   useEffect(() => {
     /*
       Amplify provides a unique user identifier (userSub),
@@ -35,8 +31,9 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-<<<<<<< HEAD
-      <AuthContext.Provider value={{userId, setUserId}}>
+
+      <AuthContext.Provider value={{user, setUser}}>
+
 
         <OverlayProvider>
           {/* 
@@ -51,20 +48,12 @@ export default function App() {
 
         </OverlayProvider>
       </AuthContext.Provider>
-=======
-      <StatusBar />
-      {/* Navigation will go here */}
-      {/*<Navigation />*/}
-      {/*<ProfilePage/>*/}
-      <OtherProfilePage/>
->>>>>>> ProfileScreen
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.tabInactiveColor,
     flex: 1,
   },
 });

@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import BottomTabNav from './BottomTabNav';
 import AuthStack from './AuthStack';
 import { Auth, Hub } from 'aws-amplify';
@@ -12,20 +12,21 @@ import { useChatContext } from 'stream-chat-expo';
 const Root = createStackNavigator();
 
 const Navigation = () => {
-    const [user, setUser] = useState(undefined);
+    // const [user, setUser] = useState(undefined);
     // decouple authentication from navigation using context api
-    const {userId, setUserId} = useContext(AuthContext);
-
+    const {user, setUser} = useContext(AuthContext);
+    console.log(user);
     const {client} = useChatContext();
     const checkUser = async () => {
         try {
             // bypasse cache to query the database and make certain the user does not exist
             const currentAuthenticatedUser = await Auth.currentAuthenticatedUser({ bypassCache: true });
             
-    
-            if (userId.length > 0) {
+            // if user is already signed in, we don't connect another
+            if (user) {
                 return;
             }
+            
             await client.connectUser(
                 {
                     id: currentAuthenticatedUser.attributes.sub,
@@ -34,18 +35,14 @@ const Navigation = () => {
                 client.devToken(currentAuthenticatedUser.attributes.sub) // authentication token that I receive from backend
             );
 
-            // create a messages channel on user connection
-            // const channel = client.channel("livestream", "live", { name: "Test Live" });
-
-            // // watch loads the initial state, and automatically subscribes for updates when new events occur
-            // await channel.watch();
             console.log('connected user in navigation screen');
             setUser(currentAuthenticatedUser);
-            setUserId(currentAuthenticatedUser.attributes.sub)
+            
+            
         } catch (e) {
             console.log("No current authenticated user");
             setUser(null);
-            setUserId(null)
+            
         }
 
     }

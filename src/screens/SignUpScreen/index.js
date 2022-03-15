@@ -7,6 +7,7 @@ import CustomSelect from '../../components/CustomSelect';
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
 import React, { useRef, useContext } from 'react';
+import { User } from '../../models';
 
 const COLLEGES = [
     { id: 'Temple', name: 'Temple' },
@@ -56,7 +57,16 @@ const SignUpScreen = () => {
                     'custom:University': data.uniSelector[0],
                     'custom:GradYear': data.gradYear[0],
                 }
+              
             });
+            // // await DataStore.save( new User({
+            // //     'displayName': data.name,
+            // //     'university': data.uniSelector[0],
+            // //     'gradYear': data.gradYear[0],
+            // //     'userSub': response.userSub,
+            // // })
+        
+            // )
 
 
             navigation.navigate('VerifyAccount');
@@ -66,6 +76,19 @@ const SignUpScreen = () => {
         }
 
 
+    }
+
+    function validateEmail(input) {
+        const validEmails = ["temple.edu", "drexel.edu", "pennstate.edu", "upenn.edu", "villanova.edu"];
+        const valid = input.split("@");
+        const uni = valid[valid.length-1];
+        if (validEmails.includes(uni)) {
+            alert("Valid email address");
+            return true;
+        } else {
+            alert("Invalid email address");
+            return false;
+        }
     }
 
     const validatePassword = (confirmedPassword) => {
@@ -104,9 +127,18 @@ const SignUpScreen = () => {
                             name="email"
                             placeholder='Email'
                             rules={{
-                                required: "Email required"
+                                required: "Email required",
+                                validate: {
+                                    checkEmail: e => validateEmail(e) || "Invalid University Email"
+                                },
                             }}
                         />
+                        <View>
+                            <Text style={styles.passwordInfo}>Minimum 8 characters</Text>
+                            <Text style={styles.passwordInfo}>Must include special characters</Text>
+                            <Text style={styles.passwordInfo}>Must include upper and lower case characters</Text>
+                            <Text style={styles.passwordInfo}>Must include numerals</Text>
+                        </View>
                         <CustomInput
                             control={control}
                             name="password"
@@ -127,11 +159,28 @@ const SignUpScreen = () => {
                             placeholder='Confirm Password'
                             rules={{
                                 validate: {
-                                    checkEmail: v => validatePassword(v) || "Passwords not equivalent"
+                                    checkPassword: v => validatePassword(v) || "Passwords not equivalent"
                                 },
-                                required: "Pasword confirmation required"
+                                required: "Pasword confirmation required" 
+
                             }}
                             secureTextEntry={true}
+                        />
+                        <CustomInput
+                            control={control}
+                            name="phone"
+                            placeholder='Enter phone number: xxx-xxx-xxxx'
+                            rules={{
+                                required: "Phone number required"
+                            }}
+                        />
+                        <CustomInput
+                            control={control}
+                            name="birthdate"
+                            placeholder='Enter birthdate: mm/dd/yyyy'
+                            rules={{
+                                required: "birthdate required"
+                            }}
                         />
 
                     </View>
@@ -149,6 +198,7 @@ const SignUpScreen = () => {
                         rules={{ required: 'Must select grad year' }}
                         itemToSelect='Graduation Year'
                     />
+
                     <View style={styles.buttonContainer}>
 
                         <CustomButton onPress={handleSubmit(onConfirmPressed)} text="Confirm" />

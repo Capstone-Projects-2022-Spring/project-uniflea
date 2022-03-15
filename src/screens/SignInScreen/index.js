@@ -26,8 +26,9 @@ const SignInScreen = () => {
     // This function requires call to amplify to verify user, making it asynchronous
     const onSignInPressed = async (data) => {
         try {
+            console.log("Signing in...");
             const response = await Auth.signIn(data.email, data.password);
-            
+            console.log('result = ', response);
         } catch(e){
             Alert.alert('Oops', e.message);
         }

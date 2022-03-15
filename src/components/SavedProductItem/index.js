@@ -1,7 +1,6 @@
 
 import { Text, View, Image, Pressable } from 'react-native';
 import styles from './styles';
-import CustomButton from '../CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import { SavedProduct } from '../../models';
 import { DataStore } from 'aws-amplify';
