@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
       fontSize: 30
     },
     topRightPosition:{
-      top:-140,
-      left: 160,
+      top: -120,
+      left: 180,
     },
     profileButton:{
       width:100, 
