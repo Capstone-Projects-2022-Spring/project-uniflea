@@ -42,7 +42,7 @@ Users can test the release in the following ways
   4. You will be greeted with an error
   5. Enter a university email
   
-* Tet that duplicate accounts can't be created
+* Test that duplicate accounts can't be created
   1. Click the sign up button again
   2. enter sign up information, but instead of using a new email, sign up using the email you validated in the previous test
   3. Click submit
