@@ -26,11 +26,11 @@ From here, there are two options:
 
 Option One (QR Code Scan): Scan the QR Code below. Upon scanning, you may be prompted to open the UniFlea application in Expo. Otherwise, it will automatically do so, and UniFlea will be running on your mobile device.
 
-![image](https://user-images.githubusercontent.com/61302705/158283715-a5f44af0-efe7-4dad-8f07-50a5dc0d0b2e.png)
+![image](https://user-images.githubusercontent.com/61302705/158296888-72c3d1e2-a615-4d2a-a762-3aa28ba774e1.png)
 
-Option Two (Link): Copy and paste the following link into your browser and hit enter: exp://exp.host/@tjhnguyen/UniFlea?release-channel=default. Upon hitting enter, you may be prompted to open the UniFlea application in Expo. Otherwise, it will automatically do so, and UniFlea will be running on your mobile device.
+Option Two (Link): Copy and paste the following link into your browser and hit enter: exp://exp.host/@unifleatest/UniFlea?release-channel=default. Upon hitting enter, you may be prompted to open the UniFlea application in Expo. Otherwise, it will automatically do so, and UniFlea will be running on your mobile device.
 
-If you would like to see the current offical published release on Expo, proceed to https://expo.dev/@tjhnguyen/UniFlea where you can see additional details about the project and corresponding instructions to run the application similar to Option One and Option Two.
+If you would like to see the current offical published release on Expo, proceed to https://expo.dev/@unifleatest/UniFlea where you can see additional details about the project and corresponding instructions to run the application similar to Option One and Option Two.
 
 # How to Use and Test Release
 <br>
