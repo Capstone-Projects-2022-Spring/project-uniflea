@@ -1,3 +1,4 @@
+
 # project-uniflea
 project-uniflea created by GitHub Classroom
 
@@ -73,3 +74,7 @@ Users can test the release in the following ways
   4. Enter the code sent to your email, and your new password on the next screen
 
 [Link to source code](src)
+
+## Contributors
+Dylan Dunda, Josh Hageman, Tuan Lam, Adam Lang, Kasie Madden, TJ Nguyen, Sameera Rachakonda
+
