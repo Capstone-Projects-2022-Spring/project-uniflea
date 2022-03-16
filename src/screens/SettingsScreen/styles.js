@@ -6,10 +6,11 @@ const styles = StyleSheet.create({
     // flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
-    padding: 10,
+    padding:13,
   },
   pageContainerIcon: {
-    padding: 10,
+    padding: 20,
+    paddingBottom:'25%',
   },
   icon: {
     paddingRight:28,
@@ -38,21 +39,26 @@ const styles = StyleSheet.create({
   containerText: {
     fontSize: 14,
     height:50,
-    width: '100%',
+    width: '95%',
+    justifyContent:'center',
     paddingTop:18,
-    paddingLeft:10,
+    paddingRight:40,
     color: 'gray',
     fontFamily: 'Arial', 
     borderBottomWidth:1,
     borderColor:'gray',
   },
   inputContainer: {
-    justifyContent:'flex-end',
+    paddingRight:10,
+    justifyContent:'center',
     alignItems:'center',
   }, 
   buttonContainer: {
     marginVertical: 10,
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+
+    
 },
 
 });
