@@ -1,4 +1,4 @@
-import {View, Text, } from 'react-native';
+import {View, Text, ScrollView } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import { useForm } from 'react-hook-form';
@@ -8,6 +8,7 @@ import { AntDesign} from '@expo/vector-icons';
 import { User } from '../../models';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {Auth, DataStore} from "aws-amplify";
+
 
 
 
@@ -23,6 +24,7 @@ const SettingsScreen = () => {
 
   const [displayName, setName] = useState(null);
   const [userSub, setuserSub] = useState(null);
+  const [createdAt, setcreatedAt] = useState(null);
   const UserPlaceholder = async()  => {
     const myUser = await Auth.currentAuthenticatedUser();
     //i want the single user in the DB with the correct userSUB
@@ -30,10 +32,11 @@ const SettingsScreen = () => {
     //i want the pfp of that user
     const displayName = userRecord[0].displayName;
     const userSub = userRecord[0].userSub;
+    const createdAt = userRecord[0].createdAt;
       
     setName(displayName);
     setuserSub(userSub);
-    
+    setcreatedAt(createdAt)
 
     };
 
@@ -58,28 +61,32 @@ const SettingsScreen = () => {
 
   return(
       
-    <SafeAreaView>
+    <ScrollView>
        
       <View style={styles.root}>
+        <Text style={styles.settingsText}>Settings</Text>
         <View style={styles.pageContainerIcon}>
-          <Text style={styles.settingsText}>Settings</Text>
-          <View style={styles.inputContainer}>
 
+          <View style={styles.inputContainer}>
+          
+          {/* user name input */}
+               
           <View style={styles.iconStyle }>
             <AntDesign style={styles.icon} name="user" size = {24} color="#black"  />
             <CustomInput
               control={control}
                 name="name"
-                 placeholder={displayName}    
+                placeholder={displayName}    
             /> 
-            </View>
 
+            </View>
+            {/* email display */}
             <View style={styles.iconStyle }>
             <AntDesign style={styles.icon} name="mail" size = {24} color="#black"  />
-            <Text style={styles.containerText}>{displayName} </Text>
+            <Text style={styles.containerText}>{createdAt} </Text>
             </View>
 
-
+            {/* user's username */}
             <View style={styles.iconStyle}>
             <AntDesign style={styles.icon} name="aliwangwang-o1" size = {24} color="#black"  />
             <CustomInput
@@ -87,7 +94,7 @@ const SettingsScreen = () => {
               name="username"
               placeholder={userSub}
             /></View>
-{/* call amp to password call signin func *************************/}
+{/* call amp to password call signin func Needs to be changed *************************/}
             <View style={styles.iconStyle}>
             <AntDesign style={styles.icon} name="lock" size={24} color="black" />
             <CustomInput
@@ -98,7 +105,7 @@ const SettingsScreen = () => {
             </View>
 {/* Need to change***************************************/}
             
-            
+            {/* user phone input */}
             <View style={styles.iconStyle}>
             <AntDesign style={styles.icon} name="phone" size={24} color="black" />
             <CustomInput
@@ -128,7 +135,7 @@ const SettingsScreen = () => {
      
         
 
-    </SafeAreaView>
+    </ScrollView>
 
   
 
