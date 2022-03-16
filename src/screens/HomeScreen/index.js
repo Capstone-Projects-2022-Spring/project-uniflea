@@ -12,6 +12,7 @@ import { Feather } from '@expo/vector-icons';
 const HomeScreen = ({ searchValue }) => {
   const {client} = useChatContext();
   const [products, setProducts] = useState([]);
+  var [sortedProducts, setSortedProducts] = useState([]);
   const {user, setUser} = useContext(AuthContext);
   console.log(searchValue);
   console.log('user id homescreen= ', user);
@@ -27,7 +28,7 @@ const HomeScreen = ({ searchValue }) => {
   }
   const [selectedValue, setSelectedValue] = useState("None");
 
-  const filterSort = (products, itemValue) => {
+  const filterSort = (sortedProducts, itemValue) => {
       setSelectedValue(itemValue);
       console.log("Changed sort setting");
       console.log(itemValue);
@@ -36,21 +37,19 @@ const HomeScreen = ({ searchValue }) => {
       case 'none':
         console.log("Didn't sort");
         //No need to sort
+        setSortedProducts(products);
         return;
-
-      case 'category':
-        console.log("Sorted by category");
-        //Sort by category  
-        return;
-
 
       case 'price':
         console.log("Sorted by price");
         //sort by price
+        sortedProducts.sort((a, b) => (a.price > b.price) ? 1 : -1);
+        //console.log("Sorted products after sort:")
+        //console.log(sortedProducts);
         return;
 
       default:
-        console.log("Default switch case detected, not sorting.")
+        console.log("Default switch case, not sorting.")
         return;
     }
   }
@@ -58,7 +57,12 @@ const HomeScreen = ({ searchValue }) => {
   useEffect(() => {
     // query the products in the product list on rendering the page
     DataStore.query(Product).then(setProducts);
-  
+    DataStore.query(Product).then(setSortedProducts);
+    //console.log("OG product array:");
+    //console.log(products);
+    //console.log("Copy Product Array:");
+    //console.log(sortedProducts);
+
   }, []);
   return (
     <View style={styles.page}>
@@ -81,14 +85,24 @@ const HomeScreen = ({ searchValue }) => {
             style = {{width: '100%', borderTopWidth: 0}}
             itemStyle={{fontSize:20}}
             selectedValue={selectedValue}
-            onValueChange={(itemValue, itemIndex)=> filterSort(products, itemValue)}
+            onValueChange={(itemValue, itemIndex)=> filterSort(sortedProducts, itemValue)}
             >
               <Picker.Item label ="None" value="none"/>
-              <Picker.Item label ="Category" value="category"/>
               <Picker.Item label ="Price" value="price"/>
 
           </Picker>
         </View>
+
+        <View style={{ width: '100%', height: 15}}>
+        <Text
+          onPress={()=>console.log('Category Filter pressed')}
+          style={{
+            width: '100%',
+            textAlign: 'center',
+          }}>
+          Filter by Category
+        </Text>
+      </View>
 
       </View>
 
@@ -105,7 +119,7 @@ const HomeScreen = ({ searchValue }) => {
       </View>
       
       <FlatList
-        data={products}
+        data={sortedProducts}
         renderItem={({ item }) =>
 
           <ProductItem
@@ -113,6 +127,7 @@ const HomeScreen = ({ searchValue }) => {
             title={item.title}
             image={item.image}
             price={item.price}
+            category={item.category}
           />
 
 
