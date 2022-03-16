@@ -10,7 +10,7 @@ import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import { S3Image } from 'aws-amplify-react-native';
 import { User } from '../../models';
-import { Feather } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 
 const ProfilePage = () => {
@@ -63,14 +63,17 @@ const ProfilePage = () => {
     };
 
     useEffect(  () => {downloadImage()}, []);
+    
+    //setting varriable to naviate to the settings screen 
+    const iconPress = () => {navigation.navigate("SettingsScreen")};
 
     return (
     
             <SafeAreaView style={styles.container} >
-            {/* cog icon to navigate to the settings screen */}
-            <TouchableOpacity styles = {styles.topRightPosition} onPress={console.log}>
-            <Feather name="settings" size={30} color="black" 
-                style={[{width:50, height:50, borderRadius:50/2,}, styles.topRightPosition]}/>
+
+            {/* The onpress settings icon */}
+            <TouchableOpacity style={styles.topRightPosition} onPress={iconPress}>
+            <AntDesign name="setting" size={30} color="black" />
             </TouchableOpacity>
             
             <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
@@ -93,7 +96,7 @@ const ProfilePage = () => {
                 <View style={styles.space}/>
                 <ProfileScreenButton onPress={ () => navigation.navigate("ForgotPasswordScreen")} text="Change Password"/>
                 <View style={styles.space}/>
-                <ProfileScreenButton onPress={() => navigation.navigate("SettingsScreen")} text="Settings"/>
+
             </SafeAreaView>
 
     );
