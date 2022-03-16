@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: 10,
         margin: 20,
-        borderWidth: 1,
+        borderBottomWidth:1,
+        borderColor:'gray',
         justifyContent: 'center',
     },
 });
