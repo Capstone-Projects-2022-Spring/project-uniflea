@@ -7,7 +7,7 @@ import HomeStack from './HomeStack';
 import ProfilePage from '../screens/ProfileScreen';
 import MessagesStack from './MessagesStack';
 import SavedItemStack from './SavedItemStack';
-import SellItemScreen from '../screens/SellItemScreen';
+import SellItemScreenStack from './SellItemScreenStack';
 import ProfileScreenStack from './ProfileStack';
 
 const Tab = createBottomTabNavigator();
@@ -35,14 +35,14 @@ const BottomTabNav = () => {
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
-                        <Entypo name="shopping-cart" size={24} color={color} />
+                        <Entypo name="bookmarks" size={24} color={color} />
                     ),
                 }} />
-            <Tab.Screen component={SellItemScreen} name={"Sell"}
+            <Tab.Screen component={SellItemScreenStack} name={"Sell"}
 
                 options={{
-                    headerShown: true,
-                    headerTitle: 'List an item',
+                    headerShown: false,
+                    headerTitle: 'List an Item',
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
                         <Entypo name="squared-plus" size={24} color={color} />
