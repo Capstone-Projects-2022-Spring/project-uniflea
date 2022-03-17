@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
       fontSize: 30
     },
     topRightPosition:{
-      top: -130,
+      top: -180,
       left: 170,
     },
     profileButton:{
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 
       borderWidth: 1
     },
+
     
   });
 
