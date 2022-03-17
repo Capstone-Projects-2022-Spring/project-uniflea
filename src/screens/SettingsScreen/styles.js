@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   root: {
-    // flex: 1,
     backgroundColor: "#fff",
     justifyContent: "center",
     padding: 13,
@@ -37,6 +36,21 @@ const styles = StyleSheet.create({
     color: "#403d3d",
     fontFamily: "Arial",
   },
+  lableText: {
+    fontSize: 14,
+    color: "#403d3d",
+    fontFamily: "Arial",
+    fontStyle: "italic",
+  },
+  lableContainer: {
+    fontSize: 14,
+    height: 20,
+    width: "100%",
+    justifyContent: "center",
+    paddingLeft: 30,
+    bottom: -15,
+  },
+
   containerText: {
     fontSize: 14,
     height: 50,
@@ -61,8 +75,6 @@ const styles = StyleSheet.create({
     color: "gray",
     borderBottomWidth: 1,
     borderColor: "gray",
-
-    // backgroundColor:"blue",
   },
   inputContainer: {
     paddingRight: 10,
