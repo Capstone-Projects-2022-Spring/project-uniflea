@@ -19,6 +19,8 @@ const SettingsScreen = () => {
   const [dob, setDOB] = useState(null);
   const [phone, setPhone] = useState(null);
   const [name, setName] = useState(null);
+  const [grad, setGrad] = useState(null);
+  const [school, setSchool] = useState(null);
 
   const UserPlaceholder = async () => {
     const myUser = await Auth.currentAuthenticatedUser();
@@ -32,11 +34,16 @@ const SettingsScreen = () => {
     const dob = userRecord[0].dob;
     const phone = userRecord[0].phone;
     const name = userRecord[0].name;
+    const grad = userRecord[0].gradYear;
+    const school = userRecord[0].university;
+
     setDisplayName(displayName);
     setEmail(email);
     setDOB(dob);
     setPhone(phone);
     setName(name);
+    setGrad(grad),
+    setSchool(school);
   };
 
   // //Upload to DB
@@ -81,6 +88,20 @@ const SettingsScreen = () => {
             </View>
             {/* email display */}
             <View style={styles.iconStyle}>
+              <FontAwesome5
+                style={styles.icon}
+                name="user-graduate"
+                size={24}
+                color="#black"
+              />
+              <Text style={styles.containerText}>
+                {school}{" "}{grad}
+              </Text>
+            </View>
+
+            <View style={styles.space} />
+                        {/* email display */}
+                        <View style={styles.iconStyle}>
               <AntDesign
                 style={styles.icon}
                 name="mail"
@@ -120,6 +141,20 @@ const SettingsScreen = () => {
                 placeholder={displayName}
               />
             </View>
+            {/* user phone input */}
+            <View style={styles.iconStyle}>
+              <AntDesign
+                style={styles.icon}
+                name="phone"
+                size={24}
+                color="black"
+              />
+              <CustomInput
+                control={control}
+                name="phone"
+                placeholder={phone}
+              />
+            </View>
 
             {/* call amp to password call signin func Needs to be changed *************************/}
             {/* Text is onPress to redirect user to forget password */}
@@ -140,20 +175,7 @@ const SettingsScreen = () => {
             </View>
             {/* Need to change***************************************/}
 
-            {/* user phone input */}
-            <View style={styles.iconStyle}>
-              <AntDesign
-                style={styles.icon}
-                name="phone"
-                size={24}
-                color="black"
-              />
-              <CustomInput
-                control={control}
-                name="phone"
-                placeholder={phone}
-              />
-            </View>
+            
           </View>
           {/* button */}
 
