@@ -5,7 +5,7 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import CustomSelect from '../../components/CustomSelect';
 import { useNavigation } from '@react-navigation/native';
-import { Auth } from 'aws-amplify';
+import { Auth, DataStore } from 'aws-amplify';
 import React, { useRef, useContext } from 'react';
 import { User } from '../../models';
 
@@ -47,26 +47,40 @@ const SignUpScreen = () => {
 
     const onConfirmPressed = async (data) => {
         try {
-            const response = await Auth.signUp({
-                'username': data.email,
-                'password': data.password,
-                'attributes': {
-                    'name': data.name,
+            let response;
+            try{
+                response = await Auth.signUp({
+                    'username': data.email,
+                    'password': data.password,
+                    'attributes': {
+                        'name': data.name,
+                        'email': data.email,
+                        'preferred_username': data.username,
+                        'custom:University': data.uniSelector[0],
+                        'custom:GradYear': data.gradYear[0],
+                    }
+                  
+                });
+            } catch (e){
+                Alert.alert("Error signing user up", e.message);
+                return;
+            }
+            try{
+                await DataStore.save( new User({
+                    'displayName': data.username,
+                    'university': data.uniSelector[0],
+                    'gradYear': Number(data.gradYear[0]),
+                    'userSub': response.userSub,
                     'email': data.email,
-                    'preferred_username': data.username,
-                    'custom:University': data.uniSelector[0],
-                    'custom:GradYear': data.gradYear[0],
-                }
-              
-            });
-            // // await DataStore.save( new User({
-            // //     'displayName': data.name,
-            // //     'university': data.uniSelector[0],
-            // //     'gradYear': data.gradYear[0],
-            // //     'userSub': response.userSub,
-            // // })
-        
-            // )
+                    'name': data.name,
+                    'phone': data.phone,
+                    'dob': data.birthdate,
+                    'email': data.email
+                }));
+            } catch(e) {
+                Alert.alert("Error added user to db", e.message);
+            }
+
 
 
             navigation.navigate('VerifyAccount');
