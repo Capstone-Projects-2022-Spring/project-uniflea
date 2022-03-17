@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
         height: 50,
         width: '95%',
         padding: 10,
-        margin: 20,
+        // margin: 5,
         borderBottomWidth:1,
         borderColor:'gray',
         justifyContent: 'center',
+
     },
 });
 
