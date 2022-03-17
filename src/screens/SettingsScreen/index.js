@@ -28,7 +28,7 @@ const SettingsScreen = () => {
     const userRecord = await DataStore.query(User, (s) =>
       s.userSub("eq", myUser.attributes.sub)
     );
-    //setting all the data for the users 
+    //setting all the data for the users
     const displayName = userRecord[0].displayName;
     const email = userRecord[0].email;
     const dob = userRecord[0].dob;
@@ -42,7 +42,7 @@ const SettingsScreen = () => {
     setDOB(dob);
     setPhone(phone);
     setName(name);
-    setGrad(grad),
+    setGrad(grad), 
     setSchool(school);
   };
 
@@ -73,6 +73,12 @@ const SettingsScreen = () => {
           <View style={styles.inputContainer}>
             {/* user name input */}
 
+            <View style={styles.lableContainer}>
+              <Text style={styles.lableText} textAlign="right">
+                Name
+              </Text>
+            </View>
+
             <View style={styles.iconStyle}>
               <AntDesign
                 style={styles.icon}
@@ -80,12 +86,16 @@ const SettingsScreen = () => {
                 size={24}
                 color="#black"
               />
-              <CustomInput
-                control={control}
-                name="name"
-                placeholder={name}
-              />
+              <CustomInput control={control} name="name" placeholder={name} />
             </View>
+            <View style={styles.space} />
+
+            <View style={styles.lableContainer}>
+              <Text style={styles.lableText} textAlign="right">
+                Student Details
+              </Text>
+            </View>
+
             {/* email display */}
             <View style={styles.iconStyle}>
               <FontAwesome5
@@ -95,25 +105,35 @@ const SettingsScreen = () => {
                 color="#black"
               />
               <Text style={styles.containerText}>
-                {school}{" "}{grad}
+                {school} {grad}
               </Text>
             </View>
 
             <View style={styles.space} />
-                        {/* email display */}
-                        <View style={styles.iconStyle}>
+
+            <View style={styles.lableContainer}>
+              <Text style={styles.lableText} textAlign="right">
+                Email
+              </Text>
+            </View>
+            {/* email display */}
+            <View style={styles.iconStyle}>
               <AntDesign
                 style={styles.icon}
                 name="mail"
                 size={24}
                 color="#black"
               />
-              <Text style={styles.containerText}>
-                {email}{" "}
-              </Text>
+              <Text style={styles.containerText}>{email} </Text>
             </View>
 
             <View style={styles.space} />
+
+            <View style={styles.lableContainer}>
+              <Text style={styles.lableText} textAlign="right">
+                Birthday
+              </Text>
+            </View>
 
             <View style={styles.iconStyle}>
               <FontAwesome5
@@ -122,11 +142,16 @@ const SettingsScreen = () => {
                 size={24}
                 color="black"
               />
-              <Text style={styles.containerText}>
-                {dob}{" "}
-              </Text>
+              <Text style={styles.containerText}>{dob} </Text>
             </View>
 
+            <View style={styles.space} />
+
+            <View style={styles.lableContainer}>
+              <Text style={styles.lableText} textAlign="right">
+                Username
+              </Text>
+            </View>
             {/* user's username */}
             <View style={styles.iconStyle}>
               <AntDesign
@@ -141,6 +166,14 @@ const SettingsScreen = () => {
                 placeholder={displayName}
               />
             </View>
+
+            <View style={styles.space} />
+
+            <View style={styles.lableContainer}>
+              <Text style={styles.lableText} textAlign="right">
+                Phone Number
+              </Text>
+            </View>
             {/* user phone input */}
             <View style={styles.iconStyle}>
               <AntDesign
@@ -149,11 +182,14 @@ const SettingsScreen = () => {
                 size={24}
                 color="black"
               />
-              <CustomInput
-                control={control}
-                name="phone"
-                placeholder={phone}
-              />
+              <CustomInput control={control} name="phone" placeholder={phone} />
+            </View>
+            <View style={styles.space} />
+
+            <View style={styles.lableContainer}>
+              <Text style={styles.lableText} textAlign="right">
+                Change Password
+              </Text>
             </View>
 
             {/* call amp to password call signin func Needs to be changed *************************/}
@@ -174,8 +210,6 @@ const SettingsScreen = () => {
               </TouchableOpacity>
             </View>
             {/* Need to change***************************************/}
-
-            
           </View>
           {/* button */}
 
