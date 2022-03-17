@@ -14,9 +14,11 @@ import { useNavigation } from "@react-navigation/native";
 
 const SettingsScreen = () => {
   // get info from DB
-
-  const [displayName, setName] = useState(null);
+  const [displayName, setDisplayName] = useState(null);
   const [email, setEmail] = useState(null);
+  const [dob, setDOB] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [name, setName] = useState(null);
 
   const UserPlaceholder = async () => {
     const myUser = await Auth.currentAuthenticatedUser();
@@ -24,12 +26,17 @@ const SettingsScreen = () => {
     const userRecord = await DataStore.query(User, (s) =>
       s.userSub("eq", myUser.attributes.sub)
     );
-    //i want the pfp of that user
+    //setting all the data for the users 
     const displayName = userRecord[0].displayName;
     const email = userRecord[0].email;
-
-    setName(displayName);
+    const dob = userRecord[0].dob;
+    const phone = userRecord[0].phone;
+    const name = userRecord[0].name;
+    setDisplayName(displayName);
     setEmail(email);
+    setDOB(dob);
+    setPhone(phone);
+    setName(name);
   };
 
   // //Upload to DB
@@ -69,7 +76,7 @@ const SettingsScreen = () => {
               <CustomInput
                 control={control}
                 name="name"
-                placeholder={displayName}
+                placeholder={name}
               />
             </View>
             {/* email display */}
@@ -81,7 +88,7 @@ const SettingsScreen = () => {
                 color="#black"
               />
               <Text style={styles.containerText}>
-                {"Display Email - won't change"}{" "}
+                {email}{" "}
               </Text>
             </View>
 
@@ -95,7 +102,7 @@ const SettingsScreen = () => {
                 color="black"
               />
               <Text style={styles.containerText}>
-                {"Display Birthday - wont change"}{" "}
+                {dob}{" "}
               </Text>
             </View>
 
@@ -110,7 +117,7 @@ const SettingsScreen = () => {
               <CustomInput
                 control={control}
                 name="username"
-                placeholder={"userSub"}
+                placeholder={displayName}
               />
             </View>
 
@@ -144,7 +151,7 @@ const SettingsScreen = () => {
               <CustomInput
                 control={control}
                 name="phone"
-                placeholder={"Display Phone Number"}
+                placeholder={phone}
               />
             </View>
           </View>
