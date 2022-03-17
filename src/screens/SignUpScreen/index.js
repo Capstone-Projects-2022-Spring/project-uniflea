@@ -128,6 +128,7 @@ const SignUpScreen = () => {
                                 required: "Name required"
                             }}
                         />
+                        <View style={styles.space} />
                         <CustomInput
                             control={control}
                             name="username"
@@ -136,6 +137,7 @@ const SignUpScreen = () => {
                                 required: "Username required"
                             }}
                         />
+                        <View style={styles.space} />
                         <CustomInput
                             control={control}
                             name="email"
@@ -147,6 +149,7 @@ const SignUpScreen = () => {
                                 },
                             }}
                         />
+                        <View style={styles.space} />
                         <View>
                             <Text style={styles.passwordInfo}>Minimum 8 characters</Text>
                             <Text style={styles.passwordInfo}>Must include special characters</Text>
@@ -166,6 +169,7 @@ const SignUpScreen = () => {
                             }}
                             secureTextEntry={true}
                         />
+                        <View style={styles.space} />
 
                         <CustomInput
                             control={control}
@@ -180,6 +184,7 @@ const SignUpScreen = () => {
                             }}
                             secureTextEntry={true}
                         />
+                        <View style={styles.space} />
                         <CustomInput
                             control={control}
                             name="phone"
@@ -188,6 +193,7 @@ const SignUpScreen = () => {
                                 required: "Phone number required"
                             }}
                         />
+                        <View style={styles.space} />
                         <CustomInput
                             control={control}
                             name="birthdate"
@@ -196,8 +202,10 @@ const SignUpScreen = () => {
                                 required: "birthdate required"
                             }}
                         />
+                        <View style={styles.space} />
 
                     </View>
+                    <View style={styles.space} />
                     <CustomSelect
                         control={control}
                         items={COLLEGES}
@@ -205,6 +213,7 @@ const SignUpScreen = () => {
                         rules={{ required: 'Must select university' }}
                         itemToSelect='University'
                     />
+                    <View style={styles.space} />
                     <CustomSelect
                         control={control}
                         items={GRAD_YEARS}
@@ -212,6 +221,7 @@ const SignUpScreen = () => {
                         rules={{ required: 'Must select grad year' }}
                         itemToSelect='Graduation Year'
                     />
+                    <View style={styles.space} />
 
                     <View style={styles.buttonContainer}>
 
