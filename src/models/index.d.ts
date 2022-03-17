@@ -57,6 +57,10 @@ export declare class User {
   readonly sumRatings?: number;
   readonly numRatings?: number;
   readonly reviews?: (Review | null)[];
+  readonly phone: string;
+  readonly name: string;
+  readonly dob: string;
+  readonly email: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);
