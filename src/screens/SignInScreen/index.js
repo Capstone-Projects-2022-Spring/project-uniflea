@@ -54,6 +54,7 @@ const SignInScreen = () => {
                             required: "Email required"
                         }}
                     />
+                    <View style={styles.space} />
                     <CustomInput 
                         control={control}
                         name="password"

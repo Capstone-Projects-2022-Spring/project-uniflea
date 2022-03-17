@@ -38,7 +38,11 @@ const styles = StyleSheet.create({
     },
     signInText: {
         textDecorationLine:'underline',
-    }
+    },
+    space: {
+        width: 20,
+        height: 20,
+      },
 });
 
 export default styles;
