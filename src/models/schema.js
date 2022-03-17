@@ -269,6 +269,34 @@ export const schema = {
                         "associatedWith": "userReviewsId"
                     }
                 },
+                "phone": {
+                    "name": "phone",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "dob": {
+                    "name": "dob",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -400,5 +428,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "4b893f1b11a9e9dc0e2ae6e7bc501e98"
+    "version": "c08d066988d9674f585debe0934422d8"
 };

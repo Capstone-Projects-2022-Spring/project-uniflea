@@ -35,9 +35,10 @@ const HomeScreen = ({ searchValue }) => {
 
       switch(itemValue) {
       case 'none':
-        console.log("Didn't sort");
+        console.log("No sort required");
         //No need to sort
         setSortedProducts(products);
+        applyCategory(category);
         return;
 
       case 'price':
@@ -54,14 +55,30 @@ const HomeScreen = ({ searchValue }) => {
     }
   }
 
+  var [category, setCategory] = useState(null);
+  const [categoryText, setCategoryText] = useState("CURRENT SELECTED CATEGORY: NONE" )
+  const applyCategory = (category) => {
+    setCategory(category);
+    setCategoryText("CURRENT SELECTED CATEGORY: " + category);
+    if (category !== null){
+      DataStore.query(Product, c => c.category("contains", category)).then(setSortedProducts);
+    } else {
+      DataStore.query(Product).then(setSortedProducts);
+    }
+
+  }
+
   useEffect(() => {
     // query the products in the product list on rendering the page
-    DataStore.query(Product).then(setProducts);
-    DataStore.query(Product).then(setSortedProducts);
-    //console.log("OG product array:");
-    //console.log(products);
-    //console.log("Copy Product Array:");
-    //console.log(sortedProducts);
+
+    if( category !== null){
+      DataStore.query(Product).then(setProducts);
+      DataStore.query(Product, c => c.category("contains", category)).then(setSortedProducts);
+    } else {
+      DataStore.query(Product).then(setProducts);
+      DataStore.query(Product).then(setSortedProducts);
+    }
+
 
   }, []);
   return (
@@ -95,13 +112,54 @@ const HomeScreen = ({ searchValue }) => {
 
         <View style={{ width: '100%', height: 15}}>
         <Text
-          onPress={()=>console.log('Category Filter pressed')}
           style={{
             width: '100%',
+            height: 30,
             textAlign: 'center',
           }}>
-          Filter by Category
+            {categoryText}
         </Text>
+
+        <Text
+          onPress={()=>applyCategory("a")}
+          style={{
+            width: '100%',
+            height: 30,
+            textAlign: 'center',
+          }}>
+          Filter by Category A
+        </Text>
+
+        <Text
+          onPress={()=>applyCategory("b")}
+          style={{
+            width: '100%',
+            height: 30,
+            textAlign: 'center',
+          }}>
+          Filter by Category B
+        </Text>
+
+        <Text
+          onPress={()=>applyCategory("c")}
+          style={{
+            width: '100%',
+            height: 30,
+            textAlign: 'center',
+          }}>
+          Filter by Category C
+        </Text>
+
+        <Text
+          onPress={()=>applyCategory(null)}
+          style={{
+            width: '100%',
+            height: 30,
+            textAlign: 'center',
+          }}>
+          Clear Category
+        </Text>
+
       </View>
 
       </View>
