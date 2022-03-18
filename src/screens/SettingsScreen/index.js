@@ -6,14 +6,14 @@ import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { User } from "../../models";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Auth, DataStore } from "aws-amplify";
 import { useNavigation } from "@react-navigation/native";
 
 // import CustomInput from '../../components/CustomInput';
 
 const SettingsScreen = () => {
-  // get info from DB
+  const navigation = useNavigation();
+
   const [displayName, setDisplayName] = useState(null);
   const [email, setEmail] = useState(null);
   const [dob, setDOB] = useState(null);
@@ -202,7 +202,7 @@ const SettingsScreen = () => {
                 color="black"
               />
               <TouchableOpacity
-                onPress={() => navigation.navigate("ForgotPasswordScreen")}
+                onPress={() => navigation.navigate("ResetPassword")}
               >
                 <Text style={styles.containerPassword}>
                   {"\u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24"}{" "}
