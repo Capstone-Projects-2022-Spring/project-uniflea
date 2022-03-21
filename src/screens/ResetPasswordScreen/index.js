@@ -56,11 +56,11 @@ const ResetPasswordScreen = () => {
                     <CustomInput
                         control={control}
                         name="code"
-                        placeholder="Enter Validation Code"
+                        placeholder="Check Email For Validation Code"
                         secureTextEntry={false}
                         rules={{ required: 'Code required' }}
                     />
-                     <Text style={styles.resetText}>Enter the code sent to your email.</Text>
+                     {/* <Text style={styles.resetText}>Enter the code sent to your email.</Text> */}
                      <View style={styles.space} />
                     {/* <View>
 
