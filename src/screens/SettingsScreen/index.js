@@ -212,7 +212,7 @@ const SettingsScreen = () => {
             {/* Need to change***************************************/}
           </View>
           {/* button */}
-
+          <View style={styles.space} />
           <View style={styles.buttonContainer}>
             <CustomButton text="Save Changes" />
           </View>
