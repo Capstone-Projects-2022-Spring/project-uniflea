@@ -3,10 +3,11 @@
   "serviceConfiguration": {
     "apiName": "uniflea",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Node.js\\project-uniflea\\amplify\\backend\\api\\uniflea\\schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-75e2aeda-1832-4d65-92e6-4a86dbf245aa/amplify/backend/api/uniflea/schema.graphql",
     "defaultAuthType": {
-      "mode": "AMAZON_COGNITO_USER_POOLS",
-      "cognitoUserPoolId": "authUniFlea"
+      "mode": "API_KEY",
+      "keyDescription": "api key description",
+      "expirationTime": 30
     },
     "conflictResolution": {
       "defaultResolutionStrategy": {

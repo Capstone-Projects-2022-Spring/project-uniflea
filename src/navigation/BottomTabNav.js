@@ -35,7 +35,7 @@ const BottomTabNav = () => {
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
-                        <Entypo name="shopping-cart" size={24} color={color} />
+                        <Entypo name="bookmark" size={24} color={color} />
                     ),
                 }} />
             <Tab.Screen component={SellItemScreen} name={"Sell"}
