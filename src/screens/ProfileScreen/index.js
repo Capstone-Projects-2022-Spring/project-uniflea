@@ -93,7 +93,7 @@ const ProfilePage = () => {
             <View style={styles.space}/>
                 <ProfileScreenButton onPress={() => navigation.navigate("SaveItemScreen")} text="active listing"/>
                 <View style={styles.space}/>
-                <ProfileScreenButton onPress={console.log} text="Reviews and Ratings"/>
+                <ProfileScreenButton onPress={() => navigation.navigate('ReviewScreen')} text="Reviews and Ratings"/>
                 <View style={styles.space}/>
             </SafeAreaView>
 

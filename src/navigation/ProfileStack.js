@@ -7,6 +7,7 @@ import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import SignInScreen from '../screens/SignInScreen';
+import ReviewScreen from '../screens/ReviewScreen';
 
 const ProfileStack = createStackNavigator();
 
@@ -18,6 +19,7 @@ const ProfileScreenStack = () => {
         <ProfileStack.Navigator screenOptions={{headerShown: true}}>
             <ProfileStack.Screen name='ProfileScreen' component={ProfilePage} options= {{title: 'Profile'}}/>
             <ProfileStack.Screen name='SaveItemScreen' component={SavedItemScreen} options={{title: 'Active Listings',}}/>
+            <ProfileStack.Screen name="ReviewScreen" component={ReviewScreen} />
             <ProfileStack.Screen name='ForgotPasswordScreen' component={ForgotPasswordScreen} options={{title:'Change Password'}}/>
             <ProfileStack.Screen name='SettingsScreen' component={SettingsScreen} options={{title:'Back '}}/>
             <ProfileStack.Screen name="ResetPassword" component={ResetPasswordScreen} />
