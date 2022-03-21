@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { useForm } from "react-hook-form";
@@ -11,8 +11,21 @@ import { useNavigation } from "@react-navigation/native";
 
 // import CustomInput from '../../components/CustomInput';
 
-const SettingsScreen = () => {
+const SettingsScreen = ()  => {
   const navigation = useNavigation();
+  const onChangePassword = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      console.log(user )
+      await Auth.forgotPassword(user.attributes.email);
+      navigation.navigate("ResetPassword");
+
+      
+    } catch (e) {
+      Alert.alert("Oops", e.message);
+    }
+  };
+  
 
   const [displayName, setDisplayName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -202,10 +215,10 @@ const SettingsScreen = () => {
                 color="black"
               />
               <TouchableOpacity
-                onPress={() => navigation.navigate("ResetPassword")}
+                 onPress={onChangePassword} 
               >
                 <Text style={styles.containerPassword}>
-                  {"\u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24"}{" "}
+                  {"\u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24"}
                 </Text>
               </TouchableOpacity>
             </View>
