@@ -11,7 +11,7 @@ const Review = ({ title, body, rating, username, img }) => {
             <View style={styles.profileContainer}>
                 <Image
                     style={styles.tinyLogo}
-                    source={{uri:img}}
+                    source={{ uri: img }}
                 />
                 <Text style={styles.username}>{username}</Text>
             </View>
@@ -19,13 +19,23 @@ const Review = ({ title, body, rating, username, img }) => {
 
             <View style={styles.ratingsContainer}>
                 {
-                    [0, 1, 2, 3, 4].map((el, i) =>
-                        <FontAwesome
+                    [0, 1, 2, 3, 4].map((el, i) => {
+                        let starName = "";
+                        if (i < Math.floor(rating)) {
+                            starName = "star"
+                        } else if (i < rating) {
+                            starName = "star-half-empty"
+                        } else { starName = "star-o" }
+                        console.log("Star Name ========= ", starName);
+                        return (<FontAwesome
                             style={styles.star}
-                            name={i < Math.floor(rating) ? "star" : "star-o"}
+                            name={starName}
                             size={16}
                             color="#bf1b36"
                             key={el} />
+                        )
+                    }
+
                     )}
                 <Text style={styles.title}>{title}</Text>
             </View>
