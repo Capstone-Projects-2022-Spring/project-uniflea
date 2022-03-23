@@ -93,8 +93,16 @@ const ProfilePage = () => {
             <View style={styles.space}/>
                 <ProfileScreenButton onPress={() => navigation.navigate("SaveItemScreen")} text="active listing"/>
                 <View style={styles.space}/>
-                <ProfileScreenButton onPress={console.log} text="Reviews and Ratings"/>
+                <ProfileScreenButton onPress={() => navigation.navigate('ReviewScreen')} text="Reviews and Ratings"/>
                 <View style={styles.space}/>
+                <ProfileScreenButton onPress={() => navigation.navigate('LeaveReviewScreen')} text="Leave a Review"/>
+                <View style={styles.space}/>
+                <ProfileScreenButton onPress={ () => navigation.navigate("ForgotPasswordScreen")} text="Change Password"/>
+                <View style={styles.space}/>
+                <ProfileScreenButton onPress={() => navigation.navigate("SettingsScreen")} text="Settings"/>
+                <View style={styles.space}/>
+                <ProfileScreenButton onPress={() => navigation.navigate("ReportScreen")} text="Report Test"/>
+
             </SafeAreaView>
 
     );

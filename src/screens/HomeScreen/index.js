@@ -1,5 +1,5 @@
 import { Auth } from 'aws-amplify';
-import { Text, View, FlatList, Modal, Picker } from 'react-native';
+import { Text, View, FlatList, Modal, Picker, Alert } from 'react-native';
 import styles from './styles';
 import ProductItem from '../../components/ProductItem';
 import React, { useEffect, useState, useContext } from 'react';
@@ -9,6 +9,7 @@ import AuthContext from '../../contexts/Authentication';
 import { useChatContext } from 'stream-chat-expo';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
+
 const HomeScreen = ({ searchValue }) => {
   const {client} = useChatContext();
   const [products, setProducts] = useState([]);
@@ -67,8 +68,21 @@ const HomeScreen = ({ searchValue }) => {
     }
 
   }
-
+  const resetDatastore =  async () => {
+    try{
+      
+      await DataStore.stop();
+      await DataStore.start();
+      console.warn('successfully stopped, started');
+      const products = await DataStore.query(Product);
+    
+      console.log('Products in useffect ========= ', products);
+    } catch (e) {
+        Alert.alert("oops", e.message);
+    }
+  }
   useEffect(() => {
+    resetDatastore()
     // query the products in the product list on rendering the page
 
     if( category !== null){
@@ -76,6 +90,7 @@ const HomeScreen = ({ searchValue }) => {
       DataStore.query(Product, c => c.category("contains", category)).then(setSortedProducts);
     } else {
       DataStore.query(Product).then(setProducts);
+      console.log("products ============== ", products);
       DataStore.query(Product).then(setSortedProducts);
     }
 

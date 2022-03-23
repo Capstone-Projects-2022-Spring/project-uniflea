@@ -5,10 +5,12 @@ import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 
 import Navigation from './src/navigation';
+
 import Amplify,{ Auth, DataStore} from 'aws-amplify';
 import awsconfig from './src/aws-exports'
 
 import AuthContext from './src/contexts/Authentication';
+
 
 Amplify.configure(awsconfig)
 
@@ -18,12 +20,11 @@ const client = StreamChat.getInstance(API_KEY);
 export default function App() {
   const [user, setUser] = useState('');
 
-  // To clear pervious local stored data - Maybe. 
-  const restDataStore = async() => {await  DataStore.clear(), await  DataStore.start()}
   
-    useEffect(() => {
-    restDataStore();
-
+   
+  
+  useEffect(() => {
+    
 
     /*
       Amplify provides a unique user identifier (userSub),

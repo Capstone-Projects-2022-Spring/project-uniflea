@@ -71,11 +71,11 @@ const SignUpScreen = () => {
                     'university': data.uniSelector[0],
                     'gradYear': Number(data.gradYear[0]),
                     'userSub': response.userSub,
-                    'email': data.email,
                     'name': data.name,
                     'phone': data.phone,
                     'dob': data.birthdate,
                 }));
+                
             } catch(e) {
                 Alert.alert("Error added user to db", e.message);
             }
@@ -96,7 +96,7 @@ const SignUpScreen = () => {
         const valid = input.split("@");
         const uni = valid[valid.length-1];
         if (validEmails.includes(uni)) {
-            alert("Valid email address");
+           
             return true;
         } else {
             alert("Invalid email address");
