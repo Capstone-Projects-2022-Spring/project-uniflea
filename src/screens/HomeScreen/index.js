@@ -9,6 +9,7 @@ import AuthContext from '../../contexts/Authentication';
 import { useChatContext } from 'stream-chat-expo';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Feather } from '@expo/vector-icons'; 
+
 const HomeScreen = ({ searchValue }) => {
   const {client} = useChatContext();
   const [products, setProducts] = useState([]);
@@ -33,6 +34,7 @@ const HomeScreen = ({ searchValue }) => {
   
   }, []);
   return (
+    
     <View style={styles.page}>
 
     {/*Modal used to display filter tab*/}

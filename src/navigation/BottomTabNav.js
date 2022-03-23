@@ -62,6 +62,7 @@ const BottomTabNav = () => {
                         <Entypo name="user" size={24} color={color} />
                     ),
                 }} />
+          
         </Tab.Navigator>
     );
 }
