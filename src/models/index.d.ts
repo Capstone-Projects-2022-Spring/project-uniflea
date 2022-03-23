@@ -1,5 +1,9 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
+
+
+
+
 type ProductMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -27,6 +31,7 @@ export declare class Product {
   readonly userSub: string;
   readonly university: string;
   readonly savedProducts?: (SavedProduct | null)[];
+  readonly displayName: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Product, ProductMetaData>);
@@ -53,6 +58,10 @@ export declare class User {
   readonly sumRatings?: number;
   readonly numRatings?: number;
   readonly reviews?: (Review | null)[];
+  readonly phone: string;
+  readonly name: string;
+  readonly dob: string;
+  readonly email: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);
@@ -65,6 +74,7 @@ export declare class Review {
   readonly message: string;
   readonly reviewerSub: string;
   readonly user?: User;
+  readonly rating?: number;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Review, ReviewMetaData>);
