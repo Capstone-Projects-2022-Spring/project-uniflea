@@ -49,6 +49,18 @@ const HomeScreen = ({ searchValue }) => {
         //console.log(sortedProducts);
         return;
 
+      case 'dateNewest':
+        console.log("Sorted by Date: Newest");
+        //sort by price
+        sortedProducts.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
+        return;
+        
+      case 'dateOldest':
+        console.log("Sorted by Date: Oldest");
+        //sort by price
+        sortedProducts.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
+        return;  
+
       default:
         console.log("Default switch case, not sorting.")
         return;
@@ -106,6 +118,8 @@ const HomeScreen = ({ searchValue }) => {
             >
               <Picker.Item label ="None" value="none"/>
               <Picker.Item label ="Price" value="price"/>
+              <Picker.Item label ="Date: Newest" value="dateNewest"/>
+              <Picker.Item label ="Date: Oldest" value="dateOldest"/>
 
           </Picker>
         </View>
@@ -187,8 +201,6 @@ const HomeScreen = ({ searchValue }) => {
             price={item.price}
             category={item.category}
           />
-
-
         }
         keyExtractor={product => product.id}
         showsVerticalScrollIndicator={false}
