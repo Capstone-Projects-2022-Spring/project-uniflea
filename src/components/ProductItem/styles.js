@@ -1,24 +1,18 @@
 import { StyleSheet } from "react-native";
-import Position from "react-native/Libraries/Components/Touchable/Position";
-import { backgroundColor, color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const styles = StyleSheet.create({
   root: {
-    flexDirection: "row",
     borderColor: "#d1d1d1",
     borderWidth: 1.5,
     backgroundColor: "#fff",
     marginVertical: 0.5,
-    paddingBottom: 10,
-    paddingTop: 10,
-    paddingLeft: 10,
-    borderRadius: 10,
+    width: "100%",
+    height: 100,
   },
   rightContainer: {
-    padding: 10,
-    width: "100%",
-    flex: 3,
-    alignItems: "flex-start",
+    width: 291,
+    height: 97,
+    left: 97,
   },
 
   title: {
@@ -27,38 +21,40 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   titleContainer: {
-
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
   },
 
   userContainer: {
-    paddingTop:6,
-
+    paddingTop: 2,
   },
   priceContainer: {
-    top: 125,
-    right: 160,
+    bottom: 5,
+    flex: 1,
     position: "absolute",
   },
-  timeContainer: {
-    top: 125,
-    left: 180,
+  dateContainer: {
+    bottom: 5,
+    flex: 1,
+    right: 10,
+    position: "absolute",
+  },
+  imageContainer: {
+    padding: 3,
+    flexDirection: "row",
     position: "absolute",
   },
   image: {
     borderRadius: 3,
-    right: 2.5,
-    borderColor: "gray",
-    flex: 2,
-    height: 150,
+    width: 90,
+    height: 90,
     resizeMode: "cover",
+    alignItems: "center",
   },
-  time:{
-    fontSize: 18,
-    fontWeight:'bold',
-    color:'green'
+  date: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "green",
   },
 
   price: {
