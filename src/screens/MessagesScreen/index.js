@@ -4,15 +4,15 @@ import AuthContext from '../../contexts/Authentication';
 import { useNavigation } from '@react-navigation/native';
 
 const MessagesScreen = () => {
-    const {userId} = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     const navigation = useNavigation();
     const onChannelPressed = (channel) => {
         navigation.navigate('ChatScreen', {channel});
     };
     const filter = {
-        members: { $in: [userId] },
+        members: { $in: [user.attributes.sub] },
     };
-    console.warn(userId);
+    // console.warn("user sub in messages screen = ",user.attributes.sub);
     // show all channels the user is in
     return (
        
