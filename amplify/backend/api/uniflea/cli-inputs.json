@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "uniflea",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-75e2aeda-1832-4d65-92e6-4a86dbf245aa/amplify/backend/api/uniflea/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-1a5725c3-5326-401e-99df-a8d6a21246b6/amplify/backend/api/uniflea/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
