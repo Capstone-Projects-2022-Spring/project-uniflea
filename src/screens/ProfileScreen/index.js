@@ -97,6 +97,12 @@ const ProfilePage = () => {
                 <View style={styles.space}/>
                 <ProfileScreenButton onPress={() => navigation.navigate('LeaveReviewScreen')} text="Leave a Review"/>
                 <View style={styles.space}/>
+                <ProfileScreenButton onPress={ () => navigation.navigate("ForgotPasswordScreen")} text="Change Password"/>
+                <View style={styles.space}/>
+                <ProfileScreenButton onPress={() => navigation.navigate("SettingsScreen")} text="Settings"/>
+                <View style={styles.space}/>
+                <ProfileScreenButton onPress={() => navigation.navigate("ReportScreen")} text="Report Test"/>
+
             </SafeAreaView>
 
     );
