@@ -75,7 +75,6 @@ const SignUpScreen = () => {
                     'name': data.name,
                     'phone': data.phone,
                     'dob': data.birthdate,
-                    'email': data.email
                 }));
             } catch(e) {
                 Alert.alert("Error added user to db", e.message);
