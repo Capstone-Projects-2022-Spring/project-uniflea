@@ -82,6 +82,13 @@ export const schema = {
                         "associatedWith": "productSavedProductsId"
                     }
                 },
+                "displayName": {
+                    "name": "displayName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -383,6 +390,13 @@ export const schema = {
                         "targetName": "userReviewsId"
                     }
                 },
+                "rating": {
+                    "name": "rating",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -428,5 +442,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "c08d066988d9674f585debe0934422d8"
+    "version": "5760863d4c3c9483a24bf965658c113e"
 };

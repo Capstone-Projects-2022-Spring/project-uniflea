@@ -9,6 +9,7 @@ type Product @model @auth(rules: [{allow: public}]) {
   userSub: String!
   university: String!
   savedProducts: [SavedProduct] @hasMany
+  displayName: String!
 }
 
 type SavedProduct @model @auth(rules: [{allow: public}]) {
@@ -39,5 +40,6 @@ type Review @model @auth(rules: [{allow: public}]) {
   message: String!
   reviewerSub: String!
   user: User @belongsTo
+  rating: Int
 }
  

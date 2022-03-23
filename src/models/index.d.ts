@@ -31,6 +31,7 @@ export declare class Product {
   readonly userSub: string;
   readonly university: string;
   readonly savedProducts?: (SavedProduct | null)[];
+  readonly displayName: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Product, ProductMetaData>);
@@ -73,6 +74,7 @@ export declare class Review {
   readonly message: string;
   readonly reviewerSub: string;
   readonly user?: User;
+  readonly rating?: number;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Review, ReviewMetaData>);
