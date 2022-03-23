@@ -111,6 +111,7 @@ const HomeScreen = ({ searchValue }) => {
 
   }, []);
   return (
+    
     <View style={styles.page}>
 
     {/*Modal used to display filter tab*/}
