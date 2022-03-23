@@ -9,7 +9,7 @@ import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import SignInScreen from '../screens/SignInScreen';
 import ReviewScreen from '../screens/ReviewScreen';
 import LeaveReviewScreen from '../screens/LeaveReviewScreen';
-
+import ReportScreen from '../screens/ReportScreen';
 
 const ProfileStack = createStackNavigator();
 
