@@ -53,13 +53,13 @@ const HomeScreen = ({ searchValue }) => {
       case 'dateNewest':
         console.log("Sorted by Date: Newest");
         //sort by price
-        sortedProducts.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
+        sortedProducts.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
         return;
         
       case 'dateOldest':
         console.log("Sorted by Date: Oldest");
         //sort by price
-        sortedProducts.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
+        sortedProducts.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
         return;  
 
       default:
@@ -72,10 +72,12 @@ const HomeScreen = ({ searchValue }) => {
   const [categoryText, setCategoryText] = useState("CURRENT SELECTED CATEGORY: NONE" )
   const applyCategory = (category) => {
     setCategory(category);
-    setCategoryText("CURRENT SELECTED CATEGORY: " + category);
+
     if (category !== null){
+      setCategoryText("CURRENT SELECTED CATEGORY: " + category);
       DataStore.query(Product, c => c.category("contains", category)).then(setSortedProducts);
     } else {
+      setCategoryText("CURRENT SELECTED CATEGORY: NONE");
       DataStore.query(Product).then(setSortedProducts);
     }
 
