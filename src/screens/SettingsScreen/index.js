@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,7 @@ import { User } from "../../models";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Auth, DataStore } from "aws-amplify";
 import { useNavigation } from "@react-navigation/native";
+import { Component } from "react";
 
 // import CustomInput from '../../components/CustomInput';
 
@@ -65,6 +66,10 @@ const SettingsScreen = () => {
 
   const { control } = useForm();
 
+  const [updateName, setUpdateName] = useState('');
+  const [updateDisplayName, setUpdateDisplayName] = useState('');
+  const [updatePhoneNumber, setUpdatePhoneNumber] = useState('');
+
   return (
     <ScrollView>
       <View style={styles.root}>
@@ -86,7 +91,9 @@ const SettingsScreen = () => {
                 size={24}
                 color="#black"
               />
-              <CustomInput control={control} name="name" placeholder={name} />
+              {/*<CustomInput control={control} name="name" placeholder={name} onChangeText={updateName => setUpdateName(updateName)}/>*/}
+              <TextInput style={{height: 50, width: '95%'}} name="name" placeholder={name} onChangeText={updateName => setUpdateName(updateName)}/>
+
             </View>
             <View style={styles.space} />
 
@@ -160,11 +167,14 @@ const SettingsScreen = () => {
                 size={24}
                 color="#black"
               />
+              {/*
               <CustomInput
                 control={control}
                 name="username"
                 placeholder={displayName}
               />
+              */}
+              <TextInput style={{height: 50, width: '95%'}} name="username" placeholder={displayName} onChangeText={updateDisplayName => setUpdateDisplayName(updateDisplayName)}/>
             </View>
 
             <View style={styles.space} />
@@ -182,7 +192,8 @@ const SettingsScreen = () => {
                 size={24}
                 color="black"
               />
-              <CustomInput control={control} name="phone" placeholder={phone} />
+              {/*<CustomInput control={control} name="phone" placeholder={phone} />*/}
+              <TextInput style={{height: 50, width: '95%'}} name="phone" placeholder={phone} onChangeText={updatePhoneNumber => setUpdatePhoneNumber(updatePhoneNumber)}/>
             </View>
             <View style={styles.space} />
 
@@ -214,7 +225,7 @@ const SettingsScreen = () => {
           {/* button */}
 
           <View style={styles.buttonContainer}>
-            <CustomButton text="Save Changes" />
+            <CustomButton text="Save Changes" onPress={() => console.log(updateName, updateDisplayName, updatePhoneNumber)}/>
           </View>
 
           {/* onpress pass in Uploadnewdata this will update user record */}
@@ -222,6 +233,6 @@ const SettingsScreen = () => {
       </View>
     </ScrollView>
   );
-};
+}
 
 export default SettingsScreen;
