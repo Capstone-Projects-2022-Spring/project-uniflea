@@ -15,7 +15,9 @@ const ResetPasswordScreen = () => {
     const onSubmit = async (data) => {
         try {
             await Auth.forgotPasswordSubmit(data.email, data.code, data.password);
-            navigation.navigate("SignIn");
+            navigation.navigate("SettingsScreen");
+
+        
         } catch (e) {
             Alert.alert('Oops', e.message);
         }
