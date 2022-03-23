@@ -170,7 +170,7 @@ const HomeScreen = ({ searchValue }) => {
       <View style={{alignItems: 'flex-end'}}>
       <AntDesign 
         name='filter'
-        size={40}
+        size={28}
         color='gray'
         onPress={toggleModalOpen}
         />
