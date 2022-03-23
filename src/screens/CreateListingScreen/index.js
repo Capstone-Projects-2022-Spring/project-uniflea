@@ -18,6 +18,8 @@ import {useNavigation} from "@react-navigation/native";
 import {Auth, DataStore, Storage} from "aws-amplify";
 import {SavedProduct, User, Product} from "../../models";
 import AuthContext from "../../contexts/Authentication";
+import {v4 as uuidv4} from 'uuid';
+import {S3Image} from 'aws-amplify-react-native';
 
 
 const CreateListingScreen = () => {
@@ -31,6 +33,7 @@ const CreateListingScreen = () => {
     // const [percentage, setPercentage] = useState(0);
 
     const pickImage = async () => {
+        let myuuid = uuidv4();
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
@@ -44,9 +47,11 @@ const CreateListingScreen = () => {
         }
         const response = await fetch(result.uri);
         const blob = await response.blob();
+        console.warn("blob created=====", blob);
         const uploadedImage = await Storage.put(myuuid, blob);
-        console.warn("Image uploaded successfully");
         setImage(uploadedImage.key);
+        console.warn("image uploaded gang=====", uploadedImage.key);
+
     };
 
     // const saveListingAsDraft = async() => {
@@ -93,7 +98,7 @@ const CreateListingScreen = () => {
             {/*    />*/}
             {/*</Pressable>*/}
             <TouchableOpacity onPress={pickImage}>
-                <Image style={styles.cameraFrame} source={{ uri: image }} />
+                <S3Image style={styles.cameraFrame} imgKey={image} />
             </TouchableOpacity>
             <TextInput
                 style={styles.input}
