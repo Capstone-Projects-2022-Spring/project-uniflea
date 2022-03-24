@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         height: 200,
         width: 200,
         margin: 10,
-        borderWidth: 2,
+        borderWidth: 1,
         padding: 10,
     },
     space:{

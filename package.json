@@ -50,7 +50,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@iconify/react": "^3.2.0"
   },
   "private": true
 }

@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { useForm } from "react-hook-form";
@@ -6,14 +6,27 @@ import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { User } from "../../models";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Auth, DataStore } from "aws-amplify";
 import { useNavigation } from "@react-navigation/native";
 
 // import CustomInput from '../../components/CustomInput';
 
-const SettingsScreen = () => {
-  // get info from DB
+const SettingsScreen = ()  => {
+  const navigation = useNavigation();
+  const onChangePassword = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      console.log(user )
+      await Auth.forgotPassword(user.attributes.email);
+      navigation.navigate("ResetPassword");
+
+      
+    } catch (e) {
+      Alert.alert("Oops", e.message);
+    }
+  };
+  
+
   const [displayName, setDisplayName] = useState(null);
   const [email, setEmail] = useState(null);
   const [dob, setDOB] = useState(null);
@@ -202,17 +215,17 @@ const SettingsScreen = () => {
                 color="black"
               />
               <TouchableOpacity
-                onPress={() => navigation.navigate("ForgotPasswordScreen")}
+                 onPress={onChangePassword} 
               >
                 <Text style={styles.containerPassword}>
-                  {"\u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24"}{" "}
+                  {"\u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24"}
                 </Text>
               </TouchableOpacity>
             </View>
             {/* Need to change***************************************/}
           </View>
           {/* button */}
-
+          <View style={styles.space} />
           <View style={styles.buttonContainer}>
             <CustomButton text="Save Changes" />
           </View>
