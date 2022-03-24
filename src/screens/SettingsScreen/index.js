@@ -8,8 +8,8 @@ import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { User } from "../../models";
 import { Auth, DataStore } from "aws-amplify";
 import { useNavigation } from "@react-navigation/native";
+import { Component } from "react";
 
-// import CustomInput from '../../components/CustomInput';
 
 const SettingsScreen = ()  => {
   const navigation = useNavigation();
@@ -59,24 +59,92 @@ const SettingsScreen = ()  => {
     setSchool(school);
   };
 
-  // //Upload to DB
-  // const Uploadnewdata = async()  => {
-  //  //upload to amplify
-  //  const myUser = await Auth.currentAuthenticatedUser();
-  //  const original = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
+  //Upload to DB
+  const Uploadnewdata = async(data)  => {
+    console.log(data.name, data.displayName, data.phone);
 
-  //  await DataStore.save(
-  //      User.copyOf(original[0], updated => {
-  //          updated.image = uploadedImage.key
-  //      })
-  //  )
-  //     }
+    //upload to amplify
+    const myUser = await Auth.currentAuthenticatedUser();
+    const original = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub)); 
+
+    //Case 1 - name is filled
+    if (data.name !== undefined && data.displayName === undefined &&  data.phone === undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.name = data.name;
+        })
+      )  
+    }
+
+    //Case 2 - displayName is filled
+    else if (data.name === undefined && data.displayName !== undefined &&  data.phone === undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.displayName = data.displayName;
+        })
+      )  
+    }
+
+    //Case 3 - phone is filled
+    else if (data.name === undefined && data.displayName === undefined &&  data.phone !== undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.phone = data.phone
+        })
+      )  
+    }
+
+    //Case 4 - name & displayName filled
+    else if (data.name !== undefined && data.displayName !== undefined &&  data.phone === undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.name = data.name;
+          updated.displayName = data.displayName;
+        })
+      )  
+    }
+
+    //Case 5 - name & phone filled
+    else if (data.name !== undefined && data.displayName === undefined &&  data.phone !== undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.name = data.name;
+          updated.phone = data.phone
+        })
+      )  
+    }
+
+    //Case 6 - displayName & phone filled
+    else if (data.name === undefined && data.displayName !== undefined &&  data.phone !== undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.displayName = data.displayName;
+          updated.phone = data.phone
+        })
+      )  
+    }
+
+    //Case 7 - 3 fields are filled
+    else if (data.name !== undefined && data.displayName !== undefined &&  data.phone !== undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.name = data.name;
+          updated.displayName = data.displayName;
+          updated.phone = data.phone
+        })
+      )  
+    }
+      
+
+      }
+
+
 
   useEffect(() => {
     UserPlaceholder();
   }, []);
 
-  const { control } = useForm();
+  const { control, handleSubmit } = useForm();
 
   return (
     <ScrollView>
@@ -99,7 +167,8 @@ const SettingsScreen = ()  => {
                 size={24}
                 color="#black"
               />
-              <CustomInput control={control} name="name" placeholder={name} />
+              <CustomInput control={control} name="name" placeholder={name}/>
+             
             </View>
             <View style={styles.space} />
 
@@ -173,11 +242,14 @@ const SettingsScreen = ()  => {
                 size={24}
                 color="#black"
               />
+              
               <CustomInput
                 control={control}
-                name="username"
+                name="displayName"
                 placeholder={displayName}
               />
+              
+              
             </View>
 
             <View style={styles.space} />
@@ -196,6 +268,7 @@ const SettingsScreen = ()  => {
                 color="black"
               />
               <CustomInput control={control} name="phone" placeholder={phone} />
+             
             </View>
             <View style={styles.space} />
 
@@ -205,7 +278,7 @@ const SettingsScreen = ()  => {
               </Text>
             </View>
 
-            {/* call amp to password call signin func Needs to be changed *************************/}
+          
             {/* Text is onPress to redirect user to forget password */}
             <View style={styles.iconStyle}>
               <AntDesign
@@ -222,19 +295,19 @@ const SettingsScreen = ()  => {
                 </Text>
               </TouchableOpacity>
             </View>
-            {/* Need to change***************************************/}
+           
           </View>
           {/* button */}
           <View style={styles.space} />
           <View style={styles.buttonContainer}>
-            <CustomButton text="Save Changes" />
+            <CustomButton text="Save Changes" onPress={handleSubmit(Uploadnewdata)}/>
           </View>
 
-          {/* onpress pass in Uploadnewdata this will update user record */}
+          
         </View>
       </View>
     </ScrollView>
   );
-};
+}
 
 export default SettingsScreen;
