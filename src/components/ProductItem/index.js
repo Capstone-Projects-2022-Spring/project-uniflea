@@ -1,10 +1,8 @@
 import { Text, View, Image, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Auth, DataStore } from "aws-amplify";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
-// import moment from "moment";
 
 const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
   const navigation = useNavigation();
@@ -12,37 +10,34 @@ const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
     navigation.navigate("ProductScreen", { id: id });
   };
-  {
-    /* This is getting the current date and setting it to a string*/
-  }
-  const currentDate = new Date();
-  const currentDayOfMonth = currentDate.getDate();
-  const currentMonth = currentDate.getMonth() + 1;
-  const currentYear = currentDate.getFullYear();
-  // will look like "23-03-2022"
-  let dateString = currentDayOfMonth + "-" + currentMonth + "-" + currentYear;
+  const compareDate = () => {
+    {
+      /* This is getting the current date and setting it to a string*/
+    }
+    const currentDate = new Date();
+    const currentDayOfMonth = ("0" + currentDate.getDate()).slice(-2);
+    const currentMonth = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+    const currentYear = currentDate.getFullYear();
+    // will look like "2022-03-23"
+    const dateString =
+      currentYear + "-" + currentMonth + "-" + currentDayOfMonth;
+    const newDateString = dateString.toString();
+   
 
-  //getting the item timestamp and splting the sting just to get the date
-  const ampString = createdAt;
-  let dateAmp = ampString.split("T", 1);
+    //getting the item timestamp and splting the sting just to get the date
+    const ampString = createdAt;
+    const dateAmp = ampString.split("T", 1);
+    const newDateAmp = dateAmp.toString();
 
-  const compareDate = (dateAmp, dateString) => {
-    
-    if (dateString === dateAmp) {
+    if (newDateAmp === newDateString) {
       return (
         <Text style={styles.time}>
           NEW
           <FontAwesome name="exclamation" size={17} color="green" />
         </Text>
       );
-      console.log(
-        "current date = dateAmp **********"
-      );
     } else {
-      return <Text style={styles.time}></Text>;
-      console.log(
-        "current date != itedateAmpmdate**********"
-      );
+      return;
     }
   };
 
