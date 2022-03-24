@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, TextInput, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { useForm } from "react-hook-form";
@@ -48,30 +48,109 @@ const SettingsScreen = () => {
   };
 
   //Upload to DB
-  const Uploadnewdata = async()  => {
-   //upload to amplify
-   const myUser = await Auth.currentAuthenticatedUser();
-   const original = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
+  const Uploadnewdata = async(data)  => {
+    console.log(data.name, data.displayName, data.phone);
 
-   await DataStore.save(
-       User.copyOf(original[0], updated => {
-           updated.name = updateName;
-           updated.displayName = updateDisplayName;
-           updated.phone = updatePhoneNumber;
-       })
-   )
-   console.log(updateName, updateDisplayName, updatePhoneNumber);
-  }
+    //upload to amplify
+    const myUser = await Auth.currentAuthenticatedUser();
+    const original = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub)); 
+
+    //Case 1 - name is filled
+    if (data.name !== undefined && data.displayName === undefined &&  data.phone === undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.name = data.name;
+        })
+      )  
+    }
+
+    //Case 2 - displayName is filled
+    else if (data.name === undefined && data.displayName !== undefined &&  data.phone === undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.displayName = data.displayName;
+        })
+      )  
+    }
+
+    //Case 3 - phone is filled
+    else if (data.name === undefined && data.displayName === undefined &&  data.phone !== undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.phone = data.phone
+        })
+      )  
+    }
+
+    //Case 4 - name & displayName filled
+    else if (data.name !== undefined && data.displayName !== undefined &&  data.phone === undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.name = data.name;
+          updated.displayName = data.displayName;
+        })
+      )  
+    }
+
+    //Case 5 - name & phone filled
+    else if (data.name !== undefined && data.displayName === undefined &&  data.phone !== undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.name = data.name;
+          updated.phone = data.phone
+        })
+      )  
+    }
+
+    //Case 6 - displayName & phone filled
+    else if (data.name === undefined && data.displayName !== undefined &&  data.phone !== undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.displayName = data.displayName;
+          updated.phone = data.phone
+        })
+      )  
+    }
+
+    //Case 7 - 3 fields are filled
+    else if (data.name !== undefined && data.displayName !== undefined &&  data.phone !== undefined){
+      await DataStore.save(
+        User.copyOf(original[0], updated => {
+          updated.name = data.name;
+          updated.displayName = data.displayName;
+          updated.phone = data.phone
+        })
+      )  
+    }
+      
+      // await DataStore.save(
+      //     User.copyOf(original[0], updated => {
+      //         updated.name = data.name;
+      //         updated.displayName = data.displayName;
+      //         updated.phone = data.phone;
+      //     })
+      //     // myUser.name = data.name,
+      //     // myUser.displayName = data.displayName,
+      //     // myUser.phone = data.phone
+      //     // 'displayName': data.displayName,
+      //     // 'name': data.name,
+      //     // 'phone': data.phone
+      
+      // )
+      
+      }
+
+
 
   useEffect(() => {
     UserPlaceholder();
   }, []);
 
-  const { control } = useForm();
+  const { control, handleSubmit } = useForm();
 
-  const [updateName, setUpdateName] = useState('');
-  const [updateDisplayName, setUpdateDisplayName] = useState('');
-  const [updatePhoneNumber, setUpdatePhoneNumber] = useState('');
+  // const [data.name, setdata.name] = useState(undefined);
+  // const [data.displayName, setdata.displayName] = useState(undefined);
+  // const [data.phone, setdata.phone] = useState(undefined);
 
   return (
     <ScrollView>
@@ -94,8 +173,8 @@ const SettingsScreen = () => {
                 size={24}
                 color="#black"
               />
-              {/*<CustomInput control={control} name="name" placeholder={name} onChangeText={updateName => setUpdateName(updateName)}/>*/}
-              <TextInput style={{height: 50, width: '95%'}} name="name" placeholder={name} onChangeText={updateName => setUpdateName(updateName)}/>
+              <CustomInput control={control} name="name" placeholder={name}/>
+              {/*<TextInput style={{height: 50, width: '95%'}} name="name" placeholder={name} onChangeText={data.name => setdata.name(data.name)}/>*/}
 
             </View>
             <View style={styles.space} />
@@ -170,14 +249,14 @@ const SettingsScreen = () => {
                 size={24}
                 color="#black"
               />
-              {/*
+              
               <CustomInput
                 control={control}
-                name="username"
+                name="displayName"
                 placeholder={displayName}
               />
-              */}
-              <TextInput style={{height: 50, width: '95%'}} name="username" placeholder={displayName} onChangeText={updateDisplayName => setUpdateDisplayName(updateDisplayName)}/>
+              
+              {/*<TextInput style={{height: 50, width: '95%'}} name="username" placeholder={displayName} onChangeText={data.displayName => setdata.displayName(data.displayName)}/>*/}
             </View>
 
             <View style={styles.space} />
@@ -195,8 +274,8 @@ const SettingsScreen = () => {
                 size={24}
                 color="black"
               />
-              {/*<CustomInput control={control} name="phone" placeholder={phone} />*/}
-              <TextInput style={{height: 50, width: '95%'}} name="phone" placeholder={phone} onChangeText={updatePhoneNumber => setUpdatePhoneNumber(updatePhoneNumber)}/>
+              <CustomInput control={control} name="phone" placeholder={phone} />
+              {/*<TextInput style={{height: 50, width: '95%'}} name="phone" placeholder={phone} onChangeText={data.phone => setdata.phone(data.phone)}/>*/}
             </View>
             <View style={styles.space} />
 
@@ -228,7 +307,7 @@ const SettingsScreen = () => {
           {/* button */}
 
           <View style={styles.buttonContainer}>
-            <CustomButton text="Save Changes" onPress={Uploadnewdata}/>
+            <CustomButton text="Save Changes" onPress={handleSubmit(Uploadnewdata)}/>
           </View>
 
           {/* onpress pass in Uploadnewdata this will update user record */}
