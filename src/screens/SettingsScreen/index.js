@@ -47,18 +47,21 @@ const SettingsScreen = () => {
     setSchool(school);
   };
 
-  // //Upload to DB
-  // const Uploadnewdata = async()  => {
-  //  //upload to amplify
-  //  const myUser = await Auth.currentAuthenticatedUser();
-  //  const original = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
+  //Upload to DB
+  const Uploadnewdata = async()  => {
+   //upload to amplify
+   const myUser = await Auth.currentAuthenticatedUser();
+   const original = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
 
-  //  await DataStore.save(
-  //      User.copyOf(original[0], updated => {
-  //          updated.image = uploadedImage.key
-  //      })
-  //  )
-  //     }
+   await DataStore.save(
+       User.copyOf(original[0], updated => {
+           updated.name = updateName;
+           updated.displayName = updateDisplayName;
+           updated.phone = updatePhoneNumber;
+       })
+   )
+   console.log(updateName, updateDisplayName, updatePhoneNumber);
+  }
 
   useEffect(() => {
     UserPlaceholder();
@@ -225,7 +228,7 @@ const SettingsScreen = () => {
           {/* button */}
 
           <View style={styles.buttonContainer}>
-            <CustomButton text="Save Changes" onPress={() => console.log(updateName, updateDisplayName, updatePhoneNumber)}/>
+            <CustomButton text="Save Changes" onPress={Uploadnewdata}/>
           </View>
 
           {/* onpress pass in Uploadnewdata this will update user record */}
