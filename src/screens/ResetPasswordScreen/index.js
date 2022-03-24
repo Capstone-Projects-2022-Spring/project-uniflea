@@ -5,6 +5,7 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import React, {useRef} from 'react';
 
@@ -14,12 +15,18 @@ const ResetPasswordScreen = () => {
     const onSubmit = async (data) => {
         try {
             await Auth.forgotPasswordSubmit(data.email, data.code, data.password);
-            navigation.navigate("SignIn");
+            navigation.navigate("SettingsScreen");
+
+        
         } catch (e) {
             Alert.alert('Oops', e.message);
         }
 
     }
+
+    const pwdReqs =() =>{
+        <Text>{"Password must have at least 8 characters"} {"\n"} {"Must include special characters"} </Text>
+    };
 
     const {
         control,
@@ -34,44 +41,52 @@ const ResetPasswordScreen = () => {
 
     return (
         <View style={styles.root}>
-            <View style={styles.code}>
-                <Text style={styles.resetHeader}>Create a new password</Text>
-                <Text style={styles.resetText}>Enter the code sent to your email to reset your password</Text>
+            <View style={styles.pageContainer}>
+                <View style={styles.iconContainer}>
+            <MaterialCommunityIcons name="lock-reset" size={65} color="#474747" />
+            </View>
+                <Text style={styles.resetHeader}>Reset Your Password</Text>
                 <View style={styles.inputContainer}>
                     <CustomInput
                         control={control}
                         name="email"
-                        placeholder="Enter email"
+                        placeholder="Enter Account Email"
                         secureTextEntry={false}
                         rules={{ required: 'Email required' }}
                     />
+                    <View style={styles.space} />
                     <CustomInput
                         control={control}
                         name="code"
-                        placeholder="Enter code"
+                        placeholder="Check Email For Validation Code"
                         secureTextEntry={false}
                         rules={{ required: 'Code required' }}
                     />
-                    <View>
+                     {/* <Text style={styles.resetText}>Enter the code sent to your email.</Text> */}
+                     <View style={styles.space} />
+                    {/* <View>
+
                         <Text style={styles.passwordInfo}>Minimum 8 characters</Text>
                         <Text style={styles.passwordInfo}>Must include special characters</Text>
                         <Text style={styles.passwordInfo}>Must include upper and lower case characters</Text>
                         <Text style={styles.passwordInfo}>Must include numerals</Text>
-                    </View>
+                    </View> */}
                     <CustomInput
                         control={control}
                         name="password"
-                        placeholder='password'
+                        placeholder='Enter New Password'
+                        
                         rules={{
+
                             minLength: {
                                 value: 8,
-                                message: "Password must have at least 8 characters"
+                                message:"Password must have at least 8 characters, special characters, upper and lower case characters and numbers.",
                             },
                             required: "Pasword required"
                         }}
                         secureTextEntry={true}
                     />
-
+                        <View style={styles.space} />
                     <CustomInput
                         control={control}
                         name="confirmPassword"
@@ -85,8 +100,8 @@ const ResetPasswordScreen = () => {
                         secureTextEntry={true}
                     />
                 </View>
-
-                <View>
+                <View style={styles.space} />           
+                <View style={styles.buttonContainer}>
                     <CustomButton text='Submit' onPress={handleSubmit(onSubmit)} />
                 </View>
 

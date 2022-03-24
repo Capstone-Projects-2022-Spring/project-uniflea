@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, TextInput, Alert } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import styles from "./styles";
 import { useForm } from "react-hook-form";
@@ -6,15 +6,27 @@ import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import { User } from "../../models";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Auth, DataStore } from "aws-amplify";
 import { useNavigation } from "@react-navigation/native";
 import { Component } from "react";
 
-// import CustomInput from '../../components/CustomInput';
 
-const SettingsScreen = () => {
-  // get info from DB
+const SettingsScreen = ()  => {
+  const navigation = useNavigation();
+  const onChangePassword = async () => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      console.log(user )
+      await Auth.forgotPassword(user.attributes.email);
+      navigation.navigate("ResetPassword");
+
+      
+    } catch (e) {
+      Alert.alert("Oops", e.message);
+    }
+  };
+  
+
   const [displayName, setDisplayName] = useState(null);
   const [email, setEmail] = useState(null);
   const [dob, setDOB] = useState(null);
@@ -123,21 +135,7 @@ const SettingsScreen = () => {
       )  
     }
       
-      // await DataStore.save(
-      //     User.copyOf(original[0], updated => {
-      //         updated.name = data.name;
-      //         updated.displayName = data.displayName;
-      //         updated.phone = data.phone;
-      //     })
-      //     // myUser.name = data.name,
-      //     // myUser.displayName = data.displayName,
-      //     // myUser.phone = data.phone
-      //     // 'displayName': data.displayName,
-      //     // 'name': data.name,
-      //     // 'phone': data.phone
-      
-      // )
-      
+
       }
 
 
@@ -147,10 +145,6 @@ const SettingsScreen = () => {
   }, []);
 
   const { control, handleSubmit } = useForm();
-
-  // const [data.name, setdata.name] = useState(undefined);
-  // const [data.displayName, setdata.displayName] = useState(undefined);
-  // const [data.phone, setdata.phone] = useState(undefined);
 
   return (
     <ScrollView>
@@ -174,8 +168,7 @@ const SettingsScreen = () => {
                 color="#black"
               />
               <CustomInput control={control} name="name" placeholder={name}/>
-              {/*<TextInput style={{height: 50, width: '95%'}} name="name" placeholder={name} onChangeText={data.name => setdata.name(data.name)}/>*/}
-
+             
             </View>
             <View style={styles.space} />
 
@@ -256,7 +249,7 @@ const SettingsScreen = () => {
                 placeholder={displayName}
               />
               
-              {/*<TextInput style={{height: 50, width: '95%'}} name="username" placeholder={displayName} onChangeText={data.displayName => setdata.displayName(data.displayName)}/>*/}
+              
             </View>
 
             <View style={styles.space} />
@@ -275,7 +268,7 @@ const SettingsScreen = () => {
                 color="black"
               />
               <CustomInput control={control} name="phone" placeholder={phone} />
-              {/*<TextInput style={{height: 50, width: '95%'}} name="phone" placeholder={phone} onChangeText={data.phone => setdata.phone(data.phone)}/>*/}
+             
             </View>
             <View style={styles.space} />
 
@@ -285,7 +278,7 @@ const SettingsScreen = () => {
               </Text>
             </View>
 
-            {/* call amp to password call signin func Needs to be changed *************************/}
+          
             {/* Text is onPress to redirect user to forget password */}
             <View style={styles.iconStyle}>
               <AntDesign
@@ -295,22 +288,22 @@ const SettingsScreen = () => {
                 color="black"
               />
               <TouchableOpacity
-                onPress={() => navigation.navigate("ForgotPasswordScreen")}
+                 onPress={onChangePassword} 
               >
                 <Text style={styles.containerPassword}>
-                  {"\u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24"}{" "}
+                  {"\u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24 \u2B24"}
                 </Text>
               </TouchableOpacity>
             </View>
-            {/* Need to change***************************************/}
+           
           </View>
           {/* button */}
-
+          <View style={styles.space} />
           <View style={styles.buttonContainer}>
             <CustomButton text="Save Changes" onPress={handleSubmit(Uploadnewdata)}/>
           </View>
 
-          {/* onpress pass in Uploadnewdata this will update user record */}
+          
         </View>
       </View>
     </ScrollView>

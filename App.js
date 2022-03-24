@@ -5,7 +5,8 @@ import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 
 import Navigation from './src/navigation';
-import Amplify, { DataStore } from 'aws-amplify'
+
+import Amplify,{ Auth, DataStore} from 'aws-amplify';
 import awsconfig from './src/aws-exports'
 
 import AuthContext from './src/contexts/Authentication';
@@ -18,6 +19,7 @@ const client = StreamChat.getInstance(API_KEY);
 
 export default function App() {
   const [user, setUser] = useState('');
+
   
    
   
