@@ -10,9 +10,10 @@ const styles = StyleSheet.create({
     height: 100,
   },
   rightContainer: {
-    width: 291,
+    width: '100%',
     height: 97,
     left: 97,
+   
   },
 
   title: {
@@ -21,8 +22,9 @@ const styles = StyleSheet.create({
     textAlign: "left",
   },
   titleContainer: {
-    width: "100%",
+    width: "75%",
     flexDirection: "row",
+
   },
 
   userContainer: {
@@ -35,9 +37,11 @@ const styles = StyleSheet.create({
   },
   dateContainer: {
     bottom: 5,
-    flex: 1,
-    right: 10,
+    paddingRight:5,
+    right:'25%',
+    width:'25%',
     position: "absolute",
+    alignItems:'flex-end'
   },
   imageContainer: {
     padding: 3,

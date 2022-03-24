@@ -17,7 +17,9 @@ const styles = StyleSheet.create({
   },
   topRightPosition: {
     top: 5,
-    left: 365,
+    alignItems:'flex-end',
+    width:'100%',
+    padding:5,
     position: "absolute",
   },
   profileButton: {
