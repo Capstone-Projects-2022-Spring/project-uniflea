@@ -15,8 +15,7 @@ const HomeScreen = ({ searchValue }) => {
   const [products, setProducts] = useState([]);
   var [sortedProducts, setSortedProducts] = useState([]);
   const { user, setUser } = useContext(AuthContext);
-  console.log(searchValue);
-  console.log("user id homescreen= ", user);
+  
   const signOut = () => {
     setUser(undefined);
     client.disconnectUser();
@@ -87,16 +86,28 @@ const HomeScreen = ({ searchValue }) => {
       await DataStore.stop();
       await DataStore.start();
       console.warn("successfully stopped, started");
-      const products = await DataStore.query(Product);
-
-      console.log("Products in useffect ========= ", products);
+  
     } catch (e) {
       Alert.alert("oops", e.message);
     }
   };
+
+  useEffect(() => {
+    // wait 2 seconds after user finishes typing to query results
+    const delayDebounceFn = setTimeout(() => {
+      console.log(searchValue)
+      // Send Axios request here
+      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(setProducts);
+      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(
+        setSortedProducts
+      );
+    }, 1000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [searchValue])
+
   useEffect(() => {
     resetDatastore();
-    // query the products in the product list on rendering the page
 
     if (category !== null) {
       DataStore.query(Product).then(setProducts);
