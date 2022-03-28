@@ -1,15 +1,15 @@
 import { Text, View, Image, Pressable } from 'react-native';
-import { DataStore, Auth } from 'aws-amplify';
-import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
+import { useNavigation } from '@react-navigation/native';
+import { DataStore } from 'aws-amplify';
+import { Product } from '../../models';
 
 
-
-const ActiveProductItem = ({ id, image, title, price, productId, items, setItems }) => {
-    const navigation = useNavigation();
+const ActiveProductItem = ({ id, image, title, price, items }) => {
+    // const navigation = useNavigation();
 
     const deleteItemById = async(id) => {
-        const todelete = await DataStore.query(SavedProduct, id);
+        const todelete = await DataStore.query(Product, id);
         console.log("Item to delete =", todelete);
         if(todelete.length===0){
             console.warn("couldn't find item to delete");
@@ -25,11 +25,12 @@ const ActiveProductItem = ({ id, image, title, price, productId, items, setItems
     return (
         // Need to change navigation for profile page
         // <Pressable onPress={() => navigation.navigate("ProductScreen", { id: productId })}>
-            <View style={styles.root}>
+           
+           <View style={styles.root}>
                 <View style={styles.row}>
                     <Image style={styles.image} source={{ uri: image }} />
                     <View style={styles.rightContainer}>
-                        <Text style={styles.title} numberOfLines={3}>{title}</Text>
+                        <Text style={styles.title} numberOfLines={2}>{'hello' }</Text>
 
                         <Text style={styles.price}>${price}</Text>
                     </View>

@@ -81,7 +81,7 @@ const ProfilePage = () => {
   
             <S3Image style={styles.image} imgKey={image} />
             </TouchableOpacity>
-            <Text style={styles.profileNameText}>John Doe</Text>
+            <Text style={styles.profileNameText}>kasie</Text>
 
             <Rating
                 rated={3.0}
@@ -91,7 +91,7 @@ const ProfilePage = () => {
             />
 
             <View style={styles.space}/>
-                <ProfileScreenButton onPress={() => navigation.navigate("SaveItemScreen")} text="active listing"/>
+                <ProfileScreenButton onPress={() => navigation.navigate("ActiveListingScreen")} text="active listing"/>
                 <View style={styles.space}/>
                 <ProfileScreenButton onPress={() => navigation.navigate('ReviewScreen')} text="Reviews and Ratings"/>
                 <View style={styles.space}/>
