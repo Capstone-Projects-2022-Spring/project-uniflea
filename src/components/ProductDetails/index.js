@@ -6,6 +6,8 @@ import ImageCarousel from '../ImageCarousel';
 import CustomButton from '../CustomButton';
 import { Auth, DataStore } from 'aws-amplify';
 import { Product, SavedProduct } from '../../models';
+import { useNavigation } from '@react-navigation/native';
+
 const prod = {
     id: '5',
     title: "Logitech MX Master 3 Advanced Wireless Mouse for Mac - Bluetooth/USB",
@@ -25,6 +27,7 @@ const prod = {
   };
 const ProductDetails = () => {
 
+    const navigation = useNavigation();
     const [product, setProduct] = useState(undefined);
     const route = useRoute();
     // route allows us to receive the data passed as param from navigator hook
@@ -82,6 +85,23 @@ const ProductDetails = () => {
                 <Text style={styles.description}>{product.description}</Text>
                 {/* Save listing */}
                 <CustomButton onPress={addToSavedList} text='Save Listing' primary={true} />
+                
+                    <CustomButton onPress={() => {
+                            console.log("Product Details screen: " + product.id)
+                            console.log("Product Details screen: " + product.title)
+                            console.log("Product Details screen: " + product.price)
+                            console.log("Product Details screen: " + product.description)
+                        navigation.navigate('EditProductScreen', 
+                           {
+                                id: product.id,
+                                title: product.title,
+                                price: product.price,
+                                description: product.description
+                            }
+                        )
+                        }}
+                    text="Edit"/>
+                
             </ScrollView>
         </SafeAreaView>
 

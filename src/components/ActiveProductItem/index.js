@@ -1,6 +1,7 @@
 import { Text, View, Image, Pressable } from 'react-native';
 import { DataStore, Auth } from 'aws-amplify';
 import { useNavigation } from '@react-navigation/native';
+import CustomButton from '../CustomButton';
 import styles from './styles';
 
 
@@ -37,6 +38,7 @@ const ActiveProductItem = ({ id, image, title, price, productId, items, setItems
                 <View style={styles.row}>
                     <Pressable onPress={() => deleteItemById(id)}><Text>Delete</Text></Pressable>
                 </View>
+            
             </View>
         // </Pressable>
     ); 
