@@ -149,7 +149,7 @@ Users can test the release in the following ways
   3. Add the title of the listing
   4. Add a short description about the listing
   5. Set a price for the listing
-  6. Press the create listing button
+  6. Press the publish listing button
   7. Go back to the home page where the listing will be shown
 
 * Delete a listing
