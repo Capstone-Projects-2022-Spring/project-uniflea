@@ -148,7 +148,7 @@ const ProfilePage = () => {
       <View style={styles.space} />
       <View style={styles.buttonContainer}>
       <ProfileScreenButton
-        onPress={() => navigation.navigate("SaveItemScreen")}
+        onPress={() => navigation.navigate("ActiveListingScreen")}
         text="View Active Listings"
       />
       </View>
