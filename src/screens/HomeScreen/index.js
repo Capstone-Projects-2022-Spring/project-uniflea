@@ -42,23 +42,26 @@ const HomeScreen = ({ searchValue }) => {
         applyCategory(category);
         return;
 
-      case "price":
-        console.log("Sorted by price");
+      case "priceLow":
+        console.log("Sorted by price: low to high");
         //sort by price
         sortedProducts.sort((a, b) => (a.price > b.price ? 1 : -1));
-        //console.log("Sorted products after sort:")
-        //console.log(sortedProducts);
         return;
+
+      
+      case "priceHigh":
+        console.log("Sorted by price: high to low");
+        //sort by price
+        sortedProducts.sort((a, b) => (a.price < b.price ? 1 : -1));
+        return;  
 
       case 'dateNewest':
         console.log("Sorted by Date: Newest");
-        //sort by price
         sortedProducts.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
         return;
         
       case 'dateOldest':
         console.log("Sorted by Date: Oldest");
-        //sort by price
         sortedProducts.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
         return;  
 
@@ -134,7 +137,8 @@ const HomeScreen = ({ searchValue }) => {
               }
             >
               <Picker.Item label ="None" value="none"/>
-              <Picker.Item label ="Price" value="price"/>
+              <Picker.Item label ="Price: Low to High" value="priceLow"/>
+              <Picker.Item label ="Price: High to Low" value="priceHigh"/>
               <Picker.Item label ="Date: Newest" value="dateNewest"/>
               <Picker.Item label ="Date: Oldest" value="dateOldest"/>
 
