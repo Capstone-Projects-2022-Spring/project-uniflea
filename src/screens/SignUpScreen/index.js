@@ -74,6 +74,7 @@ const SignUpScreen = () => {
                     'name': data.name,
                     'phone': data.phone,
                     'dob': data.birthdate,
+                    'email': data.email
                 }));
                 
             } catch(e) {
