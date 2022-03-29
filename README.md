@@ -106,10 +106,10 @@ Option One (QR Code Scan): Scan the QR Code below.
 Upon scanning, you may be prompted to open the UniFlea application in Expo. 
 Otherwise, it will automatically do so, and UniFlea will be running on your mobile device.
 
-![image](https://user-images.githubusercontent.com/61302705/158296888-72c3d1e2-a615-4d2a-a762-3aa28ba774e1.png)
+![image](https://user-images.githubusercontent.com/61302705/160692420-d6a976eb-e8a6-484a-8db2-7d438c2832aa.png)
 
 Option Two (Link): Copy and paste the following link into your browser and hit enter: 
-exp://exp.host/@unifleatest/UniFlea?release-channel=default. 
+exp://exp.host/@unifleatest/UniFlea?release-channel=default
 Upon hitting enter, you may be prompted to open the UniFlea application in Expo. 
 Otherwise, it will automatically do so, and UniFlea will be running on your mobile device.
 
