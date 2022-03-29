@@ -10,11 +10,11 @@ import {
 } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const SavedProductItem = ({ id, image, title, price, displayName }) => {
+const SavedProductItem = ({ id, image, title, price, displayName, productId, items, setItems }) => {
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
-    navigation.navigate("ProductScreen", { id: id });
+    navigation.navigate("ProductScreen", { id: productId });
   };
 
   const deleteItemById = async (id) => {
@@ -31,7 +31,8 @@ const SavedProductItem = ({ id, image, title, price, displayName }) => {
 
   return (
     // need to send product id, not savedProduct id
-    <Pressable onPress={onPress} style={styles.root}>
+    <View style={styles.root}>
+    <Pressable onPress={onPress} >
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: image }} />
       </View>
@@ -57,7 +58,7 @@ const SavedProductItem = ({ id, image, title, price, displayName }) => {
           </Text>
         </View>
       </View>
-
+      </Pressable>
       <View style={styles.deletePressContainer}>
         <TouchableOpacity
           style={styles.deletePress}
@@ -70,7 +71,8 @@ const SavedProductItem = ({ id, image, title, price, displayName }) => {
           />
         </TouchableOpacity>
       </View>
-    </Pressable>
+
+    </View>
   );
 };
 

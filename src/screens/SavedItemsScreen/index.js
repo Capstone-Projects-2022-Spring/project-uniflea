@@ -40,7 +40,7 @@ import { SavedProduct } from '../../models';
               renderItem={({item}) =>
                
                 <SavedProductItem 
-                  id={item.product.id}
+                  id={item.id}
                   title={item.product.title} 
                   image={item.product.image} 
                   price={item.product.price} 
