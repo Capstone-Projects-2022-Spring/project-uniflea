@@ -68,7 +68,16 @@ Users can test the release in the following ways
   4. click submit
   5. wait a few moments
   6. navigate to the home screen and filter based on date: newest to see your product
-
+ 
+* Test save listing 
+  1. navigate to home screen (first tab)
+  2. select 'Book 3 (3/23/22 12:02)' product
+  3. click 'save listing'
+  4. navigate to saved listings screen (second tab)
+  5. notice the listing is there. Click the listing to be taken back to the listing details screen
+  6. Press back arrow
+  7. click delete listing to remove from saved screen
+ 
 * Test review screens exist
   1. Navigate to profile page (bottom righ tab) 
   2. Click the 'Reviews and Ratings' button
