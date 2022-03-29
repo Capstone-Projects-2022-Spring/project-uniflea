@@ -15,6 +15,14 @@ import AuthContext from "../../contexts/Authentication";
 
 const ProfilePage = () => {
   const navigation = useNavigation();
+  const { user, setUser } = useContext(AuthContext);
+
+    const signOut = () => {
+      setUser(undefined);
+      Auth.signOut();
+   };
+
+
   let myuuid = uuidv4();
   const [image, setImage] = useState(null);
 
@@ -94,17 +102,12 @@ const ProfilePage = () => {
 
   //setting varriable to naviate to the settings screen
   const iconPress = () => {
-    navigation.navigate("SettingsScreen");
-    
+    navigation.navigate("SettingsScreen"); 
    };
 
-    const { user, setUser } = useContext(AuthContext);
-    console.log("user id Profilescreen= ", user);
-    const signOut = () => {
-      setUser(undefined);
-      client.disconnectUser();
-      Auth.signOut();
-    };
+
+
+
  
   return (
     <SafeAreaView style={styles.root}>
