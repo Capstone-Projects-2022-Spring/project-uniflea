@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     right:1,
   },
 profilePicContainer:{
-  backgroundColor:'green',
+  // backgroundColor:'green',
   width:'27%',
   paddingLeft:3,
   top:5,
