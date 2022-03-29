@@ -2,23 +2,12 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
 
-    rightContainer: {
-      padding: 10,
-      width: '100%',
-      flex: 3,
-      alignItems:'flex-start'
-    },
-    row: {
-      flexDirection: 'row',
-    },
-    root: {
-      
-      borderColor: '#d1d1d1',
-      borderWidth: 1,
-      borderRadius: 10,
-      backgroundColor: '#fff',
-      marginVertical: 5,
-    }, 
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
     title: {
         fontSize: 18,
     },

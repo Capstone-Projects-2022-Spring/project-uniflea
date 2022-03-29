@@ -1,10 +1,11 @@
-import { Text, View, TouchableOpacity, TextInput } from "react-native";
+import { Text, View, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 import React, {useState, useEffect} from 'react';
 import { DataStore, Auth } from "aws-amplify";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
 import { Product } from "../../models";
+import CustomButton from "../../components/CustomButton";
 
 const EditProductScreen = ({route, navigation}) => {
 
@@ -69,45 +70,46 @@ const EditProductScreen = ({route, navigation}) => {
         setImage(uploadedImage.key);
     };
 
-    return(
-        <View style={styles.root}>
-            <View style={styles.row}>
+    return (
+        <SafeAreaView style={styles.container}>
 
-                {/* Item image */}
-                <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
-                    <S3Image imgKey={image} style={styles.image}/>
-                </TouchableOpacity>
-                
-                <View style={styles.rightContainer}>
-                    {/* title */}
-                    <TextInput
-                        textAlignVertical='top'
-                        style={styles.textBox}
-                        placeholder= {title}
-                        // defaultValue = {passedTitle}
-                        // onChangeText = {title => setTitle(title)} 
-                    />
-                    
-                    {/*Price */}
-                    <TextInput
-                        styles={styles.textBox}
-                        placeholder = {JSON.stringify(price)}
-                        // defaultValue = {passedPrice}
-                        // onChangeText={price => setPrice(price)}                      
-                    />
 
-                    {/* Description */}
-                    <TextInput
-                        textAlignVertical='top'
-                        style={styles.textBox}
-                        placeholder={description}
-                        // value= {passedDescription}
-                        // onChangeText={description => setDescription(description)}
-                        multiline= {true}                    
-                    />
-                </View>
-            </View>
-        </View>
+            {/* Item image */}
+            <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
+                <S3Image imgKey={image} style={styles.image} />
+            </TouchableOpacity>
+
+            {/* title */}
+            <TextInput
+                textAlignVertical='top'
+                style={styles.textBox}
+                placeholder={title}
+            // defaultValue = {passedTitle}
+            // onChangeText = {title => setTitle(title)} 
+            />
+
+            {/*Price */}
+            <TextInput
+                styles={styles.textBox}
+                placeholder={JSON.stringify(price)}
+            // defaultValue = {passedPrice}
+            // onChangeText={price => setPrice(price)}                      
+            />
+
+            {/* Description */}
+            <TextInput
+                textAlignVertical='top'
+                style={styles.textBox}
+                placeholder={description}
+                // value= {passedDescription}
+                // onChangeText={description => setDescription(description)}
+                multiline={true}
+            />
+
+            <CustomButton onPress={console.log} text="Save Changes" />
+
+
+        </SafeAreaView>
     )
 }
 
