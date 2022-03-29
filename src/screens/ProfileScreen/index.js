@@ -105,9 +105,6 @@ const ProfilePage = () => {
     navigation.navigate("SettingsScreen"); 
    };
 
-
-
-
  
   return (
     <SafeAreaView style={styles.root}>
