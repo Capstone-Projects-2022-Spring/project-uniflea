@@ -1,3 +1,4 @@
+
 import { Text, View, Image, Pressable } from "react-native";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
@@ -28,6 +29,7 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
   return (
     // Need to change navigation for profile page
 <View style={styles.root}>
+
 
    
       

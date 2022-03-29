@@ -8,7 +8,9 @@ const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
-    navigation.navigate("ProductScreen", { id: id });
+    navigation.navigate("ProductScreen", { 
+      screen: 'ProductDetails',
+      params: {id: id, title: title, price: price}});
   };
   const compareDate = () => {
     {
