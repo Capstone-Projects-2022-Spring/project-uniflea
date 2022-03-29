@@ -72,7 +72,7 @@ profilePicContainer:{
     paddingTop:3,
     top:-95,
     width:'64%',
-    left: '28%',
+    left: '29%',
   },
   name:{
     fontSize:20 ,
@@ -82,7 +82,7 @@ profilePicContainer:{
     paddingTop:3,
     top:-95,
     width:'64%',
-    left: '28%',
+    left: '29%',
   },
   bioContainer:{
     position: "absolute",
