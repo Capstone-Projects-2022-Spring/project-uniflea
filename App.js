@@ -5,10 +5,12 @@ import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 
 import Navigation from './src/navigation';
-import Amplify from 'aws-amplify'
+
+import Amplify,{ Auth, DataStore} from 'aws-amplify';
 import awsconfig from './src/aws-exports'
 
 import AuthContext from './src/contexts/Authentication';
+
 
 Amplify.configure(awsconfig)
 
@@ -17,7 +19,13 @@ const client = StreamChat.getInstance(API_KEY);
 
 export default function App() {
   const [user, setUser] = useState('');
+
+  
+   
+  
   useEffect(() => {
+    
+
     /*
       Amplify provides a unique user identifier (userSub),
       which can be passed as userToken to create a link between the user in the stream database

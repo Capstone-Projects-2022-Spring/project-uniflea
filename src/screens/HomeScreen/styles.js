@@ -2,6 +2,8 @@ import { StyleSheet } from "react-native";
 import { Colors } from "../../styles/Colors";
 const styles = StyleSheet.create({
   page: {
+    flexDirection: "column",
+    flex: 1,
     padding: 10,
     backgroundColor: Colors.mainBackground,
   },
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
     borderRightColor: Colors.mainBackground,
     borderLeftWidth: 20,
     borderLeftColor: Colors.mainBackground,
-  }
+  },
 });
 
-  export default styles;
+export default styles;

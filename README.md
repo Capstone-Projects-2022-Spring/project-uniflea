@@ -6,9 +6,11 @@ project-uniflea created by GitHub Classroom
 <br>
 UniFlea is a mobile application that serves as a marketplace platform for university students. It will be exclusively available to currently enrolled students at the university with a buffer period that permits recent graduates to also participate. The goal for UniFlea is to help students purchase or sell textbooks, equipment, electronics, furniture, clothing and more. Similar to applications such as Facebook Marketplace and Craigslist, UniFlea is unique in that it offers the comfort of safety through an authentication process that confirms transactions are being made by students. Features of UniFlea include authentication and verification upon creating an account, a personalized homepage catered to the individual student, search filters and categories, in app messaging, notifications, and a moderation and reporting system.
 
-# Milestone 1 Release
+# Milestone 2 Release
 <br>
-New in this release is a full authentication suite. This includes sign up, sign in, and password reset functionality. Furthermore, we provide industry standard email validation to ensure that each user is a current or recent university graduate. Finally, we have implemented a profile screen, which allows users to interact with their information by changing their profile picture, or by navigating to related pages to change their password, or view their active listings.
+New in this release is a fully functioning product filtering system. This includes filtering by searching, category, date, and price.
+Furthermore, we enable users to save items they are interested in. We have also restyled the listings on the home screen to adhere to modern design principles. We also created the listing screen, allowing users to create new listings, and have them populated in the home screen's list of products.
+Finally, we created the front end for the report user and add review screens, accessible via the profile screen.
 
 # Installation Instructions
 <br>
@@ -34,42 +36,58 @@ If you would like to see the current offical published release on Expo, proceed 
 <br>
 Users can test the release in the following ways
 
-* Test the email validation
-  1. Click the sign up button
-  2. Enter sign up information, but instead of using a university email, use a personal email
-  3. Click submit
-  4. You will be greeted with an error
-  5. Enter a university email
-  
-* Test that duplicate accounts can't be created
-  1. Click the sign up button again
-  2. Enter sign up information, but instead of using a new email, sign up using the email you validated in the previous test
-  3. Click submit
-  4. You will be greeted with an error
-  5. Return to the sign in page
 
-* Test that other input fields are validated
-  1. Click the sign up button
-  2. Enter no sign up information
-  3. Click submit
-  4. You will be greeted with errors for each field
-  5. Enter valid values for the fields
-  6. Check your email for the validation code
-  7. Enter the code and press submit
-  8. You will be redirected to the sign in page, enter your validated email and password
-  9. You will now be on the home page
-
-* Test that user can change profile image
-  1. Navigate to profile page (bottom righ tab) 
-  2. Click the profile picture icon at the top of the page
-  3. Select the image you would like to use
-  4. You can now see that image being displayed
+* Test the sort by date filter
+  1. navigate to home screen (first tab)
+  2. click on the funnel icon
+  3. click on date: newest. 
+  4. Look for products with timestamp in title
+  5. observe that products are sorted, newest at the top
   
-* Test user can change password
+* Test the sort by date filter
+  1. navigate to home screen (first tab)
+  2. click on the funnel icon
+  3. click on date: oldest. 
+  4. Look for products with timestamp in title
+  5. observe that products are sorted, oldest at the top
+ 
+* Test the sort by price filter
+  1. navigate to home screen (first tab)
+  2. click on the funnel icon
+  3. click on date. Observe that the products are now sorted by price, cheapest at the top
+
+* Test create listing 
+  1. navigate to listing screen (middle tab)
+  2. select an image
+  3. fill out the form
+  4. click submit
+  5. wait a few moments
+  6. navigate to the home screen and filter based on date: newest to see your product
+ 
+* Test save listing 
+  1. navigate to home screen (first tab)
+  2. select 'Book 3 (3/23/22 12:02)' product
+  3. click 'save listing'
+  4. navigate to saved listings screen (second tab)
+  5. notice the listing is there. Click the listing to be taken back to the listing details screen
+  6. Press back arrow
+  7. click delete listing to remove from saved screen
+ 
+* Test review screens exist
+
   1. Navigate to profile page (bottom righ tab) 
-  2. Click the change password button
-  3. Input your email
-  4. Enter the code sent to your email, and your new password on the next screen
+  2. Click the 'Reviews and Ratings' button
+  3. Notice that reviews are displayed
+  4. click back arrow
+  5. click on 'Leave a Review' button
+  6. Notice that a form to leave a rating exists
+  7. Note: Currentlt no functionality added to this screen yet
+  
+* Test report screen exists
+  1. Navigate to profile page (bottom righ tab) 
+  2. Click 'Test Report' button
+  3. Notice that form to report a user exists
+  4. Note: no functionality added to this screen yet
 
 [Link to source code for milestone 1](src)
 
