@@ -45,6 +45,7 @@ import { SavedProduct } from '../../models';
                   image={item.product.image} 
                   price={item.product.price} 
                   productId={item.product.id}
+                  displayName={item.product.displayName}
                   items={items}
                   setItems={setItems}
                 />
