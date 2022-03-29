@@ -1,28 +1,9 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\johnc\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js install
-
-PATH: 
-  C:\Python310\Scripts\;C:\Python310\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Eclipse Adoptium\jdk-17.0.1.12-hotspot\bin;C:\Program Files\Eclipse Foundation\jdk-11.0.12.7-hotspot\bin;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\dotnet\;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Users\johnc\Downloads\apache-maven-3.8.4\bin;C:\Users\johnc\AppData\Local\Microsoft\WindowsApps;C:\Users\johnc\.dotnet\tools;C:\Users\johnc\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\johnc\AppData\Local\GitHubDesktop\bin;C:\Users\johnc\AppData\Local\gitkraken\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2021.3.1\bin;C:\Users\johnc\AppData\Roaming\npm
 
 Yarn version: 
   1.22.17
 
 Node version: 
-  16.13.2
-
-Platform: 
-  win32 x64
-
-Trace: 
-  SyntaxError: Unknown token: { line: 7658, col: 1, type: 'INVALID', value: undefined } 7658:1 in C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Node.js\project-uniflea\yarn.lock
-      at Parser.unexpected (C:\Users\johnc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:64374:11)
-      at Parser.parse (C:\Users\johnc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:64505:14)
-      at parse (C:\Users\johnc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:64579:21)
-      at module.exports.exports.default (C:\Users\johnc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:64141:96)
-      at Function.<anonymous> (C:\Users\johnc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:3064:63)
-      at Generator.next (<anonymous>)
-      at step (C:\Users\johnc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
-      at C:\Users\johnc\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
 
 npm manifest: 
   {

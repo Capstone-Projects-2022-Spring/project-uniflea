@@ -15,8 +15,7 @@ const HomeScreen = ({ searchValue }) => {
   const [products, setProducts] = useState([]);
   var [sortedProducts, setSortedProducts] = useState([]);
   const { user, setUser } = useContext(AuthContext);
-  console.log(searchValue);
-  console.log("user id homescreen= ", user);
+  
   const signOut = () => {
     setUser(undefined);
     client.disconnectUser();
@@ -87,17 +86,12 @@ const HomeScreen = ({ searchValue }) => {
       await DataStore.stop();
       await DataStore.start();
       console.warn("successfully stopped, started");
-      const products = await DataStore.query(Product);
-
-      console.log("Products in useffect ========= ", products);
+  
     } catch (e) {
       Alert.alert("oops", e.message);
     }
   };
-  useEffect(() => {
-    resetDatastore();
-    // query the products in the product list on rendering the page
-
+  const fetchProducts = () => {
     if (category !== null) {
       DataStore.query(Product).then(setProducts);
       DataStore.query(Product, (c) => c.category("contains", category)).then(
@@ -108,6 +102,32 @@ const HomeScreen = ({ searchValue }) => {
       console.log("products ============== ", products);
       DataStore.query(Product).then(setSortedProducts);
     }
+  }
+  useEffect(() => {
+    // wait 2 seconds after user finishes typing to query results
+    const delayDebounceFn = setTimeout(() => {
+      console.log(searchValue)
+      // Send Axios request here
+      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(setProducts);
+      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(
+        setSortedProducts
+      );
+    }, 1000)
+
+    return () => clearTimeout(delayDebounceFn)
+  }, [searchValue])
+
+  useEffect(() => {
+    resetDatastore();
+    
+  }, []);
+  useEffect(() => {
+    fetchProducts();
+    const subscription = DataStore.observe(Product).subscribe(() => {
+      fetchProducts()
+    });
+    // close subscription to prevent memory leaks
+    return () => subscription.unsubscribe();
   }, []);
   return (
     
