@@ -91,7 +91,18 @@ const HomeScreen = ({ searchValue }) => {
       Alert.alert("oops", e.message);
     }
   };
-
+  const fetchProducts = () => {
+    if (category !== null) {
+      DataStore.query(Product).then(setProducts);
+      DataStore.query(Product, (c) => c.category("contains", category)).then(
+        setSortedProducts
+      );
+    } else {
+      DataStore.query(Product).then(setProducts);
+      console.log("products ============== ", products);
+      DataStore.query(Product).then(setSortedProducts);
+    }
+  }
   useEffect(() => {
     // wait 2 seconds after user finishes typing to query results
     const delayDebounceFn = setTimeout(() => {
@@ -108,17 +119,15 @@ const HomeScreen = ({ searchValue }) => {
 
   useEffect(() => {
     resetDatastore();
-
-    if (category !== null) {
-      DataStore.query(Product).then(setProducts);
-      DataStore.query(Product, (c) => c.category("contains", category)).then(
-        setSortedProducts
-      );
-    } else {
-      DataStore.query(Product).then(setProducts);
-      console.log("products ============== ", products);
-      DataStore.query(Product).then(setSortedProducts);
-    }
+    
+  }, []);
+  useEffect(() => {
+    fetchProducts();
+    const subscription = DataStore.observe(Product).subscribe(() => {
+      fetchProducts()
+    });
+    // close subscription to prevent memory leaks
+    return () => subscription.unsubscribe();
   }, []);
   return (
     
