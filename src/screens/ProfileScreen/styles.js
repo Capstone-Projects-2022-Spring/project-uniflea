@@ -2,38 +2,127 @@ import { StyleSheet } from "react-native";
 import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    
   },
   space: {
     width: 20,
     height: 20,
   },
-  profileNameText: {
-    fontSize: 30,
-  },
+ topBannerContainer:{
+  flex: 1,
+   width:"100%",
+   height:'20%',
+   position: "absolute",
+  
+
+
+ },
+ lowerContainer:{
+  flex: 1,
+   width:'100%',
+   top:'40%',
+   bottom:5,
+  
+   position:'absolute',
+ },
+
   topRightPosition: {
     top: 5,
     alignItems:'flex-end',
-    width:'100%',
+    width:'10%',
     padding:5,
     position: "absolute",
+  
+    right:1,
   },
+profilePicContainer:{
+
+  width:'26%',
+  paddingLeft:3,
+  top:5,
+},
   profileButton: {
-    width: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width:100,
     height: 100,
-    borderWidth: 1,
-    backgroundColor: "lightgray",
+    borderWidth: 3,
+    borderRadius: 100/ 2,
+   
   },
   image: {
-    width: 100,
-    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width:99,
+    height: 99,
+    borderRadius: 99/ 2,
+    
 
-    borderWidth: 1,
   },
+  userNameContainer:{
+    top:-95,
+    width:'64%',
+    left: '26%',
+  },
+  userName:{
+    fontSize: 30,
+  },
+  nameContainer:{
+    paddingTop:3,
+    top:-95,
+    width:'64%',
+    left: '26%',
+  },
+  name:{
+    fontSize:20 ,
+  },
+
+  ratingContainer:{
+    paddingTop:3,
+    top:-95,
+    width:'64%',
+    left: '26%',
+  },
+  bioContainer:{
+    position: "absolute",
+    width:'100%',
+    top:"20%",
+    height:'20%',
+    borderColor:'gray',
+    padding:5,
+    backgroundColor:'#F4F4F4',
+    borderRadius:20
+  },
+  bioText:{
+    fontSize:24
+
+  },
+
+  buttonContainer:{
+  
+    justifyContent: "center",
+
+  }, 
+
+  signOutContainer:{
+    flex: 1,
+    bottom:5,
+    position: "absolute",
+    width: "100%",
+    height: 20,
+
+
+  },
+  signOutText:{
+    width: "100%",
+    textAlign: "center",
+    fontWeight:'bold'
+  },
+
+
 });
 
 export default styles;
