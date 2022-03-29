@@ -159,7 +159,7 @@ Users can test the release in the following ways
   4. Click delete listing
   5. Go back to active listings and see that the listing has been deleted
 
-[Link to source code for milestone 2](src)
+[Link to source code for milestone](src)
 
 ## Contributors
 Dylan Dunda, Josh Hageman, Tuan Lam, Adam Lang, Kasie Madden, TJ Nguyen, Sameera Rachakonda
