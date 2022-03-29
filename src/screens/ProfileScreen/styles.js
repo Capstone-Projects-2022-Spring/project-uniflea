@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     right:1,
   },
 profilePicContainer:{
-
-  width:'26%',
+  backgroundColor:'green',
+  width:'27%',
   paddingLeft:3,
   top:5,
 },
@@ -54,18 +54,16 @@ profilePicContainer:{
    
   },
   image: {
-    justifyContent: 'center',
+    justifyContent:'center',
     alignItems: 'center',
     width:99,
     height: 99,
     borderRadius: 99/ 2,
-    
-
   },
   userNameContainer:{
     top:-95,
     width:'64%',
-    left: '26%',
+    left: '29%',
   },
   userName:{
     fontSize: 30,
@@ -74,7 +72,7 @@ profilePicContainer:{
     paddingTop:3,
     top:-95,
     width:'64%',
-    left: '26%',
+    left: '28%',
   },
   name:{
     fontSize:20 ,
@@ -84,7 +82,7 @@ profilePicContainer:{
     paddingTop:3,
     top:-95,
     width:'64%',
-    left: '26%',
+    left: '28%',
   },
   bioContainer:{
     position: "absolute",
@@ -98,23 +96,17 @@ profilePicContainer:{
   },
   bioText:{
     fontSize:24
-
   },
 
   buttonContainer:{
-  
     justifyContent: "center",
-
   }, 
-
   signOutContainer:{
     flex: 1,
     bottom:5,
     position: "absolute",
     width: "100%",
     height: 20,
-
-
   },
   signOutText:{
     width: "100%",
