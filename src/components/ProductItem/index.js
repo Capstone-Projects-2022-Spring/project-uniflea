@@ -8,12 +8,14 @@ const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
-    navigation.navigate("ProductScreen", { id: id });
+    navigation.navigate("ProductScreen", { 
+      screen: 'ProductDetails',
+      params: {id: id, title: title, price: price}});
   };
   const compareDate = () => {
-    {
-      /* This is getting the current date and setting it to a string*/
-    }
+    
+    /* This is getting the current date and setting it to a string*/
+    
     const currentDate = new Date();
     const currentDayOfMonth = ("0" + currentDate.getDate()).slice(-2);
     const currentMonth = ("0" + (currentDate.getMonth() + 1)).slice(-2);
@@ -25,19 +27,27 @@ const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
    
 
     //getting the item timestamp and splting the sting just to get the date
-    const ampString = createdAt;
-    const dateAmp = ampString.split("T", 1);
-    const newDateAmp = dateAmp.toString();
-
-    if (newDateAmp === newDateString) {
-      return (
-        <Text style={styles.time}>
-          NEW
-          <FontAwesome name="exclamation" size={17} color="green" />
-        </Text>
-      );
-    } else {
-      return;
+    try{
+      console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + createdAt);
+      const ampString = createdAt;
+      const dateAmp = ampString.split("T", 1);
+      console.log("ampstring:" + ampString)
+      console.log("dateAmp:" + dateAmp)
+      const newDateAmp = dateAmp.toString();
+  
+      if (newDateAmp === newDateString) {
+        return (
+          <Text style={styles.time}>
+            NEW
+            <FontAwesome name="exclamation" size={17} color="green" />
+          </Text>
+        );
+      } else {
+        return;
+      }
+    }
+    catch (e){
+      console.log(e.msg)
     }
   };
 
