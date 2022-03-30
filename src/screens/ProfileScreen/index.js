@@ -22,10 +22,10 @@ const ProfilePage = () => {
       const myUser = await Auth.currentAuthenticatedUser();
       //i want the single user in the DB with the correct userSUB
       const user = await DataStore.query(User, s => s.userSub("eq", myUser.attributes.sub));
+
       console.log('user ====================', user[0]);
       //i want the pfp of that user
       const image = user[0].image;
-      
         
       setImage(image);
       };
