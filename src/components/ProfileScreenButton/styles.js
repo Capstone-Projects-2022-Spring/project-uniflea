@@ -3,19 +3,23 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
     },
     button: {
         alignItems: 'center',
-        padding:10,
+        padding: 15,
+        width:'75%',
         backgroundColor: '#99182e',
-        // borderRadius: 4,
+        borderRadius: 15,
         paddingVertical:12,
+        elevation:6
+        
     },
     text:{
         color: 'white',
+        fontSize: 15,
+
     },
     space:{
         width:20,
