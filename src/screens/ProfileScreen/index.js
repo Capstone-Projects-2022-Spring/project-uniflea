@@ -15,8 +15,9 @@ import AuthContext from "../../contexts/Authentication";
 
 const ProfilePage = () => {
   const navigation = useNavigation();
-  const { user, setUser } = useContext(AuthContext);
 
+  //to for signing out 
+  const { user, setUser } = useContext(AuthContext);
   const signOut = () => {
     setUser(undefined);
     Auth.signOut();
@@ -72,9 +73,9 @@ const ProfilePage = () => {
 
     setImage(uploadedImage.key);
   };
-  {
+  
+
     /*Setting the name of the user on the page */
-  }
   const [displayName, setDisplayName] = useState(null);
   const [name, setName] = useState(null);
   const [memberDate, setMemberDate] = useState(null);
@@ -89,14 +90,14 @@ const ProfilePage = () => {
     const displayName = userRecord[0].displayName;
     const name = userRecord[0].name;
     const memberDate = userRecord[0].createdAt;
-
     setDisplayName(displayName);
     setName(name);
     setMemberDate(memberDate.split("-", 1).toString());
   };
 
-  const Square = ({ text }) => (
-    <View style={styles.square}>
+    //for the circle buttons 
+  const Circle = ({ text }) => (
+    <View style={styles.circle}>
       <Text style={styles.squareText}>{text}</Text>
     </View>
   );
@@ -113,7 +114,9 @@ const ProfilePage = () => {
 
   return (
     <SafeAreaView style={styles.root}>
+      <View style={styles.shape2} /> 
       <View style={styles.shape} />
+     
       <View style={styles.topBannerContainer}>
         {/* The onpress settings icon */}
         <TouchableOpacity style={styles.topRightPosition} onPress={iconPress}>
@@ -183,7 +186,7 @@ const ProfilePage = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("ReviewScreen")}
             >
-              <Square text="Read Reviews" />
+              <Circle text="Read Reviews" />
             </TouchableOpacity>
 
             <View style={styles.space} />
@@ -191,7 +194,7 @@ const ProfilePage = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("ActiveListingScreen")}
             >
-              <Square text="Active Listings" />
+              <Circle text="Active Listings" />
             </TouchableOpacity>
           
           </View>
@@ -200,12 +203,12 @@ const ProfilePage = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("LeaveReviewScreen")}
             >
-              <Square text="Leave a Review" />
+              <Circle text="Leave a Review" />
             </TouchableOpacity>
             
             <View style={styles.space} />
             <TouchableOpacity onPress={() => navigation.navigate(" ")}>
-              <Square text="Message User" />
+              <Circle text="Message User" />
             </TouchableOpacity>
           </View>
         </View>

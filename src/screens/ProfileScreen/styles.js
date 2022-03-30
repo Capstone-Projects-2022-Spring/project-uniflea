@@ -16,7 +16,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#99182e",
     // opacity:.8,
   },
-
+  shape2: {
+    position: "absolute",
+    width: 700,
+    height: 700,
+    right: "-23%",
+    bottom: "55%",
+    borderRadius: 700 / 2,
+    backgroundColor: "#D5D8DC",
+    // opacity:.8,
+  },
   space: {
     width: 20,
     height: 20,
@@ -27,6 +36,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "25%",
     position: "absolute",
+    // backgroundColor:'green'
   },
   lowerContainer: {
     flex: 1,
@@ -60,6 +70,7 @@ const styles = StyleSheet.create({
     borderWidth: 6,
     borderRadius: 150 / 2,
     borderColor: "white",
+    
   },
   image: {
     justifyContent: "center",
@@ -67,6 +78,7 @@ const styles = StyleSheet.create({
     width: 143,
     height: 143,
     borderRadius: 143 / 2,
+
   },
   userNameContainer: {
     alignContent: "flex-end",
@@ -148,16 +160,25 @@ const styles = StyleSheet.create({
     width: "10%",
   },
 
-  square: {
+  circle: {
     borderColor: "#99182e",
     borderWidth: 6.5,
     width: 140,
     height: 140,
-    borderRadius: 3,
+    borderRadius: 140/2,
+    backgroundColor:'white',
 
     justifyContent: "center",
     alignItems: "center",
-    elevation: 4,
+    shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 10,
+},
+shadowOpacity: 0.8,
+shadowRadius: 14.78,
+elevation: 6,
+    
   },
   row: {
     flexDirection: "row",
