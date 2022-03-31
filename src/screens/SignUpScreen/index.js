@@ -66,6 +66,7 @@ const SignUpScreen = () => {
                 return;
             }
             try{
+                console.log("email ====>>>>", data.email);
                 await DataStore.save( new User({
                     'displayName': data.username,
                     'university': data.uniSelector[0],
@@ -74,10 +75,11 @@ const SignUpScreen = () => {
                     'name': data.name,
                     'phone': data.phone,
                     'dob': data.birthdate,
+                    'email': data.email
                 }));
                 
             } catch(e) {
-                Alert.alert("Error added user to db", e.message);
+                Alert.alert("Error adding user to db", e.message);
             }
 
 
