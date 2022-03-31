@@ -14,6 +14,7 @@ import { AntDesign } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
 
 const ProfilePage = () => {
+
   const navigation = useNavigation();
   const { user, setUser } = useContext(AuthContext);
 
