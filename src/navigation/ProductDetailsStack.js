@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import ProductDetails from '../components/ProductDetails'
-import EditProductScreen from '../screens/EditProductScreen'
+import ProductDetails from '../components/ProductDetails';
+import EditProductScreen from '../screens/EditProductScreen';
 
 const ProductStack = createStackNavigator();
 
@@ -15,4 +15,4 @@ const ProductDetailScreenStack = () => {
     )
 }
 
-export default ProductDetailScreenStack
+export default ProductDetailScreenStack;

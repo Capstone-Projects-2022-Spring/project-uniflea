@@ -1,9 +1,31 @@
 Arguments: 
 
+  /usr/local/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/tj/IdeaProjects/project-uniflea/node_modules/.bin
+
+
 Yarn version: 
   1.22.17
 
 Node version: 
+  16.13.2
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: Unknown token: { line: 7658, col: 1, type: 'INVALID', value: undefined } 7658:1 in /Users/tj/IdeaProjects/project-uniflea/yarn.lock
+      at Parser.unexpected (/usr/local/lib/node_modules/yarn/lib/cli.js:64374:11)
+      at Parser.parse (/usr/local/lib/node_modules/yarn/lib/cli.js:64505:14)
+      at parse (/usr/local/lib/node_modules/yarn/lib/cli.js:64579:21)
+      at module.exports.exports.default (/usr/local/lib/node_modules/yarn/lib/cli.js:64141:96)
+      at Function.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:3064:63)
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
 
 npm manifest: 
   {
