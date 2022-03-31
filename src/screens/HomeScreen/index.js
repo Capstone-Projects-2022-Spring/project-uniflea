@@ -17,7 +17,8 @@ const HomeScreen = ({ searchValue }) => {
   const [products, setProducts] = useState([]);
   var [sortedProducts, setSortedProducts] = useState([]);
   const { user, setUser } = useContext(AuthContext);
-  
+  console.log(searchValue);
+  console.log("user id homescreen= ", user);
   const signOut = () => {
     setUser(undefined);
     client.disconnectUser();
@@ -76,12 +77,27 @@ const HomeScreen = ({ searchValue }) => {
       await DataStore.stop();
       await DataStore.start();
       console.warn("successfully stopped, started");
-  
+      const products = await DataStore.query(Product);
+
+      console.log("Products in useffect ========= ", products);
     } catch (e) {
       Alert.alert("oops", e.message);
     }
   };
-<<<<<<< HEAD
+
+  const fetchProducts = () => {
+    if (categories.length > 0) {
+      DataStore.query(Product).then(setProducts);
+      // setSortedProducts of categories
+      DataStore.query(Product, c => c.category("IN", categories)).then(setSortedProducts);
+    } else {
+      console.log("Categories is null");
+      DataStore.query(Product).then(setProducts);
+      //console.log("products ============== ", products);
+      DataStore.query(Product).then(setSortedProducts);
+    }
+  }
+
 
   useEffect(() => {
     console.log("Running useEffect");
@@ -117,13 +133,9 @@ const HomeScreen = ({ searchValue }) => {
     if(categories.length>0){
       console.log("Categories is NOT null");
       console.log("Categories: " + categories);
-=======
-  const fetchProducts = () => {
-    if (category !== null) {
->>>>>>> origin/Milestone3
       DataStore.query(Product).then(setProducts);
       // setSortedProducts of categories
-      DataStore.query(Product, c => c.category("IN", category)).then(setSortedProducts);
+      DataStore.query(Product, c => c.category("IN", categories)).then(setSortedProducts);
     } else {
       console.log("Categories is null");
       DataStore.query(Product).then(setProducts);
@@ -131,11 +143,6 @@ const HomeScreen = ({ searchValue }) => {
       DataStore.query(Product).then(setSortedProducts);
     }
   }
-<<<<<<< HEAD
-
-
-
-=======
   useEffect(() => {
     // wait 2 seconds after user finishes typing to query results
     const delayDebounceFn = setTimeout(() => {
@@ -162,7 +169,6 @@ const HomeScreen = ({ searchValue }) => {
     // close subscription to prevent memory leaks
     return () => subscription.unsubscribe();
   }, []);
->>>>>>> origin/Milestone3
   return (
     
     <View style={styles.page}>
