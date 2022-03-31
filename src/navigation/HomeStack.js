@@ -9,6 +9,7 @@ import { Feather } from '@expo/vector-icons';
 import { Colors } from '../styles/Colors';
 import NotificationsButton from '../components/NotificationsButton';
 import NotificationsScreen from '../screens/NotificationsScreen';
+import ProductDetailScreenStack from './ProductDetailsStack';
 
 const Stack = createStackNavigator();
 
@@ -43,7 +44,7 @@ const HomeStack = () => {
                     () => <HomeScreen searchValue={search}/>
                 }
             </Stack.Screen>
-            <Stack.Screen name='ProductScreen' component={ProductDetails} options={{ title: '' }} />
+            <Stack.Screen name='ProductScreen' component={ProductDetailScreenStack} options={{ title: '' }} />
             <Stack.Screen component={NotificationsScreen} name={"Notifications"} options={{ title: 'Notifications' }} /> 
         </Stack.Navigator>
 
