@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { Storage, Auth, DataStore } from "aws-amplify";
-import { Text, SafeAreaView, TouchableOpacity, View, Modal, Pressable, Alert} from "react-native";
+import { Text, SafeAreaView, TouchableOpacity, View, Modal, Pressable, Alert, StyleSheet} from "react-native";
 import ProfileScreenButton from "../../components/ProfileScreenButton";
 import styles from "./styles";
 import { Rating } from "react-native-rating-element";
@@ -13,6 +13,15 @@ import { User } from "../../models";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
 import { scale } from 'react-native-size-matters';
+
+import {
+  useResponsiveHeight,
+  useResponsiveWidth,
+  useResponsiveScreenHeight,
+  useResponsiveScreenWidth,
+  useDimensionsChange
+} from "react-native-responsive-dimensions";
+
 
 
 const ProfilePage = () => {
@@ -115,7 +124,19 @@ const ProfilePage = () => {
   };
   const [modalVisible, setModalVisible] = useState(false);
  
- 
+ const windowHeight = useResponsiveHeight(100);
+  const windowWidth = useResponsiveWidth(100);
+
+  const screenHeight = useResponsiveScreenHeight(100);
+  const screenWidth = useResponsiveScreenWidth(100);
+
+  useDimensionsChange(
+    useCallback(({ window, screen }) => {
+      console.log("Updated Values ﹣ ");
+      console.log("window ﹣ ", window);
+      console.log("screen ﹣ ", screen);
+    }, [])
+    )
   //***************************************************************************************RETURN() */
   return (
     <SafeAreaView style={styles.root}>
@@ -140,25 +161,25 @@ const ProfilePage = () => {
           </View>
 
           <View style={styles.userInfoContainer}>
-            <Text style={styles.userName}>{displayName}</Text>
+            <Text style={styles.userName} screenHeight screenWidth>{displayName}</Text>
           
-          <Text style={styles.name}>
+          <Text style={styles.name} screenHeight screenWidth>
             {name}
             {": est. "}
             {memberDate}
           </Text>
 
          
-          <Rating style={styles.rating} rated={3.5}
+          <Rating style={styles.rating} rated={3.5} screenHeight screenWidth
             totalCount={5}
             size={20}
             ratingColor={"gold"}/>
 
-            <View style={styles.reportContainer}>          
+            <View style={styles.reportContainer}screenHeight screenWidth>          
           <TouchableOpacity onPress={() => navigation.navigate("ReportScreen")}>
           <MaterialIcons style={styles.reportIconContainer} name="report" size={scale(14)} color="white" />
           
-          <Text style={styles.reportText}>Report User</Text>
+          <Text style={styles.reportText}screenHeight screenWidth>Report User</Text>
           </TouchableOpacity>
            </View>  
           </View>
@@ -169,20 +190,20 @@ const ProfilePage = () => {
   {/* <View style={[styles.shape,styles.shape2]}/> */}
 
 
-<View style={styles.bioContainer}>
-          <Text style={styles.bioText}>
+<View style={styles.bioContainer} screenHeight screenWidth>
+          <Text style={styles.bioText} screenHeight screenWidth>
           A senior computer science looking to sell old textbooks that were
           never opened.
         </Text>
 </View>
-        <View style={styles.lowerContainer}>
+        <View style={styles.lowerContainer} screenHeight screenWidth >
 
         <View style={styles.container}>
-          <View style={styles.row}>
+          <View style={styles.row}screenHeight screenWidth >
             <TouchableOpacity
               onPress={() => navigation.navigate("ReviewScreen")}
             >
-              <Circle text="Read Reviews" />
+              <Circle creenHeight screenWidth text="Read Reviews" s/>
             </TouchableOpacity>
 
             <View style={styles.space} />
@@ -190,7 +211,7 @@ const ProfilePage = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("ActiveListingScreen")}
             >
-              <Circle text="Active Listings" />
+              <Circle screenHeight screenWidth text="Active Listings"  />
             </TouchableOpacity>
           
           </View>
@@ -199,12 +220,12 @@ const ProfilePage = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("LeaveReviewScreen")}
             >
-              <Circle text="Leave a Review" />
+              <Circle screenHeight screenWidt text="Leave a Review" h/>
             </TouchableOpacity>
             
             <View style={styles.space} />
             <TouchableOpacity onPress={() => navigation.navigate(" ")}>
-              <Circle text="Message User" />
+              <Circle screenHeight screenWidth text="Message User" />
             </TouchableOpacity>
           </View>
         </View>
