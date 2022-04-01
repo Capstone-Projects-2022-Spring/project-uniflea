@@ -33,7 +33,7 @@ export default function App() {
     */
       
     // stream only allows one client connected at a time. On dismount, disconnect user
-    console.log(client);
+    // console.log(client);
     return () => client.disconnectUser();
   }, []);
 
@@ -65,4 +65,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-AppRegistry.registerComponent('main', () => App);

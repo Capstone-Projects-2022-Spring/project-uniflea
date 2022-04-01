@@ -59,8 +59,8 @@ const ProfilePage = () => {
     //uploads to s3
     const response = await fetch(result.uri);
     const blob = await response.blob();
-    const uploadedImage = await Storage.put(myuuid, blob);
-
+    const uploadedImage = await Storage.put(myuuid, blob, {contentType: "image/png"});
+    console.log("UPLOADED YOUR IMAGE");
     //upload to amplify
     const myUser = await Auth.currentAuthenticatedUser();
     const original = await DataStore.query(User, (s) =>
