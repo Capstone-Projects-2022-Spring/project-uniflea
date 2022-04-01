@@ -8,6 +8,7 @@ import { Auth, DataStore } from 'aws-amplify';
 import { Product, SavedProduct } from '../../models';
 import { useNavigation } from '@react-navigation/native';
 import SendMessageItem from '../SendMessageItem';
+import { useChatContext } from 'stream-chat-expo';
 const ProductDetails = () => {
     const [sellingUser, setSellingUser] = useState();
 
