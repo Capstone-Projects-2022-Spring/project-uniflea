@@ -4,12 +4,12 @@ type Product @model @auth(rules: [{allow: public}]) {
   description: String!
   image: String!
   images: [String!]!
-  category: [String!]
   price: Float!
   userSub: String!
   university: String!
   savedProducts: [SavedProduct] @hasMany
   displayName: String!
+  category: String
 }
 
 type SavedProduct @model @auth(rules: [{allow: public}]) {
@@ -32,6 +32,7 @@ type User @model @auth(rules: [{allow: public}]) {
   name: String!
   dob: String!
   email: String!
+  userBio: String
 }
 
 type Review @model @auth(rules: [{allow: public}]) {
