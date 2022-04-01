@@ -7,33 +7,27 @@ import CustomButton from '../CustomButton';
 import { Auth, DataStore } from 'aws-amplify';
 import { Product, SavedProduct } from '../../models';
 import { useNavigation } from '@react-navigation/native';
-
-const prod = {
-    id: '5',
-    title: "Logitech MX Master 3 Advanced Wireless Mouse for Mac - Bluetooth/USB",
-    description: `Features & details
-    - MAGSPEED WHEEL: Ultra-fast, precise, quiet MagSpeed electromagnetic scrolling
-    - DARKFIELD 4000 DPI SENSOR: Darkfield 4000 DPI sensor for precise tracking on any surface, even glass (up to 4mm in thickness)
-    - COMFORTABLE DESIGN: Tactile reference for hand positioning makes it easy to stay oriented and in your flow
-    - FLOW CROSS-COMPUTER CONTROL: Supports flow cross-computer control across multiple screens. Pair up to 3 devices via Bluetooth Low Energy or Unifying USB receiver`,
-    image: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/mouse1.jpg',
-    images: [
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/mouse1.jpg',
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/mouse2.jpg',
-      'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/products/mouse3.jpg',
-    ],
-    price: 99.98,
-  
-  };
+import SendMessageItem from '../SendMessageItem';
 const ProductDetails = () => {
+    const [sellingUser, setSellingUser] = useState();
+
+    const {client} = useChatContext();
 
     const navigation = useNavigation();
     const [product, setProduct] = useState(undefined);
     const route = useRoute();
+  
     // route allows us to receive the data passed as param from navigator hook
-    console.log('route params = ', route.params);
-    console.log(route.params.id);
+    // console.log('route params = ', route.params);
+    // console.log(route.params.id);
+    const fetchSellingUser = async (product) => {
+       
+        // fetch the user who created the listing's Stream API account
+        const response = await client.queryUsers({ id: { $in: [product.userSub] } });
+        console.log("Response from user query = ", response);
+        setSellingUser(response.users[0]);
     
+    }
     const queryProduct = async() => {
         if(!route.params?.id) {
             console.warn("No id matching item");
@@ -42,7 +36,10 @@ const ProductDetails = () => {
         const prod = await DataStore.query(Product, route.params.id);
         setProduct(prod);
         console.log("Product = ", product)
+
+        fetchSellingUser(prod);
     }
+
     // query product on render and each time the id parameter changes
     useEffect(() => {
 
@@ -101,7 +98,7 @@ const ProductDetails = () => {
                         )
                         }}
                     text="Edit"/>
-                
+                <SendMessageItem userToMessage={sellingUser} />
             </ScrollView>
         </SafeAreaView>
 

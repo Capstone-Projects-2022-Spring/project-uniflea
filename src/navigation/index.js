@@ -26,7 +26,7 @@ const Navigation = () => {
             if (user) {
                 return;
             }
-            
+            // query user in database to and set image to user's image
             await client.connectUser(
                 {
                     id: currentAuthenticatedUser.attributes.sub,
@@ -79,10 +79,6 @@ const Navigation = () => {
                 {user ? (
                     <>
                         <Root.Screen name="HomeTabs" component={BottomTabNav} />
-                        {/* <Root.Screen name="Home" component={HomeScreen} />
-                        <Root.Screen name="Messages" component={MessagesScreen} />
-                        <Root.Screen name="Users" component={UsersScreen} />
-                        <Root.Screen name="Chat" component={ChatScreen} /> */}
                         
                     </>
                     

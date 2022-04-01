@@ -12,14 +12,15 @@ import { S3Image } from "aws-amplify-react-native";
 import { User } from "../../models";
 import { AntDesign } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
-
+import { useChatContext } from 'stream-chat-expo';
 const ProfilePage = () => {
 
   const navigation = useNavigation();
   const { user, setUser } = useContext(AuthContext);
-
+  const {client} = useChatContext();
     const signOut = () => {
       setUser(undefined);
+      client.disconnectUser()
       Auth.signOut();
    };
 

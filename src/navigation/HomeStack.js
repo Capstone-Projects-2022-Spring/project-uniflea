@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HeaderBackButton } from '@react-navigation/stack';
-
 import HomeScreen from '../screens/HomeScreen';
-import ProductDetails from '../components/ProductDetails';
 import { SafeAreaView, TextInput, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Colors } from '../styles/Colors';
