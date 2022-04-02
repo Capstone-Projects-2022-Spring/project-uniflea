@@ -23,8 +23,8 @@ const Review = ({ title, body, rating, username, img }) => {
                         let starName = "";
                         if (i < Math.floor(rating)) {
                             starName = "star"
-                        } else if (i < rating) {
-                            starName = "star-half-empty"
+                        //} else if (i < rating) {
+                            //starName = "star-half-empty"
                         } else { starName = "star-o" }
                         console.log("Star Name ========= ", starName);
                         return (<FontAwesome
