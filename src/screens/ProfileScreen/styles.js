@@ -64,7 +64,7 @@ const styles = ScaledSheet.create({
   },
   reportText: {
     left: scale(15),
-    fontSize: scale(14),
+    fontSize: '14@s',
     color: "white",
   },
   reportIconContainer: {
@@ -82,12 +82,12 @@ const styles = ScaledSheet.create({
     bottom: "3%",
   },
   userName: {
-    fontSize: scale(28),
+    fontSize: '24@s',
     fontWeight: "bold",
     color: "white",
   },
   name: {
-    fontSize: scale(16),
+    fontSize: '16@s',
     color: "white",
   },
   //******************************** */
@@ -166,8 +166,8 @@ const styles = ScaledSheet.create({
         height: 10,
       },
     shadowOpacity: 0.8,
-    shadowRadius: 14.78,
-    elevation: 6,
+    shadowRadius: 10,
+    elevation: 4,
   },
   row: {
     top:"10%",
@@ -177,7 +177,7 @@ const styles = ScaledSheet.create({
     alignItems: "center",
   },
   squareText: {
-    fontSize: scale(16),
+    fontSize: '16@s',
     color: "#99182e",
     fontWeight: "bold",
   },

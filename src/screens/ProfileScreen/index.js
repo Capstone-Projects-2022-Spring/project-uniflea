@@ -14,16 +14,6 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
 import { scale } from 'react-native-size-matters';
 
-import {
-  useResponsiveHeight,
-  useResponsiveWidth,
-  useResponsiveScreenHeight,
-  useResponsiveScreenWidth,
-  useDimensionsChange
-} from "react-native-responsive-dimensions";
-
-
-
 const ProfilePage = () => {
   const navigation = useNavigation();
 
@@ -89,7 +79,8 @@ const ProfilePage = () => {
     /*Setting the name of the user on the page */
   const [displayName, setDisplayName] = useState(null);
   const [name, setName] = useState(null);
-  const [memberDate, setMemberDate] = useState(null);
+  const [schoolName, setSchoolName] = useState(null);
+  const [gradYear, setSchoolyYear] = useState(null);
 
   const placeholder = async () => {
     const myUser = await Auth.currentAuthenticatedUser();
@@ -100,10 +91,14 @@ const ProfilePage = () => {
     //setting all the data for the users
     const displayName = userRecord[0].displayName;
     const name = userRecord[0].name;
-    const memberDate = userRecord[0].createdAt;
+    const schoolName = userRecord[0].university;
+    const gradYear = userRecord[0].gradYear;
     setDisplayName(displayName);
     setName(name);
-    setMemberDate(memberDate.split("-", 1).toString());
+    setSchoolName(schoolName);
+    setSchoolyYear(gradYear);
+
+    // setMemberDate(memberDate.split("-", 1).toString());
   };
 
     //for the circle buttons 
@@ -113,30 +108,15 @@ const ProfilePage = () => {
     </View>
   );
 
+  const iconPress = () => {
+    navigation.navigate("SettingsScreen");
+  };
+
   useEffect(() => {
     downloadImage();
     placeholder();
   }, []);
 
-  //setting varriable to naviate to the settings screen
-  const iconPress = () => {
-    navigation.navigate("SettingsScreen");
-  };
-  const [modalVisible, setModalVisible] = useState(false);
- 
- const windowHeight = useResponsiveHeight(100);
-  const windowWidth = useResponsiveWidth(100);
-
-  const screenHeight = useResponsiveScreenHeight(100);
-  const screenWidth = useResponsiveScreenWidth(100);
-
-  useDimensionsChange(
-    useCallback(({ window, screen }) => {
-      console.log("Updated Values ﹣ ");
-      console.log("window ﹣ ", window);
-      console.log("screen ﹣ ", screen);
-    }, [])
-    )
   //***************************************************************************************RETURN() */
   return (
     <SafeAreaView style={styles.root}>
@@ -161,25 +141,30 @@ const ProfilePage = () => {
           </View>
 
           <View style={styles.userInfoContainer}>
-            <Text style={styles.userName} screenHeight screenWidth>{displayName}</Text>
+            <Text style={styles.userName} >{displayName}</Text>
           
-          <Text style={styles.name} screenHeight screenWidth>
+          <Text style={styles.name}>
             {name}
             {": est. "}
-            {memberDate}
+            {''}
+          </Text>
+          <Text style={styles.name}>
+            {schoolName}
+            {" "}
+            {gradYear}
           </Text>
 
          
-          <Rating style={styles.rating} rated={3.5} screenHeight screenWidth
+          <Rating style={styles.rating} rated={3.5}
             totalCount={5}
             size={20}
             ratingColor={"gold"}/>
 
-            <View style={styles.reportContainer}screenHeight screenWidth>          
+            <View style={styles.reportContainer}>          
           <TouchableOpacity onPress={() => navigation.navigate("ReportScreen")}>
           <MaterialIcons style={styles.reportIconContainer} name="report" size={scale(14)} color="white" />
           
-          <Text style={styles.reportText}screenHeight screenWidth>Report User</Text>
+          <Text style={styles.reportText}>Report User</Text>
           </TouchableOpacity>
            </View>  
           </View>
@@ -195,14 +180,14 @@ const ProfilePage = () => {
           never opened.
         </Text>
 </View>
-        <View style={styles.lowerContainer} screenHeight screenWidth >
+        <View style={styles.lowerContainer} >
 
         <View style={styles.container}>
-          <View style={styles.row}screenHeight screenWidth >
+          <View style={styles.row}>
             <TouchableOpacity
               onPress={() => navigation.navigate("ReviewScreen")}
             >
-              <Circle creenHeight screenWidth text="Read Reviews" s/>
+              <Circle  text="Read Reviews" s/>
             </TouchableOpacity>
 
             <View style={styles.space} />
@@ -210,7 +195,7 @@ const ProfilePage = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("ActiveListingScreen")}
             >
-              <Circle screenHeight screenWidth text="Active Listings"  />
+              <Circle text="Active Listings"  />
             </TouchableOpacity>
           
           </View>
@@ -219,12 +204,12 @@ const ProfilePage = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("LeaveReviewScreen")}
             >
-              <Circle screenHeight screenWidt text="Leave a Review" h/>
+              <Circle text="Leave a Review" h/>
             </TouchableOpacity>
             
             <View style={styles.space} />
             <TouchableOpacity onPress={() => navigation.navigate(" ")}>
-              <Circle screenHeight screenWidth text="Message User" />
+              <Circle text="Message User" />
             </TouchableOpacity>
           </View>
         </View>
