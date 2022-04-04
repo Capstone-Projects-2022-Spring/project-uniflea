@@ -121,6 +121,10 @@ const ProfilePage = () => {
   return (
     <SafeAreaView style={styles.root}>
 
+<View style={styles.shape} />
+<View style={styles.shape2} />
+
+
       <View style={styles.topBannerContainer}> 
       <View style={styles.topBannerrRow}>
         
@@ -145,8 +149,6 @@ const ProfilePage = () => {
           
           <Text style={styles.name}>
             {name}
-            {": est. "}
-            {''}
           </Text>
           <Text style={styles.name}>
             {schoolName}
@@ -169,7 +171,7 @@ const ProfilePage = () => {
            </View>  
           </View>
         </View>
-      </View>
+      </View>  
 </View>
 
   {/* <View style={[styles.shape,styles.shape2]}/> */}
@@ -218,7 +220,11 @@ const ProfilePage = () => {
 
         </View>
         
-      
+        <View style={styles.signOutContainer}>
+        <Text onPress={signOut} style={styles.signOutText}>
+          Sign Out
+        </Text>
+      </View>
     </SafeAreaView>
   );
 };

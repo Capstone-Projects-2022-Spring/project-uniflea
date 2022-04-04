@@ -4,7 +4,7 @@ import { scale, ScaledSheet } from 'react-native-size-matters';
 const styles = ScaledSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "gray",
+    // backgroundColor: "gray",
   },
   space: {
     width: 20,
@@ -14,11 +14,13 @@ const styles = ScaledSheet.create({
   topBannerContainer: {
     width: "100%",
     height: '30%',
+    backgroundColor:'transparent',
   },
   topBannerrRow: {
     flexDirection: "row",
     height: "100%",
     width: "100%",
+    backgroundColor:'transparent',
   },
   profilePicContainer: {
     width: "45%",
@@ -47,6 +49,7 @@ const styles = ScaledSheet.create({
     flex: 1,
     justifyContent: "center",
     alignContent: "flex-start",
+    backgroundColor:'transparent',
     
   },
   SettingsPosition: {
@@ -76,6 +79,7 @@ const styles = ScaledSheet.create({
     justifyContent: "center",
   },
   userInfoContainer: {
+    paddingTop:5,
     justifyContent: "center",
     alignContent: "flex-start",
     flexWrap: "wrap",
@@ -104,14 +108,12 @@ const styles = ScaledSheet.create({
   }, 
   
   bioContainer: {
-    
+  bottom:'3%',
     width: "80%",
-    left: "10%",
-    alignItems:'center',
+    alignSelf:'center',
     justifyContent:'center',
-    padding: 5,
-    borderRadius: 15,
-    // backgroundColor: 'red',
+    padding: 1,
+ 
 
   },
   bioText: {
@@ -124,39 +126,21 @@ const styles = ScaledSheet.create({
   shape: {
     position: "absolute",
     width: "80%",
-    bottom: "60%",
-    left: "10%",
+    bottom: "57%",
     height: "10%",
-    alignContent: "center",
-    padding: 5,
-    borderRadius: 15,
-
-
-
-    // width: scale(500),
-    // height: scale(500),
-    // // right: "50@s",
-    // top: "-5@s",
-    // borderRadius: scale(500 / 2),
-    // backgroundColor: "#99182e",
-    // // opacity:.8,
+    alignSelf:'center',
+    flexDirection:'column',
+    width: scale(500),
+    height: scale(500),
+    borderRadius: scale(500 / 2),
+    backgroundColor: "#99182e",
   },
-  shape2: {
-    position: "absolute",
-    width: scale(700),
-    height: scale(700),
-    borderRadius: scale(700 / 2),
-    // backgroundColor: "#D5D8DC",
-    // opacity:.8,
-    backgroundColor: "yellow",
-  },
-
   circle: {
     borderColor: "#99182e",
-    borderWidth: 6.5,
-    width: scale(130),
-    height: scale(130),
-    borderRadius: scale(130 / 2),
+    borderWidth: 5.5,
+    width: scale(115),
+    height: scale(115),
+    borderRadius: scale(115/ 2),
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
@@ -170,8 +154,7 @@ const styles = ScaledSheet.create({
     elevation: 4,
   },
   row: {
-    top:"10%",
-    // backgroundColor:'red',
+    top:"6%",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -188,64 +171,24 @@ const styles = ScaledSheet.create({
     marginTop: scale(22),
   },
 
-
-
 buttonContainer: {
   justifyContent: "center",
   alignItems: "center",
 },
 signOutContainer: {
   flex: 1,
-  bottom: 5,
+  bottom: '1.5%',
   position: "absolute",
   width: "100%",
-  height: 20,
+  height: '5%',
 },
 signOutText: {
   width: "100%",
   textAlign: "center",
   fontWeight: "bold",
+  fontSize:'14@s',
 },
 
-  // modalView: {
-  //   // margin: 20,
-  //   backgroundColor: "white",
-  //   borderRadius: 20,
-  //   padding: 35,
-  //   alignItems: "center",
-  //   shadowColor: "#000",
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 2
-  //   },
-  //   shadowOpacity: 0.25,
-  //   shadowRadius: 4,
-  //   elevation: 5
-  // },
-  // button: {
-  //   position:'absolute',
-  //   top:'100%',
-
-  //   borderRadius: 5,
-  //   padding: 10,
-  //   elevation: 2,
-  //   backgroundColor:'green'
-  // },
-  // buttonOpen: {
-  //   backgroundColor: "pink",
-  // },
-  // buttonClose: {
-  //   backgroundColor: "#2196F3",
-  // },
-  // textStyle: {
-  //   color: "white",
-  //   fontWeight: "bold",
-  //   textAlign: "center"
-  // },
-  // modalText: {
-  //   marginBottom: 15,
-  //   textAlign: "center"
-  // }
 });
 
 
