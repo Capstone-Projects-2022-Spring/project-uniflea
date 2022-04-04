@@ -189,9 +189,8 @@ const ProfilePage = () => {
 
   {/* <View style={[styles.shape,styles.shape2]}/> */}
 
-
-<View style={styles.bioContainer} screenHeight screenWidth>
-          <Text style={styles.bioText} screenHeight screenWidth>
+<View style={styles.bioContainer}>
+          <Text style={styles.bioText}>
           A senior computer science looking to sell old textbooks that were
           never opened.
         </Text>

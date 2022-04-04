@@ -13,8 +13,7 @@ const styles = ScaledSheet.create({
 
   topBannerContainer: {
     width: "100%",
-    aspectRatio: 1.45 / 1,
-    // backgroundColor:'green'
+    height: '30%',
   },
   topBannerrRow: {
     flexDirection: "row",
@@ -56,6 +55,7 @@ const styles = ScaledSheet.create({
     top: "1%",
     padding: 4,
     justifyContent: "center",
+  
   },
   reportContainer: {
     width: scale(100),
@@ -104,19 +104,21 @@ const styles = ScaledSheet.create({
   }, 
   
   bioContainer: {
-    position: "absolute",
+    
     width: "80%",
-    bottom: "60%",
     left: "10%",
-    height: "10%",
-    alignContent: "center",
+    alignItems:'center',
+    justifyContent:'center',
     padding: 5,
     borderRadius: 15,
+    // backgroundColor: 'red',
+
   },
   bioText: {
-    fontSize: 18,
+    fontSize: "16@s",
     color: "white",
     textAlign: "center",
+  
   },
 
   shape: {
@@ -175,7 +177,7 @@ const styles = ScaledSheet.create({
     alignItems: "center",
   },
   squareText: {
-    fontSize: scale(18),
+    fontSize: scale(16),
     color: "#99182e",
     fontWeight: "bold",
   },
