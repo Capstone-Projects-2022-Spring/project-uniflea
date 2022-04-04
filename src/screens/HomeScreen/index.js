@@ -18,7 +18,7 @@ const HomeScreen = ({ searchValue }) => {
   var [sortedProducts, setSortedProducts] = useState([]);
   const { user, setUser } = useContext(AuthContext);
   console.log(searchValue);
-  console.log("user id homescreen= ", user);
+  
   const signOut = () => {
     setUser(undefined);
     client.disconnectUser();
@@ -79,7 +79,7 @@ const HomeScreen = ({ searchValue }) => {
       console.warn("successfully stopped, started");
       const products = await DataStore.query(Product);
 
-      console.log("Products in useffect ========= ", products);
+   
     } catch (e) {
       Alert.alert("oops", e.message);
     }

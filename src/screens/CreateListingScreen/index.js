@@ -80,7 +80,6 @@ const CreateListingScreen = () => {
             title: titleOfListing,
             description: descriptionOfListing,
             price: Number(priceOfListing),
-            category: catSelector[0],
             image: image, // when implementing multiple images, maybe 5 max, reference 1 image is images[0]
             images: [image],
             university: user.attributes["custom:University"],
