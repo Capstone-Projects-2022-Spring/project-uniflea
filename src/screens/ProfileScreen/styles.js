@@ -1,10 +1,8 @@
-import { container } from 'aws-amplify';
-import { scale, ScaledSheet } from 'react-native-size-matters';
+import { scale, ScaledSheet } from "react-native-size-matters";
 
 const styles = ScaledSheet.create({
   root: {
     flex: 1,
-    // backgroundColor: "gray",
   },
   space: {
     width: 20,
@@ -13,20 +11,19 @@ const styles = ScaledSheet.create({
 
   topBannerContainer: {
     width: "100%",
-    height: '30%',
-    backgroundColor:'transparent',
+    height: "30%",
+    backgroundColor: "transparent",
   },
   topBannerrRow: {
     flexDirection: "row",
     height: "100%",
     width: "100%",
-    backgroundColor:'transparent',
+    backgroundColor: "transparent",
   },
   profilePicContainer: {
     width: "45%",
     justifyContent: "center",
     padding: 5,
-  
   },
   profileButton: {
     width: scale(120),
@@ -49,8 +46,7 @@ const styles = ScaledSheet.create({
     flex: 1,
     justifyContent: "center",
     alignContent: "flex-start",
-    backgroundColor:'transparent',
-    
+    backgroundColor: "transparent",
   },
   SettingsPosition: {
     position: "absolute",
@@ -58,7 +54,6 @@ const styles = ScaledSheet.create({
     top: "1%",
     padding: 4,
     justifyContent: "center",
-  
   },
   reportContainer: {
     width: scale(100),
@@ -67,7 +62,7 @@ const styles = ScaledSheet.create({
   },
   reportText: {
     left: scale(15),
-    fontSize: '14@s',
+    fontSize: "14@s",
     color: "white",
   },
   reportIconContainer: {
@@ -79,57 +74,49 @@ const styles = ScaledSheet.create({
     justifyContent: "center",
   },
   userInfoContainer: {
-    paddingTop:5,
+    paddingTop: 5,
     justifyContent: "center",
     alignContent: "flex-start",
     flexWrap: "wrap",
     bottom: "3%",
   },
   userName: {
-    fontSize: '24@s',
+    fontSize: "24@s",
     fontWeight: "bold",
     color: "white",
   },
   name: {
-    fontSize: '16@s',
+    fontSize: "16@s",
     color: "white",
   },
   //******************************** */
-   lowerContainer: {
+  lowerContainer: {
     flex: 1,
     width: "100%",
-    height:'100%',
+    height: "100%",
     top: "41%",
     alignContent: "center",
     position: "absolute",
-    // backgroundColor:'pink'
-
-    //  backgroundColor: 'transparent',
-  }, 
-  
+  },
   bioContainer: {
-  bottom:'3%',
+    bottom: "3%",
     width: "80%",
-    alignSelf:'center',
-    justifyContent:'center',
+    alignSelf: "center",
+    justifyContent: "center",
     padding: 1,
- 
-
   },
   bioText: {
-    fontSize: "16@s",
+    fontSize: "14@s",
     color: "white",
     textAlign: "center",
-  
   },
-
   shape: {
     position: "absolute",
     width: "80%",
     bottom: "57%",
     height: "10%",
-    alignSelf:'center',
-    flexDirection:'column',
+    alignSelf: "center",
+    flexDirection: "column",
     width: scale(500),
     height: scale(500),
     borderRadius: scale(500 / 2),
@@ -140,27 +127,27 @@ const styles = ScaledSheet.create({
     borderWidth: 5.5,
     width: scale(115),
     height: scale(115),
-    borderRadius: scale(115/ 2),
+    borderRadius: scale(115 / 2),
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 10,
-      },
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
     shadowOpacity: 0.8,
     shadowRadius: 10,
     elevation: 4,
   },
   row: {
-    top:"6%",
+    top: "6%",
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
   squareText: {
-    fontSize: '16@s',
+    fontSize: "14@s",
     color: "#99182e",
     fontWeight: "bold",
   },
@@ -171,28 +158,23 @@ const styles = ScaledSheet.create({
     marginTop: scale(22),
   },
 
-buttonContainer: {
-  justifyContent: "center",
-  alignItems: "center",
-},
-signOutContainer: {
-  flex: 1,
-  bottom: '1.5%',
-  position: "absolute",
-  width: "100%",
-  height: '5%',
-},
-signOutText: {
-  width: "100%",
-  textAlign: "center",
-  fontWeight: "bold",
-  fontSize:'14@s',
-},
-
+  buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signOutContainer: {
+    flex: 1,
+    bottom: "1.5%",
+    position: "absolute",
+    width: "100%",
+    height: "5%",
+  },
+  signOutText: {
+    width: "100%",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: "14@s",
+  },
 });
 
-
-
-
 export default styles;
-

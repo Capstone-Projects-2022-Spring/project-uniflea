@@ -1,7 +1,15 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
 import { Storage, Auth, DataStore } from "aws-amplify";
-import { Text, SafeAreaView, TouchableOpacity, View, Modal, Pressable, Alert, StyleSheet} from "react-native";
-import ProfileScreenButton from "../../components/ProfileScreenButton";
+import {
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+  Modal,
+  Pressable,
+  Alert,
+  StyleSheet,
+} from "react-native";
 import styles from "./styles";
 import { Rating } from "react-native-rating-element";
 import { useNavigation } from "@react-navigation/native";
@@ -12,12 +20,12 @@ import { S3Image } from "aws-amplify-react-native";
 import { User } from "../../models";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
-import { scale } from 'react-native-size-matters';
+import { scale } from "react-native-size-matters";
 
 const ProfilePage = () => {
   const navigation = useNavigation();
 
-  //to for signing out 
+  //to for signing out
   const { user, setUser } = useContext(AuthContext);
   const signOut = () => {
     setUser(undefined);
@@ -74,9 +82,8 @@ const ProfilePage = () => {
 
     setImage(uploadedImage.key);
   };
-   
 
-    /*Setting the name of the user on the page */
+  /*Setting the name of the user on the page */
   const [displayName, setDisplayName] = useState(null);
   const [name, setName] = useState(null);
   const [schoolName, setSchoolName] = useState(null);
@@ -101,7 +108,7 @@ const ProfilePage = () => {
     // setMemberDate(memberDate.split("-", 1).toString());
   };
 
-    //for the circle buttons 
+  //for the circle buttons
   const Circle = ({ text }) => (
     <View style={styles.circle}>
       <Text style={styles.squareText}>{text}</Text>
@@ -120,14 +127,10 @@ const ProfilePage = () => {
   //***************************************************************************************RETURN() */
   return (
     <SafeAreaView style={styles.root}>
+      <View style={styles.shape} />
 
-<View style={styles.shape} />
-<View style={styles.shape2} />
-
-
-      <View style={styles.topBannerContainer}> 
-      <View style={styles.topBannerrRow}>
-        
+      <View style={styles.topBannerContainer}>
+        <View style={styles.topBannerrRow}>
           {/*The profile image */}
           <View style={styles.profilePicContainer}>
             <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
@@ -135,61 +138,62 @@ const ProfilePage = () => {
             </TouchableOpacity>
           </View>
 
-        <View style={styles.rightInfoContainer}>
+          <View style={styles.rightInfoContainer}>
+            {/* The onpress settings icon */}
+            <View style={styles.SettingsPosition}>
+              <TouchableOpacity onPress={iconPress}>
+                <AntDesign name="setting" size={scale(30)} color="white" />
+              </TouchableOpacity>
+            </View>
 
-          {/* The onpress settings icon */}
-          <View style={styles.SettingsPosition}>
-            <TouchableOpacity onPress={iconPress}>
-              <AntDesign name="setting" size={scale(30)} color="white" />
-            </TouchableOpacity>
-          </View>
+            <View style={styles.userInfoContainer}>
+              <Text style={styles.userName}>{displayName}</Text>
 
-          <View style={styles.userInfoContainer}>
-            <Text style={styles.userName} >{displayName}</Text>
-          
-          <Text style={styles.name}>
-            {name}
-          </Text>
-          <Text style={styles.name}>
-            {schoolName}
-            {" "}
-            {gradYear}
-          </Text>
+              <Text style={styles.name}>{name}</Text>
+              <Text style={styles.name}>
+                {schoolName} {gradYear}
+              </Text>
 
-         
-          <Rating style={styles.rating} rated={3.5}
-            totalCount={5}
-            size={20}
-            ratingColor={"gold"}/>
+              <Rating
+                style={styles.rating}
+                rated={3.5}
+                totalCount={5}
+                size={20}
+                ratingColor={"gold"}
+              />
 
-            <View style={styles.reportContainer}>          
-          <TouchableOpacity onPress={() => navigation.navigate("ReportScreen")}>
-          <MaterialIcons style={styles.reportIconContainer} name="report" size={scale(14)} color="white" />
-          
-          <Text style={styles.reportText}>Report User</Text>
-          </TouchableOpacity>
-           </View>  
+              <View style={styles.reportContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("ReportScreen")}
+                >
+                  <MaterialIcons
+                    style={styles.reportIconContainer}
+                    name="report"
+                    size={scale(14)}
+                    color="white"
+                  />
+
+                  <Text style={styles.reportText}>Report User</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </View>
-      </View>  
-</View>
+      </View>
 
-  {/* <View style={[styles.shape,styles.shape2]}/> */}
-
-<View style={styles.bioContainer}>
-          <Text style={styles.bioText}>
+      <View style={styles.bioContainer}>
+        <Text style={styles.bioText}>
           A senior computer science looking to sell old textbooks that were
           never opened.
         </Text>
-</View>
-        <View style={styles.lowerContainer} >
-
+      </View>
+      <View style={styles.lowerContainer}>
         <View style={styles.container}>
           <View style={styles.row}>
             <TouchableOpacity
               onPress={() => navigation.navigate("ReviewScreen")}
             >
-              <Circle  text="Read Reviews" s/>
+              <Circle text="Read Reviews" s />
             </TouchableOpacity>
 
             <View style={styles.space} />
@@ -197,30 +201,26 @@ const ProfilePage = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("ActiveListingScreen")}
             >
-              <Circle text="Active Listings"  />
+              <Circle text="Active Listings" />
             </TouchableOpacity>
-          
           </View>
           <View style={styles.space} />
           <View style={styles.row}>
             <TouchableOpacity
               onPress={() => navigation.navigate("LeaveReviewScreen")}
             >
-              <Circle text="Leave a Review" h/>
+              <Circle text="Leave a Review" h />
             </TouchableOpacity>
-            
+
             <View style={styles.space} />
             <TouchableOpacity onPress={() => navigation.navigate(" ")}>
               <Circle text="Message User" />
             </TouchableOpacity>
           </View>
         </View>
+      </View>
 
-
-
-        </View>
-        
-        <View style={styles.signOutContainer}>
+      <View style={styles.signOutContainer}>
         <Text onPress={signOut} style={styles.signOutText}>
           Sign Out
         </Text>
