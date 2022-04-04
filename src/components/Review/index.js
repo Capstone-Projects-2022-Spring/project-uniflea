@@ -60,8 +60,8 @@ const ReviewItem = ({ title, body, rating, reviewerSub }) => {
                         let starName = "";
                         if (i < Math.floor(rating)) {
                             starName = "star"
-                        } else if (i < rating) {
-                            starName = "star-half-empty"
+                        //} else if (i < rating) {
+                            //starName = "star-half-empty"
                         } else { starName = "star-o" }
                         return (<FontAwesome
                             style={styles.star}

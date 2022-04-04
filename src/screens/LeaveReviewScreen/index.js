@@ -17,15 +17,10 @@ const LeaveReviewScreen = () => {
                 onValueChange={(itemValue, itemIndex) =>
                     setRating(itemValue)
                 }>
-                <Picker.Item label="0.5 Stars" value={0.5} />
                 <Picker.Item label="1.0 Stars" value={1.0} />
-                <Picker.Item label="1.5 Stars" value={1.5} />
                 <Picker.Item label="2.0 Stars" value={2.0} />
-                <Picker.Item label="2.5 Stars" value={2.5} />
                 <Picker.Item label="3.0 Stars" value={3.0} />
-                <Picker.Item label="3.5 Stars" value={3.5} />
                 <Picker.Item label="4.0 Stars" value={4.0} />
-                <Picker.Item label="4.5 Stars" value={4.5} />
                 <Picker.Item label="5.0 Stars" value={5.0} />
             </Picker>
 
