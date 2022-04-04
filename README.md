@@ -106,10 +106,10 @@ Option One (QR Code Scan): Scan the QR Code below.
 Upon scanning, you may be prompted to open the UniFlea application in Expo. 
 Otherwise, it will automatically do so, and UniFlea will be running on your mobile device.
 
-![image](https://user-images.githubusercontent.com/61302705/158296888-72c3d1e2-a615-4d2a-a762-3aa28ba774e1.png)
+![image](https://user-images.githubusercontent.com/61302705/160692420-d6a976eb-e8a6-484a-8db2-7d438c2832aa.png)
 
 Option Two (Link): Copy and paste the following link into your browser and hit enter: 
-exp://exp.host/@unifleatest/UniFlea?release-channel=default. 
+exp://exp.host/@unifleatest/UniFlea?release-channel=default
 Upon hitting enter, you may be prompted to open the UniFlea application in Expo. 
 Otherwise, it will automatically do so, and UniFlea will be running on your mobile device.
 
@@ -149,7 +149,7 @@ Users can test the release in the following ways
   3. Add the title of the listing
   4. Add a short description about the listing
   5. Set a price for the listing
-  6. Press the create listing button
+  6. Press the publish listing button
   7. Go back to the home page where the listing will be shown
 
 * Delete a listing
@@ -159,7 +159,7 @@ Users can test the release in the following ways
   4. Click delete listing
   5. Go back to active listings and see that the listing has been deleted
 
-[Link to source code for milestone 2](src)
+[Link to source code for milestone](src)
 
 ## Contributors
 Dylan Dunda, Josh Hageman, Tuan Lam, Adam Lang, Kasie Madden, TJ Nguyen, Sameera Rachakonda

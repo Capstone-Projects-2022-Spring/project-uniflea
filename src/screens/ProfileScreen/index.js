@@ -21,9 +21,21 @@ import { User } from "../../models";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
 import { scale } from "react-native-size-matters";
+import { useChatContext } from 'stream-chat-expo';
+
 
 const ProfilePage = () => {
+
   const navigation = useNavigation();
+  
+  const { user, setUser } = useContext(AuthContext);
+  const {client} = useChatContext();
+    const signOut = () => {
+      setUser(undefined);
+      client.disconnectUser()
+      Auth.signOut();
+   };
+
 
   //to for signing out
   const { user, setUser } = useContext(AuthContext);
@@ -66,8 +78,8 @@ const ProfilePage = () => {
     //uploads to s3
     const response = await fetch(result.uri);
     const blob = await response.blob();
-    const uploadedImage = await Storage.put(myuuid, blob);
-
+    const uploadedImage = await Storage.put(myuuid, blob, {contentType: "image/png"});
+    console.log("UPLOADED YOUR IMAGE");
     //upload to amplify
     const myUser = await Auth.currentAuthenticatedUser();
     const original = await DataStore.query(User, (s) =>

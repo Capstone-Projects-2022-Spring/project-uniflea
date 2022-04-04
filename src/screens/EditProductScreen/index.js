@@ -9,26 +9,15 @@ import CustomButton from "../../components/CustomButton";
 
 const EditProductScreen = ({route, navigation}) => {
 
-    // const{passedID, passedTitle, passedPrice, passedDescription} = route.params;
     const{id, title, price, description} = route.params;
    
-    // console.log("edit screen: " + passedID)
-    // console.log("edit screen: " + passedTitle)
-    // console.log("edit screen: " + passedPrice)
-    // console.log("edit screen: " + passedDescription)
-
     console.log("edit screen: " + id)
     console.log("edit screen: " + title)
     console.log("edit screen: " + price)
     console.log("edit screen: " + description)
 
-
-    const [image, setImage] = useState(null);
-    const[setID] = useState('');
-    const[setTitle] = useState('');
-    const[setPrice] = useState('');
-    const[setDescription] = useState('');
-
+    const[image, setImage] = useState(null);
+    
     const downloadImage = async()  => {
  
         const product = await DataStore.query(Product, s => s.id("eq", id));
@@ -70,9 +59,22 @@ const EditProductScreen = ({route, navigation}) => {
         setImage(uploadedImage.key);
     };
 
+    const saveChanges = async() => {
+        const product = await DataStore.query(Product, s => s.id("eq", id));
+        await DataStore.save(
+            Product.copyOf(product[0], updated => {
+                updated.title = title
+                updated.price = parseFloat(price)
+                updated.description = description
+            })
+        )
+        console.log("++++ changes saved ++++");
+    };
+    
+    useEffect( () => {downloadImage()}, []);
+
     return (
         <SafeAreaView style={styles.container}>
-
 
             {/* Item image */}
             <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
@@ -84,16 +86,20 @@ const EditProductScreen = ({route, navigation}) => {
                 textAlignVertical='top'
                 style={styles.textBox}
                 placeholder={title}
-            // defaultValue = {passedTitle}
-            // onChangeText = {title => setTitle(title)} 
+                defaultValue = {title}
+                onChangeText = { newTitle =>navigation.setParams({
+                    title: newTitle
+                })} 
             />
 
             {/*Price */}
             <TextInput
                 styles={styles.textBox}
                 placeholder={JSON.stringify(price)}
-            // defaultValue = {passedPrice}
-            // onChangeText={price => setPrice(price)}                      
+                defaultValue = {price}
+                onChangeText={ newPrice =>navigation.setParams({
+                    price: newPrice
+                })}                      
             />
 
             {/* Description */}
@@ -101,12 +107,14 @@ const EditProductScreen = ({route, navigation}) => {
                 textAlignVertical='top'
                 style={styles.textBox}
                 placeholder={description}
-                // value= {passedDescription}
-                // onChangeText={description => setDescription(description)}
+                value= {description}
+                onChangeText={newDescription => navigation.setParams({
+                    description: newDescription
+                })}
                 multiline={true}
             />
 
-            <CustomButton onPress={console.log} text="Save Changes" />
+            <CustomButton onPress={saveChanges} text="Save Changes" />
 
 
         </SafeAreaView>

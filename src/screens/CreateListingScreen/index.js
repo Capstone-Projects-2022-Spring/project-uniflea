@@ -1,17 +1,7 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState, useRef} from 'react';
 import styles from './styles'
-import {
-    SafeAreaView,
-    StyleSheet,
-    TextInput,
-    Pressable,
-    Image,
-    Text,
-    View,
-    TouchableHighlight,
-    TouchableOpacity,
-    Alert
-} from 'react-native';
+import {SafeAreaView, StyleSheet, TextInput, Pressable, Image, ScrollView,
+    Text, View, TouchableHighlight, TouchableOpacity, Picker, Alert} from 'react-native';
 import CustomButton from "../../components/CustomButton";
 import * as ImagePicker from 'expo-image-picker';
 import {useNavigation} from "@react-navigation/native";
@@ -20,17 +10,32 @@ import {SavedProduct, User, Product} from "../../models";
 import AuthContext from "../../contexts/Authentication";
 import {v4 as uuidv4} from 'uuid';
 import {S3Image} from 'aws-amplify-react-native';
-
+import CategorySelect from '../../components/CategorySelect';
+import {UIImagePickerPresentationStyle} from "expo-image-picker";
+import {useForm} from "react-hook-form";
 
 const CreateListingScreen = () => {
     const navigation = useNavigation();
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+        watch
+    } = useForm();
     const {user} = useContext(AuthContext);
     const [titleOfListing, setTitleOfListing] = React.useState(null);
     const [descriptionOfListing, setDescriptionOfListing] = React.useState(null);
     const [priceOfListing, setPriceOfListing] = React.useState(null);
-    const [notesOfListing, setNotesOfListing] = React.useState(null); // make another variable for each field for placeholder and setter
     const [image, setImage] = React.useState('../../../assets/camera.png');
-    // const [percentage, setPercentage] = useState(0);
+    const [selectedCategory, setSelectedCategory] = React.useState(null);
+    const CATEGORIES = [
+        {id: 'Books', name: 'Books'},
+        {id: 'Supplies & Equipment', name: 'Supplies & Equipment'},
+        {id: 'Electronics', name: 'Electronics'},
+        {id: 'Clothes', name: 'Clothes'},
+        {id: 'Handmade', name: 'Handmade'},
+        {id: 'Service', name: 'Service'},
+    ];
 
     const pickImage = async () => {
         let myuuid = uuidv4();
@@ -51,7 +56,6 @@ const CreateListingScreen = () => {
         const uploadedImage = await Storage.put(myuuid, blob);
         setImage(uploadedImage.key);
         console.warn("image uploaded gang=====", uploadedImage.key);
-
     };
 
     // const saveListingAsDraft = async() => {
@@ -76,7 +80,6 @@ const CreateListingScreen = () => {
             title: titleOfListing,
             description: descriptionOfListing,
             price: Number(priceOfListing),
-            // category: [category],
             image: image, // when implementing multiple images, maybe 5 max, reference 1 image is images[0]
             images: [image],
             university: user.attributes["custom:University"],
@@ -89,54 +92,44 @@ const CreateListingScreen = () => {
     }
 
     return (
-        <SafeAreaView style = {styles.container}>
-            {/*<Text style = {styles.centerTitle}>Create New Listing*/}
-            {/*</Text>*/}
-            {/*<Pressable onPress={console.log("You tapped the camera icon")}>*/}
-            {/*    <Image source={require('../../../assets/camera.png')}*/}
-            {/*           style={styles.cameraFrame}*/}
-            {/*    />*/}
-            {/*</Pressable>*/}
-            <TouchableOpacity onPress={pickImage}>
-                <S3Image style={styles.cameraFrame} imgKey={image} />
-            </TouchableOpacity>
-            <TextInput
-                style={styles.input}
-                placeholder="Title of Listing"
-                onChangeText = {newText => setTitleOfListing(newText)}
-                defaultValue={titleOfListing}
-            />
-            <TextInput
-                style={styles.input2}
-                placeholder="Description of Listing"
-                onChangeText = {newText => setDescriptionOfListing(newText)}
-                defaultValue={descriptionOfListing}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="($) Price of Listing"
-                onChangeText = {newText => setPriceOfListing(newText)}
-                defaultValue={priceOfListing}
-            />
-            {/*<TextInput*/}
-            {/*    style={styles.input}*/}
-            {/*    placeholder="Notes of Listing"*/}
-            {/*    onChangeText = {newText => setNotesOfListing(newText)}*/}
-            {/*    defaultValue={notesOfListing}*/}
-            {/*/>*/}
-
-            {/*<CustomButton onPress= {saveListingAsDraft} text  = "Save Listing as Draft"/>*/}
-            {/*<View style={styles.space}/>*/}
-            <CustomButton onPress= {publishListing} text  = "Publish Listing"/>
-            {/*<View style={styles.space}/>*/}
-            {/*<Pressable onPress={console.log("You tried to save listing as a draft")}>*/}
-            {/*    <Text style = {styles.draftSave}>Save Listing as Draft</Text>*/}
-            {/*</Pressable>*/}
-            {/*<Pressable onPress={console.log("You tried to publish listing")}>*/}
-            {/*    <Text style = {styles.draftSave}>Publish Listing</Text>*/}
-            {/*</Pressable>*/}
-
-        </SafeAreaView>
+        <ScrollView>
+            <View style = {styles.container}>
+                <TouchableOpacity onPress={pickImage}>
+                    <S3Image style={styles.cameraFrame} imgKey={image} />
+                </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Title of Listing"
+                    onChangeText = {newText => setTitleOfListing(newText)}
+                    defaultValue={titleOfListing}
+                />
+            </View>
+            <View style = {styles.container2}>
+                <CategorySelect
+                    control={control}
+                    items={CATEGORIES}
+                    name="catSelector"
+                    rules={{ required: 'Must select a category' }}
+                    itemToSelect='Category'
+                />
+            </View>
+            <View style = {styles.container}>
+                <TextInput
+                    style={styles.input2}
+                    placeholder="Description of Listing"
+                    multiline = {true}
+                    onChangeText = {newText => setDescriptionOfListing(newText)}
+                    defaultValue={descriptionOfListing}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="($) Price of Listing"
+                    onChangeText = {newText => setPriceOfListing(newText)}
+                    defaultValue={priceOfListing}
+                />
+                <CustomButton onPress= {publishListing} text  = "Publish Listing"/>
+            </View>
+        </ScrollView>
     );
 };
 

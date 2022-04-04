@@ -6,7 +6,7 @@ import { DataStore } from "aws-amplify";
 import { Product } from "../../models";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { FontAwesome, Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
-
+import { S3Image } from "aws-amplify-react-native/dist/Storage";
 const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
   const navigation = useNavigation();
   const onPress = () => {
@@ -16,7 +16,7 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
 
   const deleteItemById = async (id) => {
     const todelete = await DataStore.query(Product, id);
-    console.log("Item to delete =", todelete);
+    // console.log("Item to delete =", todelete);
     if (todelete.length === 0) {
       console.warn("couldn't find item to delete");
       return;
@@ -35,7 +35,7 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
       
         <View style={styles.imageContainer}>
            <Pressable onPress={onPress} >  
-          <Image style={styles.image} source={{ uri: image }} />
+          <S3Image style={styles.image} imgKey={ image }/>
          </Pressable>
         </View>
        

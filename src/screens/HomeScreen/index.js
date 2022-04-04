@@ -9,12 +9,15 @@ import AuthContext from "../../contexts/Authentication";
 import { useChatContext } from "stream-chat-expo";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import DropDownPicker from "react-native-dropdown-picker";
+import { ConsoleLogger } from "@aws-amplify/core";
 
 const HomeScreen = ({ searchValue }) => {
   const { client } = useChatContext();
   const [products, setProducts] = useState([]);
   var [sortedProducts, setSortedProducts] = useState([]);
   const { user, setUser } = useContext(AuthContext);
+  console.log(searchValue);
   
   const signOut = () => {
     setUser(undefined);
@@ -38,26 +41,28 @@ const HomeScreen = ({ searchValue }) => {
         console.log("No sort required");
         //No need to sort
         setSortedProducts(products);
-        applyCategory(category);
         return;
 
-      case "price":
-        console.log("Sorted by price");
+      case "priceLow":
+        console.log("Sorted by price: low to high");
         //sort by price
         sortedProducts.sort((a, b) => (a.price > b.price ? 1 : -1));
-        //console.log("Sorted products after sort:")
-        //console.log(sortedProducts);
         return;
+
+      
+      case "priceHigh":
+        console.log("Sorted by price: high to low");
+        //sort by price
+        sortedProducts.sort((a, b) => (a.price < b.price ? 1 : -1));
+        return;  
 
       case 'dateNewest':
         console.log("Sorted by Date: Newest");
-        //sort by price
         sortedProducts.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
         return;
         
       case 'dateOldest':
         console.log("Sorted by Date: Oldest");
-        //sort by price
         sortedProducts.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
         return;  
 
@@ -67,39 +72,74 @@ const HomeScreen = ({ searchValue }) => {
     }
   };
 
-  var [category, setCategory] = useState(null);
-  const [categoryText, setCategoryText] = useState(
-    "CURRENT SELECTED CATEGORY: NONE"
-  );
-  const applyCategory = (category) => {
-    setCategory(category);
-    if (category !== null){
-      setCategoryText("CURRENT SELECTED CATEGORY: " + category);
-      DataStore.query(Product, c => c.category("contains", category)).then(setSortedProducts);
-    } else {
-      setCategoryText("CURRENT SELECTED CATEGORY: NONE");
-      DataStore.query(Product).then(setSortedProducts);
-    }
-  };
   const resetDatastore = async () => {
     try {
       await DataStore.stop();
       await DataStore.start();
       console.warn("successfully stopped, started");
-  
+      const products = await DataStore.query(Product);
+
+   
     } catch (e) {
       Alert.alert("oops", e.message);
     }
   };
+
   const fetchProducts = () => {
-    if (category !== null) {
+    if (categories.length > 0) {
       DataStore.query(Product).then(setProducts);
-      DataStore.query(Product, (c) => c.category("contains", category)).then(
-        setSortedProducts
-      );
+      // setSortedProducts of categories
+      DataStore.query(Product, c => c.category("IN", categories)).then(setSortedProducts);
     } else {
+      console.log("Categories is null");
       DataStore.query(Product).then(setProducts);
-      console.log("products ============== ", products);
+      //console.log("products ============== ", products);
+      DataStore.query(Product).then(setSortedProducts);
+    }
+  }
+
+
+  useEffect(() => {
+    console.log("Running useEffect");
+    resetDatastore();
+    if(categories.length>0){
+      console.log("Categories is NOT null");
+      console.log("Categories: " + categories);
+      DataStore.query(Product).then(setProducts);
+      // setSortedProducts of categories
+      DataStore.query(Product, c => c.category("contains", categories)).then(setSortedProducts);
+    } else {
+      console.log("Categories is null");
+      DataStore.query(Product).then(setProducts);
+      //console.log("products ============== ", products);
+      DataStore.query(Product).then(setSortedProducts);
+    }
+
+  }, [categories]);
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState([]);
+  const [items, setItems] = useState([
+    {label: 'Books', value: 'book'},
+    {label: 'Equipment', value: 'equipment'}
+  ]);
+  var [categories, setCategories] = useState([])
+  const applyCategories = (value) => {
+    console.log("value in applyCategories: " + value);
+    categories=value;
+    console.log("Categories in applyCategories: " + categories);
+
+    resetDatastore();
+    if(categories.length>0){
+      console.log("Categories is NOT null");
+      console.log("Categories: " + categories);
+      DataStore.query(Product).then(setProducts);
+      // setSortedProducts of categories
+      DataStore.query(Product, c => c.category("IN", categories)).then(setSortedProducts);
+    } else {
+      console.log("Categories is null");
+      DataStore.query(Product).then(setProducts);
+      //console.log("products ============== ", products);
       DataStore.query(Product).then(setSortedProducts);
     }
   }
@@ -154,67 +194,34 @@ const HomeScreen = ({ searchValue }) => {
               }
             >
               <Picker.Item label ="None" value="none"/>
-              <Picker.Item label ="Price" value="price"/>
+              <Picker.Item label ="Price: Low to High" value="priceLow"/>
+              <Picker.Item label ="Price: High to Low" value="priceHigh"/>
               <Picker.Item label ="Date: Newest" value="dateNewest"/>
               <Picker.Item label ="Date: Oldest" value="dateOldest"/>
 
           </Picker>
-          </View>
 
-          <View style={{ width: "100%", height: 15 }}>
-            <Text
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              {categoryText}
-            </Text>
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            multiple={true}
+            min={0}
+            max={5}
+            onChangeValue={(value) => {
+              // categories = value;
+              var [temp] = value;
+              console.log("temp: " + temp);
+              applyCategories(value);
+              console.log("value: " + value);
+              console.log("Categories: " + categories);
+            }}
+          />
 
-            <Text
-              onPress={() => applyCategory("a")}
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              Filter by Category A
-            </Text>
 
-            <Text
-              onPress={() => applyCategory("b")}
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              Filter by Category B
-            </Text>
-
-            <Text
-              onPress={() => applyCategory("c")}
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              Filter by Category C
-            </Text>
-
-            <Text
-              onPress={() => applyCategory(null)}
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              Clear Category
-            </Text>
           </View>
         </View>
       </Modal>

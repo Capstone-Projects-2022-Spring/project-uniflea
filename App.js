@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import CreateListingScreen from './src/screens/CreateListingScreen'
+import { StyleSheet, SafeAreaView, StatusBar, AppRegistry } from 'react-native';
+
 import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 
@@ -33,7 +33,7 @@ export default function App() {
     */
       
     // stream only allows one client connected at a time. On dismount, disconnect user
-    console.log(client);
+    // console.log(client);
     return () => client.disconnectUser();
   }, []);
 

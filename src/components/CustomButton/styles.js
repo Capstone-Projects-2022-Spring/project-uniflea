@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.buttonbackgroundPrimary,
         height: 40,
         width: 300,
-        borderRadius: 20,
-        borderWidth: 1.5,
+        borderRadius: 5,
+        borderWidth: 1,
         borderColor: Colors.buttonBorderPrimary,
         margin: 10,
 
