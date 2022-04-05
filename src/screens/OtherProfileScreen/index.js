@@ -91,6 +91,7 @@ const OtherProfilePage = () => {
   const [name, setName] = useState(null);
   const [schoolName, setSchoolName] = useState(null);
   const [gradYear, setSchoolyYear] = useState(null);
+  const [bio, setBio] = useState(null);
 
   const placeholder = async () => {
     const myUser = await Auth.currentAuthenticatedUser();
@@ -103,10 +104,12 @@ const OtherProfilePage = () => {
     const name = userRecord[0].name;
     const schoolName = userRecord[0].university;
     const gradYear = userRecord[0].gradYear;
+    const bio = userRecord[0].userBio;
     setDisplayName(displayName);
     setName(name);
     setSchoolName(schoolName);
     setSchoolyYear(gradYear);
+    setBio(bio);
 
     // setMemberDate(memberDate.split("-", 1).toString());
   };
@@ -181,8 +184,7 @@ const OtherProfilePage = () => {
 
       <View style={styles.bioContainer}>
         <Text style={styles.bioText}>
-          A senior computer science looking to sell old textbooks that were
-          never opened.
+          {bio}
         </Text>
       </View>
       <View style={styles.lowerContainer}>
