@@ -1,4 +1,6 @@
 import { scale, ScaledSheet } from "react-native-size-matters";
+import { Dimensions } from "react-native";
+const { width } = Dimensions.get("window");
 
 const styles = ScaledSheet.create({
   root: {
@@ -12,6 +14,7 @@ const styles = ScaledSheet.create({
   topBannerContainer: {
     width: "100%",
     height: "30%",
+    bottom:'2%',
     backgroundColor: "transparent",
   },
   topBannerrRow: {
@@ -57,21 +60,26 @@ const styles = ScaledSheet.create({
   },
   reportContainer: {
     width: scale(100),
+    height:scale(20),
     flexDirection: "row",
     alignItems: "center",
+    // backgroundColor:'green',
   },
   reportText: {
     left: scale(15),
     fontSize: "14@s",
     color: "white",
+    paddingLeft:15,
   },
   reportIconContainer: {
     position: "absolute",
-    width: scale(14),
-    top: "1%",
+    width: scale(20),
+    height:scale(20),
+    top: "-4%",
     left: "1%",
     bottom: "1%",
     justifyContent: "center",
+    // backgroundColor:'pink', 
   },
   userInfoContainer: {
     paddingTop: 5,
@@ -99,7 +107,7 @@ const styles = ScaledSheet.create({
     position: "absolute",
   },
   bioContainer: {
-    bottom: "3%",
+    bottom: "4.5%",
     width: "80%",
     alignSelf: "center",
     justifyContent: "center",
@@ -175,6 +183,35 @@ const styles = ScaledSheet.create({
     fontWeight: "bold",
     fontSize: "14@s",
   },
+
+//start of user bio
+    viewWrapper: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.2)",
+    },
+    modalView: {
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
+        top: "37%",
+        left: "50%",
+        elevation: 5,
+        transform: [{ translateX: -(width * 0.4) }, 
+                    { translateY: -90 }],
+        height: 350,
+        width: width * 0.8,
+        backgroundColor: "#fff",
+        borderRadius: 7,
+    },
+    max:{
+      fontSize:'10@s', 
+      color:'#D8D8D8'
+    },
+
+
+
 });
 
 export default styles;
