@@ -4,9 +4,10 @@ const styles = StyleSheet.create({
     button:{
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: Colors.buttonbackgroundPrimary,
+        backgroundColor:'#99182e',
+        // backgroundColor: Colors.buttonbackgroundPrimary,
         height: 40,
-        width: 300,
+        width: 250,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: Colors.buttonBorderPrimary,
