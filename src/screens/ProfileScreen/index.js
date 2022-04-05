@@ -1,7 +1,15 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import { Storage, Auth, DataStore } from "aws-amplify";
-import {Text, SafeAreaView, TouchableOpacity, View,} from "react-native";
-import ProfileScreenButton from "../../components/ProfileScreenButton";
+import {
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  View,
+  Modal,
+  Pressable,
+  Alert,
+  StyleSheet,
+} from "react-native";
 import styles from "./styles";
 import { Rating } from "react-native-rating-element";
 import { useNavigation } from "@react-navigation/native";
@@ -10,20 +18,22 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { S3Image } from "aws-amplify-react-native";
 import { User } from "../../models";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
+import { scale } from "react-native-size-matters";
 import { useChatContext } from 'stream-chat-expo';
+
+
 const ProfilePage = () => {
 
   const navigation = useNavigation();
-  const { user, setUser } = useContext(AuthContext);
-  const {client} = useChatContext();
-    const signOut = () => {
-      setUser(undefined);
-      client.disconnectUser()
-      Auth.signOut();
-   };
 
+  //to for signing out
+  const { user, setUser } = useContext(AuthContext);
+  const signOut = () => {
+    setUser(undefined);
+    Auth.signOut();
+  };
 
   let myuuid = uuidv4();
   const [image, setImage] = useState(null);
@@ -75,9 +85,12 @@ const ProfilePage = () => {
 
     setImage(uploadedImage.key);
   };
-{/*Setting the name of the user on the page */}
+
+  /*Setting the name of the user on the page */
   const [displayName, setDisplayName] = useState(null);
   const [name, setName] = useState(null);
+  const [schoolName, setSchoolName] = useState(null);
+  const [gradYear, setSchoolyYear] = useState(null);
 
   const placeholder = async () => {
     const myUser = await Auth.currentAuthenticatedUser();
@@ -88,106 +101,133 @@ const ProfilePage = () => {
     //setting all the data for the users
     const displayName = userRecord[0].displayName;
     const name = userRecord[0].name;
-
+    const schoolName = userRecord[0].university;
+    const gradYear = userRecord[0].gradYear;
     setDisplayName(displayName);
     setName(name);
-  
+    setSchoolName(schoolName);
+    setSchoolyYear(gradYear);
+
+    // setMemberDate(memberDate.split("-", 1).toString());
+  };
+
+  //for the circle buttons
+  const Circle = ({ text }) => (
+    <View style={styles.circle}>
+      <Text style={styles.squareText}>{text}</Text>
+    </View>
+  );
+
+  const iconPress = () => {
+    navigation.navigate("SettingsScreen");
   };
 
   useEffect(() => {
     downloadImage();
     placeholder();
-  
-    
-
   }, []);
 
-  //setting varriable to naviate to the settings screen
-  const iconPress = () => {
-    navigation.navigate("SettingsScreen"); 
-   };
-
- 
+  //***************************************************************************************RETURN() */
   return (
     <SafeAreaView style={styles.root}>
+      <View style={styles.shape} />
+
       <View style={styles.topBannerContainer}>
-      
-      
-      {/* The onpress settings icon */}
-      <TouchableOpacity style={styles.topRightPosition} onPress={iconPress}>
-        <AntDesign name="setting" size={30} color="black" />
-      </TouchableOpacity>
+        <View style={styles.topBannerrRow}>
+          {/*The profile image */}
+          <View style={styles.profilePicContainer}>
+            <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
+              <S3Image style={styles.image} imgKey={image} />
+            </TouchableOpacity>
+          </View>
 
-        {/*The profile image */}
-      <View style={styles.profilePicContainer}>
-        <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
-          <S3Image style={styles.image} imgKey={image} />
-        </TouchableOpacity>
-      </View>
+          <View style={styles.rightInfoContainer}>
+            {/* The onpress settings icon */}
+            <View style={styles.SettingsPosition}>
+              <TouchableOpacity onPress={iconPress}>
+                <AntDesign name="setting" size={scale(30)} color="white" />
+              </TouchableOpacity>
+            </View>
 
-        {/*Display name */}
-        <View style={styles.userNameContainer}>
-        <Text style={styles.userName}>{displayName}</Text>
+            <View style={styles.userInfoContainer}>
+              <Text style={styles.userName}>{displayName}</Text>
+
+              <Text style={styles.name}>{name}</Text>
+              <Text style={styles.name}>
+                {schoolName} {gradYear}
+              </Text>
+
+              <Rating
+                style={styles.rating}
+                rated={3.5}
+                totalCount={5}
+                size={20}
+                ratingColor={"gold"}
+              />
+
+              <View style={styles.reportContainer}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("ReportScreen")}
+                >
+                  <MaterialIcons
+                    style={styles.reportIconContainer}
+                    name="report"
+                    size={scale(14)}
+                    color="white"
+                  />
+
+                  <Text style={styles.reportText}>Report User</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
         </View>
-
-        <View style={styles.nameContainer}>
-        <Text style={styles.name}>{name}</Text>
-        </View> 
-        
-      {/*start of rating*/}
-      <View style={styles.ratingContainer}>
-      <Rating style={styles.rating} rated={3.5} totalCount={5} size={18} ratingColor={"#99182e"} />
-      </View>
-</View>
-<View style={styles.bioContainer}>
-
-<Text style={styles.bioText}>A senior computer science looking to sell old textbooks that were never opened. </Text>
-</View>
-
-<View style={styles.lowerContainer}>
-<View style={styles.space} />
-        {/*buttons to go to other pages */}
-      <View style={styles.space} />
-      <View style={styles.buttonContainer}>
-      <ProfileScreenButton
-        onPress={() => navigation.navigate("ActiveListingScreen")}
-        text="View Active Listings"
-      />
-      </View>
-      <View style={styles.space} />
-      <View style={styles.buttonContainer}>
-      <ProfileScreenButton
-        onPress={() => navigation.navigate("ReviewScreen")}
-        text="Read Reviews by other users"
-      />
       </View>
 
+      <View style={styles.bioContainer}>
+        <Text style={styles.bioText}>
+          A senior computer science looking to sell old textbooks that were
+          never opened.
+        </Text>
+      </View>
+      <View style={styles.lowerContainer}>
+        <View style={styles.container}>
+          <View style={styles.row}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ReviewScreen")}
+            >
+              <Circle text="Read Reviews" s />
+            </TouchableOpacity>
 
-      <View style={styles.space} />
+            <View style={styles.space} />
 
-      <View style={styles.buttonContainer}>
-      <ProfileScreenButton
-        onPress={() => navigation.navigate("LeaveReviewScreen")}
-        text="Leave a Review"
-      />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ActiveListingScreen")}
+            >
+              <Circle text="Active Listings" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.space} />
+          <View style={styles.row}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("LeaveReviewScreen")}
+            >
+              <Circle text="Leave a Review" h />
+            </TouchableOpacity>
+
+            <View style={styles.space} />
+            <TouchableOpacity onPress={() => navigation.navigate(" ")}>
+              <Circle text="Message User" />
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
 
-      <View style={styles.space} />
-      <View style={styles.buttonContainer}>
-      <ProfileScreenButton
-        onPress={() => navigation.navigate("ReportScreen")}
-        text="Report User"
-      />
-      </View>
-
-</View>     
-<View style={styles.signOutContainer}>
+      <View style={styles.signOutContainer}>
         <Text onPress={signOut} style={styles.signOutText}>
           Sign Out
         </Text>
-      </View> 
-
-
+      </View>
     </SafeAreaView>
   );
 };

@@ -1,120 +1,180 @@
-import { StyleSheet } from "react-native";
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import { scale, ScaledSheet } from "react-native-size-matters";
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "#fff",
-    
   },
   space: {
     width: 20,
     height: 20,
   },
- topBannerContainer:{
-  flex: 1,
-   width:"100%",
-   height:'20%',
-   position: "absolute",
-  
 
-
- },
- lowerContainer:{
-  flex: 1,
-   width:'100%',
-   top:'40%',
-   bottom:5,
-  
-   position:'absolute',
- },
-
-  topRightPosition: {
-    top: 5,
-    alignItems:'flex-end',
-    width:'10%',
-    padding:5,
-    position: "absolute",
-  
-    right:1,
+  topBannerContainer: {
+    width: "100%",
+    height: "30%",
+    backgroundColor: "transparent",
   },
-profilePicContainer:{
-  // backgroundColor:'green',
-  width:'27%',
-  paddingLeft:3,
-  top:5,
-},
+  topBannerrRow: {
+    flexDirection: "row",
+    height: "100%",
+    width: "100%",
+    backgroundColor: "transparent",
+  },
+  profilePicContainer: {
+    width: "45%",
+    justifyContent: "center",
+    padding: 5,
+  },
   profileButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width:100,
-    height: 100,
-    borderWidth: 3,
-    borderRadius: 100/ 2,
-   
+    width: scale(120),
+    height: scale(120),
+    borderWidth: 5,
+    borderRadius: scale(120 / 2),
+    borderColor: "white",
+    left: "15%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
-    justifyContent:'center',
-    alignItems: 'center',
-    width:99,
-    height: 99,
-    borderRadius: 99/ 2,
-  },
-  userNameContainer:{
-    top:-95,
-    width:'64%',
-    left: '29%',
-  },
-  userName:{
-    fontSize: 30,
-  },
-  nameContainer:{
-    paddingTop:3,
-    top:-95,
-    width:'64%',
-    left: '29%',
-  },
-  name:{
-    fontSize:20 ,
-  },
-
-  ratingContainer:{
-    paddingTop:3,
-    top:-95,
-    width:'64%',
-    left: '29%',
-  },
-  bioContainer:{
-    position: "absolute",
-    width:'100%',
-    top:"20%",
-    height:'20%',
-    borderColor:'gray',
-    padding:5,
-    backgroundColor:'#F4F4F4',
-    borderRadius:20
-  },
-  bioText:{
-    fontSize:24
-  },
-
-  buttonContainer:{
     justifyContent: "center",
-  }, 
-  signOutContainer:{
+    alignItems: "center",
+    width: scale(112),
+    height: scale(112),
+    borderRadius: scale(112 / 2),
+  },
+  rightInfoContainer: {
     flex: 1,
-    bottom:5,
+    justifyContent: "center",
+    alignContent: "flex-start",
+    backgroundColor: "transparent",
+  },
+  SettingsPosition: {
+    position: "absolute",
+    right: "1%",
+    top: "1%",
+    padding: 4,
+    justifyContent: "center",
+  },
+  reportContainer: {
+    width: scale(100),
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  reportText: {
+    left: scale(15),
+    fontSize: "14@s",
+    color: "white",
+  },
+  reportIconContainer: {
+    position: "absolute",
+    width: scale(14),
+    top: "1%",
+    left: "1%",
+    bottom: "1%",
+    justifyContent: "center",
+  },
+  userInfoContainer: {
+    paddingTop: 5,
+    justifyContent: "center",
+    alignContent: "flex-start",
+    flexWrap: "wrap",
+    bottom: "3%",
+  },
+  userName: {
+    fontSize: "24@s",
+    fontWeight: "bold",
+    color: "white",
+  },
+  name: {
+    fontSize: "16@s",
+    color: "white",
+  },
+  //******************************** */
+  lowerContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    top: "41%",
+    alignContent: "center",
+    position: "absolute",
+  },
+  bioContainer: {
+    bottom: "3%",
+    width: "80%",
+    alignSelf: "center",
+    justifyContent: "center",
+    padding: 1,
+  },
+  bioText: {
+    fontSize: "14@s",
+    color: "white",
+    textAlign: "center",
+  },
+  shape: {
+    position: "absolute",
+    width: "80%",
+    bottom: "57%",
+    height: "10%",
+    alignSelf: "center",
+    flexDirection: "column",
+    width: scale(500),
+    height: scale(500),
+    borderRadius: scale(500 / 2),
+    backgroundColor: "#99182e",
+  },
+  circle: {
+    borderColor: "#99182e",
+    borderWidth: 5.5,
+    width: scale(115),
+    height: scale(115),
+    borderRadius: scale(115 / 2),
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 10,
+    elevation: 4,
+  },
+  row: {
+    top: "6%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  squareText: {
+    fontSize: "14@s",
+    color: "#99182e",
+    fontWeight: "bold",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: scale(22),
+  },
+
+  buttonContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signOutContainer: {
+    flex: 1,
+    bottom: "1.5%",
     position: "absolute",
     width: "100%",
-    height: 20,
+    height: "5%",
   },
-  signOutText:{
+  signOutText: {
     width: "100%",
     textAlign: "center",
-    fontWeight:'bold'
+    fontWeight: "bold",
+    fontSize: "14@s",
   },
-
-
 });
 
 export default styles;
