@@ -144,6 +144,7 @@ const ProfilePage = () => {
   const { control, handleSubmit } = useForm();
 
   useEffect(() => {
+    downloadImage();
     pullUserData();
     updateBio();
 
