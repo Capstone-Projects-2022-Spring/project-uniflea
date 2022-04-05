@@ -27,15 +27,6 @@ import { useChatContext } from 'stream-chat-expo';
 const ProfilePage = () => {
 
   const navigation = useNavigation();
-  
-  const { user, setUser } = useContext(AuthContext);
-  const {client} = useChatContext();
-    const signOut = () => {
-      setUser(undefined);
-      client.disconnectUser()
-      Auth.signOut();
-   };
-
 
   //to for signing out
   const { user, setUser } = useContext(AuthContext);
