@@ -89,7 +89,7 @@ const HomeScreen = ({ searchValue }) => {
     if (categories.length > 0) {
       DataStore.query(Product).then(setProducts);
       // setSortedProducts of categories
-      DataStore.query(Product, c => c.category("IN", categories)).then(setSortedProducts);
+      DataStore.query(Product, c => c.category("contains", categories)).then(setSortedProducts);
     } else {
       console.log("Categories is null");
       DataStore.query(Product).then(setProducts);
@@ -120,8 +120,8 @@ const HomeScreen = ({ searchValue }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState([]);
   const [items, setItems] = useState([
-    {label: 'Books', value: 'book'},
-    {label: 'Equipment', value: 'equipment'}
+    {label: 'Protein', value: 'protein'},
+    {label: 'Test', value: 'test'}
   ]);
   var [categories, setCategories] = useState([])
   const applyCategories = (value) => {
@@ -135,7 +135,7 @@ const HomeScreen = ({ searchValue }) => {
       console.log("Categories: " + categories);
       DataStore.query(Product).then(setProducts);
       // setSortedProducts of categories
-      DataStore.query(Product, c => c.category("IN", categories)).then(setSortedProducts);
+      DataStore.query(Product, c => c.category("contains", categories)).then(setSortedProducts);
     } else {
       console.log("Categories is null");
       DataStore.query(Product).then(setProducts);
