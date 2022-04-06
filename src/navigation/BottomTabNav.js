@@ -8,6 +8,7 @@ import MessagesStack from './MessagesStack';
 import SavedItemStack from './SavedItemStack';
 import SellItemScreenStack from './SellItemScreenStack';
 import ProfileScreenStack from './ProfileStack';
+import OtherProfileNavStack from './OtherProfileNavStack';
 
 const Tab = createBottomTabNavigator();
 const BottomTabNav = () => {
