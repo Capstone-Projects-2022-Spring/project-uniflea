@@ -89,7 +89,7 @@ const HomeScreen = ({ searchValue }) => {
     if (categories.length > 0) {
       DataStore.query(Product).then(setProducts);
       // setSortedProducts of categories
-      DataStore.query(Product, c => c.category("contains", categories)).then(setSortedProducts);
+      DataStore.query(Product, c => c.or(c => c.category("eq", categories[0])).category("eq", categories[1]).then(setSortedProducts));
     } else {
       console.log("Categories is null");
       DataStore.query(Product).then(setProducts);
@@ -107,7 +107,7 @@ const HomeScreen = ({ searchValue }) => {
       console.log("Categories: " + categories);
       DataStore.query(Product).then(setProducts);
       // setSortedProducts of categories
-      DataStore.query(Product, c => c.category("contains", categories)).then(setSortedProducts);
+      DataStore.query(Product, c => c.or(c => c.category("eq", categories[0])).category("eq", categories[1]).then(setSortedProducts));
     } else {
       console.log("Categories is null");
       DataStore.query(Product).then(setProducts);
@@ -135,7 +135,7 @@ const HomeScreen = ({ searchValue }) => {
       console.log("Categories: " + categories);
       DataStore.query(Product).then(setProducts);
       // setSortedProducts of categories
-      DataStore.query(Product, c => c.category("contains", categories)).then(setSortedProducts);
+      DataStore.query(Product, c => c.or(c => c.category("eq", categories[0])).category("eq", categories[1]).then(setSortedProducts));
     } else {
       console.log("Categories is null");
       DataStore.query(Product).then(setProducts);
