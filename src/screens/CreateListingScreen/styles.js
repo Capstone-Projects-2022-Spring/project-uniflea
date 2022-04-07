@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import {Colors} from "../../styles/Colors";
 
 const styles = StyleSheet.create({
     container: {
@@ -6,7 +7,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     container2: {
-        justifyContent: 'center',
+        padding: 10,
+        width: '85%',
     },
     input: {
         height: 40,
@@ -14,6 +16,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderWidth: 1,
         padding: 10,
+        borderRadius: 5,
     },
     input2: {
         height: 130,
@@ -21,6 +24,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderWidth: 1,
         padding: 10,
+        borderRadius: 5,
         // textAlign: 'center',
     },
     centerTitle: {
@@ -38,6 +42,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderWidth: 1,
         padding: 10,
+        borderRadius: 5,
     },
     space:{
         width:300,

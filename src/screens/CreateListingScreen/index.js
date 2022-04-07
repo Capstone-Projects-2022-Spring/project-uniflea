@@ -13,6 +13,8 @@ import {S3Image} from 'aws-amplify-react-native';
 import CategorySelect from '../../components/CategorySelect';
 import {UIImagePickerPresentationStyle} from "expo-image-picker";
 import {useForm} from "react-hook-form";
+import DropDownPicker from "react-native-dropdown-picker";
+
 
 const CreateListingScreen = () => {
     const navigation = useNavigation();
@@ -27,14 +29,27 @@ const CreateListingScreen = () => {
     const [descriptionOfListing, setDescriptionOfListing] = React.useState(null);
     const [priceOfListing, setPriceOfListing] = React.useState(null);
     const [image, setImage] = React.useState('../../../assets/camera.png');
+    const [pickedCategory, setPickedCategory] = React.useState(null);
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState([]);
+    const [items, setItems] = useState([
+        {label: 'Books', value: 'Books'},
+        {label: 'Supplies & Equipment', value: 'Supplies & Equipment'},
+        {label: 'Electronics', value: 'Electronics'},
+        {label: 'Clothes', value: 'Clothes'},
+        {label: 'Food & Nutrition', value: 'Food & Nutrition'},
+        {label: 'Handmade', value: 'Handmade'},
+        {label: 'Service', value: 'Service'},
+    ]);
     const CATEGORIES = [
-        {id: 'Books', name: 'Books'},
-        {id: 'Supplies & Equipment', name: 'Supplies & Equipment'},
-        {id: 'Electronics', name: 'Electronics'},
-        {id: 'Clothes', name: 'Clothes'},
-        {id: 'Food & Nutrition', name: 'Food & Nutrition'},
-        {id: 'Handmade', name: 'Handmade'},
-        {id: 'Service', name: 'Service'},
+        {label: 'Books', value: 'Books'},
+        {label: 'Supplies & Equipment', value: 'Supplies & Equipment'},
+        {label: 'Electronics', value: 'Electronics'},
+        {label: 'Clothes', value: 'Clothes'},
+        {label: 'Food & Nutrition', value: 'Food & Nutrition'},
+        {label: 'Handmade', value: 'Handmade'},
+        {label: 'Service', value: 'Service'},
+        {label: 'Other', value: 'Other'},
     ];
 
     const pickImage = async () => {
@@ -84,7 +99,7 @@ const CreateListingScreen = () => {
             images: [image],
             university: user.attributes["custom:University"],
             displayName: user.attributes["preferred_username"],
-            category: catSelector[0],
+            category: pickedCategory,
         });
         // console.log("University==========", user.attributes["custom:University"]);
 
@@ -92,10 +107,12 @@ const CreateListingScreen = () => {
         Alert.alert("Success!", "Your Listing Has Been Published!");
     }
 
+    // had scroll view to permit tapping out of text boxes. try to find keyboard dismiss. also figure out how to keep default camera image on pickimage. implement multiople images as well. /clear fields after publishing successfully. require fileds too
     return (
-        <ScrollView>
+        <View>
             <View style = {styles.container}>
                 <TouchableOpacity onPress={pickImage}>
+                    {/*<Image style = {styles.cameraFrame} source = {require("../../../assets/camera.png")}/>*/}
                     <S3Image style={styles.cameraFrame} imgKey={image} />
                 </TouchableOpacity>
                 <TextInput
@@ -105,15 +122,7 @@ const CreateListingScreen = () => {
                     defaultValue={titleOfListing}
                 />
             </View>
-            <View style = {styles.container2}>
-                <CategorySelect
-                    control={control}
-                    items={CATEGORIES}
-                    name="catSelector"
-                    rules={{ required: 'Must select a category' }}
-                    itemToSelect='Category'
-                />
-            </View>
+
             <View style = {styles.container}>
                 <TextInput
                     style={styles.input2}
@@ -128,9 +137,38 @@ const CreateListingScreen = () => {
                     onChangeText = {newText => setPriceOfListing(newText)}
                     defaultValue={priceOfListing}
                 />
+                <View style = {styles.container2}>
+                    {/*<CategorySelect*/}
+                    {/*    control={control}*/}
+                    {/*    items={CATEGORIES}*/}
+                    {/*    name="catSelector"*/}
+                    {/*    rules={{ required: 'Must select a category' }}*/}
+                    {/*    itemToSelect='Category'*/}
+                    {/*/>*/}
+                    <DropDownPicker
+                        style = {{
+                            backgroundColor: "#f2f2f2",
+                            borderRadius: '5',
+                        }}
+                        placeholder="Select a Category"
+                        placeholderStyle={{
+                            color: "#bdbdc2",
+                        }}
+                        open={open}
+                        value={value}
+                        items={items}
+                        setOpen={setOpen}
+                        setValue={setValue}
+                        setItems={setItems}
+                        multiple={false}
+                        onChangeValue={(value) => {
+                            setPickedCategory(value);
+                        }}
+                    />
+                </View>
                 <CustomButton onPress= {publishListing} text  = "Publish Listing"/>
             </View>
-        </ScrollView>
+        </View>
     );
 };
 
