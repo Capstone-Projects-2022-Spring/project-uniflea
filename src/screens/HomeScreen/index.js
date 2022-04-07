@@ -19,11 +19,6 @@ const HomeScreen = ({ searchValue }) => {
   const { user, setUser } = useContext(AuthContext);
   console.log(searchValue);
   
-  const signOut = () => {
-    setUser(undefined);
-    client.disconnectUser();
-    Auth.signOut();
-  };
 
   const [modalOpen, setModalOpen] = useState(false);
   const toggleModalOpen = () => {
@@ -88,15 +83,6 @@ const HomeScreen = ({ searchValue }) => {
 
   useEffect(() => {
     console.log("Running useEffect");
-    // resetDatastore();
-    // if(categories.length==1){
-    //   // console.log("Categories is NOT null");
-    //   console.log("Categories: " + categories);
-    //   DataStore.query(Product).then(setProducts);
-    //   // setSortedProducts of categories
-    //   console.log("THIS SHOULD QUERY FOR 1 CATEGORY");
-    //   DataStore.query(Product, (product) => product.category("eq", '' + categories[0])).then(setSortedProducts);
-    // } else 
     
     if (categories.length >= 1) {
 
@@ -143,65 +129,12 @@ const HomeScreen = ({ searchValue }) => {
   var [notCategories, setNotCategories] = useState(["art", "protein", "test", "textbook"]);
   
 
-
-  const removeCategory = (cat) => {
-
-    var array = notCategories;
-    var index = notCategories.indexOf(cat);
-    console.log("cat in removeCategory " + cat);
-    if (index !== -1) {
-      console.log("splicing " + cat);
-      array.splice(index, 1);
-      setNotCategories(array);
-    }
-
-    console.log(notCategories + "In the function!");
-  }
-
   const applyCategories = (value) => {
-    console.log("Not Categories: " + notCategories);
-    // console.log("value in applyCategories: " + value);
     categories=value;
     console.log("Categories in applyCategories: " + categories);
-
-    // resetDatastore();
-
-    // if(categories.length==1){
-    //   // console.log("Categories is NOT null");
-    //   // console.log("Categories: " + categories);
-    //   // DataStore.query(Product).then(setProducts);
-    //   // setSortedProducts of categories
-    //   console.log("THIS SHOULD QUERY FOR 1 CATEGORY");
-    //   // console.log("Querying for 1 Category: " + categories[0]);
-    //   DataStore.query(Product, (product) => product.category("eq", '' + categories)).then(setSortedProducts);
-    
-
-    
-    
-    // } else 
-    
     
     
     if (categories.length >= 1) {
-      // console.log("THIS SHOULD QUERY FOR 2 CATEGORIES");
-      // console.log('' + categories[0]);
-      // console.log('' + categories[1]);
-      // console.log("Querying for 2 Categories: " + categories[0] + categories[1]);
-
-      // setNotCategories(notCategories.splice(categories[0]));
-      // setNotCategories(notCategories.splice(categories[1]));
-      
-      // console.log("notCategories before querying: " + notCategories);
-
-      // removeCategory(categories[0]);
-      // removeCategory(categories[1]);
-
-      
-      // console.log("notCategories after splicing: " + notCategories[0] + notCategories[1]);
-      
-      
-      // DataStore.query((Product), (product) => product.or(product => product.category("eq", categories[0]).category("eq", categories[1]))).then(setSortedProducts);
-      
       DataStore.query((Product), (product) => product.or(product => product
         .category("eq", categories[0])
         .category("eq", categories[1])
