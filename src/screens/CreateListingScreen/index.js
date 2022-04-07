@@ -27,12 +27,12 @@ const CreateListingScreen = () => {
     const [descriptionOfListing, setDescriptionOfListing] = React.useState(null);
     const [priceOfListing, setPriceOfListing] = React.useState(null);
     const [image, setImage] = React.useState('../../../assets/camera.png');
-    const [selectedCategory, setSelectedCategory] = React.useState(null);
     const CATEGORIES = [
         {id: 'Books', name: 'Books'},
         {id: 'Supplies & Equipment', name: 'Supplies & Equipment'},
         {id: 'Electronics', name: 'Electronics'},
         {id: 'Clothes', name: 'Clothes'},
+        {id: 'Food & Nutrition', name: 'Food & Nutrition'},
         {id: 'Handmade', name: 'Handmade'},
         {id: 'Service', name: 'Service'},
     ];
@@ -52,10 +52,10 @@ const CreateListingScreen = () => {
         }
         const response = await fetch(result.uri);
         const blob = await response.blob();
-        console.warn("blob created=====", blob);
+        // console.warn("blob created=====", blob);
         const uploadedImage = await Storage.put(myuuid, blob);
         setImage(uploadedImage.key);
-        console.warn("image uploaded gang=====", uploadedImage.key);
+        // console.warn("image uploaded gang=====", uploadedImage.key);
     };
 
     // const saveListingAsDraft = async() => {
@@ -84,6 +84,7 @@ const CreateListingScreen = () => {
             images: [image],
             university: user.attributes["custom:University"],
             displayName: user.attributes["preferred_username"],
+            category: catSelector[0],
         });
         // console.log("University==========", user.attributes["custom:University"]);
 
