@@ -43,25 +43,9 @@ const HomeScreen = ({ searchValue }) => {
   
 
   const fetchProducts = () => {
-    // if (categories.length == 1) {
-    //   DataStore.query(Product).then(setProducts);
-    //   // setSortedProducts of categories
-    //   console.log("THIS SHOULD QUERY FOR 1 CATEGORY");
-    //   DataStore.query(Product, (product) => product.category("eq", '' + categories[0])).then(setSortedProducts);
-    // } else 
-    
+    // if (categories.length == 1)
     
     if(categories.length >= 1) {
-
-      // console.log("notCategories before querying: " + notCategories);
-
-      // removeCategory(categories[0]);
-      // removeCategory(categories[1]);
-
-      // console.log("notCategories after splicing: " + notCategories[0] + notCategories[1]);
-      // DataStore.query(Product, (product) => product.or(product => product.category("ne", notCategories[0])).category("ne" + notCategories[1])).then(setSortedProducts);
-      // console.log(sortedProducts);
-      // DataStore.query((Product), (product) => product.or(product => product.category("eq", categories[0]).category("eq", categories[1]))).then(setSortedProducts);
 
       DataStore.query((Product), (product) => product.or(product => product
         .category("eq", categories[0])
