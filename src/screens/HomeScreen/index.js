@@ -278,9 +278,7 @@ const HomeScreen = ({ searchValue }) => {
       console.log(searchValue)
       // Send Axios request here
       DataStore.query(Product, (product) => product.title("contains", searchValue)).then(setProducts);
-      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(
-        setSortedProducts
-      );
+      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(setSortedProducts);
     }, 1000)
 
     return () => clearTimeout(delayDebounceFn)
@@ -344,6 +342,7 @@ const HomeScreen = ({ searchValue }) => {
             onChangeValue={(value) => {
               setCategories(value);
               applyCategories(value);
+              filterSort(sortedProducts, 'none');
               console.log("value: " + value);
               console.log("Categories after setting in dropdown: " + categories);
             }}
