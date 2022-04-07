@@ -10,6 +10,7 @@ import { useChatContext } from "stream-chat-expo";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
+
 const HomeScreen = ({ searchValue }) => {
   const { client } = useChatContext();
   const [products, setProducts] = useState([]);
@@ -104,6 +105,7 @@ const HomeScreen = ({ searchValue }) => {
     }
   }
   useEffect(() => {
+    
     // wait 2 seconds after user finishes typing to query results
     const delayDebounceFn = setTimeout(() => {
       console.log(searchValue)
