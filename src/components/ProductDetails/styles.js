@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginVertical: 10,
         lineHeight: 20,
+        alignSelf: 'center',
     },
     buttonContainer: {
         alignItems: 'center',

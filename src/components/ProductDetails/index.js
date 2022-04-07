@@ -10,7 +10,6 @@ import { useNavigation } from '@react-navigation/native';
 import SendMessageItem from '../SendMessageItem';
 import { useChatContext } from 'stream-chat-expo';
 import CustomCircleButton from "../CustomCircleButton";
-import { Entypo } from '@expo/vector-icons';
 import {S3Image} from "aws-amplify-react-native/src/Storage";
 
 const ProductDetails = () => {
@@ -30,15 +29,15 @@ const ProductDetails = () => {
     // console.log('route params = ', route.params);
     // console.log(route.params.id);
 
-    const queryUser = async () => {
-        setIsLoading(true);
-        const user = await DataStore.query(User, s => s.userSub("eq", product.userSub));
-        // console.log("test = ", user);
-        // console.log("profile pic = ", profileImage);
-        const profileImage = user[0].image;
-        setProfileImage(profileImage);
-        setIsLoading(false);
-    }
+    // const queryUser = async () => {
+    //     setIsLoading(true);
+    //     const user = await DataStore.query(User, s => s.userSub("eq", product.userSub));
+    //     // console.log("test = ", user);
+    //     // console.log("profile pic = ", profileImage);
+    //     const profileImage = user[0].image;
+    //     setProfileImage(profileImage);
+    //     setIsLoading(false);
+    // }
 
     const queryProduct = async () => {
         setIsLoading(true);
@@ -53,8 +52,8 @@ const ProductDetails = () => {
 
         // fetch the user who created the listing's Stream API account
         const response = await client.queryUsers({ id: { $in: [prod.userSub] } });
-        // console.log("Response from user query = ", response);
-        setSellingUser(response.users[0]);
+        console.log("Response from user query = ", response);
+        // setSellingUser(response.users[0]);
         setIsLoading(false);
 
     }
@@ -62,7 +61,7 @@ const ProductDetails = () => {
 
     // query product on render and each time the id parameter changes
     useEffect(() => {
-        queryUser();
+        // queryUser();
         queryProduct();
         // const subscription = DataStore.observe(User).subscribe(() => {
         //     queryUser();
@@ -116,7 +115,8 @@ const ProductDetails = () => {
                     {/*    <Image style = {styles.circleButtonPic} source = {require("/Users/tj/IdeaProjects/project-uniflea/assets/logo.png")}/>*/}
                     {/*</CustomCircleButton>*/}
                     <TouchableOpacity onPress = {() => alert("Will take to listing user's profile in future updates!")} style={styles.circleButton}>
-                        <S3Image style = {styles.circleButtonPic} imgKey={profileImage}/>
+                        {/*<S3Image style = {styles.circleButtonPic} imgKey={profileImage}/>*/}
+                        <Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>
                     </TouchableOpacity>
 
                     <Text style = {styles.profileText}>Visit User's Profile</Text>
@@ -146,7 +146,7 @@ const ProductDetails = () => {
                         )
                     }}
                         text="Edit" />
-                    {/*<SendMessageItem userToMessage={sellingUser} />*/}
+                    <SendMessageItem userToMessage={sellingUser} />
                     {/*<CustomButton onPress = {addToSavedList} text = 'Profile'/>*/}
                 </View>
 
