@@ -53,7 +53,7 @@ const ProductDetails = () => {
         // fetch the user who created the listing's Stream API account
         const response = await client.queryUsers({ id: { $in: [prod.userSub] } });
         console.log("Response from user query = ", response);
-        // setSellingUser(response.users[0]);
+        setSellingUser(response.users[0]);
         setIsLoading(false);
 
     }
