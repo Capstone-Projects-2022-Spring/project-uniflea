@@ -59,7 +59,7 @@ const BottomTabNav = () => {
                         <Entypo name="message" size={24} color={color} />
                     ),
                 }} />
-            <Tab.Screen component={ProfileScreenStack} name={"Profile"}
+            <Tab.Screen component={OtherProfileNavStack} name={"Profile"}
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (

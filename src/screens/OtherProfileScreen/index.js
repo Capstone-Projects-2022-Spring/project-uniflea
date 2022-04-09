@@ -22,6 +22,7 @@ import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
 import { scale } from "react-native-size-matters";
 import { useChatContext } from 'stream-chat-expo';
+import SendMessageItem from "../../components/SendMessageItem";
 
 
 const OtherProfilePage = () => {
@@ -213,8 +214,9 @@ const OtherProfilePage = () => {
             </TouchableOpacity>
 
             <View style={styles.space} />
-            <TouchableOpacity onPress={() => navigation.navigate(" ")}>
-              <Circle text="Message User" />
+            <TouchableOpacity >
+              {/* <Circle text="Message User" /> */}
+              <SendMessageItem userToMessage={user}/>
             </TouchableOpacity>
           </View>
         </View>
