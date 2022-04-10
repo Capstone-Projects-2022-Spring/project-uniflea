@@ -11,12 +11,15 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
 import { ConsoleLogger } from "@aws-amplify/core";
+import { User } from "../../models";
 
 const HomeScreen = ({ searchValue }) => {
   const { client } = useChatContext();
   const [products, setProducts] = useState([]);
   const [sortedProducts, setSortedProducts] = useState([]);
   const { user, setUser } = useContext(AuthContext);
+  const [university, setUniversity] = useState(null);
+
   console.log(searchValue);
   
 
@@ -40,7 +43,17 @@ const HomeScreen = ({ searchValue }) => {
     }
   };
 
-  
+  const findUniversity = () => {
+    const currentUser = await Auth.currentAuthenticatedUser();
+
+    const user = await DataStore.query(User, (s) => 
+      s.userSub("eq", currentUser.attributes.sub)
+    );
+
+    const userUni = user[0].university;
+
+    setUniversity(userUni);
+  }
 
   const fetchProducts = () => {
     // if (categories.length == 1)
@@ -64,6 +77,14 @@ const HomeScreen = ({ searchValue }) => {
     }
   }
 
+  useEffect(() => {
+    if(university === "Temple"){
+      //set theme to temple theme
+    }
+    else{
+      //set theme to drexel theme
+    }
+  })
 
   useEffect(() => {
     console.log("Running useEffect");
