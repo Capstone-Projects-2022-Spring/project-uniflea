@@ -117,7 +117,7 @@ const CreateListingScreen = () => {
                 </TouchableOpacity>
                 <TextInput
                     style={styles.input}
-                    placeholder="Title of Listing"
+                    placeholder={"Title of Listing"}
                     onChangeText = {newText => setTitleOfListing(newText)}
                     defaultValue={titleOfListing}
                 />
@@ -126,14 +126,14 @@ const CreateListingScreen = () => {
             <View style = {styles.container}>
                 <TextInput
                     style={styles.input2}
-                    placeholder="Description of Listing"
+                    placeholder={"Description of Listing"}
                     multiline = {true}
                     onChangeText = {newText => setDescriptionOfListing(newText)}
                     defaultValue={descriptionOfListing}
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder="($) Price of Listing"
+                    placeholder={"($) Price of Listing"}
                     onChangeText = {newText => setPriceOfListing(newText)}
                     defaultValue={priceOfListing}
                 />
@@ -147,10 +147,18 @@ const CreateListingScreen = () => {
                     {/*/>*/}
                     <DropDownPicker
                         style = {{
-                            backgroundColor: "#f2f2f2",
-                            borderRadius: '5',
+                            backgroundColor: "#f2f2f2"
                         }}
-                        placeholder="Select a Category"
+
+                        //******************************************************************* */
+                        //I think this borderRadius is what is breaking 
+                        // style = {{
+                        //     backgroundColor: "#f2f2f2",
+                        //     borderRadius: '5'
+                        // }}
+                        // placeholder={"Select a Category"}
+
+                        //******************************************************************* */
                         placeholderStyle={{
                             color: "#bdbdc2",
                         }}
@@ -166,7 +174,7 @@ const CreateListingScreen = () => {
                         }}
                     />
                 </View>
-                <CustomButton onPress= {publishListing} text  = "Publish Listing"/>
+                <CustomButton onPress= {publishListing} text  = {"Publish Listing"}/>
             </View>
         </View>
     );
