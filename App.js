@@ -10,7 +10,7 @@ import Amplify,{ Auth, DataStore} from 'aws-amplify';
 import awsconfig from './src/aws-exports'
 
 import AuthContext from './src/contexts/Authentication';
-
+import ThemeContextProvider from './src/components/ThemeContextProvider';
 
 Amplify.configure(awsconfig)
 
@@ -41,8 +41,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
 
       <AuthContext.Provider value={{user, setUser}}>
-
-
+      <ThemeContextProvider>
         <OverlayProvider>
           {/* 
         Could encapsulate only the message screen with the chat component
@@ -55,6 +54,7 @@ export default function App() {
           </Chat>
 
         </OverlayProvider>
+        </ThemeContextProvider>
       </AuthContext.Provider>
     </SafeAreaView>
   );

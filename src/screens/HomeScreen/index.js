@@ -12,6 +12,8 @@ import { Feather } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
 import { ConsoleLogger } from "@aws-amplify/core";
 import { User } from "../../models";
+import {ThemeContextProvider} from '../../components/ThemeContextProvider'
+import { TempleTheme, DrexelTheme } from "../../components/MasterColorComponent";
 
 const HomeScreen = ({ searchValue }) => {
   const { client } = useChatContext();
@@ -19,7 +21,7 @@ const HomeScreen = ({ searchValue }) => {
   const [sortedProducts, setSortedProducts] = useState([]);
   const { user, setUser } = useContext(AuthContext);
   const [university, setUniversity] = useState(null);
-
+  const {theme, changeTheme} = useContext(ThemeContextProvider);
   console.log(searchValue);
   
 
@@ -78,11 +80,14 @@ const HomeScreen = ({ searchValue }) => {
   }
 
   useEffect(() => {
+    findUniversity();
     if(university === "Temple"){
       //set theme to temple theme
-    }
+      changeTheme(TempleTheme);
+    } 
     else{
       //set theme to drexel theme
+      changeTheme(DrexelTheme);
     }
   })
 
@@ -205,10 +210,6 @@ const HomeScreen = ({ searchValue }) => {
         return;
     }
   };
-
-
-
-
 
   useEffect(() => {
     // wait 2 seconds after user finishes typing to query results

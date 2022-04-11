@@ -9,7 +9,7 @@ const ThemeContextProvider = ({children}) => {
     const [theme, changeTheme] = useState(TempleTheme)
 
     return(
-        <AppContext.Provider>
+        <AppContext.Provider value={{theme: theme, changeTheme}}>
             <PaperProvider theme={theme}>
                 {children}
             </PaperProvider>
