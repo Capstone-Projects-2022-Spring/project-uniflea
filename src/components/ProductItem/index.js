@@ -28,11 +28,10 @@ const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
 
     //getting the item timestamp and splting the sting just to get the date
     try{
-      console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + createdAt);
+      
       const ampString = createdAt;
       const dateAmp = ampString.split("T", 1);
-      console.log("ampstring:" + ampString)
-      console.log("dateAmp:" + dateAmp)
+      
       const newDateAmp = dateAmp.toString();
   
       if (newDateAmp === newDateString) {

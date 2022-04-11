@@ -47,6 +47,7 @@ const ProductDetails = () => {
         }
         const prod = await DataStore.query(Product, route.params.id);
         setProduct(prod);
+        console.log('prod------',prod )
 
         // console.log("Product = ", product)
 
@@ -119,7 +120,11 @@ const ProductDetails = () => {
                         <Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>
                     </TouchableOpacity>
 
+                    <TouchableOpacity onPress={() => navigation.navigate("OtherProfileScreen",{userSub: product.userSub} )}>
                     <Text style = {styles.profileText}>Visit User's Profile</Text>
+                    </TouchableOpacity>
+
+                    
                 </View>
                 {/* Image Carousel */}
                 <ImageCarousel images={product.images} />
