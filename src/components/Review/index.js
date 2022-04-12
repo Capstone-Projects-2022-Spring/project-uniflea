@@ -1,19 +1,56 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, Image } from "react-native";
 import styles from "./styles";
 import { FontAwesome } from '@expo/vector-icons';
+import { DataStore } from "aws-amplify";
+import { User } from "../../models";
+import { S3Image } from 'aws-amplify-react-native';
+const STOCK_IMAGE = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png"
+const ReviewItem = ({ title, body, rating, reviewerSub }) => {
+    const [user, setUser] = useState();
+    const [userImage, setUserImage] = useState(undefined);
+    const [userName, setUserName] = useState(undefined);
+    const fetchReviewerProfile = async () => {
+        try {
+            // console.log("REVIEWER SUB ========", reviewerSub);
+            const reviewingUser = await DataStore.query(User, u => u.userSub("eq", reviewerSub))
+            
+            if (reviewingUser.length > 0) {
+             
+                setUser(reviewingUser[0]);
+            } else {
+                console.warn("No such reviewing user found");
+                return;
+            }
 
-const Review = ({ title, body, rating, username, img }) => {
+            // console.log("USER =========", user);
 
+            setUserImage(reviewingUser[0].image);
+            console.log("USER IMAGE = ", userImage);
+            setUserName(reviewingUser[0].name);
+            console.log("USER NAME = ", userName);
+
+        } catch (e) {
+            console.log('error fetching reviewing user');
+        }
+
+    }
+    useEffect(() => {
+        fetchReviewerProfile();
+    }, []);
     return (
 
         <View style={styles.container}>
             <View style={styles.profileContainer}>
-                <Image
+                {userImage != null ? (<S3Image
                     style={styles.tinyLogo}
-                    source={{ uri: img }}
-                />
-                <Text style={styles.username}>{username}</Text>
+                    imgKey={userImage}
+                />) : (
+
+                    <Image style={styles.tinyLogo} source={{ uri: STOCK_IMAGE }} />
+                )}
+
+                <Text style={styles.username}>{userName}</Text>
             </View>
 
 
@@ -26,7 +63,6 @@ const Review = ({ title, body, rating, username, img }) => {
                         //} else if (i < rating) {
                             //starName = "star-half-empty"
                         } else { starName = "star-o" }
-                        console.log("Star Name ========= ", starName);
                         return (<FontAwesome
                             style={styles.star}
                             name={starName}
@@ -46,4 +82,4 @@ const Review = ({ title, body, rating, username, img }) => {
     );
 }
 
-export default Review;
+export default ReviewItem;

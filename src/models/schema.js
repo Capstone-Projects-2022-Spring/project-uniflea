@@ -39,14 +39,6 @@ export const schema = {
                     "attributes": [],
                     "isArrayNullable": false
                 },
-                "category": {
-                    "name": "category",
-                    "isArray": true,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": [],
-                    "isArrayNullable": true
-                },
                 "price": {
                     "name": "price",
                     "isArray": false,
@@ -87,6 +79,13 @@ export const schema = {
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
+                    "attributes": []
+                },
+                "category": {
+                    "name": "category",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
                     "attributes": []
                 },
                 "createdAt": {
@@ -304,6 +303,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "userBio": {
+                    "name": "userBio",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -442,5 +448,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "5760863d4c3c9483a24bf965658c113e"
+    "version": "17de62d195a0974e3720fcfdd9f71cac"
 };

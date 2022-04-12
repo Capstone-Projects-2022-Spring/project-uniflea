@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Arial',  
     },
     passwordInfo: {
-        color: 'red',
+        color: 'blue',
     },
     pageContainer: {
         padding: 10,

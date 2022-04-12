@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Storage, Auth, DataStore } from "aws-amplify";
-import {Text, SafeAreaView, TouchableOpacity, View,} from "react-native";
-import ProfileScreenButton from "../../components/ProfileScreenButton";
+import { Text, SafeAreaView, TouchableOpacity, View,
+  Modal, ScrollView, ActivityIndicator} from "react-native";
 import styles from "./styles";
 import { Rating } from "react-native-rating-element";
 import { useNavigation } from "@react-navigation/native";
@@ -10,18 +10,22 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 import { S3Image } from "aws-amplify-react-native";
 import { User } from "../../models";
-import { AntDesign } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
+import CustomTextBox from "../../components/CustomTextBox";
+import CustomButton from "../../components/CustomButton";
+import { useForm } from "react-hook-form";
+
 
 const ProfilePage = () => {
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(true);
+
+  //to for signing out
   const { user, setUser } = useContext(AuthContext);
-
-    const signOut = () => {
-      setUser(undefined);
-      Auth.signOut();
-   };
-
+  const signOut = () => {
+    setUser(undefined);
+    Auth.signOut();
+  };
 
   let myuuid = uuidv4();
   const [image, setImage] = useState(null);
@@ -41,7 +45,7 @@ const ProfilePage = () => {
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
-
+    setIsLoading(true);
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -57,8 +61,10 @@ const ProfilePage = () => {
     //uploads to s3
     const response = await fetch(result.uri);
     const blob = await response.blob();
-    const uploadedImage = await Storage.put(myuuid, blob);
-
+    const uploadedImage = await Storage.put(myuuid, blob, {
+      contentType: "image/png",
+    });
+    console.log("UPLOADED YOUR IMAGE");
     //upload to amplify
     const myUser = await Auth.currentAuthenticatedUser();
     const original = await DataStore.query(User, (s) =>
@@ -72,120 +78,240 @@ const ProfilePage = () => {
     );
 
     setImage(uploadedImage.key);
+    setIsLoading(false);
   };
-{/*Setting the name of the user on the page */}
+
+  /*Setting the name of the user on the page */
   const [displayName, setDisplayName] = useState(null);
   const [name, setName] = useState(null);
-
-  const placeholder = async () => {
+  const [schoolName, setSchoolName] = useState(null);
+  const [gradYear, setSchoolyYear] = useState(null);
+  const [userBio, setUserBio] = useState(null);
+  const [memberDate, setMemberDate] = useState(null);
+  const pullUserData = async () => {
+    setIsLoading(true);
     const myUser = await Auth.currentAuthenticatedUser();
     //i want the single user in the DB with the correct userSUB
     const userRecord = await DataStore.query(User, (s) =>
       s.userSub("eq", myUser.attributes.sub)
     );
+
     //setting all the data for the users
     const displayName = userRecord[0].displayName;
     const name = userRecord[0].name;
-
+    const schoolName = userRecord[0].university;
+    const gradYear = userRecord[0].gradYear;
+    const userBio = userRecord[0].userBio;
+    const memberDate = userRecord[0].createdAt;
     setDisplayName(displayName);
     setName(name);
-  
+    setSchoolName(schoolName);
+    setSchoolyYear(gradYear);
+    setUserBio(userBio);
+    setMemberDate(memberDate.split("-", 1).toString());
+
+    setIsLoading(false);
   };
+
+  //upload new bio  to amplify
+  const updateBio = async (data) => {
+    const myUser = await Auth.currentAuthenticatedUser();
+    const userRecord = await DataStore.query(User, (s) =>
+      s.userSub("eq", myUser.attributes.sub)
+    );
+
+    await DataStore.save(
+      User.copyOf(userRecord[0], (update) => {
+        update.userBio = data.userBio;
+      })
+    );
+    console.log(userBio);
+    console.log("==========changed BIO=============");
+    toggleModalVisibility();
+  };
+
+  //for the circle buttons
+  const Circle = ({ text }) => (
+    <View style={styles.circle}>
+      <Text style={styles.squareText}>{text}</Text>
+    </View>
+  );
+
+  const settingPress = () => {
+    navigation.navigate("SettingsScreen");
+  };
+
+  const { control, handleSubmit } = useForm();
 
   useEffect(() => {
     downloadImage();
-    placeholder();
-  
-    
+    pullUserData();
+    updateBio();
 
+    const subscription = DataStore.observe(User).subscribe(() => {
+      pullUserData();
+    });
+    // close subscription to prevent memory leaks
+    return () => subscription.unsubscribe();
   }, []);
 
-  //setting varriable to naviate to the settings screen
-  const iconPress = () => {
-    navigation.navigate("SettingsScreen"); 
-   };
+  //*************************************************bio pop-up */
+  // This is to manage Modal State
 
- 
+  // This is to manage Modal State
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  // Create toggleModalVisibility function that will
+  // Open and close modal upon button clicks.
+  const toggleModalVisibility = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  if (isLoading) {
+    return (
+      <SafeAreaView>
+        <ScrollView style={styles.root}>
+          <ActivityIndicator />
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+  //***************************************************************************************RETURN() */
   return (
     <SafeAreaView style={styles.root}>
+      <View style={styles.shape} />
+
       <View style={styles.topBannerContainer}>
-      
-      
-      {/* The onpress settings icon */}
-      <TouchableOpacity style={styles.topRightPosition} onPress={iconPress}>
-        <AntDesign name="setting" size={30} color="black" />
-      </TouchableOpacity>
+        <View style={styles.topBannerrRow}>
+          {/*The profile image */}
+          <View style={styles.profilePicContainer}>
+            <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
+              <S3Image style={styles.image} imgKey={image} />
+            </TouchableOpacity>
+          </View>
 
-        {/*The profile image */}
-      <View style={styles.profilePicContainer}>
-        <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
-          <S3Image style={styles.image} imgKey={image} />
-        </TouchableOpacity>
-      </View>
+          <View style={styles.rightInfoContainer}>
+            {/* The onpress settings icon */}
+            {/* <View style={styles.SettingsPosition}>
+              <TouchableOpacity onPress={settingPress}>
+                <AntDesign name="setting" size={scale(30)} color="white" />
+              </TouchableOpacity>
+            </View> */}
 
-        {/*Display name */}
-        <View style={styles.userNameContainer}>
-        <Text style={styles.userName}>{displayName}</Text>
+            <View style={styles.userInfoContainer}>
+              <Text style={styles.userName}>{displayName}</Text>
+
+              <Text style={styles.name}>{name}</Text>
+
+              <Text style={styles.name}>
+                {schoolName} {gradYear}
+              </Text>
+              <Text style={styles.name}>
+                {"Member Since: "}
+                {gradYear}{" "}
+              </Text>
+
+              <Rating
+                style={styles.rating}
+                rated={3.5}
+                totalCount={5}
+                size={20}
+                ratingColor={"gold"}
+              />
+
+              {/* <View style={styles.reportContainer}>
+                <TouchableOpacity
+                 title="Show Modal" onPress={toggleModalVisibility} 
+                >
+                  <AntDesign style={styles.reportIconContainer} name="edit" size={24} color="white" />
+
+                  <Text style={styles.reportText}>Edit Bio</Text>
+                </TouchableOpacity>
+                </View> */}
+
+              {/**  We are going to create a Modal with Text Input. */}
+              {/* <Button title="Show Modal" onPress={toggleModalVisibility} /> */}
+
+              {/** This is our modal component containing textinput and a button */}
+              <Modal
+                animationType="none"
+                transparent
+                visible={isModalVisible}
+                presentationStyle="overFullScreen"
+                onDsimiss={toggleModalVisibility}
+              >
+                <View style={styles.viewWrapper}>
+                  <View style={styles.modalView}>
+                    <CustomTextBox
+                      control={control}
+                      name="userBio"
+                      placeholder={userBio}
+                    />
+
+                    {/** This button is responsible to close the modal */}
+                    <Text style={styles.max}> Max character count is 150</Text>
+                    <CustomButton
+                      text="Save Changes"
+                      onPress={handleSubmit(updateBio)}
+                    />
+                    <CustomButton
+                      text="Cancle"
+                      onPress={toggleModalVisibility}
+                    />
+                  </View>
+                </View>
+              </Modal>
+            </View>
+          </View>
         </View>
-
-        <View style={styles.nameContainer}>
-        <Text style={styles.name}>{name}</Text>
-        </View> 
-        
-      {/*start of rating*/}
-      <View style={styles.ratingContainer}>
-      <Rating style={styles.rating} rated={3.5} totalCount={5} size={18} ratingColor={"#99182e"} />
-      </View>
-</View>
-<View style={styles.bioContainer}>
-
-<Text style={styles.bioText}>A senior computer science looking to sell old textbooks that were never opened. </Text>
-</View>
-
-<View style={styles.lowerContainer}>
-<View style={styles.space} />
-        {/*buttons to go to other pages */}
-      <View style={styles.space} />
-      <View style={styles.buttonContainer}>
-      <ProfileScreenButton
-        onPress={() => navigation.navigate("ActiveListingScreen")}
-        text="View Active Listings"
-      />
-      </View>
-      <View style={styles.space} />
-      <View style={styles.buttonContainer}>
-      <ProfileScreenButton
-        onPress={() => navigation.navigate("ReviewScreen")}
-        text="Read Reviews by other users"
-      />
       </View>
 
-
-      <View style={styles.space} />
-
-      <View style={styles.buttonContainer}>
-      <ProfileScreenButton
-        onPress={() => navigation.navigate("LeaveReviewScreen")}
-        text="Leave a Review"
-      />
+      <View style={styles.bioContainer}>
+        <Text style={styles.bioText}>{userBio}</Text>
       </View>
 
-      <View style={styles.space} />
-      <View style={styles.buttonContainer}>
-      <ProfileScreenButton
-        onPress={() => navigation.navigate("ReportScreen")}
-        text="Report User"
-      />
+      {/************************************************Start of lower container */}
+      <View style={styles.lowerContainer}>
+        <View style={styles.container}>
+          <View style={styles.row}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ReviewScreen")}
+            >
+              <Circle text="Read Reviews" />
+            </TouchableOpacity>
+
+            <View style={styles.space} />
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ActiveListingScreen")}
+            >
+              <Circle text="Active Listings" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.space} />
+          <View style={styles.row}>
+            <TouchableOpacity
+              title="Show Modal"
+              onPress={toggleModalVisibility}
+            >
+              <Circle text="Edit Bio" />
+            </TouchableOpacity>
+
+            <View style={styles.space} />
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SettingsScreen")}
+            >
+              <Circle text="Settings" />
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
 
-</View>     
-<View style={styles.signOutContainer}>
+      <View style={styles.signOutContainer}>
         <Text onPress={signOut} style={styles.signOutText}>
           Sign Out
         </Text>
-      </View> 
-
-
+      </View>
     </SafeAreaView>
   );
 };

@@ -1,5 +1,5 @@
 import { Auth } from "aws-amplify";
-import { Text, View, FlatList, Modal, Picker, Alert } from "react-native";
+import { Text, View, FlatList, Modal, Picker, Alert, TextComponent } from "react-native";
 import styles from "./styles";
 import ProductItem from "../../components/ProductItem";
 import React, { useEffect, useState, useContext } from "react";
@@ -9,18 +9,16 @@ import AuthContext from "../../contexts/Authentication";
 import { useChatContext } from "stream-chat-expo";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import DropDownPicker from "react-native-dropdown-picker";
+import { ConsoleLogger } from "@aws-amplify/core";
 
 const HomeScreen = ({ searchValue }) => {
   const { client } = useChatContext();
   const [products, setProducts] = useState([]);
-  var [sortedProducts, setSortedProducts] = useState([]);
+  const [sortedProducts, setSortedProducts] = useState([]);
   const { user, setUser } = useContext(AuthContext);
+  console.log(searchValue);
   
-  const signOut = () => {
-    setUser(undefined);
-    client.disconnectUser();
-    Auth.signOut();
-  };
 
   const [modalOpen, setModalOpen] = useState(false);
   const toggleModalOpen = () => {
@@ -28,36 +26,156 @@ const HomeScreen = ({ searchValue }) => {
   };
   const [selectedValue, setSelectedValue] = useState("None");
 
+
+  const resetDatastore = async () => {
+    try {
+      await DataStore.stop();
+      await DataStore.start();
+      console.warn("successfully stopped, started");
+      const products = await DataStore.query(Product);
+
+   
+    } catch (e) {
+      Alert.alert("oops", e.message);
+    }
+  };
+
+  
+
+  const fetchProducts = () => {
+    // if (categories.length == 1)
+    
+    if(categories.length >= 1) {
+
+      DataStore.query((Product), (product) => product.or(product => product
+        .category("eq", categories[0])
+        .category("eq", categories[1])
+        .category("eq", categories[2])
+        .category("eq", categories[3])
+        .category("eq", categories[4])
+        .category("eq", categories[5])
+        .category("eq", categories[6])))
+        .then(setSortedProducts);
+    } else {
+      console.log("Categories is null");
+      DataStore.query(Product).then(setProducts);
+      //console.log("products ============== ", products);
+      DataStore.query(Product).then(setSortedProducts);
+    }
+  }
+
+
+  useEffect(() => {
+    console.log("Running useEffect");
+    
+    if (categories.length >= 1) {
+
+      console.log("notCategories before querying: " + notCategories);
+
+      removeCategory(categories[0]);
+      removeCategory(categories[1]);
+
+      console.log("notCategories after splicing: " + notCategories[0] + notCategories[1]);
+      // DataStore.query(Product, (product) => product.or(product => product.category("ne", notCategories[0])).category("ne" + notCategories[1])).then(setSortedProducts);
+      // console.log(sortedProducts);
+      DataStore.query((Product), (product) => product.or(product => product
+      .category("eq", categories[0])
+      .category("eq", categories[1])
+      .category("eq", categories[2])
+      .category("eq", categories[3])
+      .category("eq", categories[4])
+      .category("eq", categories[5])
+      .category("eq", categories[6])))
+      .then(setSortedProducts);
+    
+    } else {
+      console.log("Categories is null");
+      DataStore.query(Product).then(setProducts);
+      //console.log("products ============== ", products);
+      DataStore.query(Product).then(setSortedProducts);
+    }
+
+  }, [categories]);
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState([]);
+  const [items, setItems] = useState([
+    {label: 'Books', value: 'Books'},
+    {label: 'Supplies & Equipment', value: 'Supplies & Equipment'},
+    {label: 'Electronics', value: 'Electronics'},
+    {label: 'Clothes', value: 'Clothes'},
+    {label:  'Food & Nutrition', value: 'Food & Nutrition'},
+    {label: 'Handmade', value: 'Handmade'},
+    {label: 'Service', value: 'Service'},
+    {label: 'Other', value: 'Other'}
+  ]);
+  var [categories, setCategories] = useState([]);
+  var [notCategories, setNotCategories] = useState(["art", "protein", "test", "textbook"]);
+  
+
+  const applyCategories = (value) => {
+    categories=value;
+    console.log("Categories in applyCategories: " + categories);
+    
+    
+    if (categories.length >= 1) {
+      DataStore.query((Product), (product) => product.or(product => product
+        .category("eq", categories[0])
+        .category("eq", categories[1])
+        .category("eq", categories[2])
+        .category("eq", categories[3])
+        .category("eq", categories[4])
+        .category("eq", categories[5])
+        .category("eq", categories[6])))
+        .then(setSortedProducts);
+      // setSortedProducts(categorizedProducts);
+      // DataStore.query(Product, (product) => product.or(product => product.category("ne", notCategories[0])).category("ne" + notCategories[1])).then(setSortedProducts);
+      // console.log(sortedProducts);
+
+
+    } else {
+      console.log("Categories is null");
+      DataStore.query(Product).then(setProducts);
+      //console.log("products ============== ", products);
+      DataStore.query(Product).then(setSortedProducts);
+    }
+  }
+
+
+
   const filterSort = (sortedProducts, itemValue) => {
     setSelectedValue(itemValue);
-    console.log("Changed sort setting");
-    console.log(itemValue);
+    console.log("Changed sort setting to " + itemValue);
+    console.log("Categories in filterSort: " + categories)
 
     switch (itemValue) {
       case "none":
         console.log("No sort required");
         //No need to sort
         setSortedProducts(products);
-        applyCategory(category);
+        applyCategories(categories);
         return;
 
-      case "price":
-        console.log("Sorted by price");
+      case "priceLow":
+        console.log("Sorted by price: low to high");
         //sort by price
         sortedProducts.sort((a, b) => (a.price > b.price ? 1 : -1));
-        //console.log("Sorted products after sort:")
-        //console.log(sortedProducts);
         return;
+
+      
+      case "priceHigh":
+        console.log("Sorted by price: high to low");
+        //sort by price
+        sortedProducts.sort((a, b) => (a.price < b.price ? 1 : -1));
+        return;  
 
       case 'dateNewest':
         console.log("Sorted by Date: Newest");
-        //sort by price
         sortedProducts.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
         return;
         
       case 'dateOldest':
         console.log("Sorted by Date: Oldest");
-        //sort by price
         sortedProducts.sort((a, b) => (a.createdAt > b.createdAt) ? 1 : -1);
         return;  
 
@@ -67,58 +185,25 @@ const HomeScreen = ({ searchValue }) => {
     }
   };
 
-  var [category, setCategory] = useState(null);
-  const [categoryText, setCategoryText] = useState(
-    "CURRENT SELECTED CATEGORY: NONE"
-  );
-  const applyCategory = (category) => {
-    setCategory(category);
-    if (category !== null){
-      setCategoryText("CURRENT SELECTED CATEGORY: " + category);
-      DataStore.query(Product, c => c.category("contains", category)).then(setSortedProducts);
-    } else {
-      setCategoryText("CURRENT SELECTED CATEGORY: NONE");
-      DataStore.query(Product).then(setSortedProducts);
-    }
-  };
-  const resetDatastore = async () => {
-    try {
-      await DataStore.stop();
-      await DataStore.start();
-      console.warn("successfully stopped, started");
-  
-    } catch (e) {
-      Alert.alert("oops", e.message);
-    }
-  };
-  const fetchProducts = () => {
-    if (category !== null) {
-      DataStore.query(Product).then(setProducts);
-      DataStore.query(Product, (c) => c.category("contains", category)).then(
-        setSortedProducts
-      );
-    } else {
-      DataStore.query(Product).then(setProducts);
-      console.log("products ============== ", products);
-      DataStore.query(Product).then(setSortedProducts);
-    }
-  }
+
+
+
+
   useEffect(() => {
     // wait 2 seconds after user finishes typing to query results
     const delayDebounceFn = setTimeout(() => {
       console.log(searchValue)
       // Send Axios request here
       DataStore.query(Product, (product) => product.title("contains", searchValue)).then(setProducts);
-      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(
-        setSortedProducts
-      );
+      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(setSortedProducts);
     }, 1000)
 
     return () => clearTimeout(delayDebounceFn)
   }, [searchValue])
 
   useEffect(() => {
-    resetDatastore();
+
+    // resetDatastore();
     
   }, []);
   useEffect(() => {
@@ -154,67 +239,33 @@ const HomeScreen = ({ searchValue }) => {
               }
             >
               <Picker.Item label ="None" value="none"/>
-              <Picker.Item label ="Price" value="price"/>
+              <Picker.Item label ="Price: Low to High" value="priceLow"/>
+              <Picker.Item label ="Price: High to Low" value="priceHigh"/>
               <Picker.Item label ="Date: Newest" value="dateNewest"/>
               <Picker.Item label ="Date: Oldest" value="dateOldest"/>
 
-          </Picker>
-          </View>
+            </Picker>
 
-          <View style={{ width: "100%", height: 15 }}>
-            <Text
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              {categoryText}
-            </Text>
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            multiple={true}
+            min={0}
+            max={7}
+            onChangeValue={(value) => {
+              setCategories(value);
+              applyCategories(value);
+              filterSort(sortedProducts, 'none');
+              console.log("value: " + value);
+              console.log("Categories after setting in dropdown: " + categories);
+            }}
+          />
 
-            <Text
-              onPress={() => applyCategory("a")}
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              Filter by Category A
-            </Text>
 
-            <Text
-              onPress={() => applyCategory("b")}
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              Filter by Category B
-            </Text>
-
-            <Text
-              onPress={() => applyCategory("c")}
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              Filter by Category C
-            </Text>
-
-            <Text
-              onPress={() => applyCategory(null)}
-              style={{
-                width: "100%",
-                height: 30,
-                textAlign: "center",
-              }}
-            >
-              Clear Category
-            </Text>
           </View>
         </View>
       </Modal>

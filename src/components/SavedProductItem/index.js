@@ -3,6 +3,7 @@ import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { SavedProduct } from "../../models";
 import { DataStore } from "aws-amplify";
+import { S3Image } from "aws-amplify-react-native/dist/Storage";
 import {
   Ionicons,
   AntDesign,
@@ -34,7 +35,7 @@ const SavedProductItem = ({ id, image, title, price, displayName, productId, ite
     <View style={styles.root}>
     <Pressable onPress={onPress} >
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: image }} />
+        <S3Image style={styles.image} imgKey={image }/>
       </View>
       <View style={styles.rightContainer}>
         <View style={styles.titleContainer}>

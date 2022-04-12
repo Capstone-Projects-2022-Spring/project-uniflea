@@ -1,6 +1,8 @@
 import React, {useState, useRef} from 'react';
 import { View, Image, FlatList, useWindowDimensions } from 'react-native';
 import styles from './styles';
+import { S3Image } from 'aws-amplify-react-native/dist/Storage';
+
 // image carousel recieves an array of images
 const ImageCarousel = ({images}) => {
     const windowWidth = useWindowDimensions().width;
@@ -20,7 +22,7 @@ const ImageCarousel = ({images}) => {
                 data={images}
                 renderItem={({item}) => {
                         return (
-                            <Image style={[styles.image, {width: windowWidth - 20}]} source={{uri: item}}/>
+                            <S3Image style={styles.image} imgKey={item}/>
                         );
                     }
                     
