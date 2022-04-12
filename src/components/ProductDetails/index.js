@@ -117,13 +117,13 @@ const ProductDetails = () => {
                     {/*<CustomCircleButton onPress = {() => alert("Will take to listing user's profile in future updates!")}>*/}
                     {/*    <Image style = {styles.circleButtonPic} source = {require("/Users/tj/IdeaProjects/project-uniflea/assets/logo.png")}/>*/}
                     {/*</CustomCircleButton>*/}
+                    <TouchableOpacity onPress = {() => navigation.navigate("OtherProfileScreen",{userSub: product.userSub} )} style={styles.circleButton}>
 
-                    <TouchableOpacity onPress = {() => {navigation.navigate("OtherProfileStack")}} style={styles.circleButton}>
                         {/*<S3Image style = {styles.circleButtonPic} imgKey={profileImage}/>*/}
                         <Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>
-                    </TouchableOpacity>
+              
 
-                    <TouchableOpacity onPress={() => navigation.navigate("OtherProfileScreen",{userSub: product.userSub} )}>
+ 
                     <Text style = {styles.profileText}>Visit User's Profile</Text>
                     </TouchableOpacity>
 

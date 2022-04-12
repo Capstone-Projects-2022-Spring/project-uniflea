@@ -94,6 +94,12 @@ const OtherProfilePage = () => {
   const [schoolName, setSchoolName] = useState(null);
   const [gradYear, setSchoolyYear] = useState(null);
   const [bio, setBio] = useState(null);
+ const [image, setImage] = useState(null);
+ const [prod, setProduct] = useState(null); 
+
+
+ const { userSub } = route.params;
+  const pullOtherUserInfo = async () => {
 
   const placeholder = async () => {
     const myUser = await Auth.currentAuthenticatedUser();
