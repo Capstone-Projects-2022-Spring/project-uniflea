@@ -48,7 +48,9 @@ const ProductDetails = () => {
         }
         const prod = await DataStore.query(Product, route.params.id);
         setProduct(prod);
+
         setOtherUser(prod.userSub)
+
         // console.log("Product = ", product)
 
         // fetch the user who created the listing's Stream API account
@@ -121,7 +123,11 @@ const ProductDetails = () => {
                         <Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>
                     </TouchableOpacity>
 
+                    <TouchableOpacity onPress={() => navigation.navigate("OtherProfileScreen",{userSub: product.userSub} )}>
                     <Text style = {styles.profileText}>Visit User's Profile</Text>
+                    </TouchableOpacity>
+
+                    
                 </View>
                 {/* Image Carousel */}
                 <ImageCarousel images={product.images} />
