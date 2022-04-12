@@ -1,0 +1,110 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-uniflea-staging-135234-authRole",
+      "UnauthRoleArn": "arn:aws:iam::485772891194:role/amplify-uniflea-staging-135234-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::485772891194:role/amplify-uniflea-staging-135234-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-uniflea-staging-135234-deployment",
+      "UnauthRoleName": "amplify-uniflea-staging-135234-unauthRole",
+      "StackName": "amplify-uniflea-staging-135234",
+      "StackId": "arn:aws:cloudformation:us-east-2:485772891194:stack/amplify-uniflea-staging-135234/5e790d90-88e6-11ec-89e8-0a4d7a11b74c",
+      "AmplifyAppId": "d1c5vvalmphgap"
+    }
+  },
+  "auth": {
+    "UniFlea": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL",
+          "NAME"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ]
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "output": {
+        "UserPoolId": "us-east-2_OFLlxksfz",
+        "AppClientIDWeb": "1oenkissd7ec2k7ru49sjrg508",
+        "AppClientID": "2ibunjlqfbkiin9reuq1c291e3",
+        "IdentityPoolId": "us-east-2:4c12daa6-48bc-47e0-8648-9cfaa87fe2ea",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-2:485772891194:userpool/us-east-2_OFLlxksfz",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "UniFlea"
+      },
+      "lastPushTimeStamp": "2022-03-17T01:10:42.360Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-uniflea-staging-135234-deployment/amplify-cfn-templates/auth/UniFlea-cloudformation-template.json",
+        "logicalId": "authUniFlea"
+      }
+    }
+  },
+  "api": {
+    "uniflea": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            }
+          },
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ]
+        },
+        "GraphQLAPIIdOutput": "stemm7wygrb6zoha2vxw2isfge",
+        "GraphQLAPIEndpointOutput": "https://atffpkptlnhgrpookffyfgeuza.appsync-api.us-east-2.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-7epaff42z5fezef7a367ugjqee"
+      },
+      "lastPushTimeStamp": "2022-03-17T01:10:42.363Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-uniflea-staging-135234-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiuniflea"
+      },
+      "lastPushDirHash": "TJege3tJwxk0icDhEBKNabGdm5c="
+    }
+  },
+  "storage": {
+    "s3unifleastorage54a4f075": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "BucketName": "uniflea-storage-54a4f075135234-staging",
+        "Region": "us-east-2"
+      },
+      "lastPushTimeStamp": "2022-03-17T01:10:44.807Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-uniflea-staging-135234-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storages3unifleastorage54a4f075"
+      }
+    }
+  }
+}

@@ -41,7 +41,7 @@ const UsersScreen = () => {
         setIsLoading(true)
         // can filter users based on some param
         const response = await client.queryUsers({});
-        console.log(response);
+        // console.log(response);
         setUsers(response.users);
         setIsLoading(false);
     }

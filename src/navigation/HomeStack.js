@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { HeaderBackButton } from '@react-navigation/stack';
-
 import HomeScreen from '../screens/HomeScreen';
-import ProductDetails from '../components/ProductDetails';
 import { SafeAreaView, TextInput, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Colors } from '../styles/Colors';
@@ -44,7 +41,7 @@ const HomeStack = () => {
                     () => <HomeScreen searchValue={search}/>
                 }
             </Stack.Screen>
-            <Stack.Screen name='ProductScreen' component={ProductDetailScreenStack} options={{ title: '' }} />
+            <Stack.Screen name='ProductScreen' component={ProductDetailScreenStack} options={{headerShown: true, title: '' }} />
             <Stack.Screen component={NotificationsScreen} name={"Notifications"} options={{ title: 'Notifications' }} /> 
         </Stack.Navigator>
 

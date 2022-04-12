@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
-
+import { S3Image } from "aws-amplify-react-native/dist/Storage";
 const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
   const navigation = useNavigation();
   const onPress = () => {
@@ -28,11 +28,10 @@ const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
 
     //getting the item timestamp and splting the sting just to get the date
     try{
-      console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + createdAt);
+      
       const ampString = createdAt;
       const dateAmp = ampString.split("T", 1);
-      console.log("ampstring:" + ampString)
-      console.log("dateAmp:" + dateAmp)
+      
       const newDateAmp = dateAmp.toString();
   
       if (newDateAmp === newDateString) {
@@ -55,7 +54,7 @@ const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
     <Pressable onPress={onPress} style={styles.root}>
       {/* Is the image onpress -- directs to product screen*/}
       <View style={styles.imageContainer}>
-        <Image style={styles.image} source={{ uri: image }} />
+        <S3Image style={styles.image} imgKey={ image } />
       </View>
       <View style={styles.rightContainer}>
         <View style={styles.titleContainer}>

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { StyleSheet, SafeAreaView, StatusBar } from 'react-native';
-import CreateListingScreen from './src/screens/CreateListingScreen'
+import { StyleSheet, SafeAreaView, StatusBar, AppRegistry } from 'react-native';
+
 import { StreamChat } from 'stream-chat';
 import { OverlayProvider, Chat } from 'stream-chat-expo';
 
@@ -19,6 +19,7 @@ const client = StreamChat.getInstance(API_KEY);
 
 export default function App() {
   const [user, setUser] = useState('');
+  const [otherUser, setOtherUser] = useState('');
 
   
    
@@ -33,14 +34,16 @@ export default function App() {
     */
       
     // stream only allows one client connected at a time. On dismount, disconnect user
-    console.log(client);
+    // console.log(client);
     return () => client.disconnectUser();
   }, []);
+
+  console.disableYellowBox = true;
 
   return (
     <SafeAreaView style={styles.container}>
 
-      <AuthContext.Provider value={{user, setUser}}>
+      <AuthContext.Provider value={{user, setUser, otherUser, setOtherUser}}>
 
 
         <OverlayProvider>

@@ -26,12 +26,12 @@ export declare class Product {
   readonly description: string;
   readonly image: string;
   readonly images: string[];
-  readonly category?: string[];
   readonly price: number;
   readonly userSub: string;
   readonly university: string;
   readonly savedProducts?: (SavedProduct | null)[];
   readonly displayName: string;
+  readonly category?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<Product, ProductMetaData>);
@@ -62,6 +62,7 @@ export declare class User {
   readonly name: string;
   readonly dob: string;
   readonly email: string;
+  readonly userBio?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<User, UserMetaData>);

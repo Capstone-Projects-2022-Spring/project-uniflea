@@ -4,11 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import { Colors } from '../styles/Colors';
 import HomeStack from './HomeStack';
-import ProfilePage from '../screens/ProfileScreen';
 import MessagesStack from './MessagesStack';
 import SavedItemStack from './SavedItemStack';
 import SellItemScreenStack from './SellItemScreenStack';
 import ProfileScreenStack from './ProfileStack';
+import OtherProfileNavStack from './OtherProfileNavStack';
 
 const Tab = createBottomTabNavigator();
 const BottomTabNav = () => {
