@@ -36,7 +36,7 @@ const OtherProfilePage = ({route}) => {
   const [gradYear, setSchoolyYear] = useState(null);
   const [bio, setBio] = useState(null);
  const [image, setImage] = useState(null);
- const [prod, setProduct] = useState(null);
+ const [prod, setProduct] = useState(null); 
 
 
  const { userSub } = route.params;
