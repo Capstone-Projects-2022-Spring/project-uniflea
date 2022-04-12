@@ -22,7 +22,7 @@ import { scale } from "react-native-size-matters";
 
 
 
-const OtherProfilePage = ({route}) => {
+const OtherProfileScreen = ({route}) => {
 
   const navigation = useNavigation();
 
@@ -68,9 +68,6 @@ const OtherProfilePage = ({route}) => {
     </View>
   );
 
-  const iconPress = () => {
-    navigation.navigate("SettingsScreen");
-  };
 
   useEffect(() => {
     
@@ -112,7 +109,7 @@ const OtherProfilePage = ({route}) => {
 
               <View style={styles.reportContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("ReportScreen")}
+                  onPress={() => navigation.navigate('ProductDetails', {screen : "ReportScreen"})}
                 >
                   <MaterialIcons
                     style={styles.reportIconContainer}
@@ -140,7 +137,7 @@ const OtherProfilePage = ({route}) => {
             <TouchableOpacity
               onPress={() => navigation.navigate("ReviewScreen")}
             >
-              <Circle text="Read Reviews" s />
+              <Circle text="Read Reviews"  />
             </TouchableOpacity>
 
             <View style={styles.space} />
@@ -156,13 +153,13 @@ const OtherProfilePage = ({route}) => {
             <TouchableOpacity
               onPress={() => navigation.navigate("LeaveReviewScreen")}
             >
-              <Circle text="Leave a Review" h />
+              <Circle text="Leave a Review" />
             </TouchableOpacity>
 
             <View style={styles.space} />
-            <TouchableOpacity onPress={() => navigation.navigate(" ")}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("Messages")}>
               <Circle text="Message User" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </View>
@@ -170,4 +167,4 @@ const OtherProfilePage = ({route}) => {
   );
 };
 
-export default OtherProfilePage;
+export default OtherProfileScreen;
