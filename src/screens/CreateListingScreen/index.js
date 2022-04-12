@@ -14,6 +14,7 @@ import CategorySelect from '../../components/CategorySelect';
 import {UIImagePickerPresentationStyle} from "expo-image-picker";
 import {useForm} from "react-hook-form";
 import DropDownPicker from "react-native-dropdown-picker";
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 
 const CreateListingScreen = () => {
@@ -109,6 +110,8 @@ const CreateListingScreen = () => {
 
     // had scroll view to permit tapping out of text boxes. try to find keyboard dismiss. also figure out how to keep default camera image on pickimage. implement multiople images as well. /clear fields after publishing successfully. require fileds too
     return (
+
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View>
             <View style = {styles.container}>
                 <TouchableOpacity onPress={pickImage}>
@@ -169,6 +172,7 @@ const CreateListingScreen = () => {
                         setValue={setValue}
                         setItems={setItems}
                         multiple={false}
+                        dropDownDirection="TOP"
                         onChangeValue={(value) => {
                             setPickedCategory(value);
                         }}
@@ -177,6 +181,7 @@ const CreateListingScreen = () => {
                 <CustomButton onPress= {publishListing} text  = {"Publish Listing"}/>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     );
 };
 
