@@ -23,6 +23,7 @@ import AuthContext from "../../contexts/Authentication";
 import { scale } from "react-native-size-matters";
 import { useChatContext } from 'stream-chat-expo';
 
+import { useRoute } from '@react-navigation/native';
 
 const OtherProfilePage = () => {
 
@@ -34,7 +35,8 @@ const OtherProfilePage = () => {
     setUser(undefined);
     Auth.signOut();
   };
-
+  const route = useRoute();
+  
   let myuuid = uuidv4();
   const [image, setImage] = useState(null);
 
@@ -113,7 +115,7 @@ const OtherProfilePage = () => {
 
     // setMemberDate(memberDate.split("-", 1).toString());
   };
-
+  
   //for the circle buttons
   const Circle = ({ text }) => (
     <View style={styles.circle}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {Text, ScrollView, SafeAreaView, Alert, ActivityIndicator, View, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import { useRoute } from '@react-navigation/native';
@@ -11,6 +11,7 @@ import SendMessageItem from '../SendMessageItem';
 import { useChatContext } from 'stream-chat-expo';
 import CustomCircleButton from "../CustomCircleButton";
 import {S3Image} from "aws-amplify-react-native/src/Storage";
+import AuthContext from '../../contexts/Authentication';
 
 const ProductDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(undefined);
     const [profileImage, setProfileImage] = useState(undefined);
     const [user, setUser] = useState(undefined);
-
+    const {setOtherUser} = useContext(AuthContext);
     const route = useRoute();
 
     // route allows us to receive the data passed as param from navigator hook
@@ -47,7 +48,7 @@ const ProductDetails = () => {
         }
         const prod = await DataStore.query(Product, route.params.id);
         setProduct(prod);
-
+        setOtherUser(prod.userSub)
         // console.log("Product = ", product)
 
         // fetch the user who created the listing's Stream API account
@@ -114,7 +115,8 @@ const ProductDetails = () => {
                     {/*<CustomCircleButton onPress = {() => alert("Will take to listing user's profile in future updates!")}>*/}
                     {/*    <Image style = {styles.circleButtonPic} source = {require("/Users/tj/IdeaProjects/project-uniflea/assets/logo.png")}/>*/}
                     {/*</CustomCircleButton>*/}
-                    <TouchableOpacity onPress = {() => alert("Will take to listing user's profile in future updates!")} style={styles.circleButton}>
+
+                    <TouchableOpacity onPress = {() => {navigation.navigate("OtherProfileStack")}} style={styles.circleButton}>
                         {/*<S3Image style = {styles.circleButtonPic} imgKey={profileImage}/>*/}
                         <Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>
                     </TouchableOpacity>

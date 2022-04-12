@@ -70,6 +70,9 @@ const Navigation = () => {
     }
     useEffect(() => {
         checkUser();
+        return () => {
+            setUser(null);
+        }
     }, []);
 
     // Sign up/sign in events get logged to amplify hub.
