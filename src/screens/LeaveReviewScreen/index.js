@@ -1,10 +1,9 @@
 
-import React, { useEffect, useState, useContext } from 'react';
-import { SafeAreaView, Text, TextInput, View , Alert} from 'react-native';
+import React, { useState, useContext } from 'react';
+import { SafeAreaView, TextInput, View , Alert} from 'react-native';
 import styles from './styles';
 import { Picker } from '@react-native-picker/picker';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
-import { useRoute } from '@react-navigation/native';
 import { User, Review } from '../../models';
 import { DataStore } from 'aws-amplify';
 import AuthContext from '../../contexts/Authentication';
@@ -14,17 +13,13 @@ const LeaveReviewScreen = () => {
     const [rating, setRating] = useState(1);
     const [titleText, setTitleText] = useState('');
     const [bodyText, setBodyText] = useState('');
-    const route = useRoute();
+  
     const navigation = useNavigation();
     const { user, otherUser } = useContext(AuthContext);
     
-
-    const queryOtherUser = async() => {
-        
-    }
     const onLeaveReview = async () => {
-        // query the user
-        console.warn("Other userid ======",otherUser);
+        // query the other user's profile
+        console.log("Other userid ======",otherUser);
         if(!otherUser){
             console.warn("Error, no user found to review");
             return;
