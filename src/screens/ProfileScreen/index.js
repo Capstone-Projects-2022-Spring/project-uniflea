@@ -14,6 +14,7 @@ import AuthContext from "../../contexts/Authentication";
 import CustomTextBox from "../../components/CustomTextBox";
 import CustomButton from "../../components/CustomButton";
 import { useForm } from "react-hook-form";
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 
 const ProfilePage = () => {
@@ -240,6 +241,7 @@ const ProfilePage = () => {
                 presentationStyle="overFullScreen"
                 onDsimiss={toggleModalVisibility}
               >
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
                 <View style={styles.viewWrapper}>
                   <View style={styles.modalView}>
                     <CustomTextBox
@@ -260,6 +262,7 @@ const ProfilePage = () => {
                     />
                   </View>
                 </View>
+                </TouchableWithoutFeedback>
               </Modal>
             </View>
           </View>
