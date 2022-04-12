@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Storage, Auth, DataStore } from "aws-amplify";
 import { Text, SafeAreaView, TouchableOpacity, View,
   Modal, ScrollView, ActivityIndicator} from "react-native";
