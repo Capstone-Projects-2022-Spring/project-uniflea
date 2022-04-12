@@ -6,12 +6,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor:'#99182e',
         // backgroundColor: Colors.buttonbackgroundPrimary,
-        height: 40,
-        width: 250,
+        height: '7%',
+        width: '65%',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: Colors.buttonBorderPrimary,
-        margin: 10,
+        margin: '2%',
 
     },
     buttonText: {

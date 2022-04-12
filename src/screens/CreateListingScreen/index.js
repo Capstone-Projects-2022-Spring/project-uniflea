@@ -40,6 +40,7 @@ const CreateListingScreen = () => {
         {label: 'Food & Nutrition', value: 'Food & Nutrition'},
         {label: 'Handmade', value: 'Handmade'},
         {label: 'Service', value: 'Service'},
+        {label: 'Other', value: 'Other'},
     ]);
     const CATEGORIES = [
         {label: 'Books', value: 'Books'},
@@ -109,74 +110,68 @@ const CreateListingScreen = () => {
 
     // had scroll view to permit tapping out of text boxes. try to find keyboard dismiss. also figure out how to keep default camera image on pickimage. implement multiople images as well. /clear fields after publishing successfully. require fileds too
     return (
-        <View>
-            <View style = {styles.container}>
-                <TouchableOpacity onPress={pickImage}>
-                    {/*<Image style = {styles.cameraFrame} source = {require("../../../assets/camera.png")}/>*/}
-                    <S3Image style={styles.cameraFrame} imgKey={image} />
-                </TouchableOpacity>
-                <TextInput
-                    style={styles.input}
-                    placeholder={"Title of Listing"}
-                    onChangeText = {newText => setTitleOfListing(newText)}
-                    defaultValue={titleOfListing}
-                />
-            </View>
-
-            <View style = {styles.container}>
-                <TextInput
-                    style={styles.input2}
-                    placeholder={"Description of Listing"}
-                    multiline = {true}
-                    onChangeText = {newText => setDescriptionOfListing(newText)}
-                    defaultValue={descriptionOfListing}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder={"($) Price of Listing"}
-                    onChangeText = {newText => setPriceOfListing(newText)}
-                    defaultValue={priceOfListing}
-                />
-                <View style = {styles.container2}>
-                    {/*<CategorySelect*/}
-                    {/*    control={control}*/}
-                    {/*    items={CATEGORIES}*/}
-                    {/*    name="catSelector"*/}
-                    {/*    rules={{ required: 'Must select a category' }}*/}
-                    {/*    itemToSelect='Category'*/}
-                    {/*/>*/}
-                    <DropDownPicker
-                        style = {{
-                            backgroundColor: "#f2f2f2"
-                        }}
-
-                        //******************************************************************* */
-                        //I think this borderRadius is what is breaking 
-                        // style = {{
-                        //     backgroundColor: "#f2f2f2",
-                        //     borderRadius: '5'
-                        // }}
-                        // placeholder={"Select a Category"}
-
-                        //******************************************************************* */
-                        placeholderStyle={{
-                            color: "#bdbdc2",
-                        }}
-                        open={open}
-                        value={value}
-                        items={items}
-                        setOpen={setOpen}
-                        setValue={setValue}
-                        setItems={setItems}
-                        multiple={false}
-                        onChangeValue={(value) => {
-                            setPickedCategory(value);
-                        }}
+        <SafeAreaView>
+            {/*<ScrollView>*/}
+                <View style = {styles.container}>
+                    <TouchableOpacity onPress={pickImage}>
+                        {/*<Image style = {styles.cameraFrame} source = {require("../../../assets/camera.png")}/>*/}
+                        <S3Image style={styles.cameraFrame} imgKey={image} />
+                    </TouchableOpacity>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={"Title of Listing"}
+                        onChangeText = {newText => setTitleOfListing(newText)}
+                        defaultValue={titleOfListing}
                     />
+                    <TextInput
+                        style={styles.input2}
+                        placeholder={"Description of Listing"}
+                        multiline = {true}
+                        onChangeText = {newText => setDescriptionOfListing(newText)}
+                        defaultValue={descriptionOfListing}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder={"($) Price of Listing"}
+                        onChangeText = {newText => setPriceOfListing(newText)}
+                        defaultValue={priceOfListing}
+                    />
+                    <View style = {styles.container2}>
+                        {/*<CategorySelect*/}
+                        {/*    control={control}*/}
+                        {/*    items={CATEGORIES}*/}
+                        {/*    name="catSelector"*/}
+                        {/*    rules={{ required: 'Must select a category' }}*/}
+                        {/*    itemToSelect='Category'*/}
+                        {/*/>*/}
+                        <DropDownPicker
+                            //I think this borderRadius is what is breaking
+                            style = {{
+                                backgroundColor: "#f2f2f2",
+                                borderRadius: 5,
+                            }}
+                            placeholder="Select a Category"
+
+                            placeholderStyle={{
+                                color: "#bdbdc2",
+                            }}
+                            open={open}
+                            value={value}
+                            items={items}
+                            setOpen={setOpen}
+                            setValue={setValue}
+                            setItems={setItems}
+                            multiple={false}
+                            onChangeValue={(value) => {
+                                setPickedCategory(value);
+                            }}
+                            dropDownDirection = "TOP"
+                        />
+                    </View>
+                    <CustomButton onPress= {publishListing} text  = {"Publish Listing"}/>
                 </View>
-                <CustomButton onPress= {publishListing} text  = {"Publish Listing"}/>
-            </View>
-        </View>
+            {/*</ScrollView>*/}
+        </SafeAreaView>
     );
 };
 
