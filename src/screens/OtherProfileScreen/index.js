@@ -68,9 +68,6 @@ const OtherProfileScreen = ({route}) => {
     </View>
   );
 
-  const iconPress = () => {
-    navigation.navigate("SettingsScreen");
-  };
 
   useEffect(() => {
     
@@ -112,7 +109,7 @@ const OtherProfileScreen = ({route}) => {
 
               <View style={styles.reportContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("ReportScreen")}
+                  onPress={() => navigation.navigate('ProductDetails', {screen : "ReportScreen"})}
                 >
                   <MaterialIcons
                     style={styles.reportIconContainer}
@@ -160,9 +157,9 @@ const OtherProfileScreen = ({route}) => {
             </TouchableOpacity>
 
             <View style={styles.space} />
-            <TouchableOpacity onPress={() => navigation.navigate("Messages")}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate("Messages")}>
               <Circle text="Message User" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </View>
