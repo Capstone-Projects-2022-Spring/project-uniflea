@@ -19,13 +19,14 @@ import { User, Product } from "../../models";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
 import { scale } from "react-native-size-matters";
+import SendMessageItem from "../../components/SendMessageItem";
+import SendMessageButton from "../../components/SendMessageButton";
 
 
 
 const OtherProfilePage = ({route}) => {
 
   const navigation = useNavigation();
-
 
   /*Setting the name of the user on the page */
   const [displayName, setDisplayName] = useState(null);
@@ -34,8 +35,7 @@ const OtherProfilePage = ({route}) => {
   const [gradYear, setSchoolyYear] = useState(null);
   const [bio, setBio] = useState(null);
  const [image, setImage] = useState(null);
-
-
+ const[otherUser, setOtherUser] = useState(null);
 
  const { userSub } = route.params;
   const pullOtherUserInfo = async () => {
@@ -55,11 +55,10 @@ const OtherProfilePage = ({route}) => {
     setSchoolName(schoolName);
     setSchoolyYear(gradYear);
     setBio(bio);
+    setOtherUser(userRecord);
 
     // setMemberDate(memberDate.split("-", 1).toString());
   }
-
-
 
   //for the circle buttons
   const Circle = ({ text }) => (
@@ -75,6 +74,7 @@ const OtherProfilePage = ({route}) => {
   useEffect(() => {
     
     pullOtherUserInfo();
+
   }, []);
 
   //***************************************************************************************RETURN() */
@@ -160,9 +160,11 @@ const OtherProfilePage = ({route}) => {
             </TouchableOpacity>
 
             <View style={styles.space} />
-            <TouchableOpacity onPress={() => navigation.navigate(" ")}>
+            {/* <TouchableOpacity onPress={() => navigation.navigate(" ")}>
               <Circle text="Message User" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+
+            <SendMessageItem userToMessage={userSub}/>
           </View>
         </View>
       </View>
