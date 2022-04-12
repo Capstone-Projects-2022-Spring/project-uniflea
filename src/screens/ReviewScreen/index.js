@@ -16,7 +16,6 @@ const REVIEW_DATA = [
 ]
 
 const ReviewScreen = () => {
-    const navigation = useNavigation();
     const {user} = useContext(AuthContext);
     const [reviews, setReviews] = useState([]);
     const fetchReviews = async () => {
@@ -33,7 +32,11 @@ const ReviewScreen = () => {
 
     useEffect(() => {
         fetchReviews();
-        // console.log("Reviews ======>>>>>>********", reviews);
+        const subscription = DataStore.observe(Review).subscribe(() => {
+            fetchReviews()
+          });
+          // close subscription to prevent memory leaks
+          return () => subscription.unsubscribe();
     }, []);
     return (
 
