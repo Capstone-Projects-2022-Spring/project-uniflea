@@ -6,11 +6,21 @@ project-uniflea created by GitHub Classroom
 <br>
 UniFlea is a mobile application that serves as a marketplace platform for university students. It will be exclusively available to currently enrolled students at the university with a buffer period that permits recent graduates to also participate. The goal for UniFlea is to help students purchase or sell textbooks, equipment, electronics, furniture, clothing and more. Similar to applications such as Facebook Marketplace and Craigslist, UniFlea is unique in that it offers the comfort of safety through an authentication process that confirms transactions are being made by students. Features of UniFlea include authentication and verification upon creating an account, a personalized homepage catered to the individual student, search filters and categories, in app messaging, notifications, and a moderation and reporting system.
 
-# Milestone 2 Release
-<br>
-New in this release is a fully functioning product filtering system. This includes filtering by searching, category, date, and price.
-Furthermore, we enable users to save items they are interested in. We have also restyled the listings on the home screen to adhere to modern design principles. We also created the listing screen, allowing users to create new listings, and have them populated in the home screen's list of products.
-Finally, we created the front end for the report user and add review screens, accessible via the profile screen.
+### **Version 3.0 Release Notes**
+Hi everyone, this is the 3rd release of our application, UniFlea. There are many exciting features and quality of life fixes to go over.
+
+### **New features in this release**
+
+- Users are now able to chat in the app with other users to set up meetings or negotiate prices. Currently, this can be accessed via the navigation bar or when you tap on a item to view item details.
+- Users can view the profiles of other users and see their rating and reviews, leave a rating, and their user bio. Users can do this when they tap on an item to view more details.
+- Users can to keep UniFlea safe and legitimate by using the report item or report user feature that is available on every item details screen and everyone's profile screen.
+- Users are now able to filter items that are available using multiple categories such as 'electronics' and 'textbooks' at the same time. They can further organize those items based on price or date.
+
+### **Quality of Life Fixes**
+
+- We removed half-star ratings so that users have an easier and more enjoyable time rating other users.
+- We changed the password guideline font color from red to blue, before it confused some users into thinking that they were incorrect when they were creating their new password.
+
 
 # Installation Instructions
 <br>
