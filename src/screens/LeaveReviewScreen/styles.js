@@ -49,6 +49,16 @@ const styles = StyleSheet.create({
         width: '100%',
         height: "35%",
       },
+      customRatingBarStyle: {
+        justifyContent: 'center',
+        flexDirection: 'row',
+        marginTop: 30
+      },
+      starImgStyle: {
+        width: 40,
+        height: 40,
+        resizeMode: 'cover'
+      }
 });
 
 export default styles;
