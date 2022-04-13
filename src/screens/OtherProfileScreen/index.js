@@ -26,7 +26,7 @@ import { useChatContext } from 'stream-chat-expo';
 
 
 
-const OtherProfilePage = ({route}) => {
+const OtherProfileScreen = ({route}) => {
 
   const navigation = useNavigation();
 
@@ -78,9 +78,6 @@ const [isLoading, setIsLoading] = useState(true);
     </View>
   );
 
-  const iconPress = () => {
-    navigation.navigate("SettingsScreen");
-  };
 
   useEffect(() => {
     
@@ -133,7 +130,7 @@ const [isLoading, setIsLoading] = useState(true);
 
               <View style={styles.reportContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("ReportScreen")}
+                  onPress={() => navigation.navigate('ProductDetails', {screen : "ReportScreen"})}
                 >
                   <MaterialIcons
                     style={styles.reportIconContainer}
@@ -161,7 +158,7 @@ const [isLoading, setIsLoading] = useState(true);
             <TouchableOpacity
               onPress={() => navigation.navigate("ReviewScreen")}
             >
-              <Circle text="Read Reviews" s />
+              <Circle text="Read Reviews"  />
             </TouchableOpacity>
 
             <View style={styles.space} />
@@ -177,15 +174,13 @@ const [isLoading, setIsLoading] = useState(true);
             <TouchableOpacity
               onPress={() => navigation.navigate("LeaveReviewScreen")}
             >
-              <Circle text="Leave a Review" h />
+              <Circle text="Leave a Review" />
             </TouchableOpacity>
 
             <View style={styles.space} />
-            {/* <TouchableOpacity onPress={() => navigation.navigate(" ")}>
-              <Circle text="Message User" />
-            </TouchableOpacity> */}
 
             <SendMessageItem userToMessage={otherUser}/>
+
           </View>
         </View>
       </View>
@@ -193,4 +188,4 @@ const [isLoading, setIsLoading] = useState(true);
   );
 };
 
-export default OtherProfilePage;
+export default OtherProfileScreen;
