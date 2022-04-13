@@ -9,6 +9,7 @@ import {
   Pressable,
   Alert,
   StyleSheet,
+  ScrollView, ActivityIndicator
 } from "react-native";
 import styles from "./styles";
 import { Rating } from "react-native-rating-element";
@@ -21,6 +22,7 @@ import AuthContext from "../../contexts/Authentication";
 import { scale } from "react-native-size-matters";
 import SendMessageItem from "../../components/SendMessageItem";
 import SendMessageButton from "../../components/SendMessageButton";
+import { useChatContext } from 'stream-chat-expo';
 
 
 
@@ -37,9 +39,13 @@ const OtherProfilePage = ({route}) => {
  const [image, setImage] = useState(null);
  const[otherUser, setOtherUser] = useState(null);
 
+ const{client} = useChatContext();
+const [isLoading, setIsLoading] = useState(true);
+
  const { userSub } = route.params;
   const pullOtherUserInfo = async () => {
 
+    setIsLoading(true);
     const userRecord = await DataStore.query(User, s => s.userSub("eq", userSub));
     //setting all the data for the users
     const displayName = userRecord[0].displayName;
@@ -55,8 +61,13 @@ const OtherProfilePage = ({route}) => {
     setSchoolName(schoolName);
     setSchoolyYear(gradYear);
     setBio(bio);
-    setOtherUser(userRecord);
+    
 
+    const response = await client.queryUsers({id: {$in: [userSub]}});
+    console.log("response: " + response);
+    setOtherUser(response.users[0])
+    console.log("OtherUser is: " + otherUser)
+    setIsLoading(false);
     // setMemberDate(memberDate.split("-", 1).toString());
   }
 
@@ -76,9 +87,19 @@ const OtherProfilePage = ({route}) => {
     pullOtherUserInfo();
 
   }, []);
-
+  
+  if (isLoading) {
+    return (
+        <SafeAreaView>
+            <ScrollView style={styles.root}>
+                <ActivityIndicator />
+            </ScrollView>
+        </SafeAreaView>
+    );
+  }
   //***************************************************************************************RETURN() */
   return (
+  
     <SafeAreaView style={styles.root}>
       <View style={styles.shape} />
 
@@ -164,7 +185,7 @@ const OtherProfilePage = ({route}) => {
               <Circle text="Message User" />
             </TouchableOpacity> */}
 
-            <SendMessageItem userToMessage={userSub}/>
+            <SendMessageItem userToMessage={otherUser}/>
           </View>
         </View>
       </View>
