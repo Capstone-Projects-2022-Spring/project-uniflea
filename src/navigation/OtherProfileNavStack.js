@@ -5,7 +5,7 @@ import ReviewItem from '../components/Review';
 import ReviewScreen from '../screens/ReviewScreen';
 import ActiveListingScreen from '../screens/ActiveListingScreen';
 import LeaveReviewScreen from '../screens/LeaveReviewScreen';
-import OtherProfilePage from '../screens/OtherProfileScreen'
+import OtherProfileScreen from '../screens/OtherProfileScreen'
 import MessagesScreen from '../screens/MessagesScreen';
 import ChatScreen from '../screens/ChatScreen';
 
@@ -15,7 +15,7 @@ const OtherProfileStack = () => {
 
     return(
         <OtherProfileNavStack.Navigator screenOptions={{headerShown: true, title:''}}>
-        <OtherProfileNavStack.Screen name='OtherProfileScreen' component={OtherProfilePage} options= {{title: ''}}/>
+        <OtherProfileNavStack.Screen name='OtherProfileScreen' component={OtherProfileScreen} options= {{title: ''}}/>
         <OtherProfileNavStack.Screen name='ReportScreen' component={ReportScreen}/>
         <OtherProfileNavStack.Screen name='ReviewScreen' component={ReviewScreen}/>
         <OtherProfileNavStack.Screen name='ActiveListingScreen' component={ActiveListingScreen}/>

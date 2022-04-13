@@ -38,6 +38,8 @@ export default function App() {
     return () => client.disconnectUser();
   }, []);
 
+  console.disableYellowBox = true;
+
   return (
     <SafeAreaView style={styles.container}>
 

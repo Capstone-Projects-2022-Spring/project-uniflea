@@ -12,6 +12,7 @@ import { Feather } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
 import { ConsoleLogger } from "@aws-amplify/core";
 
+
 const HomeScreen = ({ searchValue }) => {
   const { client } = useChatContext();
   const [products, setProducts] = useState([]);
@@ -190,6 +191,7 @@ const HomeScreen = ({ searchValue }) => {
 
 
   useEffect(() => {
+    
     // wait 2 seconds after user finishes typing to query results
     const delayDebounceFn = setTimeout(() => {
       console.log(searchValue)
