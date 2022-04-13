@@ -7,6 +7,7 @@ import ActiveListingScreen from '../screens/ActiveListingScreen';
 import LeaveReviewScreen from '../screens/LeaveReviewScreen';
 import OtherProfileScreen from '../screens/OtherProfileScreen'
 import MessagesScreen from '../screens/MessagesScreen';
+import ChatScreen from '../screens/ChatScreen';
 
 const OtherProfileNavStack = createStackNavigator();
 
@@ -19,7 +20,7 @@ const OtherProfileStack = () => {
         <OtherProfileNavStack.Screen name='ReviewScreen' component={ReviewScreen}/>
         <OtherProfileNavStack.Screen name='ActiveListingScreen' component={ActiveListingScreen}/>
         <OtherProfileNavStack.Screen name='LeaveReviewScreen' component={LeaveReviewScreen} />
-        <OtherProfileNavStack.Screen name='Messages' component={MessagesScreen}/>
+        <OtherProfileNavStack.Screen name="Chat" component={ChatScreen} options={{title:'Chat'}}/>
         {/* <OtherProfileNavStack.Screen name=''/> */}
     </OtherProfileNavStack.Navigator>
     )

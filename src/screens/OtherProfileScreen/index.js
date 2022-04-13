@@ -9,6 +9,7 @@ import {
   Pressable,
   Alert,
   StyleSheet,
+  ScrollView, ActivityIndicator
 } from "react-native";
 import styles from "./styles";
 import { Rating } from "react-native-rating-element";
@@ -19,13 +20,15 @@ import { User, Product } from "../../models";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
 import { scale } from "react-native-size-matters";
+import SendMessageItem from "../../components/SendMessageItem";
+import SendMessageButton from "../../components/SendMessageButton";
+import { useChatContext } from 'stream-chat-expo';
 
 
 
 const OtherProfileScreen = ({route}) => {
 
   const navigation = useNavigation();
-
 
   /*Setting the name of the user on the page */
   const [displayName, setDisplayName] = useState(null);
@@ -34,12 +37,15 @@ const OtherProfileScreen = ({route}) => {
   const [gradYear, setSchoolyYear] = useState(null);
   const [bio, setBio] = useState(null);
  const [image, setImage] = useState(null);
+ const[otherUser, setOtherUser] = useState(null);
 
-
+ const{client} = useChatContext();
+const [isLoading, setIsLoading] = useState(true);
 
  const { userSub } = route.params;
   const pullOtherUserInfo = async () => {
 
+    setIsLoading(true);
     const userRecord = await DataStore.query(User, s => s.userSub("eq", userSub));
     //setting all the data for the users
     const displayName = userRecord[0].displayName;
@@ -55,11 +61,15 @@ const OtherProfileScreen = ({route}) => {
     setSchoolName(schoolName);
     setSchoolyYear(gradYear);
     setBio(bio);
+    
 
+    const response = await client.queryUsers({id: {$in: [userSub]}});
+    console.log("response: " + response);
+    setOtherUser(response.users[0])
+    console.log("OtherUser is: " + otherUser)
+    setIsLoading(false);
     // setMemberDate(memberDate.split("-", 1).toString());
   }
-
-
 
   //for the circle buttons
   const Circle = ({ text }) => (
@@ -72,10 +82,21 @@ const OtherProfileScreen = ({route}) => {
   useEffect(() => {
     
     pullOtherUserInfo();
-  }, []);
 
+  }, []);
+  
+  if (isLoading) {
+    return (
+        <SafeAreaView>
+            <ScrollView style={styles.root}>
+                <ActivityIndicator />
+            </ScrollView>
+        </SafeAreaView>
+    );
+  }
   //***************************************************************************************RETURN() */
   return (
+  
     <SafeAreaView style={styles.root}>
       <View style={styles.shape} />
 
@@ -157,9 +178,9 @@ const OtherProfileScreen = ({route}) => {
             </TouchableOpacity>
 
             <View style={styles.space} />
-            {/* <TouchableOpacity onPress={() => navigation.navigate("Messages")}>
-              <Circle text="Message User" />
-            </TouchableOpacity> */}
+
+            <SendMessageItem userToMessage={otherUser}/>
+
           </View>
         </View>
       </View>
