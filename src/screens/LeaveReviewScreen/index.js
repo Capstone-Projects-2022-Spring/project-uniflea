@@ -8,6 +8,7 @@ import { User, Review } from '../../models';
 import { DataStore } from 'aws-amplify';
 import AuthContext from '../../contexts/Authentication';
 import { useNavigation } from '@react-navigation/native';
+import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 const LeaveReviewScreen = () => {
     const [rating, setRating] = useState(1);
@@ -57,6 +58,7 @@ const LeaveReviewScreen = () => {
     }
     
     return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <SafeAreaView style={styles.container}>
             <Picker
                 style={styles.ratingPicker}
@@ -90,6 +92,7 @@ const LeaveReviewScreen = () => {
             <View style={styles.space} />
             <ProfileScreenButton onPress={onLeaveReview} text="Submit Review" />
         </SafeAreaView>
+        </TouchableWithoutFeedback>
     )
 }
 
