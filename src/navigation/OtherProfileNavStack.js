@@ -20,7 +20,7 @@ const OtherProfileStack = () => {
         <OtherProfileNavStack.Screen name='ReviewScreen' component={ReviewScreen}/>
         <OtherProfileNavStack.Screen name='ActiveListingScreen' component={ActiveListingScreen}/>
         <OtherProfileNavStack.Screen name='LeaveReviewScreen' component={LeaveReviewScreen} />
-        <ProductStack.Screen name="Chat" component={ChatScreen} options={{title:'Chat'}}/>
+        <OtherProfileNavStack.Screen name="Chat" component={ChatScreen} options={{title:'Chat'}}/>
         {/* <OtherProfileNavStack.Screen name=''/> */}
     </OtherProfileNavStack.Navigator>
     )
