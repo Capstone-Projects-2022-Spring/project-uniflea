@@ -190,35 +190,18 @@ const HomeScreen = ({ searchValue }) => {
 const [schoolName, setSchoolName] = useState(null);
 
 
-const findUniversity = async() => {
-  const currentUser = await Auth.currentAuthenticatedUser();
 
-  const user = await DataStore.query(User, (s) => 
-    s.userSub("eq", currentUser.attributes.sub)
-  );
 
-  const userUni = user[0].university;
-
-  setSchoolName(userUni);
-
-  
-};
 uniImg = () => {
-  if(schoolName === "Temple"){
-  return  <Image source={SchoolImage.TUImage}/> 
+  if(user.attributes['custom:University'] == 'Temple'){
+  return  (<Image source={SchoolImage.TUImage}/> ) 
     }
     else{
-      return <Image source={ SchoolImage.DRImage}/>
+      return ( <Image source={ SchoolImage.DRImage}/>)
  }
 };
 
   //*********************************************************************************************** */
-  useEffect(() => { 
-
-  findUniversity();
-
-
-  },[]);
 
 
   useEffect(() => {
@@ -304,9 +287,11 @@ uniImg = () => {
       </Modal>
       
       {/*School Image */}
-
-      {this.uniImg()}
-
+   
+      {/* {user.attributes['custom:University'] == 'Temple' ? (<Image source={SchoolImage.TUImage}/>)
+                       :( <Image source={ SchoolImage.DRImage}/>)} */}
+     {/* <View>{uniImg()}</View> 
+   */}
       {/*Filter Button*/}
       <View style={{ alignItems: "flex-end" }}>
         <AntDesign
