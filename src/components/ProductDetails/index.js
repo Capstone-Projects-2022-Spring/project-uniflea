@@ -21,26 +21,12 @@ const ProductDetails = () => {
     const navigation = useNavigation();
     const [product, setProduct] = useState(undefined);
     const [profileImage, setProfileImage] = useState(undefined);
-    const [user, setUser] = useState(undefined);
-    const [productImage, setProductImage] = useState(undefined);
+    const [profileName, setProfileName] = useState(undefined);
     const route = useRoute();
 
     // route allows us to receive the data passed as param from navigator hook
     // console.log('route params = ', route.params);
     // console.log(route.params.id);
-
-    const queryUser = async () => {
-        setIsLoading(true);
-        const user = await DataStore.query(User, s => s.userSub("eq", product.userSub));
-        if (!product.userSub) {
-            console.warn("No id matching item");
-            return;
-        }
-        const profileImage = user[0].image;
-        setProfileImage(profileImage);
-        console.log("Profile image = ", profileImage)
-        setIsLoading(false);
-    }
 
     const queryProduct = async () => {
         setIsLoading(true);
@@ -51,24 +37,26 @@ const ProductDetails = () => {
         const prod = await DataStore.query(Product, route.params.id);
         setProduct(prod);
         // console.log('prod------',prod )
-
         // console.log("Product = ", product)
+
+        // fetching user profile image
+        const user = await DataStore.query(User, s => s.userSub("eq", prod.userSub));
+        const profileImage = user[0].image;
+        setProfileImage(profileImage);
+        setProfileName(user[0].name);
+        // console.log("Profile Author's Name: ", response);
 
         // fetch the user who created the listing's Stream API account
         const response = await client.queryUsers({ id: { $in: [prod.userSub] } });
         // console.log("Response from user query = ", response);
         setSellingUser(response.users[0]);
         setIsLoading(false);
-        // setProfileImage(response.users[0].image);
-
     }
 
     // query product on render and each time the id parameter changes
     useEffect(() => {
         queryProduct();
-        // queryUser()
     }, [route.params?.id]);
-
 
     const addToSavedList = async () => {
         const userData = await Auth.currentAuthenticatedUser();
@@ -114,15 +102,17 @@ const ProductDetails = () => {
                             params: {userSub: product.userSub}
                         })}>
                             <View style={styles.profileContainer2}>
-                                <Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>
-                                {/*<S3Image style={styles.circleButtonPic} imgKey={profileImage}/>*/}
-                                <Text style={styles.profileText}>Visit User's Profile</Text>
+                                {/*<Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>*/}
+                                <S3Image style={styles.circleButtonPic} imgKey={profileImage}/>
+                                <Text style={styles.profileText}>Visit {profileName}'s Profile</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
                     {/* Image Carousel */}
-                    <ImageCarousel images={product.images}/>
-                    {/*<S3Image style = {styles.imageFrame} imgKey={productImage}/>*/}
+                    {/*<ImageCarousel images={product.images}/>*/}
+                    <View style = {styles.imageContainer}>
+                        <S3Image style = {styles.imageFrame} imgKey={product.image}/>
+                    </View>
                     {/* Price */}
                     <Text style={styles.price}>${product.price.toFixed(2)}</Text>
                     {/* Description */}

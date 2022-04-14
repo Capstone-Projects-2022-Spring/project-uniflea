@@ -67,11 +67,11 @@ const styles = ScaledSheet.create({
         alignItems: 'center',
     },
     imageFrame: {
-        width: scale(40),
-        height: scale(40),
-        borderRadius: 100,
-        borderWidth: 1,
-    }
+        width: scale(225),
+        height: scale(225),
+        borderWidth: 1.25,
+        resizeMode: 'contain',
+    },
 });
 
 export default styles;
