@@ -18,7 +18,7 @@ const SettingsScreen = ()  => {
       const user = await Auth.currentAuthenticatedUser();
       console.log(user )
       await Auth.forgotPassword(user.attributes.email);
-      navigation.navigate("ResetPassword");
+      navigation.navigate("ResetPassword", {fromScreen:"Settings"});
 
       
     } catch (e) {
