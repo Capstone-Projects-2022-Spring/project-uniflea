@@ -7,7 +7,7 @@ import { Colors } from '../styles/Colors';
 import NotificationsButton from '../components/NotificationsButton';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import ProductDetailScreenStack from './ProductDetailsStack';
-
+import SchoolLogo from '../components/SchoolLogo';
 const Stack = createStackNavigator();
 
 const HeaderComponent = ({search, setSearch}) => {
@@ -20,9 +20,8 @@ const HeaderComponent = ({search, setSearch}) => {
             </View>
 
             <View style={{position: 'absolute', right: 5, top: 5,}}>
-                <NotificationsButton/>
+               <SchoolLogo/> 
             </View>
-
 
         </SafeAreaView>
     );
@@ -42,7 +41,7 @@ const HomeStack = () => {
                 }
             </Stack.Screen>
             <Stack.Screen name='ProductScreen' component={ProductDetailScreenStack} options={{headerShown: true, title: '' }} />
-            <Stack.Screen component={NotificationsScreen} name={"Notifications"} options={{ title: 'Notifications' }} /> 
+            {/* <Stack.Screen component={NotificationsScreen} name={"Notifications"} options={{ title: 'Notifications' }} />  */}
         </Stack.Navigator>
 
 

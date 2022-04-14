@@ -15,15 +15,18 @@ import CustomTextBox from "../../components/CustomTextBox";
 import CustomButton from "../../components/CustomButton";
 import { useForm } from "react-hook-form";
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
-
+import { useChatContext } from "stream-chat-expo";
 
 const ProfilePage = () => {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
 
   //to for signing out
+  const { client } = useChatContext();
+
   const { user, setUser } = useContext(AuthContext);
   const signOut = () => {
+    client.disconnectUser();
     setUser(undefined);
     Auth.signOut();
   };
