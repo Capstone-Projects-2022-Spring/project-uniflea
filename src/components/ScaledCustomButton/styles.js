@@ -1,21 +1,22 @@
 import { StyleSheet } from "react-native";
+import { scale, ScaledSheet } from "react-native-size-matters";
 import {Colors} from '../../styles/Colors'
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     button:{
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor:'#99182e',
         // backgroundColor: Colors.buttonbackgroundPrimary,
-        height: 40,
-        width: 250,
+        height: '7%',
+        width: '65%',
         borderRadius: 5,
         borderWidth: 1,
         borderColor: Colors.buttonBorderPrimary,
-        margin: 10,
+        margin: '2%',
 
     },
     buttonText: {
-        fontSize: 20,
+        fontSize: '18@s',
         color: '#FFFFFF',
     },
 });

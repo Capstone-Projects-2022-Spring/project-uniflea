@@ -12,6 +12,7 @@ import { useChatContext } from 'stream-chat-expo';
 import CustomCircleButton from "../CustomCircleButton";
 import {S3Image} from "aws-amplify-react-native/src/Storage";
 import AuthContext from '../../contexts/Authentication';
+import ScaledCustomButton from "../ScaledCustomButton";
 
 const ProductDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -129,7 +130,7 @@ const ProductDetails = () => {
                     </View>
                     {/* Save listing */}
                     <View style={styles.buttonContainer}>
-                        <CustomButton onPress={addToSavedList} text='Save Listing' primary={true}/>
+                        <ScaledCustomButton onPress={addToSavedList} text='Save Listing' primary={true}/>
 
                         {/*<CustomButton onPress={() => {*/}
                         {/*    // console.log("Product Details screen: " + product.id)*/}

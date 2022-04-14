@@ -3,6 +3,7 @@ import styles from './styles'
 import {SafeAreaView, StyleSheet, TextInput, Pressable, Image, ScrollView,
     Text, View, TouchableHighlight, TouchableOpacity, Picker, Alert} from 'react-native';
 import CustomButton from "../../components/CustomButton";
+import ScaledCustomButton from "../../components/ScaledCustomButton";
 import * as ImagePicker from 'expo-image-picker';
 import {useNavigation} from "@react-navigation/native";
 import {Auth, DataStore, Storage} from "aws-amplify";
@@ -171,7 +172,7 @@ const CreateListingScreen = () => {
                             dropDownDirection = "TOP"
                         />
                     </View>
-                    <CustomButton onPress= {publishListing} text  = {"Publish Listing"}/>
+                    <ScaledCustomButton onPress= {publishListing} text  = {"Publish Listing"}/>
                 </View>
                 {/*</ScrollView>*/}
             </SafeAreaView>
