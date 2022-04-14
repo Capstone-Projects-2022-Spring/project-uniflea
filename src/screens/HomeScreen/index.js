@@ -188,10 +188,6 @@ const HomeScreen = ({ searchValue }) => {
 //***********************************************************************************************WORKING ON THEME IN HERE */
 
 const [schoolName, setSchoolName] = useState(null);
-
-
-
-
 uniImg = () => {
   if(user.attributes['custom:University'] == 'Temple'){
   return  (<Image source={SchoolImage.TUImage}/> ) 
@@ -290,8 +286,8 @@ uniImg = () => {
    
       {/* {user.attributes['custom:University'] == 'Temple' ? (<Image source={SchoolImage.TUImage}/>)
                        :( <Image source={ SchoolImage.DRImage}/>)} */}
-     {/* <View>{uniImg()}</View> 
-   */}
+     {/* <View>{uniImg()}</View>  */}
+   
       {/*Filter Button*/}
       <View style={{ alignItems: "flex-end" }}>
         <AntDesign
