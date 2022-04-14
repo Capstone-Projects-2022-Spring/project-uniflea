@@ -35,6 +35,7 @@ const SignInScreen = () => {
         // navigation.navigate('Home');
     }
     const onSignUpPressed = () => {
+        //navigation.navigate('SignUp');
         navigation.navigate('SignUp');
     }
     const onForgotPasswordPressed = () => {
