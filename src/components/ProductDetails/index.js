@@ -22,22 +22,18 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(undefined);
     const [profileImage, setProfileImage] = useState(undefined);
     const [user, setUser] = useState(undefined);
-
+    const [productImage, setProductImage] = useState(undefined);
     const route = useRoute();
 
     // route allows us to receive the data passed as param from navigator hook
     // console.log('route params = ', route.params);
     // console.log(route.params.id);
 
-    // const queryUser = async () => {
-    //     setIsLoading(true);
-    //     const user = await DataStore.query(User, s => s.userSub("eq", product.userSub));
-    //     // console.log("test = ", user);
-    //     // console.log("profile pic = ", profileImage);
-    //     const profileImage = user[0].image;
-    //     setProfileImage(profileImage);
-    //     setIsLoading(false);
-    // }
+    const pullProductRecord = async () => {
+        // const productRecord = await DataStore.query(Product, s => s.userSub("eq", userSub));
+        const productImage = await DataStore.query(Product, route.params.id);
+        setProductImage(productImage);
+    }
 
     const queryProduct = async () => {
         setIsLoading(true);
@@ -59,18 +55,10 @@ const ProductDetails = () => {
 
     }
 
-
     // query product on render and each time the id parameter changes
     useEffect(() => {
-        // queryUser();
         queryProduct();
-        // const subscription = DataStore.observe(User).subscribe(() => {
-        //     queryUser();
-        //
-        // });
-        // // close subscription to prevent memory leaks
-        // return () => subscription.unsubscribe();
-
+        // pullProductRecord();
     }, [route.params?.id]);
 
     const addToSavedList = async () => {
@@ -108,49 +96,44 @@ const ProductDetails = () => {
     return (
         <SafeAreaView>
             <ScrollView style={styles.root}>
-                <Text style={styles.title}>
-                    {product.title}
-                </Text>
+                <View style = {styles.titleContainer}>
+                    <Text style={styles.title}>
+                        {product.title}
+                    </Text>
+                </View>
                 <View style = {styles.profileContainer}>
-                    {/*<CustomCircleButton onPress = {() => alert("Will take to listing user's profile in future updates!")}>*/}
-                    {/*    <Image style = {styles.circleButtonPic} source = {require("/Users/tj/IdeaProjects/project-uniflea/assets/logo.png")}/>*/}
-                    {/*</CustomCircleButton>*/}
-                    <TouchableOpacity onPress = {() => alert("Will take to listing user's profile in future updates!")} style={styles.circleButton}>
-                        {/*<S3Image style = {styles.circleButtonPic} imgKey={profileImage}/>*/}
-                        <Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>
-                    </TouchableOpacity>
-
                     <TouchableOpacity onPress={() => navigation.navigate("OtherProfileScreen",{userSub: product.userSub} )}>
                     <Text style = {styles.profileText}>Visit User's Profile</Text>
                     </TouchableOpacity>
-
-                    
                 </View>
                 {/* Image Carousel */}
-                <ImageCarousel images={product.images} />
+                <ImageCarousel style = {styles.imageFrame} images={product.images} />
+                {/*<S3Image style = {styles.imageFrame} imgKey={productImage}/>*/}
                 {/* Price */}
                 <Text style={styles.price}>${product.price.toFixed(2)}</Text>
                 {/* Description */}
-                <Text style={styles.description}>{product.description}</Text>
+                <View>
+                    <Text style={styles.description}>{product.description}</Text>
+                </View>
                 {/* Save listing */}
                 <View style={styles.buttonContainer}>
                     <CustomButton onPress={addToSavedList} text='Save Listing' primary={true} />
 
-                    <CustomButton onPress={() => {
-                        // console.log("Product Details screen: " + product.id)
-                        // console.log("Product Details screen: " + product.title)
-                        // console.log("Product Details screen: " + product.price)
-                        // console.log("Product Details screen: " + product.description)
-                        navigation.navigate('EditProductScreen',
-                            {
-                                id: product.id,
-                                title: product.title,
-                                price: product.price,
-                                description: product.description
-                            }
-                        )
-                    }}
-                        text="Edit" />
+                    {/*<CustomButton onPress={() => {*/}
+                    {/*    // console.log("Product Details screen: " + product.id)*/}
+                    {/*    // console.log("Product Details screen: " + product.title)*/}
+                    {/*    // console.log("Product Details screen: " + product.price)*/}
+                    {/*    // console.log("Product Details screen: " + product.description)*/}
+                    {/*    navigation.navigate('EditProductScreen',*/}
+                    {/*        {*/}
+                    {/*            id: product.id,*/}
+                    {/*            title: product.title,*/}
+                    {/*            price: product.price,*/}
+                    {/*            description: product.description*/}
+                    {/*        }*/}
+                    {/*    )*/}
+                    {/*}}*/}
+                    {/*    text="Edit" />*/}
                     <SendMessageItem userToMessage={sellingUser} />
                     {/*<CustomButton onPress = {addToSavedList} text = 'Profile'/>*/}
                 </View>

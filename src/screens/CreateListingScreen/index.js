@@ -59,7 +59,7 @@ const CreateListingScreen = () => {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
-            quality: 1,
+            quality: 0.5,
         });
         console.log(result);
 
@@ -149,6 +149,7 @@ const CreateListingScreen = () => {
                             style = {{
                                 backgroundColor: "#f2f2f2",
                                 borderRadius: 5,
+                                borderWidth: 1.25,
                             }}
                             placeholder="Select a Category"
 
