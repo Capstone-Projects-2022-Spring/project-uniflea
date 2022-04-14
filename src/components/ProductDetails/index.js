@@ -4,7 +4,7 @@ import styles from './styles';
 import { useRoute } from '@react-navigation/native';
 import ImageCarousel from '../ImageCarousel';
 import CustomButton from '../CustomButton';
-import { Auth, DataStore } from 'aws-amplify';
+import {Auth, DataStore, loadingContainer} from 'aws-amplify';
 import { Product, SavedProduct, User } from '../../models';
 import { useNavigation } from '@react-navigation/native';
 import SendMessageItem from '../SendMessageItem';
@@ -29,10 +29,17 @@ const ProductDetails = () => {
     // console.log('route params = ', route.params);
     // console.log(route.params.id);
 
-    const pullProductRecord = async () => {
-        // const productRecord = await DataStore.query(Product, s => s.userSub("eq", userSub));
-        const productImage = await DataStore.query(Product, route.params.id);
-        setProductImage(productImage);
+    const queryUser = async () => {
+        setIsLoading(true);
+        const user = await DataStore.query(User, s => s.userSub("eq", product.userSub));
+        if (!product.userSub) {
+            console.warn("No id matching item");
+            return;
+        }
+        const profileImage = user[0].image;
+        setProfileImage(profileImage);
+        console.log("Profile image = ", profileImage)
+        setIsLoading(false);
     }
 
     const queryProduct = async () => {
@@ -43,23 +50,25 @@ const ProductDetails = () => {
         }
         const prod = await DataStore.query(Product, route.params.id);
         setProduct(prod);
-        console.log('prod------',prod )
+        // console.log('prod------',prod )
 
         // console.log("Product = ", product)
 
         // fetch the user who created the listing's Stream API account
         const response = await client.queryUsers({ id: { $in: [prod.userSub] } });
-        console.log("Response from user query = ", response);
+        // console.log("Response from user query = ", response);
         setSellingUser(response.users[0]);
         setIsLoading(false);
+        // setProfileImage(response.users[0].image);
 
     }
 
     // query product on render and each time the id parameter changes
     useEffect(() => {
         queryProduct();
-        // pullProductRecord();
+        // queryUser()
     }, [route.params?.id]);
+
 
     const addToSavedList = async () => {
         const userData = await Auth.currentAuthenticatedUser();
@@ -84,64 +93,70 @@ const ProductDetails = () => {
     }
     if (isLoading) {
         return (
-
-
             <SafeAreaView>
                 <ScrollView style={styles.root}>
                     <ActivityIndicator />
                 </ScrollView>
             </SafeAreaView>
         );
+    } else {
+        return (
+            <SafeAreaView>
+                <ScrollView style={styles.root}>
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>
+                            {product.title}
+                        </Text>
+                    </View>
+                    <View style={styles.profileContainer}>
+                        <TouchableOpacity onPress={() => navigation.navigate("OtherProfileNavStack", {
+                            screen: "OtherProfileScreen",
+                            params: {userSub: product.userSub}
+                        })}>
+                            <View style={styles.profileContainer2}>
+                                <Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>
+                                {/*<S3Image style={styles.circleButtonPic} imgKey={profileImage}/>*/}
+                                <Text style={styles.profileText}>Visit User's Profile</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    {/* Image Carousel */}
+                    <ImageCarousel images={product.images}/>
+                    {/*<S3Image style = {styles.imageFrame} imgKey={productImage}/>*/}
+                    {/* Price */}
+                    <Text style={styles.price}>${product.price.toFixed(2)}</Text>
+                    {/* Description */}
+                    <View>
+                        <Text style={styles.description}>{product.description}</Text>
+                    </View>
+                    {/* Save listing */}
+                    <View style={styles.buttonContainer}>
+                        <CustomButton onPress={addToSavedList} text='Save Listing' primary={true}/>
+
+                        {/*<CustomButton onPress={() => {*/}
+                        {/*    // console.log("Product Details screen: " + product.id)*/}
+                        {/*    // console.log("Product Details screen: " + product.title)*/}
+                        {/*    // console.log("Product Details screen: " + product.price)*/}
+                        {/*    // console.log("Product Details screen: " + product.description)*/}
+                        {/*    navigation.navigate('EditProductScreen',*/}
+                        {/*        {*/}
+                        {/*            id: product.id,*/}
+                        {/*            title: product.title,*/}
+                        {/*            price: product.price,*/}
+                        {/*            description: product.description*/}
+                        {/*        }*/}
+                        {/*    )*/}
+                        {/*}}*/}
+                        {/*    text="Edit" />*/}
+                        <SendMessageItem userToMessage={sellingUser}/>
+                        {/*<CustomButton onPress = {addToSavedList} text = 'Profile'/>*/}
+                    </View>
+
+                </ScrollView>
+            </SafeAreaView>
+
+        );
     }
-    return (
-        <SafeAreaView>
-            <ScrollView style={styles.root}>
-                <View style = {styles.titleContainer}>
-                    <Text style={styles.title}>
-                        {product.title}
-                    </Text>
-                </View>
-                <View style = {styles.profileContainer}>
-                    <TouchableOpacity onPress={() => navigation.navigate("OtherProfileScreen",{userSub: product.userSub} )}>
-                    <Text style = {styles.profileText}>Visit User's Profile</Text>
-                    </TouchableOpacity>
-                </View>
-                {/* Image Carousel */}
-                <ImageCarousel style = {styles.imageFrame} images={product.images} />
-                {/*<S3Image style = {styles.imageFrame} imgKey={productImage}/>*/}
-                {/* Price */}
-                <Text style={styles.price}>${product.price.toFixed(2)}</Text>
-                {/* Description */}
-                <View>
-                    <Text style={styles.description}>{product.description}</Text>
-                </View>
-                {/* Save listing */}
-                <View style={styles.buttonContainer}>
-                    <CustomButton onPress={addToSavedList} text='Save Listing' primary={true} />
-
-                    {/*<CustomButton onPress={() => {*/}
-                    {/*    // console.log("Product Details screen: " + product.id)*/}
-                    {/*    // console.log("Product Details screen: " + product.title)*/}
-                    {/*    // console.log("Product Details screen: " + product.price)*/}
-                    {/*    // console.log("Product Details screen: " + product.description)*/}
-                    {/*    navigation.navigate('EditProductScreen',*/}
-                    {/*        {*/}
-                    {/*            id: product.id,*/}
-                    {/*            title: product.title,*/}
-                    {/*            price: product.price,*/}
-                    {/*            description: product.description*/}
-                    {/*        }*/}
-                    {/*    )*/}
-                    {/*}}*/}
-                    {/*    text="Edit" />*/}
-                    <SendMessageItem userToMessage={sellingUser} />
-                    {/*<CustomButton onPress = {addToSavedList} text = 'Profile'/>*/}
-                </View>
-
-            </ScrollView>
-        </SafeAreaView>
-
-    );
 }
 
 export default ProductDetails;

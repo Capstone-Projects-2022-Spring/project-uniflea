@@ -34,13 +34,15 @@ const styles = ScaledSheet.create({
     buttonContainer: {
         height:'80%',
         alignItems: 'center',
-        marginVertical: '5%',
+        marginVertical: '4%',
     },
     profileContainer: {
         alignSelf: 'center',
+        padding: '4%',
+    },
+    profileContainer2: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        padding: '4%',
     },
     profileText: {
         fontSize: '14@s',
@@ -51,12 +53,13 @@ const styles = ScaledSheet.create({
         width: scale(38),
         height: scale(38),
         borderRadius: 100,
+        borderWidth: 1.25,
     },
     circleButton: {
         width: scale(40),
         height: scale(40),
         borderRadius: 100,
-        borderWidth: 1,
+        borderWidth: 1.25,
         backgroundColor: '#FFFFFF',
     },
     imageContainer: {
