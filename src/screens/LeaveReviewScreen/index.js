@@ -1,6 +1,6 @@
 
 import React, { useState, useContext } from 'react';
-import { SafeAreaView, TextInput, View , Alert} from 'react-native';
+import { SafeAreaView, TextInput, View , Alert, TouchableOpacity, Image, Text} from 'react-native';
 import styles from './styles';
 import { Picker } from '@react-native-picker/picker';
 import ProfileScreenButton from '../../components/ProfileScreenButton';
@@ -11,12 +11,16 @@ import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 const LeaveReviewScreen = () => {
-    const [rating, setRating] = useState(1);
+    const [rating, setRating] = useState(null);
+    const[maxRating, setMaxRating] = useState([1,2,3,4,5]);
     const [titleText, setTitleText] = useState('');
     const [bodyText, setBodyText] = useState('');
   
     const navigation = useNavigation();
     const { user, otherUser } = useContext(AuthContext);
+
+    const starImgFilled = 'https://github.com/tranhonghan/images/blob/main/star_filled.png?raw=true'
+    const starImgCorner = 'https://github.com/tranhonghan/images/blob/main/star_corner.png?raw=true'
     
     const onLeaveReview = async () => {
         // query the other user's profile
@@ -56,41 +60,55 @@ const LeaveReviewScreen = () => {
         Alert.alert("Success", "Review Left");
         navigation.goBack()
     }
-    
+
+    const CustomRatingBar = () => {
+        return (
+            <View style={styles.customRatingBarStyle}>{
+                    maxRating.map((item,key) => {
+                        return (
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                key={item}
+                                onPress={() => setRating(item)}>
+                                <Image
+                                    style={styles.starImgStyle}
+                                    source={
+                                        item <= rating
+                                            ? {uri: starImgFilled}
+                                            : {uri: starImgCorner}}/>
+                            </TouchableOpacity>
+                        )})
+                }
+            </View>
+        )}
+
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+         
         <SafeAreaView style={styles.container}>
-            <Picker
-                style={styles.ratingPicker}
-                selectedValue={rating}
-                onValueChange={(itemValue, itemIndex) =>
-                    setRating(itemValue)
-                }>
-                <Picker.Item label="1.0 Stars" value={1.0} />
-                <Picker.Item label="2.0 Stars" value={2.0} />
-                <Picker.Item label="3.0 Stars" value={3.0} />
-                <Picker.Item label="4.0 Stars" value={4.0} />
-                <Picker.Item label="5.0 Stars" value={5.0} />
-            </Picker>
-
-            <View style={styles.space} />
-            <TextInput
+        <Text style = {styles.text}>
+            Leave a Review
+        </Text>
+        <CustomRatingBar/>
+       
+        <View style={styles.space} />
+        <TextInput
             value={titleText}
-                style={styles.titleBox}
-                placeholder='Review title...'
-                textAlignVertical='top'
-                onChangeText={setTitleText}
-            />
-            <TextInput
-                value={bodyText}
-                style={styles.textBox}
-                placeholder='Review body...'
-                textAlignVertical='top'
-                multiline={true}
-                onChangeText={setBodyText}
-            />
-            <View style={styles.space} />
-            <ProfileScreenButton onPress={onLeaveReview} text="Submit Review" />
+            style={styles.titleBox}
+            placeholder='Review title...'
+            textAlignVertical='top'
+            onChangeText={setTitleText}
+        />
+        <TextInput
+            value={bodyText}
+            style={styles.textBox}
+            placeholder='Review body...'
+            textAlignVertical='top'
+            multiline={true}
+            onChangeText={setBodyText}
+        />
+        <View style={styles.space} />
+        <ProfileScreenButton onPress={onLeaveReview} text="Submit Review" />
         </SafeAreaView>
         </TouchableWithoutFeedback>
     )
