@@ -17,14 +17,14 @@ const styles = ScaledSheet.create({
     titleText:{
         flex: 1,
         padding: 5,
-        fontSize: '30@s',
+        fontSize: '28@s',
         color: 'black',
         textAlign: 'center',
     },
     descriptionText:{
         flex: 1,
         padding: 5,
-        fontSize: '16@s',
+        fontSize: '14@s',
         color: 'darkgrey',
         textAlign: 'center',
         fontStyle: 'italic'
@@ -39,7 +39,7 @@ const styles = ScaledSheet.create({
     infoText:{
         flex: 1,
         padding: 5,
-        fontSize: '16@s',
+        fontSize: '14@s',
         color: 'darkgrey',
         textAlign: 'center',
     },
