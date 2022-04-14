@@ -4,6 +4,7 @@ import { Text, Pressable, Alert} from 'react-native'
 import { useChatContext } from 'stream-chat-expo';
 import AuthContext from '../../contexts/Authentication';
 import CustomButton from '../CustomButton';
+import ScaledCustomButton from "../ScaledCustomButton";
 const SendMessageItem = ({userToMessage}) => {
     const {user} = useContext(AuthContext);
     const {client} = useChatContext();
@@ -26,7 +27,7 @@ const SendMessageItem = ({userToMessage}) => {
 
     }
     return(
-        <CustomButton onPress={onUserPress} text={"Message "+userToMessage.name} />
+        <ScaledCustomButton onPress={onUserPress} text={"Message "+userToMessage.name} />
         
     );
 }   
