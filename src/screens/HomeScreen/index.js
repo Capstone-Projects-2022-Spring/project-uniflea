@@ -1,16 +1,16 @@
-import { Auth } from "aws-amplify";
-import { Text, View, FlatList, Modal, Picker, Alert, TextComponent } from "react-native";
+import { Auth, DataStore } from "aws-amplify";
+import { View, FlatList, Modal, Picker, Alert, Image } from "react-native";
 import styles from "./styles";
 import ProductItem from "../../components/ProductItem";
 import React, { useEffect, useState, useContext } from "react";
-import { DataStore } from "@aws-amplify/datastore";
-import { Product } from "../../models";
+import { Product, User } from "../../models";
 import AuthContext from "../../contexts/Authentication";
 import { useChatContext } from "stream-chat-expo";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
-import { ConsoleLogger } from "@aws-amplify/core";
+import SchoolImage from "../../components/SchoolImage";
+
 
 
 const HomeScreen = ({ searchValue }) => {
@@ -185,9 +185,40 @@ const HomeScreen = ({ searchValue }) => {
         return;
     }
   };
+//***********************************************************************************************WORKING ON THEME IN HERE */
+
+const [schoolName, setSchoolName] = useState(null);
 
 
+const findUniversity = async() => {
+  const currentUser = await Auth.currentAuthenticatedUser();
 
+  const user = await DataStore.query(User, (s) => 
+    s.userSub("eq", currentUser.attributes.sub)
+  );
+
+  const userUni = user[0].university;
+
+  setSchoolName(userUni);
+
+  
+};
+uniImg = () => {
+  if(schoolName === "Temple"){
+  return  <Image source={SchoolImage.TUImage}/> 
+    }
+    else{
+      return <Image source={ SchoolImage.DRImage}/>
+ }
+};
+
+  //*********************************************************************************************** */
+  useEffect(() => { 
+
+  findUniversity();
+
+
+  },[]);
 
 
   useEffect(() => {
@@ -271,6 +302,10 @@ const HomeScreen = ({ searchValue }) => {
           </View>
         </View>
       </Modal>
+      
+      {/*School Image */}
+
+      {this.uniImg()}
 
       {/*Filter Button*/}
       <View style={{ alignItems: "flex-end" }}>
