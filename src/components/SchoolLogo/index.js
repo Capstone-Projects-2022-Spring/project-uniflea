@@ -11,7 +11,7 @@ const SchoolLogo =()=>{
 
 uniImg = () => {
   if(user.attributes['custom:University'] == 'Temple'){
-  return  (<Image source={SchoolImage.TUImage}/> ) 
+  return  (<Image  style={styles.imageSize} source={SchoolImage.TUImage}/> ) 
     }
     else{
       return ( <Image style={styles.imageSize} source={ SchoolImage.DRImage}/>)
