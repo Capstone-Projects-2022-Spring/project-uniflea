@@ -101,7 +101,6 @@ const SignUpScreen = () => {
            
             return true;
         } else {
-            alert("Invalid email address");
             return false;
         }
     }
