@@ -15,7 +15,7 @@ import ActiveListingScreen from '../screens/ActiveListingScreen';
 const ProfileStack = createStackNavigator();
 
 
-const ProfileScreenStack = () => {
+const ProfileScreenStack = () => { 
 
     return (
 

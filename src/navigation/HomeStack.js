@@ -41,7 +41,7 @@ const HomeStack = () => {
                     () => <HomeScreen searchValue={search}/>
                 }
             </Stack.Screen>
-            <Stack.Screen name='ProductScreen' component={ProductDetailScreenStack} options={{ title: '' }} />
+            <Stack.Screen name='ProductScreen' component={ProductDetailScreenStack} options={{headerShown: true, title: '' }} />
             <Stack.Screen component={NotificationsScreen} name={"Notifications"} options={{ title: 'Notifications' }} /> 
         </Stack.Navigator>
 

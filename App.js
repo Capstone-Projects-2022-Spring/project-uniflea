@@ -19,6 +19,7 @@ const client = StreamChat.getInstance(API_KEY);
 
 export default function App() {
   const [user, setUser] = useState('');
+  const [otherUser, setOtherUser] = useState('');
 
   
    
@@ -37,10 +38,12 @@ export default function App() {
     return () => client.disconnectUser();
   }, []);
 
+  console.disableYellowBox = true;
+
   return (
     <SafeAreaView style={styles.container}>
 
-      <AuthContext.Provider value={{user, setUser}}>
+      <AuthContext.Provider value={{user, setUser, otherUser, setOtherUser}}>
 
 
         <OverlayProvider>

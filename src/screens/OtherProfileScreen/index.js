@@ -9,25 +9,26 @@ import {
   Pressable,
   Alert,
   StyleSheet,
+  ScrollView, ActivityIndicator
 } from "react-native";
 import styles from "./styles";
 import { Rating } from "react-native-rating-element";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import * as ImagePicker from "expo-image-picker";
 import "react-native-get-random-values";
-import { v4 as uuidv4 } from "uuid";
 import { S3Image } from "aws-amplify-react-native";
 import { User, Product } from "../../models";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AuthContext from "../../contexts/Authentication";
 import { scale } from "react-native-size-matters";
+import SendMessageItem from "../../components/SendMessageItem";
+import SendMessageButton from "../../components/SendMessageButton";
+import { useChatContext } from 'stream-chat-expo';
 
 
 
-const OtherProfilePage = ({route}) => {
+const OtherProfileScreen = ({route}) => {
 
   const navigation = useNavigation();
-
 
   /*Setting the name of the user on the page */
   const [displayName, setDisplayName] = useState(null);
@@ -36,12 +37,15 @@ const OtherProfilePage = ({route}) => {
   const [gradYear, setSchoolyYear] = useState(null);
   const [bio, setBio] = useState(null);
  const [image, setImage] = useState(null);
- const [prod, setProduct] = useState(null);
+ const[otherUser, setOtherUser] = useState(null);
 
+ const{client} = useChatContext();
+const [isLoading, setIsLoading] = useState(true);
 
  const { userSub } = route.params;
   const pullOtherUserInfo = async () => {
 
+    setIsLoading(true);
     const userRecord = await DataStore.query(User, s => s.userSub("eq", userSub));
     //setting all the data for the users
     const displayName = userRecord[0].displayName;
@@ -57,11 +61,15 @@ const OtherProfilePage = ({route}) => {
     setSchoolName(schoolName);
     setSchoolyYear(gradYear);
     setBio(bio);
+    
 
+    const response = await client.queryUsers({id: {$in: [userSub]}});
+    console.log("response: " + response);
+    setOtherUser(response.users[0])
+    console.log("OtherUser is: " + otherUser)
+    setIsLoading(false);
     // setMemberDate(memberDate.split("-", 1).toString());
   }
-
-
 
   //for the circle buttons
   const Circle = ({ text }) => (
@@ -70,17 +78,25 @@ const OtherProfilePage = ({route}) => {
     </View>
   );
 
-  const iconPress = () => {
-    navigation.navigate("SettingsScreen");
-  };
 
   useEffect(() => {
     
     pullOtherUserInfo();
-  }, []);
 
+  }, []);
+  
+  if (isLoading) {
+    return (
+        <SafeAreaView>
+            <ScrollView style={styles.root}>
+                <ActivityIndicator />
+            </ScrollView>
+        </SafeAreaView>
+    );
+  }
   //***************************************************************************************RETURN() */
   return (
+  
     <SafeAreaView style={styles.root}>
       <View style={styles.shape} />
 
@@ -114,7 +130,7 @@ const OtherProfilePage = ({route}) => {
 
               <View style={styles.reportContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("ReportScreen")}
+                  onPress={() => navigation.navigate('ProductDetails', {screen : "ReportScreen"})}
                 >
                   <MaterialIcons
                     style={styles.reportIconContainer}
@@ -142,7 +158,7 @@ const OtherProfilePage = ({route}) => {
             <TouchableOpacity
               onPress={() => navigation.navigate("ReviewScreen")}
             >
-              <Circle text="Read Reviews" s />
+              <Circle text="Read Reviews"  />
             </TouchableOpacity>
 
             <View style={styles.space} />
@@ -158,13 +174,13 @@ const OtherProfilePage = ({route}) => {
             <TouchableOpacity
               onPress={() => navigation.navigate("LeaveReviewScreen")}
             >
-              <Circle text="Leave a Review" h />
+              <Circle text="Leave a Review" />
             </TouchableOpacity>
 
             <View style={styles.space} />
-            <TouchableOpacity onPress={() => navigation.navigate(" ")}>
-              <Circle text="Message User" />
-            </TouchableOpacity>
+
+            <SendMessageItem userToMessage={otherUser}/>
+
           </View>
         </View>
       </View>
@@ -172,4 +188,4 @@ const OtherProfilePage = ({route}) => {
   );
 };
 
-export default OtherProfilePage;
+export default OtherProfileScreen;

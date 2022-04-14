@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {Text, ScrollView, SafeAreaView, Alert, ActivityIndicator, View, Image, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import { useRoute } from '@react-navigation/native';
@@ -11,6 +11,7 @@ import SendMessageItem from '../SendMessageItem';
 import { useChatContext } from 'stream-chat-expo';
 import CustomCircleButton from "../CustomCircleButton";
 import {S3Image} from "aws-amplify-react-native/src/Storage";
+import AuthContext from '../../contexts/Authentication';
 
 const ProductDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +23,8 @@ const ProductDetails = () => {
     const [product, setProduct] = useState(undefined);
     const [profileImage, setProfileImage] = useState(undefined);
     const [profileName, setProfileName] = useState(undefined);
+    const [user, setUser] = useState(undefined);
+    const {setOtherUser} = useContext(AuthContext);
     const route = useRoute();
 
     // route allows us to receive the data passed as param from navigator hook
@@ -37,6 +40,11 @@ const ProductDetails = () => {
         const prod = await DataStore.query(Product, route.params.id);
         setProduct(prod);
         // console.log('prod------',prod )
+
+
+        setOtherUser(prod.userSub)
+
+
         // console.log("Product = ", product)
 
         // fetching user profile image
@@ -141,7 +149,6 @@ const ProductDetails = () => {
                         <SendMessageItem userToMessage={sellingUser}/>
                         {/*<CustomButton onPress = {addToSavedList} text = 'Profile'/>*/}
                     </View>
-
                 </ScrollView>
             </SafeAreaView>
 
