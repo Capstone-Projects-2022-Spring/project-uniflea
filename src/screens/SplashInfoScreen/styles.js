@@ -1,6 +1,6 @@
-import { StyleSheet } from "react-native";
+import { scale, ScaledSheet } from "react-native-size-matters"; 
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     root:{
         backgroundColor: "#fff",
         justifyContent: "center",
@@ -10,21 +10,21 @@ const styles = StyleSheet.create({
     welcomeText:{
         flex: 1,
         padding: 5,
-        fontSize: 16,
+        fontSize: '16@s',
         color: 'darkgrey',
         textAlign: 'center',
     },
     titleText:{
         flex: 1,
         padding: 5,
-        fontSize: 30,
+        fontSize: '30@s',
         color: 'black',
         textAlign: 'center',
     },
     descriptionText:{
         flex: 1,
         padding: 5,
-        fontSize: 16,
+        fontSize: '16@s',
         color: 'darkgrey',
         textAlign: 'center',
         fontStyle: 'italic'
@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
     headerText:{
         flex: 1,
         padding: 5,
-        fontSize: 20,
+        fontSize: '20@s',
         color: 'black',
         textAlign: 'center',
     },
     infoText:{
         flex: 1,
         padding: 5,
-        fontSize: 16,
+        fontSize: '16@s',
         color: 'darkgrey',
         textAlign: 'center',
     },
