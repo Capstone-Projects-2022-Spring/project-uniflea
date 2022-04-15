@@ -17,7 +17,7 @@ const AccountVerificationScreen = () => {
     const onSubmitPressed = async (data) => {
         try {
             await Auth.confirmSignUp(data.email, data.code);
-            navigation.navigate('SignIn')
+            navigation.navigate('SplashInfo');
         } catch(e) {
             Alert.alert("Oops", e.message);
         }

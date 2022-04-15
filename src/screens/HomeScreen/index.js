@@ -1,16 +1,16 @@
-import { Auth } from "aws-amplify";
-import { Text, View, FlatList, Modal, Picker, Alert, TextComponent } from "react-native";
+import { Auth, DataStore } from "aws-amplify";
+import { View, FlatList, Modal, Picker, Alert, Image } from "react-native";
 import styles from "./styles";
 import ProductItem from "../../components/ProductItem";
 import React, { useEffect, useState, useContext } from "react";
-import { DataStore } from "@aws-amplify/datastore";
-import { Product } from "../../models";
+import { Product, User } from "../../models";
 import AuthContext from "../../contexts/Authentication";
 import { useChatContext } from "stream-chat-expo";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
-import { ConsoleLogger } from "@aws-amplify/core";
+import SchoolImage from "../../components/SchoolImage";
+
 
 
 const HomeScreen = ({ searchValue }) => {
@@ -188,9 +188,19 @@ const HomeScreen = ({ searchValue }) => {
         return;
     }
   };
+//***********************************************************************************************WORKING ON THEME IN HERE */
 
+const [schoolName, setSchoolName] = useState(null);
+uniImg = () => {
+  if(user.attributes['custom:University'] == 'Temple'){
+  return  (<Image source={SchoolImage.TUImage}/> ) 
+    }
+    else{
+      return ( <Image source={ SchoolImage.DRImage}/>)
+ }
+};
 
-
+  //*********************************************************************************************** */
 
 
   useEffect(() => {
@@ -274,7 +284,13 @@ const HomeScreen = ({ searchValue }) => {
           </View>
         </View>
       </Modal>
-
+      
+      {/*School Image */}
+   
+      {/* {user.attributes['custom:University'] == 'Temple' ? (<Image source={SchoolImage.TUImage}/>)
+                       :( <Image source={ SchoolImage.DRImage}/>)} */}
+     {/* <View>{uniImg()}</View>  */}
+   
       {/*Filter Button*/}
       <View style={{ alignItems: "flex-end" }}>
         <AntDesign

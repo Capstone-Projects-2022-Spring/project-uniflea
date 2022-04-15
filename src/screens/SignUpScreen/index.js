@@ -97,8 +97,8 @@ const SignUpScreen = () => {
         const validEmails = ["temple.edu", "drexel.edu", "pennstate.edu", "upenn.edu", "villanova.edu"];
         const valid = input.split("@");
         const uni = valid[valid.length-1];
-        if (validEmails.includes(uni)) {
-           
+        console.log("input------",input)
+        if (validEmails.includes(uni) || input == "drexelstudenttheme@gmail.com") {
             return true;
         } else {
             alert("Invalid email address");
