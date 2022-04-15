@@ -156,7 +156,7 @@ const [isLoading, setIsLoading] = useState(true);
         <View style={styles.container}>
           <View style={styles.row}>
             <TouchableOpacity
-              onPress={() => navigation.navigate("ReviewScreen")}
+              onPress={() => navigation.navigate("ReviewScreen", {fromScreen:"OtherProfileScreen"})}
             >
               <Circle text="Read Reviews"  />
             </TouchableOpacity>
