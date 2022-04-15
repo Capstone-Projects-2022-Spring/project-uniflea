@@ -130,7 +130,7 @@ const [isLoading, setIsLoading] = useState(true);
 
               <View style={styles.reportContainer}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate('ProductDetails', {screen : "ReportScreen"})}
+                  onPress={() => navigation.navigate("ReportScreen")}
                 >
                   <MaterialIcons
                     style={styles.reportIconContainer}

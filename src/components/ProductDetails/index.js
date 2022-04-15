@@ -106,10 +106,7 @@ const ProductDetails = () => {
                         </Text>
                     </View>
                     <View style={styles.profileContainer}>
-                        <TouchableOpacity onPress={() => navigation.navigate("OtherProfileNavStack", {
-                            screen: "OtherProfileScreen",
-                            params: {userSub: product.userSub}
-                        })}>
+                        <TouchableOpacity onPress={() => navigation.navigate("OtherProfileScreen", {userSub: product.userSub})}>
                             <View style={styles.profileContainer2}>
                                 {/*<Image style = {styles.circleButtonPic} source = {require("../../../assets/user.png")}/>*/}
                                 <S3Image style={styles.circleButtonPic} imgKey={profileImage}/>
@@ -132,23 +129,9 @@ const ProductDetails = () => {
                     <View style={styles.buttonContainer}>
                         <ScaledCustomButton onPress={addToSavedList} text='Save Listing' primary={true}/>
 
-                        {/*<CustomButton onPress={() => {*/}
-                        {/*    // console.log("Product Details screen: " + product.id)*/}
-                        {/*    // console.log("Product Details screen: " + product.title)*/}
-                        {/*    // console.log("Product Details screen: " + product.price)*/}
-                        {/*    // console.log("Product Details screen: " + product.description)*/}
-                        {/*    navigation.navigate('EditProductScreen',*/}
-                        {/*        {*/}
-                        {/*            id: product.id,*/}
-                        {/*            title: product.title,*/}
-                        {/*            price: product.price,*/}
-                        {/*            description: product.description*/}
-                        {/*        }*/}
-                        {/*    )*/}
-                        {/*}}*/}
-                        {/*    text="Edit" />*/}
+                        
                         <SendMessageItem userToMessage={sellingUser}/>
-                        {/*<CustomButton onPress = {addToSavedList} text = 'Profile'/>*/}
+                        
                     </View>
                 </ScrollView>
             </SafeAreaView>

@@ -29,7 +29,6 @@ const ProfileScreenStack = () => {
             <ProfileStack.Screen name="ResetPassword" component={ResetPasswordScreen} />
             <ProfileStack.Screen name="SignIn" component={SignInScreen} />
             <ProfileStack.Screen name='ReportScreen' component={ReportScreen}/>
-             {/*<.Screen name='ProductScreen' component={ProductDetails} options={{ title: '' }} /> */}
         </ProfileStack.Navigator>
 
     );
