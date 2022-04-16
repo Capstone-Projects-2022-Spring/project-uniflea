@@ -39,6 +39,7 @@ const ProductDetails = () => {
             return;
         }
         const prod = await DataStore.query(Product, route.params.id);
+        console.log("Product Unniversity =====", prod.university);
         setProduct(prod);
         // console.log('prod------',prod )
 

@@ -26,7 +26,7 @@ const HomeScreen = ({ searchValue }) => {
     setModalOpen(!modalOpen);
   };
   const [selectedValue, setSelectedValue] = useState("None");
-
+  console.log("Current university ======>>>>>>>>",user.attributes["custom:University"])
 
   const resetDatastore = async () => {
     try {
@@ -55,13 +55,14 @@ const HomeScreen = ({ searchValue }) => {
         .category("eq", categories[3])
         .category("eq", categories[4])
         .category("eq", categories[5])
-        .category("eq", categories[6])))
+        .category("eq", categories[6]))
+        .and(product => product.university("eq", user.attributes["custom:University"])))
         .then(setSortedProducts);
     } else {
       console.log("Categories is null");
-      DataStore.query(Product).then(setProducts);
+      DataStore.query(Product, product => product.university("eq", user.attributes["custom:University"])).then(setProducts);
       //console.log("products ============== ", products);
-      DataStore.query(Product).then(setSortedProducts);
+      DataStore.query(Product, product => product.university("eq", user.attributes["custom:University"])).then(setSortedProducts);
     }
   }
 
@@ -79,21 +80,22 @@ const HomeScreen = ({ searchValue }) => {
       console.log("notCategories after splicing: " + notCategories[0] + notCategories[1]);
       // DataStore.query(Product, (product) => product.or(product => product.category("ne", notCategories[0])).category("ne" + notCategories[1])).then(setSortedProducts);
       // console.log(sortedProducts);
-      DataStore.query((Product), (product) => product.or(product => product
+      DataStore.query(Product, (product) => product.or(product => product
       .category("eq", categories[0])
       .category("eq", categories[1])
       .category("eq", categories[2])
       .category("eq", categories[3])
       .category("eq", categories[4])
       .category("eq", categories[5])
-      .category("eq", categories[6])))
+      .category("eq", categories[6]))
+      .and(product => product.university("eq", user.attributes["custom:University"])))
       .then(setSortedProducts);
     
     } else {
       console.log("Categories is null");
-      DataStore.query(Product).then(setProducts);
+      DataStore.query(Product, product => product.university("eq", user.attributes["custom:University"])).then(setProducts);
       //console.log("products ============== ", products);
-      DataStore.query(Product).then(setSortedProducts);
+      DataStore.query(Product, product => product.university("eq", user.attributes["custom:University"])).then(setSortedProducts);
     }
 
   }, [categories]);
@@ -127,7 +129,8 @@ const HomeScreen = ({ searchValue }) => {
         .category("eq", categories[3])
         .category("eq", categories[4])
         .category("eq", categories[5])
-        .category("eq", categories[6])))
+        .category("eq", categories[6]))
+        .and(product => product.university("eq", user.attributes["custom:University"])))
         .then(setSortedProducts);
       // setSortedProducts(categorizedProducts);
       // DataStore.query(Product, (product) => product.or(product => product.category("ne", notCategories[0])).category("ne" + notCategories[1])).then(setSortedProducts);
@@ -136,9 +139,9 @@ const HomeScreen = ({ searchValue }) => {
 
     } else {
       console.log("Categories is null");
-      DataStore.query(Product).then(setProducts);
+      DataStore.query(Product, product => product.university("eq", user.attributes["custom:University"])).then(setProducts);
       //console.log("products ============== ", products);
-      DataStore.query(Product).then(setSortedProducts);
+      DataStore.query(Product, product => product.university("eq", user.attributes["custom:University"])).then(setSortedProducts);
     }
   }
 
@@ -206,8 +209,8 @@ uniImg = () => {
     const delayDebounceFn = setTimeout(() => {
       console.log(searchValue)
       // Send Axios request here
-      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(setProducts);
-      DataStore.query(Product, (product) => product.title("contains", searchValue)).then(setSortedProducts);
+      DataStore.query(Product, (product) => product.title("contains", searchValue).university("eq", user.attributes["custom:University"])).then(setProducts);
+      DataStore.query(Product, (product) => product.title("contains", searchValue).university("eq", user.attributes["custom:University"])).then(setSortedProducts);
     }, 1000)
 
     return () => clearTimeout(delayDebounceFn)

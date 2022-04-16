@@ -17,12 +17,12 @@ import { useForm } from "react-hook-form";
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useChatContext } from "stream-chat-expo";
 
+
 const ProfilePage = () => {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
-
-  //to for signing out
   const { client } = useChatContext();
+  //to for signing out
 
   const { user, setUser } = useContext(AuthContext);
   const signOut = () => {
