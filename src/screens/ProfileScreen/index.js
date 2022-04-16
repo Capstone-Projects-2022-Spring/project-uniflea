@@ -23,7 +23,6 @@ const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { client } = useChatContext();
   //to for signing out
-  const { client } = useChatContext();
 
   const { user, setUser } = useContext(AuthContext);
   const signOut = () => {
