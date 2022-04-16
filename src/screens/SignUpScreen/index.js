@@ -101,7 +101,6 @@ const SignUpScreen = () => {
         if (validEmails.includes(uni) || input == "drexelstudenttheme@gmail.com") {
             return true;
         } else {
-            alert("Invalid email address");
             return false;
         }
     }
