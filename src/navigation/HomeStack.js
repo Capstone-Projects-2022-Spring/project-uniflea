@@ -4,10 +4,15 @@ import HomeScreen from '../screens/HomeScreen';
 import { SafeAreaView, TextInput, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { Colors } from '../styles/Colors';
-import NotificationsButton from '../components/NotificationsButton';
-import NotificationsScreen from '../screens/NotificationsScreen';
-import ProductDetailScreenStack from './ProductDetailsStack';
+import ReportScreen from '../screens/ReportScreen';
 import SchoolLogo from '../components/SchoolLogo';
+import ProductDetails from '../components/ProductDetails';
+import EditProductScreen from '../screens/EditProductScreen';
+import ChatScreen from '../screens/ChatScreen';
+import ReviewScreen from '../screens/ReviewScreen';
+import ActiveListingScreen from '../screens/ActiveListingScreen';
+import LeaveReviewScreen from '../screens/LeaveReviewScreen';
+import OtherProfileScreen from '../screens/OtherProfileScreen'
 const Stack = createStackNavigator();
 
 const HeaderComponent = ({search, setSearch}) => {
@@ -40,7 +45,16 @@ const HomeStack = () => {
                     () => <HomeScreen searchValue={search}/>
                 }
             </Stack.Screen>
-            <Stack.Screen name='ProductScreen' component={ProductDetailScreenStack} options={{headerShown: true, title: '' }} />
+
+            <Stack.Screen name="ProductDetails" component={ProductDetails} options={{title:'Product Detail'}}/>
+            <Stack.Screen name="EditProductScreen" component={EditProductScreen} options={{title:'Edit Product'}}/>
+            <Stack.Screen name='OtherProfileScreen' component={OtherProfileScreen} options= {{title: ''}}/>
+            <Stack.Screen name='ReportScreen' component={ReportScreen}/>
+            <Stack.Screen name='ReviewScreen' component={ReviewScreen}/>
+            <Stack.Screen name='ActiveListingScreen' component={ActiveListingScreen}/>
+            <Stack.Screen name='LeaveReviewScreen' component={LeaveReviewScreen} />
+            <Stack.Screen name="Chat" component={ChatScreen} options={{title:'Chat'}}/>
+            
             {/* <Stack.Screen component={NotificationsScreen} name={"Notifications"} options={{ title: 'Notifications' }} />  */}
         </Stack.Navigator>
 
