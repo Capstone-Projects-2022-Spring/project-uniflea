@@ -10,7 +10,24 @@ const styles = ScaledSheet.create({
     width: 20,
     height: 20,
   },
-
+  TempleBackgroundColor: {
+    backgroundColor: '#99182e'
+  },
+  TempleBorderColor: {
+    borderColor: '#99182e'
+  },
+  TempleTextColor: {
+    color: '#99182e'
+  },
+  DrexelBackgroundColor: {
+    backgroundColor: '#11294f',
+  },
+  DrexelBorderColor: {
+    borderColor: '#11294f'
+  },
+  DrexelTextColor: {
+    color: '#11294f'
+  },
   topBannerContainer: {
     width: "100%",
     height: "30%",
@@ -128,10 +145,10 @@ const styles = ScaledSheet.create({
     width: scale(500),
     height: scale(500),
     borderRadius: scale(500 / 2),
-    backgroundColor: "#99182e",
+    // backgroundColor: "#99182e",
   },
   circle: {
-    borderColor: "#99182e",
+    // borderColor: "#99182e",
     borderWidth: 5.5,
     width: scale(115),
     height: scale(115),
@@ -156,7 +173,7 @@ const styles = ScaledSheet.create({
   },
   squareText: {
     fontSize: "14@s",
-    color: "#99182e",
+    // color: "#99182e",
     fontWeight: "bold",
   },
   centeredView: {
