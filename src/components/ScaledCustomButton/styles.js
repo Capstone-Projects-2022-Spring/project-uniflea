@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { scale, ScaledSheet } from "react-native-size-matters";
 import {Colors} from '../../styles/Colors'
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
     button:{
         alignItems: 'center',
         justifyContent: 'center',
@@ -15,10 +15,10 @@ const styles = ScaledSheet.create({
         margin: '2%',
 
     },
-    buttonText: {
-        fontSize: '18@s',
-        color: '#FFFFFF',
-    },
+    // buttonText: {
+    //     fontSize: '18@s',
+    //     color: '#FFFFFF',
+    // },
     TempleBackgroundColor: {
         backgroundColor: '#99182e'
       },

@@ -27,7 +27,7 @@ const SendMessageItem = ({userToMessage}) => {
 
     }
     return(
-        <ScaledCustomButton onPress={onUserPress} text={"Message "+userToMessage.name} />
+        <CustomButton onPress={onUserPress} text={"Message "+userToMessage.name}  />
         
     );
 }   
