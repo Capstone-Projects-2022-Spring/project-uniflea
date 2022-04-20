@@ -5,12 +5,14 @@ const { width } = Dimensions.get("window");
 const styles = ScaledSheet.create({
 
 imageSize:{
-height:50, 
-width:50, 
+height:45, 
+width:45, 
+
 },
 imageContainer:{
-    height:20, 
-    width:20, 
+    height:50, 
+    width:50, 
+    backgroundColor:'blue'
     },
 
 });

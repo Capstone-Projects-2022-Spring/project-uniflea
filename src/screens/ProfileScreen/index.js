@@ -289,7 +289,7 @@ const ProfilePage = () => {
             <View style={styles.space} />
 
             <TouchableOpacity
-              onPress={() => navigation.navigate("ActiveListingScreen")}
+              onPress={() => navigation.navigate("ActiveListingScreen", {fromScreen:'ProfileScreen'})}
             >
               <Circle text="Active Listings" />
             </TouchableOpacity>
