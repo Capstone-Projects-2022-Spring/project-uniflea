@@ -169,7 +169,7 @@ const [product, setProduct] = useState(null);
             <TouchableOpacity
               onPress={() => navigation.navigate("ActiveListingScreen",  {fromScreen:"OtherProfileScreen"})}
             >
-              <Circle text="Read Reviews"  />
+              <Circle text="Active Listings"  />
             </TouchableOpacity>
 
             <View style={styles.space} />
@@ -177,7 +177,7 @@ const [product, setProduct] = useState(null);
             <TouchableOpacity
               
            onPress={() => navigation.navigate("ReviewScreen", {fromScreen:"OtherProfileScreen"})} >
-              <Circle text="Active Listings" />
+              <Circle text="Read Reviews" />
             </TouchableOpacity>
          
           <View style={styles.space} />
