@@ -1,10 +1,9 @@
 
-import { Text, View, Image, Pressable } from "react-native";
+import { Text, View, Image, Pressable, TouchableOpacity, } from "react-native";
 import styles from "./styles";
 import { useNavigation } from "@react-navigation/native";
 import { DataStore } from "aws-amplify";
 import { Product } from "../../models";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { FontAwesome, Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
 const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
@@ -61,11 +60,12 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
               <Text style={styles.eye}><MaterialIcons name="visibility" size={24} color="black" /></Text>
               <Text style={styles.eyeText}>30</Text>             
           </View>
+          
 
-          <View style={styles.editContainer}>
+          <TouchableOpacity style={styles.editContainer}  onPress={() => navigation.navigate("EditProductScreen",{fromScreen:'ProductDetails'})}>
               <Text><AntDesign name="edit" size={24} color="black" />Edit Listing</Text>
 
-          </View>
+          </TouchableOpacity>
           
         
         <View style={styles.trashContainer}>
