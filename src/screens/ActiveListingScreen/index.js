@@ -39,22 +39,24 @@ const ActiveListingScreen = ({route}) => {
         return () => subscription.unsubscribe();
       }, []);
   
-
+      
       return (
         <SafeAreaView style={styles.page}>
             
             <FlatList 
               data={items}
               renderItem={({item}) =>
-               
+          
                 <ActiveProductItem 
                   id={item.id}
                   title={item.title} 
                   image={item.image} 
-                  price={item.price} 
+                  price={item.price}
+                  description={item.description} 
                   items={items}
                   setItems={setItems}
                 />
+    
 
             }
               keyExtractor={product => product.id}

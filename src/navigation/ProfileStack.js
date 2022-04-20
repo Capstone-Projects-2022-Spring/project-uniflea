@@ -11,6 +11,7 @@ import ReviewScreen from '../screens/ReviewScreen';
 import LeaveReviewScreen from '../screens/LeaveReviewScreen';
 import ReportScreen from '../screens/ReportScreen';
 import ActiveListingScreen from '../screens/ActiveListingScreen';
+import EditProductScreen from '../screens/EditProductScreen';
 
 const ProfileStack = createStackNavigator();
 
@@ -29,6 +30,7 @@ const ProfileScreenStack = () => {
             <ProfileStack.Screen name="ResetPassword" component={ResetPasswordScreen} />
             <ProfileStack.Screen name="SignIn" component={SignInScreen} />
             <ProfileStack.Screen name='ReportScreen' component={ReportScreen}/>
+            <ProfileStack.Screen name="EditProductScreen" component={EditProductScreen} options={{title:'Edit Product'}}/>
         </ProfileStack.Navigator>
 
     );
