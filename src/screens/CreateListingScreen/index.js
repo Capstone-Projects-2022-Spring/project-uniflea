@@ -35,6 +35,7 @@ const CreateListingScreen = () => {
     const [value, setValue] = useState([]);
     const [items, setItems] = useState([
         {label: 'Books', value: 'Books'},
+        {label: 'Furniture', value: 'Furniture'},
         {label: 'Supplies & Equipment', value: 'Supplies & Equipment'},
         {label: 'Electronics', value: 'Electronics'},
         {label: 'Clothes', value: 'Clothes'},
@@ -93,6 +94,26 @@ const CreateListingScreen = () => {
     // }
 
     const publishListing = async() => {
+        if (image === 'camera.png') {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Picture!");
+            return;
+        }
+        if (titleOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Title!");
+            return;
+        }
+        if (descriptionOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Description!");
+            return;
+        }
+        if (priceOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Price!");
+            return;
+        }
+        // if (pickedCategory === null) {
+        //     Alert.alert("Uh Oh!", "Please Give Your Listing a Category!");
+        //     return;
+        // }
         const newProduct = new Product({
             userSub: user.attributes.sub,
             title: titleOfListing,
@@ -107,12 +128,13 @@ const CreateListingScreen = () => {
         // console.log("University==========", user.attributes["custom:University"]);
 
         await DataStore.save(newProduct);
-        Alert.alert("Success!", "Your Listing Has Been Published!");
+        Alert.alert("Success!", "Your Listing Has Been Published");
         setImage('camera.png')
-        setTitleOfListing('');
-        setDescriptionOfListing('');
-        setPriceOfListing('');
-        setPickedCategory('');
+        setTitleOfListing(null);
+        setDescriptionOfListing(null);
+        setPriceOfListing(null);
+        setPickedCategory(null);
+        // setValue(null);
 
     }
 
