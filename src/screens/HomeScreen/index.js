@@ -274,6 +274,7 @@ const HomeScreen = ({ searchValue }) => {
                 multiple={true}
                 min={0}
                 dropDownDirection="DOWN"
+                placeholder="Select Categories"
                 max={7}
 
                 style={{
