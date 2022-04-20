@@ -110,10 +110,10 @@ const CreateListingScreen = () => {
             Alert.alert("Uh Oh!", "Please Give Your Listing a Price!");
             return;
         }
-        // if (pickedCategory === null) {
-        //     Alert.alert("Uh Oh!", "Please Give Your Listing a Category!");
-        //     return;
-        // }
+        if (pickedCategory === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Category!");
+            return;
+        }
         const newProduct = new Product({
             userSub: user.attributes.sub,
             title: titleOfListing,
@@ -133,9 +133,9 @@ const CreateListingScreen = () => {
         setTitleOfListing(null);
         setDescriptionOfListing(null);
         setPriceOfListing(null);
-        setPickedCategory(null);
-        // setValue(null);
-
+        console.log("blah blah" + value);
+        setValue(null);
+        console.log("blah blah blah" + value);
     }
 
     // had scroll view to permit tapping out of text boxes. try to find keyboard dismiss. also figure out how to keep default camera image on pickimage. implement multiople images as well. /clear fields after publishing successfully. require fileds too
