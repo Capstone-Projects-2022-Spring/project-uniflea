@@ -62,7 +62,13 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
           </View>
           
 
-          <TouchableOpacity style={styles.editContainer}  onPress={() => navigation.navigate("EditProductScreen",{fromScreen:'ProductDetails'})}>
+          <TouchableOpacity style={styles.editContainer}  onPress={ () => navigation.navigate("EditProductScreen",{
+            id: id, 
+            title: title, 
+            price: price, 
+            description: 'test description'
+            }
+            )}>
               <Text><AntDesign name="edit" size={24} color="black" />Edit Listing</Text>
 
           </TouchableOpacity>
