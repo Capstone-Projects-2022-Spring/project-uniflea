@@ -10,6 +10,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
 import SchoolImage from "../../components/SchoolImage";
+import { SchoolColor } from "../../styles/SchoolColors";
 
 
 
@@ -190,15 +191,15 @@ const HomeScreen = ({ searchValue }) => {
   };
 //***********************************************************************************************WORKING ON THEME IN HERE */
 
-const [schoolName, setSchoolName] = useState(null);
-uniImg = () => {
-  if(user.attributes['custom:University'] == 'Temple'){
-  return  (<Image source={SchoolImage.TUImage}/> ) 
-    }
-    else{
-      return ( <Image source={ SchoolImage.DRImage}/>)
- }
-};
+// const [schoolName, setSchoolName] = useState(null);
+// uniImg = () => {
+//   if(user.attributes['custom:University'] == 'Temple'){
+//   return  (<Image source={SchoolImage.TUImage}/> ) 
+//     }
+//     else{
+//       return ( <Image source={ SchoolImage.DRImage}/>)
+//  }
+// };
 
   //*********************************************************************************************** */
 
@@ -231,7 +232,7 @@ uniImg = () => {
   }, []);
   return (
     
-    <View style={styles.page}>
+    <View style={[styles, (user.attributes == 'Temple')? SchoolColor.TempleBackgroundColor : SchoolColor.DrexelBackgroundColor]}>
       {/*Modal used to display filter tab*/}
       <Modal visible={modalOpen} animationType="slide">
         <View style={styles.modalContent}>

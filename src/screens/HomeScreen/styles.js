@@ -5,12 +5,12 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     padding: 10,
-    backgroundColor: Colors.mainBackground,
+    // backgroundColor: Colors.mainBackground,
   },
 
   modalContent: {
     padding: 10,
-    backgroundColor: Colors.mainBackground,
+    // backgroundColor: Colors.mainBackground,
     borderTopColor: Colors.mainBackground,
     borderTopWidth: 50,
     borderBottomColor: Colors.mainBackground,
@@ -20,6 +20,14 @@ const styles = StyleSheet.create({
     borderLeftWidth: 20,
     borderLeftColor: Colors.mainBackground,
   },
+
+TempleBackgroundColor:{
+  backgroundColor: '#99182e',
+},
+DrexelBackgroundColor: {
+  backgroundColor: '#11294f',
+
+},
 });
 
 export default styles;
