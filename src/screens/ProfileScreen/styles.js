@@ -152,7 +152,7 @@ const styles = ScaledSheet.create({
     borderWidth: 5.5,
     width: scale(115),
     height: scale(115),
-    borderRadius: scale(115 / 2),
+    borderRadius: scale(8),
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",

@@ -5,8 +5,8 @@ const styles = ScaledSheet.create({
     flex: 1,
   },
   space: {
-    width: 20,
-    height: 20,
+    width: scale(20),
+    height: scale(20),
   },
 
   topBannerContainer: {
@@ -123,11 +123,12 @@ const styles = ScaledSheet.create({
     backgroundColor: "#99182e",
   },
   circle: {
+
     borderColor: "#99182e",
     borderWidth: 5.5,
-    width: scale(115),
-    height: scale(115),
-    borderRadius: scale(115 / 2),
+    width: scale(115*2),
+    height: scale(80),
+    borderRadius: scale(8),
     backgroundColor: "white",
     justifyContent: "center",
     alignItems: "center",
