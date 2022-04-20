@@ -13,6 +13,7 @@ import CustomCircleButton from "../CustomCircleButton";
 import {S3Image} from "aws-amplify-react-native/src/Storage";
 import AuthContext from '../../contexts/Authentication';
 import ScaledCustomButton from "../ScaledCustomButton";
+import GetSchool from '../GetSchool';
 
 const ProductDetails = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -128,9 +129,11 @@ const ProductDetails = () => {
                     </View>
                     {/* Save listing */}
                     <View style={styles.buttonContainer}>
-                        <ScaledCustomButton onPress={addToSavedList} text='Save Listing' primary={true}/>
+                        {/* <ScaledCustomButton onPress={addToSavedList} text='Save Listing' primary={true}/> */}
 
-                        
+                        <TouchableOpacity onPress= {addToSavedList}  style={ [styles.button, (GetSchool()) ? styles.TempleBackgroundColor : styles.DrexelBackgroundColor]}>
+                            <Text style={styles.text}>Save Listing</Text>
+                        </TouchableOpacity>
                         <SendMessageItem userToMessage={sellingUser}/>
                         
                     </View>

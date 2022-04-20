@@ -136,8 +136,8 @@ const ProfilePage = () => {
 
   //for the circle buttons
   const Circle = ({ text }) => (
-    <View style={styles.circle}>
-      <Text style={styles.squareText}>{text}</Text>
+    <View style={[styles.circle, (schoolName == 'Temple') ? styles.TempleBorderColor : styles.DrexelBorderColor]}>
+      <Text style={[styles.squareText, (schoolName == 'Temple') ? styles.TempleTextColor : styles.DrexelTextColor]}>{text}</Text>
     </View>
   );
 
@@ -183,7 +183,7 @@ const ProfilePage = () => {
   //***************************************************************************************RETURN() */
   return (
     <SafeAreaView style={styles.root}>
-      <View style={styles.shape} />
+      <View style={[styles.shape,(schoolName == 'Temple') ? styles.TempleBackgroundColor : styles.DrexelBackgroundColor] } />
 
       <View style={styles.topBannerContainer}>
         <View style={styles.topBannerrRow}>
@@ -260,7 +260,7 @@ const ProfilePage = () => {
                       onPress={handleSubmit(updateBio)}
                     />
                     <CustomButton
-                      text="Cancle"
+                      text="Cancel"
                       onPress={toggleModalVisibility}
                     />
                   </View>

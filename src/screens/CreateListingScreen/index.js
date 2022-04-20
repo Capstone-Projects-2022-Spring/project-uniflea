@@ -2,7 +2,7 @@ import React, {useEffect, useContext, useState, useRef} from 'react';
 import styles from './styles'
 import {SafeAreaView, StyleSheet, TextInput, Pressable, Image, ScrollView,
     Text, View, TouchableHighlight, TouchableOpacity, Picker, Alert} from 'react-native';
-import CustomButton from "../../components/CustomButton";
+
 import ScaledCustomButton from "../../components/ScaledCustomButton";
 import * as ImagePicker from 'expo-image-picker';
 import {useNavigation} from "@react-navigation/native";
@@ -172,7 +172,10 @@ const CreateListingScreen = () => {
                             dropDownDirection = "TOP"
                         />
                     </View>
-                    <ScaledCustomButton onPress= {publishListing} text  = {"Publish Listing"}/>
+                    {/* <ScaledCustomButton onPress= {publishListing} text  = {"Publish Listing"}/> */}
+                    <TouchableOpacity onPress= {publishListing}  style={ [styles.button,  (user.attributes['custom:University'] == 'Temple') ? styles.TempleBackgroundColor : styles.DrexelBackgroundColor]}>
+                            <Text style={styles.text}>Publish Listing</Text>
+                    </TouchableOpacity>
                 </View>
                 {/*</ScrollView>*/}
             </SafeAreaView>

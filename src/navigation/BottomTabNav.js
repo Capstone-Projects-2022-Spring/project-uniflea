@@ -9,14 +9,27 @@ import SavedItemStack from './SavedItemStack';
 import SellItemScreenStack from './SellItemScreenStack';
 import ProfileScreenStack from './ProfileStack';
 import OtherProfileNavStack from './OtherProfileNavStack';
+import { useContext } from "react";
+import AuthContext from '../contexts/Authentication';
 
 const Tab = createBottomTabNavigator();
 const BottomTabNav = () => {
 
-    return (
+        const { user, setUser } = useContext(AuthContext);
+        // if(user.attributes['custom:University'] == 'Temple'){
+        //     inactiveColor = Colors.tabInactiveColor;
+        //     activeColor = Colors.tabSelectedColor;
+        // }
+        // else{
+        //     inactiveColor = Colors.drexelInactiveColor;
+        //     activeColor = Colors.drexelActiveColor
+        //     }
+        return (
 
         <Tab.Navigator
-            tabBarOptions={{ inactiveTintColor: Colors.tabInactiveColor, activeTintColor: Colors.tabSelectedColor }}
+            tabBarOptions={{ 
+                inactiveTintColor: (user.attributes['custom:University'] == 'Temple') ? Colors.tabInactiveColor : Colors.drexelInactiveColor,
+                activeTintColor: (user.attributes['custom:University'] == 'Temple') ? Colors.tabSelectedColor : Colors.drexelActiveColor }}
             screenOptions={{headerShown: false}}
         >
             <Tab.Screen
@@ -35,8 +48,6 @@ const BottomTabNav = () => {
                 options={{
                     tabBarLabel: '',
                     tabBarIcon: ({ color }) => (
-
-                       
 
                         <Entypo name="bookmark" size={24} color={color} />
 
