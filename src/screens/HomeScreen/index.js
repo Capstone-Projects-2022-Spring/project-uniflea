@@ -9,7 +9,7 @@ import { useChatContext } from "stream-chat-expo";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import DropDownPicker from "react-native-dropdown-picker";
-import SchoolImage from "../../components/SchoolImage";
+import { scale, ScaledSheet } from "react-native-size-matters"; 
 import { SchoolColor } from "../../styles/SchoolColors";
 
 
@@ -238,10 +238,10 @@ const HomeScreen = ({ searchValue }) => {
 
           <View style={styles.modalContainer}>
 
-            <View style={{ alignItems: "flex-end", height: 40, padding: 5}}>
+            <View style={{ alignItems: "flex-end", height: scale(40), padding:scale(5)}}>
               <Feather
                 name="check"
-                size={40}
+                size={scale(40)}
                 color="gray"
                 onPress={toggleModalOpen}
               />
@@ -250,7 +250,7 @@ const HomeScreen = ({ searchValue }) => {
             <View style={{ alignItems: "center" }}>
               <Picker
                 style={styles.sortStyle}
-                itemStyle={{ fontSize: 14 }}
+                itemStyle={{ fontSize: scale(14) }}
                 selectedValue={selectedValue}
                 onValueChange={(itemValue, itemIndex) =>
                   filterSort(sortedProducts, itemValue)
@@ -315,10 +315,10 @@ const HomeScreen = ({ searchValue }) => {
      {/* <View>{uniImg()}</View>  */}
    
       {/*Filter Button*/}
-      <View style={{ alignItems: "flex-end" }}>
+      <View style={{ right:10,  alignItems: "flex-end" }}>
         <AntDesign
           name="filter"
-          size={35}
+          size={scale(35)}
           color="white"
           onPress={toggleModalOpen}
         />
@@ -335,6 +335,7 @@ const HomeScreen = ({ searchValue }) => {
             category={item.category}
             displayName={item.displayName}
             createdAt={item.createdAt}
+            views={item.views}
           />
         )}
         keyExtractor={(product) => product.id}

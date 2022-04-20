@@ -6,7 +6,8 @@ import { DataStore } from "aws-amplify";
 import { Product } from "../../models";
 import { FontAwesome, Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
-const ActiveProductItem = ({ id, image, title, price, description, items,  setItems }) => {
+import { scale, ScaledSheet } from "react-native-size-matters"; 
+const ActiveProductItem = ({ id, image, title, price, description,views, items,  setItems }) => {
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
@@ -59,7 +60,7 @@ const ActiveProductItem = ({ id, image, title, price, description, items,  setIt
 
           <View style={styles.eyeContainer}> 
               <Text style={styles.eye}><MaterialIcons name="visibility" size={24} color="black" /></Text>
-              <Text style={styles.eyeText}>30</Text>             
+              <Text style={styles.eyeText}>{views}</Text>             
           </View>
           
 
@@ -70,14 +71,14 @@ const ActiveProductItem = ({ id, image, title, price, description, items,  setIt
             description: description
             }
             )}>
-              <Text><AntDesign name="edit" size={24} color="black" />Edit Listing</Text>
+              <Text><AntDesign name="edit" size={scale(24)} color="black" />Edit Listing</Text>
 
           </TouchableOpacity>
           
         
         <View style={styles.trashContainer}>
           <TouchableOpacity style={styles.trash} onPress={() => deleteItemById(id)}>
-            <FontAwesome name="trash-o" size={24} color="#bf1b36" />
+            <FontAwesome name="trash-o" size={scale(24)} color="#bf1b36" />
           </TouchableOpacity>
         </View>
         </View>

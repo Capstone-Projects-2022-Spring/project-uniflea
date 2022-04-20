@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
 import { Colors } from "../../styles/Colors";
+import { scale, ScaledSheet } from "react-native-size-matters"; 
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
   page: {
     flexDirection: "column",
     flex: 1,
