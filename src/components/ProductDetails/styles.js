@@ -72,6 +72,9 @@ const styles = ScaledSheet.create({
         borderWidth: 1.25,
         resizeMode: 'contain',
     },
+    TempleBackgroundColor: {
+        backgroundColor: '#99182e'
+      },
     TempleBorderColor: {
         borderColor: '#99182e'
       },
