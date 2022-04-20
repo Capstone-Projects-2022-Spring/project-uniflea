@@ -54,6 +54,7 @@ const HomeStack = () => {
             <Stack.Screen name='ActiveListingScreen' component={ActiveListingScreen}/>
             <Stack.Screen name='LeaveReviewScreen' component={LeaveReviewScreen} />
             <Stack.Screen name="Chat" component={ChatScreen} options={{title:'Chat'}}/>
+            <Stack.Screen name="OtherProductDetails" component={ProductDetails} options={{title:'Product Detail'}}/>
             
             {/* <Stack.Screen component={NotificationsScreen} name={"Notifications"} options={{ title: 'Notifications' }} />  */}
         </Stack.Navigator>
