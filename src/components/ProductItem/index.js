@@ -6,7 +6,6 @@ import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
 
 
-
 const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
   const navigation = useNavigation();
   const onPress = () => {
