@@ -76,45 +76,61 @@ const EditProductScreen = ({route, navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
 
+                              {/**screens title */}
+        <View style={styles.titleContainer}>    
+            <Text style={styles.title}>Edit Your Product</Text>
+        </View>
+
             {/* Item image */}
-            <TouchableOpacity onPress={pickImage} style={styles.profileButton}>
-                <S3Image imgKey={image} style={styles.image} />
-            </TouchableOpacity>
+
+            <View style={styles.imageContainer}>
+        <TouchableOpacity onPress={pickImage} style={styles.imageButton}>
+        <S3Image style={styles.image} imgKey={image} />
+        </TouchableOpacity>
+        </View>
 
             {/* title */}
+            <View style={styles.textBox}>
             <TextInput
-                textAlignVertical='top'
-                style={styles.textBox}
+            style={styles.text}
                 placeholder={title}
                 defaultValue = {title}
                 onChangeText = { newTitle =>navigation.setParams({
                     title: newTitle
                 })} 
             />
-
+</View>
             {/*Price */}
+            <View style={styles.space} />
+            <View style={styles.priceTextBox}>
             <TextInput
-                styles={styles.textBox}
-                placeholder={JSON.stringify(price)}
+            style={styles.text}
+             
+                placeholder={'$'+ JSON.stringify(price)}
                 defaultValue = {price}
                 onChangeText={ newPrice =>navigation.setParams({
                     price: newPrice
                 })}                      
             />
-
+</View>
             {/* Description */}
+            <View style={styles.space} />
+            <View style={styles.DescriptionTextBox}>
             <TextInput
-                textAlignVertical='top'
-                style={styles.textBox}
-                placeholder={description}
-                value= {description}
-                onChangeText={newDescription => navigation.setParams({
-                    description: newDescription
-                })}
-                multiline={true}
+              textAlign='center'
+              color='gray'
+             placeholder={description}
+             defaultValue= {description}
+             onChangeText={newDescription => navigation.setParams({
+                 description: newDescription
+             })}
+             multiline={true}
             />
-
+</View>
+<View style={styles.space} />
+<View style={styles.buttonContainer}>
             <CustomButton onPress={saveChanges} text="Save Changes" />
+</View>
 
 
         </SafeAreaView>
