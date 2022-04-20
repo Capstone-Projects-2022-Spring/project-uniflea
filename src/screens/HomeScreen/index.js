@@ -75,9 +75,6 @@ const HomeScreen = ({ searchValue }) => {
 
       console.log("notCategories before querying: " + notCategories);
 
-      removeCategory(categories[0]);
-      removeCategory(categories[1]);
-
       console.log("notCategories after splicing: " + notCategories[0] + notCategories[1]);
       // DataStore.query(Product, (product) => product.or(product => product.category("ne", notCategories[0])).category("ne" + notCategories[1])).then(setSortedProducts);
       // console.log(sortedProducts);
@@ -232,58 +229,82 @@ const HomeScreen = ({ searchValue }) => {
   }, []);
   return (
     
-    <View style={[styles, (user.attributes == 'Temple')? SchoolColor.TempleBackgroundColor : SchoolColor.DrexelBackgroundColor]}>
+    <View style={[styles, (user.attributes['custom:University'] == 'Temple') ? SchoolColor.TempleBackgroundColor : SchoolColor.DrexelBackgroundColor]}>
       {/*Modal used to display filter tab*/}
-      <Modal visible={modalOpen} animationType="slide">
-        <View style={styles.modalContent}>
-          <View style={{ alignItems: "flex-end", height: 40 }}>
-            <Feather
-              name="check"
-              size={40}
-              color="gray"
-              onPress={toggleModalOpen}
-            />
+      <Modal visible={modalOpen} animationType="none" presentationStyle="overFullScreen" transparent>
+
+
+        <View style={styles.viewWrapper}>
+
+          <View style={styles.modalContainer}>
+
+            <View style={{ alignItems: "flex-end", height: 40, padding: 5}}>
+              <Feather
+                name="check"
+                size={40}
+                color="gray"
+                onPress={toggleModalOpen}
+              />
+            </View>
+
+            <View style={{ alignItems: "center" }}>
+              <Picker
+                style={styles.sortStyle}
+                itemStyle={{ fontSize: 14 }}
+                selectedValue={selectedValue}
+                onValueChange={(itemValue, itemIndex) =>
+                  filterSort(sortedProducts, itemValue)
+                }
+              >
+                <Picker.Item label="None" value="none" />
+                <Picker.Item label="Price: Low to High" value="priceLow" />
+                <Picker.Item label="Price: High to Low" value="priceHigh" />
+                <Picker.Item label="Date: Newest" value="dateNewest" />
+                <Picker.Item label="Date: Oldest" value="dateOldest" />
+
+              </Picker>
+
+              <DropDownPicker
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+                multiple={true}
+                min={0}
+                dropDownDirection="DOWN"
+                max={7}
+
+                style={{
+                  left: "63%",
+                  width: "75%"
+                }}
+
+                dropDownContainerStyle={{
+                  left: "11%",
+                  width: "75%"
+                }}
+                onChangeValue={(value) => {
+                  setCategories(value);
+                  applyCategories(value);
+                  filterSort(sortedProducts, 'none');
+                  console.log("value: " + value);
+                  console.log("Categories after setting in dropdown: " + categories);
+                }}
+              />
+            </View>
+
           </View>
 
-          <View style={{ alignItems: "flex-start" }}>
-            <Picker
-              style={{ width: "100%", borderTopWidth: 0 }}
-              itemStyle={{ fontSize: 20 }}
-              selectedValue={selectedValue}
-              onValueChange={(itemValue, itemIndex) =>
-                filterSort(sortedProducts, itemValue)
-              }
-            >
-              <Picker.Item label ="None" value="none"/>
-              <Picker.Item label ="Price: Low to High" value="priceLow"/>
-              <Picker.Item label ="Price: High to Low" value="priceHigh"/>
-              <Picker.Item label ="Date: Newest" value="dateNewest"/>
-              <Picker.Item label ="Date: Oldest" value="dateOldest"/>
-
-            </Picker>
-
-          <DropDownPicker
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-            multiple={true}
-            min={0}
-            max={7}
-            onChangeValue={(value) => {
-              setCategories(value);
-              applyCategories(value);
-              filterSort(sortedProducts, 'none');
-              console.log("value: " + value);
-              console.log("Categories after setting in dropdown: " + categories);
-            }}
-          />
 
 
-          </View>
         </View>
+
+
+
+
+
       </Modal>
       
       {/*School Image */}
@@ -296,8 +317,8 @@ const HomeScreen = ({ searchValue }) => {
       <View style={{ alignItems: "flex-end" }}>
         <AntDesign
           name="filter"
-          size={28}
-          color="gray"
+          size={35}
+          color="white"
           onPress={toggleModalOpen}
         />
       </View>

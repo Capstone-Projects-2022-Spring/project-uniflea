@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { Colors } from "../../styles/Colors";
+
 const styles = StyleSheet.create({
   page: {
     flexDirection: "column",
@@ -8,18 +9,37 @@ const styles = StyleSheet.create({
     // backgroundColor: Colors.mainBackground,
   },
 
-  modalContent: {
-    padding: 10,
-    // backgroundColor: Colors.mainBackground,
-    borderTopColor: Colors.mainBackground,
-    borderTopWidth: 50,
-    borderBottomColor: Colors.mainBackground,
-    borderBottomWidth: 700,
-    borderRightWidth: 30,
-    borderRightColor: Colors.mainBackground,
-    borderLeftWidth: 20,
-    borderLeftColor: Colors.mainBackground,
+
+
+  modalContainer: {
+    position: "absolute",
+    height: "65%",
+    width: "75%",
+    alignContent: "center",
+    left: "13%",
+    top: "20%",
+    backgroundColor: "white",
+    borderRadius: 8,
+    borderTopWidth: 2,
+    borderLeftWidth: 2,
+    borderRightWidth: 2,
+    borderBottomWidth: 2,
+    borderTopColor: "black"
   },
+
+  sortStyle: {
+    width: "80%", 
+    backgroundColor: "white",
+    borderRadius: 8,
+    marginBottom: 20
+  },
+
+  viewWrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+},
 
 TempleBackgroundColor:{
   backgroundColor: '#99182e',
