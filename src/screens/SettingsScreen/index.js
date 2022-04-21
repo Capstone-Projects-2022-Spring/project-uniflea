@@ -149,7 +149,7 @@ const SettingsScreen = ()  => {
   return (
     <ScrollView>
       <View style={styles.root}>
-        <Text style={styles.settingsText}>Settings</Text>
+        {/*<Text style={styles.settingsText}>Settings</Text>*/}
         <View style={styles.pageContainer}>
           <View style={styles.inputContainer}>
             {/* user name input */}

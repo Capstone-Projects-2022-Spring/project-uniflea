@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: "#403d3d",
     fontFamily: "Arial",
+    alignSelf: "center",
   },
   lableText: {
     fontSize: 14,
