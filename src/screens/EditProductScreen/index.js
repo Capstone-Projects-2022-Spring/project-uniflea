@@ -107,7 +107,7 @@ const EditProductScreen = ({route, navigation}) => {
             style={styles.text}
              
                 placeholder={'$'+ JSON.stringify(price)}
-                defaultValue = {JSON.stringify(price)}
+                defaultValue = {price}
                 onChangeText={ newPrice =>navigation.setParams({
                     price: newPrice
                 })}                      
