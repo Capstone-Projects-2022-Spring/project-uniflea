@@ -1,13 +1,19 @@
 
 import { Text, View, Image, Pressable } from "react-native";
+import React, {useEffect, useContext} from "react";
 import styles from "./styles";
+import AuthContext from "../../contexts/Authentication"
 import { useNavigation } from "@react-navigation/native";
-import { DataStore } from "aws-amplify";
+import { DataStore, Auth} from "aws-amplify";
 import { Product } from "../../models";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { FontAwesome, Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
-const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
+const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub }) => {
+  
+
+  const {user, setUser} = useContext(AuthContext);
+
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
@@ -26,12 +32,26 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
     setItems(filteredData);
   };
 
+  function EditButton(props) {
+
+    const sub = props.userSub;
+    if(sub == user.attributes.sub){
+      console.log("userSub Matches")
+      return <View style={styles.editContainer}>
+      <Text><AntDesign name="edit" size={24} color="black" />Edit Listing</Text>
+      </View>;
+
+    } else{
+      console.log("UserSub does not match")
+      console.log(sub)
+      console.log(user.attributes.sub)
+      return <View></View>;
+    }
+  }
+
   return (
     // Need to change navigation for profile page
 <View style={styles.root}>
-
-
-   
       
         <View style={styles.imageContainer}>
            <Pressable onPress={onPress} >  
@@ -62,12 +82,9 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
               <Text style={styles.eyeText}>30</Text>             
           </View>
 
-          <View style={styles.editContainer}>
-              <Text><AntDesign name="edit" size={24} color="black" />Edit Listing</Text>
-
-          </View>
+        <EditButton userSub = {userSub}>
+          </EditButton>
           
-        
         <View style={styles.trashContainer}>
           <TouchableOpacity style={styles.trash} onPress={() => deleteItemById(id)}>
             <FontAwesome name="trash-o" size={24} color="#bf1b36" />
