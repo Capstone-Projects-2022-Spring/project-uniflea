@@ -17,7 +17,6 @@ import {useForm} from "react-hook-form";
 import DropDownPicker from "react-native-dropdown-picker";
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
-
 const CreateListingScreen = () => {
     const navigation = useNavigation();
     const {
@@ -30,12 +29,13 @@ const CreateListingScreen = () => {
     const [titleOfListing, setTitleOfListing] = React.useState(null);
     const [descriptionOfListing, setDescriptionOfListing] = React.useState(null);
     const [priceOfListing, setPriceOfListing] = React.useState(null);
-    const [image, setImage] = React.useState('../../../assets/camera.png');
+    const [image, setImage] = React.useState('camera.png');
     const [pickedCategory, setPickedCategory] = React.useState(null);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState([]);
     const [items, setItems] = useState([
         {label: 'Books', value: 'Books'},
+        {label: 'Furniture', value: 'Furniture'},
         {label: 'Supplies & Equipment', value: 'Supplies & Equipment'},
         {label: 'Electronics', value: 'Electronics'},
         {label: 'Clothes', value: 'Clothes'},
@@ -92,13 +92,34 @@ const CreateListingScreen = () => {
     //     Alert.alert(newListing.pri, "This is the price!");
     //     Alert.alert(newListing.no, "This is the notes!");
     // }
+
     const publishListing = async() => {
+        if (image === 'camera.png') {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Picture!");
+            return;
+        }
+        if (titleOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Title!");
+            return;
+        }
+        if (descriptionOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Description!");
+            return;
+        }
+        if (priceOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Price!");
+            return;
+        }
+        if (pickedCategory === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Category!");
+            return;
+        }
         const newProduct = new Product({
             userSub: user.attributes.sub,
             title: titleOfListing,
             description: descriptionOfListing,
             price: Number(priceOfListing),
-            image: image, // when implementing multiple images, maybe 5 max, reference 1 image is images[0]
+            image: image,
             images: [image],
             university: user.attributes["custom:University"],
             displayName: user.attributes["preferred_username"],
@@ -107,7 +128,13 @@ const CreateListingScreen = () => {
         // console.log("University==========", user.attributes["custom:University"]);
 
         await DataStore.save(newProduct);
-        Alert.alert("Success!", "Your Listing Has Been Published!");
+        Alert.alert("Success!", "Your Listing Has Been Published");
+        setImage('camera.png')
+        setTitleOfListing(null);
+        setDescriptionOfListing(null);
+        setPriceOfListing(null);
+        setValue(null);
+        navigation.navigate("HomeScreen");
     }
 
     // had scroll view to permit tapping out of text boxes. try to find keyboard dismiss. also figure out how to keep default camera image on pickimage. implement multiople images as well. /clear fields after publishing successfully. require fileds too
@@ -117,14 +144,16 @@ const CreateListingScreen = () => {
                 {/*<ScrollView>*/}
                 <View style = {styles.container}>
                     <TouchableOpacity onPress={pickImage}>
-                        {/*<Image style = {styles.cameraFrame} source = {require("../../../assets/camera.png")}/>*/}
                         <S3Image style={styles.cameraFrame} imgKey={image} />
+                        {/*<Image style = {styles.cameraFrame} source = {require("../../../assets/camera.png")}/>*/}
+                        {/*<S3Image style={styles.cameraFrame} imgKey={image} />*/}
                     </TouchableOpacity>
                     <TextInput
                         style={styles.input}
                         placeholder={"Title of Listing"}
                         onChangeText = {newText => setTitleOfListing(newText)}
                         defaultValue={titleOfListing}
+                        maxLength={32}
                     />
                     <TextInput
                         style={styles.input2}
@@ -132,12 +161,14 @@ const CreateListingScreen = () => {
                         multiline = {true}
                         onChangeText = {newText => setDescriptionOfListing(newText)}
                         defaultValue={descriptionOfListing}
+                        maxLength={256}
                     />
                     <TextInput
                         style={styles.input}
                         placeholder={"($) Price of Listing"}
                         onChangeText = {newText => setPriceOfListing(newText)}
                         defaultValue={priceOfListing}
+                        maxLength={6}
                     />
                     <View style = {styles.container2}>
                         {/*<CategorySelect*/}
@@ -182,7 +213,5 @@ const CreateListingScreen = () => {
         </TouchableWithoutFeedback>
     );
 };
-
-
 
 export default CreateListingScreen;

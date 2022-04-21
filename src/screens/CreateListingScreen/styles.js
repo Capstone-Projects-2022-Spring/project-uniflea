@@ -1,42 +1,44 @@
-import { StyleSheet } from "react-native";
-import { color } from "react-native-reanimated";
+
+import { scale, ScaledSheet } from "react-native-size-matters";
+
+
 import {Colors} from "../../styles/Colors";
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     container: {
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },
     container2: {
-        padding: 10,
+        padding: scale(10),
         width: '85%',
     },
     input: {
         height: '7%',
         width: '80%',
         margin: '2%',
-        borderWidth: 1.25,
+        borderWidth: scale(1.25),
         padding: '2%',
-        borderRadius: 5,
+        borderRadius: scale(5),
     },
     input2: {
         height: '20%',
         width: '80%',
         margin: '2%',
-        borderWidth: 1.25,
+        borderWidth: scale(1.25),
         padding: '2%',
-        borderRadius: 5,
+        borderRadius: scale(5),
     },
     cameraFrame: {
         resizeMode: 'contain',
         alignSelf: 'center',
-        height: 200,
-        width: 200,
+        height: scale(200),
+        width: scale(200),
         margin: '2%',
-        borderWidth: 1.25,
+        borderWidth: scale(1.25),
         padding: '2%',
-        borderRadius: 5,
+        borderRadius: scale(5),
     },
     TempleBackgroundColor: {
         backgroundColor: '#99182e'
