@@ -1,5 +1,5 @@
 import { Auth, DataStore } from "aws-amplify";
-import { View, FlatList, Modal, Picker, Alert, Image } from "react-native";
+import { View, FlatList, Modal, Picker, Alert, Image, Text } from "react-native";
 import styles from "./styles";
 import ProductItem from "../../components/ProductItem";
 import React, { useEffect, useState, useContext } from "react";
@@ -56,7 +56,8 @@ const HomeScreen = ({ searchValue }) => {
         .category("eq", categories[3])
         .category("eq", categories[4])
         .category("eq", categories[5])
-        .category("eq", categories[6]))
+        .category("eq", categories[6])
+        .category("eq", categories[7]))
         .and(product => product.university("eq", user.attributes["custom:University"])))
         .then(setSortedProducts);
     } else {
@@ -73,9 +74,6 @@ const HomeScreen = ({ searchValue }) => {
     
     if (categories.length >= 1) {
 
-      console.log("notCategories before querying: " + notCategories);
-
-      console.log("notCategories after splicing: " + notCategories[0] + notCategories[1]);
       // DataStore.query(Product, (product) => product.or(product => product.category("ne", notCategories[0])).category("ne" + notCategories[1])).then(setSortedProducts);
       // console.log(sortedProducts);
       DataStore.query(Product, (product) => product.or(product => product
@@ -85,7 +83,8 @@ const HomeScreen = ({ searchValue }) => {
       .category("eq", categories[3])
       .category("eq", categories[4])
       .category("eq", categories[5])
-      .category("eq", categories[6]))
+      .category("eq", categories[6])
+      .category("eq", categories[7]))
       .and(product => product.university("eq", user.attributes["custom:University"])))
       .then(setSortedProducts);
     
@@ -106,14 +105,13 @@ const HomeScreen = ({ searchValue }) => {
     {label: 'Electronics', value: 'Electronics'},
     {label: 'Clothes', value: 'Clothes'},
     {label:  'Food & Nutrition', value: 'Food & Nutrition'},
+    {label: 'Furniture', value: 'Furniture'},
     {label: 'Handmade', value: 'Handmade'},
     {label: 'Service', value: 'Service'},
     {label: 'Other', value: 'Other'}
   ]);
   var [categories, setCategories] = useState([]);
-  var [notCategories, setNotCategories] = useState(["art", "protein", "test", "textbook"]);
   
-
   const applyCategories = (value) => {
     categories=value;
     console.log("Categories in applyCategories: " + categories);
@@ -127,7 +125,8 @@ const HomeScreen = ({ searchValue }) => {
         .category("eq", categories[3])
         .category("eq", categories[4])
         .category("eq", categories[5])
-        .category("eq", categories[6]))
+        .category("eq", categories[6])
+        .category("eq", categories[7]))
         .and(product => product.university("eq", user.attributes["custom:University"])))
         .then(setSortedProducts);
       // setSortedProducts(categorizedProducts);
@@ -297,9 +296,7 @@ const HomeScreen = ({ searchValue }) => {
             </View>
 
           </View>
-
-
-
+          </View>
         </View>
 
 

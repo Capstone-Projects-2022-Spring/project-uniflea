@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginVertical: 20,
+        alignItems: 'center',
     },
     signUpContainer: {
         justifyContent: 'center',

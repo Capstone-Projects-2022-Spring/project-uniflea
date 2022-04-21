@@ -11,7 +11,7 @@ const ActiveProductItem = ({ id, image, title, price, description,views, items, 
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
-    navigation.navigate("ProductScreen", { id: id });
+    navigation.navigate("OtherProductDetails", { id: id });
   };
 
   const deleteItemById = async (id) => {

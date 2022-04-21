@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginVertical: 10,
+        alignItems: 'center',
     },
     signInContainer: {
         justifyContent: 'center',
