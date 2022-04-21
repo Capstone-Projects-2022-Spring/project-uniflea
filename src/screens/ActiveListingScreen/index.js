@@ -51,7 +51,9 @@ const ActiveListingScreen = ({route}) => {
                   id={item.id}
                   title={item.title} 
                   image={item.image} 
-                  price={item.price} 
+                  price={item.price}
+                  description={item.description} 
+                  views={item.views}
                   userSub={item.userSub}
                   items={items}
                   setItems={setItems}

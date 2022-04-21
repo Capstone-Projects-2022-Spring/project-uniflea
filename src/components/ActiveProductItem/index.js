@@ -8,9 +8,9 @@ import { DataStore, Auth} from "aws-amplify";
 import { Product } from "../../models";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { FontAwesome, Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
+import { scale, ScaledSheet } from "react-native-size-matters"; 
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
-const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub }) => {
-  
+const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub, description, views }) => {
 
   const {user, setUser} = useContext(AuthContext);
 
@@ -33,14 +33,21 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub }
   };
 
   function EditButton(props) {
-
     const sub = props.userSub;
     if(sub == user.attributes.sub){
       console.log("userSub Matches")
-      return <View style={styles.editContainer}>
-      <Text><AntDesign name="edit" size={24} color="black" />Edit Listing</Text>
-      </View>;
+      return <View>
+          <TouchableOpacity style={styles.editContainer}  onPress={ () => navigation.navigate("EditProductScreen",{
+            id: id, 
+            title: title, 
+            price: price, 
+            description: description
+            }
+            )}>
+              <Text ><AntDesign name="edit" size={scale(24)} color="blue" />Edit Listing</Text>
 
+          </TouchableOpacity>
+      </View>;
     } else{
       console.log("UserSub does not match")
       console.log(sub)
@@ -49,10 +56,12 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub }
     }
   }
 
+
+  console.log("Active Product Item: " + description)
   return (
     // Need to change navigation for profile page
 <View style={styles.root}>
-      
+
         <View style={styles.imageContainer}>
            <Pressable onPress={onPress} >  
           <S3Image style={styles.image} imgKey={ image }/>
@@ -79,11 +88,12 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub }
 
           <View style={styles.eyeContainer}> 
               <Text style={styles.eye}><MaterialIcons name="visibility" size={24} color="black" /></Text>
-              <Text style={styles.eyeText}>30</Text>             
+              <Text style={styles.eyeText}>{views}</Text>          
           </View>
 
-        <EditButton userSub = {userSub}>
-          </EditButton>
+          <EditButton userSub = {userSub}></EditButton>   
+          
+
           
         <View style={styles.trashContainer}>
           <TouchableOpacity style={styles.trash} onPress={() => deleteItemById(id)}>
