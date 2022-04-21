@@ -4,7 +4,7 @@ import React, { useEffect, useContext } from 'react';
 import BottomTabNav from './BottomTabNav';
 import AuthStack from './AuthStack';
 import { Auth, Hub } from 'aws-amplify';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import AuthContext from '../contexts/Authentication';
 import { useChatContext } from 'stream-chat-expo';
 import { DataStore, Storage } from 'aws-amplify';
@@ -62,6 +62,7 @@ const Navigation = () => {
 
 
         } catch (e) {
+            console.log("oops", e.message);
             console.log("No current authenticated user");
             setUser(null);
 

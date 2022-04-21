@@ -5,14 +5,12 @@ import CustomInput from '../../components/CustomInput';
 import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import {Auth} from 'aws-amplify';
-import {useChatContext} from 'stream-chat-expo';
-import AuthContext from '../../contexts/Authentication';
-import React, {useContext} from 'react';
-import {StreamChat} from 'stream-chat';
+import React from 'react';
+
 
 const API_KEY = '4gqynpstsrwm';
 const SECRET = 'ee3kx3rc5pmyp58pt5xbnqskttc5fa8b7zha8hzh5su52mv77tgqnksnunqraa9t';
-// const client = StreamChat.getInstance(API_KEY, SECRET);
+
 const SignInScreen = () => {
     const navigation = useNavigation();
     const {
@@ -21,8 +19,7 @@ const SignInScreen = () => {
         formState: { errors },
     } = useForm();
 
-    const { client } = useChatContext();
-    const {setUserId} = useContext(AuthContext);
+
     // This function requires call to amplify to verify user, making it asynchronous
     const onSignInPressed = async (data) => {
         try {
@@ -35,6 +32,7 @@ const SignInScreen = () => {
         // navigation.navigate('Home');
     }
     const onSignUpPressed = () => {
+        //navigation.navigate('SignUp');
         navigation.navigate('SignUp');
     }
     const onForgotPasswordPressed = () => {

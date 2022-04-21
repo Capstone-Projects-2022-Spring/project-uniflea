@@ -1,16 +1,19 @@
 import { Text, View, Image, Pressable } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import { Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
-const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
+import { useForm } from "react-hook-form";
+import { Product } from "../../models";
+import { DataStore } from "aws-amplify";
+
+
+const ProductItem = ({ id, image, title, price, displayName, createdAt, views }) => {
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
-    navigation.navigate("ProductScreen", { 
-      screen: 'ProductDetails',
-      params: {id: id, title: title, price: price}});
+    navigation.navigate("ProductDetails", {id: id, title: title, price: price});
   };
   const compareDate = () => {
     
@@ -50,8 +53,56 @@ const ProductItem = ({ id, image, title, price, displayName, createdAt }) => {
     }
   };
 
-  return (
-    <Pressable onPress={onPress} style={styles.root}>
+
+ 
+
+ const [ newViews ,setNewViews ]= useState(1);
+  const [ count ,setCount ]= useState(1);
+let incrementCount=async  ()=> {
+  console.log('Inside incrementCount-----------------: ', newViews); 
+  // const product = await DataStore.query(Product, s => s.id("eq", id));
+  // const  newViews = product[0].views;
+  setCount(count +1)
+  setNewViews( count + (views + 1));
+}
+
+const updateViews = async ()=>{
+   console.log('Inside updateViews newViews-----------------: ', newViews);  
+
+  const product = await DataStore.query(Product, s => s.id("eq", id));
+
+  await DataStore.save(
+    Product.copyOf(product[0], update =>{
+      update.views= newViews;
+    })
+
+  )
+};
+
+// console.log('ampView-----------------: ', views); 
+// console.log('count-----------------: ', count); 
+// console.log('incrementCount-----------------: ', newViews); 
+
+const countOnPress= ()=> {
+ console.log('count onpress--------------------');
+  incrementCount();
+
+   updateViews(); 
+  onPress();
+
+ 
+};
+
+  const { handleSubmit } = useForm();
+  
+  // useEffect(() => {
+  //   countOnPress();
+  // }, []);
+ 
+  return (  
+
+    <Pressable onPress={countOnPress} style={styles.root}>
+    
       {/* Is the image onpress -- directs to product screen*/}
       <View style={styles.imageContainer}>
         <S3Image style={styles.image} imgKey={ image } />

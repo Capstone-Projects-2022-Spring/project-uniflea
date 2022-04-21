@@ -18,7 +18,7 @@ const SettingsScreen = ()  => {
       const user = await Auth.currentAuthenticatedUser();
       console.log(user )
       await Auth.forgotPassword(user.attributes.email);
-      navigation.navigate("ResetPassword");
+      navigation.navigate("ResetPassword", {fromScreen:"Settings"});
 
       
     } catch (e) {
@@ -149,7 +149,7 @@ const SettingsScreen = ()  => {
   return (
     <ScrollView>
       <View style={styles.root}>
-        <Text style={styles.settingsText}>Settings</Text>
+        {/*<Text style={styles.settingsText}>Settings</Text>*/}
         <View style={styles.pageContainer}>
           <View style={styles.inputContainer}>
             {/* user name input */}
@@ -165,7 +165,7 @@ const SettingsScreen = ()  => {
                 style={styles.icon}
                 name="user"
                 size={24}
-                color="#black"
+                color="black"
               />
               <CustomInput control={control} name="name" placeholder={name}/>
              
@@ -184,7 +184,7 @@ const SettingsScreen = ()  => {
                 style={styles.icon}
                 name="user-graduate"
                 size={24}
-                color="#black"
+                color="black"
               />
               <Text style={styles.containerText}>
                 {school} {grad}
@@ -204,7 +204,7 @@ const SettingsScreen = ()  => {
                 style={styles.icon}
                 name="mail"
                 size={24}
-                color="#black"
+                color="black"
               />
               <Text style={styles.containerText}>{email} </Text>
             </View>
@@ -240,7 +240,7 @@ const SettingsScreen = ()  => {
                 style={styles.icon}
                 name="aliwangwang-o1"
                 size={24}
-                color="#black"
+                color="black"
               />
               
               <CustomInput

@@ -3,7 +3,6 @@ import React, {useContext, useEffect, useState} from 'react';
 import { Text, Pressable} from 'react-native'
 import { useChatContext } from 'stream-chat-expo';
 import AuthContext from '../../contexts/Authentication';
-impoi
 
 const SendMessageButton = ({userToMessage}) => {
     const {user} = useContext(AuthContext);

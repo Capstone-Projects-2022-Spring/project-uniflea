@@ -2,7 +2,8 @@ import React, {useEffect, useContext, useState, useRef} from 'react';
 import styles from './styles'
 import {SafeAreaView, StyleSheet, TextInput, Pressable, Image, ScrollView,
     Text, View, TouchableHighlight, TouchableOpacity, Picker, Alert} from 'react-native';
-import CustomButton from "../../components/CustomButton";
+
+import ScaledCustomButton from "../../components/ScaledCustomButton";
 import * as ImagePicker from 'expo-image-picker';
 import {useNavigation} from "@react-navigation/native";
 import {Auth, DataStore, Storage} from "aws-amplify";
@@ -16,7 +17,6 @@ import {useForm} from "react-hook-form";
 import DropDownPicker from "react-native-dropdown-picker";
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 
-
 const CreateListingScreen = () => {
     const navigation = useNavigation();
     const {
@@ -29,18 +29,20 @@ const CreateListingScreen = () => {
     const [titleOfListing, setTitleOfListing] = React.useState(null);
     const [descriptionOfListing, setDescriptionOfListing] = React.useState(null);
     const [priceOfListing, setPriceOfListing] = React.useState(null);
-    const [image, setImage] = React.useState('../../../assets/camera.png');
+    const [image, setImage] = React.useState('camera.png');
     const [pickedCategory, setPickedCategory] = React.useState(null);
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState([]);
     const [items, setItems] = useState([
         {label: 'Books', value: 'Books'},
+        {label: 'Furniture', value: 'Furniture'},
         {label: 'Supplies & Equipment', value: 'Supplies & Equipment'},
         {label: 'Electronics', value: 'Electronics'},
         {label: 'Clothes', value: 'Clothes'},
         {label: 'Food & Nutrition', value: 'Food & Nutrition'},
         {label: 'Handmade', value: 'Handmade'},
         {label: 'Service', value: 'Service'},
+        {label: 'Other', value: 'Other'},
     ]);
     const CATEGORIES = [
         {label: 'Books', value: 'Books'},
@@ -59,7 +61,7 @@ const CreateListingScreen = () => {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [4, 3],
-            quality: 1,
+            quality: 0.5,
         });
         console.log(result);
 
@@ -90,13 +92,34 @@ const CreateListingScreen = () => {
     //     Alert.alert(newListing.pri, "This is the price!");
     //     Alert.alert(newListing.no, "This is the notes!");
     // }
+
     const publishListing = async() => {
+        if (image === 'camera.png') {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Picture!");
+            return;
+        }
+        if (titleOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Title!");
+            return;
+        }
+        if (descriptionOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Description!");
+            return;
+        }
+        if (priceOfListing === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Price!");
+            return;
+        }
+        if (pickedCategory === null) {
+            Alert.alert("Uh Oh!", "Please Give Your Listing a Category!");
+            return;
+        }
         const newProduct = new Product({
             userSub: user.attributes.sub,
             title: titleOfListing,
             description: descriptionOfListing,
             price: Number(priceOfListing),
-            image: image, // when implementing multiple images, maybe 5 max, reference 1 image is images[0]
+            image: image,
             images: [image],
             university: user.attributes["custom:University"],
             displayName: user.attributes["preferred_username"],
@@ -105,86 +128,90 @@ const CreateListingScreen = () => {
         // console.log("University==========", user.attributes["custom:University"]);
 
         await DataStore.save(newProduct);
-        Alert.alert("Success!", "Your Listing Has Been Published!");
+        Alert.alert("Success!", "Your Listing Has Been Published");
+        setImage('camera.png')
+        setTitleOfListing(null);
+        setDescriptionOfListing(null);
+        setPriceOfListing(null);
+        setValue(null);
+        navigation.navigate("HomeScreen");
     }
 
     // had scroll view to permit tapping out of text boxes. try to find keyboard dismiss. also figure out how to keep default camera image on pickimage. implement multiople images as well. /clear fields after publishing successfully. require fileds too
     return (
-
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-        <View>
-            <View style = {styles.container}>
-                <TouchableOpacity onPress={pickImage}>
-                    {/*<Image style = {styles.cameraFrame} source = {require("../../../assets/camera.png")}/>*/}
-                    <S3Image style={styles.cameraFrame} imgKey={image} />
-                </TouchableOpacity>
-                <TextInput
-                    style={styles.input}
-                    placeholder={"Title of Listing"}
-                    onChangeText = {newText => setTitleOfListing(newText)}
-                    defaultValue={titleOfListing}
-                />
-            </View>
-
-            <View style = {styles.container}>
-                <TextInput
-                    style={styles.input2}
-                    placeholder={"Description of Listing"}
-                    multiline = {true}
-                    onChangeText = {newText => setDescriptionOfListing(newText)}
-                    defaultValue={descriptionOfListing}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder={"($) Price of Listing"}
-                    onChangeText = {newText => setPriceOfListing(newText)}
-                    defaultValue={priceOfListing}
-                />
-                <View style = {styles.container2}>
-                    {/*<CategorySelect*/}
-                    {/*    control={control}*/}
-                    {/*    items={CATEGORIES}*/}
-                    {/*    name="catSelector"*/}
-                    {/*    rules={{ required: 'Must select a category' }}*/}
-                    {/*    itemToSelect='Category'*/}
-                    {/*/>*/}
-                    <DropDownPicker
-                        style = {{
-                            backgroundColor: "#f2f2f2"
-                        }}
-
-                        //******************************************************************* */
-                        //I think this borderRadius is what is breaking 
-                        // style = {{
-                        //     backgroundColor: "#f2f2f2",
-                        //     borderRadius: '5'
-                        // }}
-                        // placeholder={"Select a Category"}
-
-                        //******************************************************************* */
-                        placeholderStyle={{
-                            color: "#bdbdc2",
-                        }}
-                        open={open}
-                        value={value}
-                        items={items}
-                        setOpen={setOpen}
-                        setValue={setValue}
-                        setItems={setItems}
-                        multiple={false}
-                        dropDownDirection="TOP"
-                        onChangeValue={(value) => {
-                            setPickedCategory(value);
-                        }}
+        <TouchableWithoutFeedback onPress = {Keyboard.dismiss} accessibile = {false}>
+            <SafeAreaView>
+                {/*<ScrollView>*/}
+                <View style = {styles.container}>
+                    <TouchableOpacity onPress={pickImage}>
+                        <S3Image style={styles.cameraFrame} imgKey={image} />
+                        {/*<Image style = {styles.cameraFrame} source = {require("../../../assets/camera.png")}/>*/}
+                        {/*<S3Image style={styles.cameraFrame} imgKey={image} />*/}
+                    </TouchableOpacity>
+                    <TextInput
+                        style={styles.input}
+                        placeholder={"Title of Listing"}
+                        onChangeText = {newText => setTitleOfListing(newText)}
+                        defaultValue={titleOfListing}
+                        maxLength={32}
                     />
+                    <TextInput
+                        style={styles.input2}
+                        placeholder={"Description of Listing"}
+                        multiline = {true}
+                        onChangeText = {newText => setDescriptionOfListing(newText)}
+                        defaultValue={descriptionOfListing}
+                        maxLength={256}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder={"($) Price of Listing"}
+                        onChangeText = {newText => setPriceOfListing(newText)}
+                        defaultValue={priceOfListing}
+                        maxLength={6}
+                    />
+                    <View style = {styles.container2}>
+                        {/*<CategorySelect*/}
+                        {/*    control={control}*/}
+                        {/*    items={CATEGORIES}*/}
+                        {/*    name="catSelector"*/}
+                        {/*    rules={{ required: 'Must select a category' }}*/}
+                        {/*    itemToSelect='Category'*/}
+                        {/*/>*/}
+                        <DropDownPicker
+                            //I think this borderRadius is what is breaking
+                            style = {{
+                                backgroundColor: "#f2f2f2",
+                                borderRadius: 5,
+                                borderWidth: 1.25,
+                            }}
+                            placeholder="Select a Category"
+
+                            placeholderStyle={{
+                                color: "#bdbdc2",
+                            }}
+                            open={open}
+                            value={value}
+                            items={items}
+                            setOpen={setOpen}
+                            setValue={setValue}
+                            setItems={setItems}
+                            multiple={false}
+                            onChangeValue={(value) => {
+                                setPickedCategory(value);
+                            }}
+                            dropDownDirection = "TOP"
+                        />
+                    </View>
+                    {/* <ScaledCustomButton onPress= {publishListing} text  = {"Publish Listing"}/> */}
+                    <TouchableOpacity onPress= {publishListing}  style={ [styles.button,  (user.attributes['custom:University'] == 'Temple') ? styles.TempleBackgroundColor : styles.DrexelBackgroundColor]}>
+                            <Text style={styles.text}>Publish Listing</Text>
+                    </TouchableOpacity>
                 </View>
-                <CustomButton onPress= {publishListing} text  = {"Publish Listing"}/>
-            </View>
-        </View>
+                {/*</ScrollView>*/}
+            </SafeAreaView>
         </TouchableWithoutFeedback>
     );
 };
-
-
 
 export default CreateListingScreen;

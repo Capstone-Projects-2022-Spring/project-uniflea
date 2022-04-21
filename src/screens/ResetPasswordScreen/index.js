@@ -6,16 +6,21 @@ import CustomButton from '../../components/CustomButton';
 import { useNavigation } from '@react-navigation/native';
 import { Auth } from 'aws-amplify';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { useRoute } from '@react-navigation/native';
 import React, {useRef} from 'react';
 
 const ResetPasswordScreen = () => {
     const password = useRef({});
     const navigation = useNavigation();
+    const route = useRoute();
     const onSubmit = async (data) => {
         try {
             await Auth.forgotPasswordSubmit(data.email, data.code, data.password);
-            navigation.navigate("SettingsScreen");
+            if (route.params?.fromScreen == "Settings") {
+                navigation.navigate("SettingsScreen");
+            } else {
+                navigation.navigate("SignIn");
+            }
 
         
         } catch (e) {

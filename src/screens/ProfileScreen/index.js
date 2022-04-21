@@ -15,15 +15,18 @@ import CustomTextBox from "../../components/CustomTextBox";
 import CustomButton from "../../components/CustomButton";
 import { useForm } from "react-hook-form";
 import { TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { useChatContext } from "stream-chat-expo";
 
 
 const ProfilePage = () => {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
-
+  const { client } = useChatContext();
   //to for signing out
+
   const { user, setUser } = useContext(AuthContext);
   const signOut = () => {
+    client.disconnectUser();
     setUser(undefined);
     Auth.signOut();
   };
@@ -55,7 +58,10 @@ const ProfilePage = () => {
     });
 
     console.log(result);
-
+    if (result.cancelled){
+      setIsLoading(false);
+      return;
+    }
     if (!result.cancelled) {
       setImage(result.uri);
     }
@@ -133,8 +139,8 @@ const ProfilePage = () => {
 
   //for the circle buttons
   const Circle = ({ text }) => (
-    <View style={styles.circle}>
-      <Text style={styles.squareText}>{text}</Text>
+    <View style={[styles.circle, (schoolName == 'Temple') ? styles.TempleBorderColor : styles.DrexelBorderColor]}>
+      <Text style={[styles.squareText, (schoolName == 'Temple') ? styles.TempleTextColor : styles.DrexelTextColor]}>{text}</Text>
     </View>
   );
 
@@ -180,7 +186,7 @@ const ProfilePage = () => {
   //***************************************************************************************RETURN() */
   return (
     <SafeAreaView style={styles.root}>
-      <View style={styles.shape} />
+      <View style={[styles.shape,(schoolName == 'Temple') ? styles.TempleBackgroundColor : styles.DrexelBackgroundColor] } />
 
       <View style={styles.topBannerContainer}>
         <View style={styles.topBannerrRow}>
@@ -257,7 +263,7 @@ const ProfilePage = () => {
                       onPress={handleSubmit(updateBio)}
                     />
                     <CustomButton
-                      text="Cancle"
+                      text="Cancel"
                       onPress={toggleModalVisibility}
                     />
                   </View>
@@ -286,7 +292,7 @@ const ProfilePage = () => {
             <View style={styles.space} />
 
             <TouchableOpacity
-              onPress={() => navigation.navigate("ActiveListingScreen")}
+              onPress={() => navigation.navigate("ActiveListingScreen", {fromScreen:'ProfileScreen'})}
             >
               <Circle text="Active Listings" />
             </TouchableOpacity>

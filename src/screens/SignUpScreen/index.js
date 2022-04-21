@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Auth, DataStore } from 'aws-amplify';
 import React, { useRef, useContext } from 'react';
 import { User } from '../../models';
+import { validateEmail } from './checkValidEmail';
 
 const COLLEGES = [
     { id: 'Temple', name: 'Temple' },
@@ -30,7 +31,7 @@ const GRAD_YEARS = [
     { id: '2031', name: '2031' },
     { id: '2032', name: '2032' },
 ]
-// const client = StreamChat.getInstance('4gqynpstsrwm', 'ee3kx3rc5pmyp58pt5xbnqskttc5fa8b7zha8hzh5su52mv77tgqnksnunqraa9t');
+
 const SignUpScreen = () => {
     const password = useRef({});
 
@@ -93,18 +94,7 @@ const SignUpScreen = () => {
 
     }
 
-    function validateEmail(input) {
-        const validEmails = ["temple.edu", "drexel.edu", "pennstate.edu", "upenn.edu", "villanova.edu"];
-        const valid = input.split("@");
-        const uni = valid[valid.length-1];
-        if (validEmails.includes(uni)) {
-           
-            return true;
-        } else {
-            alert("Invalid email address");
-            return false;
-        }
-    }
+
 
     const validatePassword = (confirmedPassword) => {
         return confirmedPassword === password.current;

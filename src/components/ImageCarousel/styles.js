@@ -1,22 +1,24 @@
 import {StyleSheet} from 'react-native';
+import { scale, ScaledSheet } from "react-native-size-matters";
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     root: {
        alignItems: 'center',
     },
     image: {
-        width: 200,
-        height: 200,
-        resizeMode: 'cover',
+        width: scale(225),
+        height: scale(225),
+        borderWidth: 1.25,
+        resizeMode: 'contain',
     },
     dot: {
-        width: 15,
-        height: 15, 
+        width: scale(15),
+        height: scale(15),
         borderRadius: 15,
         borderWidth: 1,
         backgroundColor: '#ededed',
         borderColor: '#c8c8c8',
-        margin: 10,        
+        margin: scale(10),
    },
    dotContainer: {
     flexDirection: 'row',

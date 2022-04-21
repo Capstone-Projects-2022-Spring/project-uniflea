@@ -1,66 +1,79 @@
-import { StyleSheet } from "react-native";
+
+import { scale, ScaledSheet } from "react-native-size-matters";
+
+
 import {Colors} from "../../styles/Colors";
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     container: {
+        height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },
     container2: {
-        padding: 10,
+        padding: scale(10),
         width: '85%',
     },
     input: {
-        height: 40,
-        width: 300,
-        margin: 10,
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 5,
+        height: '7%',
+        width: '80%',
+        margin: '2%',
+        borderWidth: scale(1.25),
+        padding: '2%',
+        borderRadius: scale(5),
     },
     input2: {
-        height: 130,
-        width: 300,
-        margin: 10,
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 5,
-        // textAlign: 'center',
-    },
-    centerTitle: {
-        textAlign: 'center', // <-- the magic
-        fontWeight: 'bold',
-        fontSize: 22,
-        marginTop: 10,
-        width: 200,
+        height: '20%',
+        width: '80%',
+        margin: '2%',
+        borderWidth: scale(1.25),
+        padding: '2%',
+        borderRadius: scale(5),
     },
     cameraFrame: {
         resizeMode: 'contain',
         alignSelf: 'center',
-        height: 200,
-        width: 200,
-        margin: 10,
-        borderWidth: 1,
-        padding: 10,
+        height: scale(200),
+        width: scale(200),
+        margin: '2%',
+        borderWidth: scale(1.25),
+        padding: '2%',
+        borderRadius: scale(5),
+    },
+    TempleBackgroundColor: {
+        backgroundColor: '#99182e'
+      },
+      TempleBorderColor: {
+        borderColor: '#99182e'
+      },
+      TempleTextColor: {
+        color: '#99182e'
+      },
+      DrexelBackgroundColor: {
+        backgroundColor: '#11294f',
+      },
+      DrexelBorderColor: {
+        borderColor: '#11294f'
+      },
+      DrexelTextColor: {
+        color: '#11294f'
+      },
+      button:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        // backgroundColor:'#99182e',
+        // backgroundColor: Colors.buttonbackgroundPrimary,
+        height: '7%',
+        width: '65%',
         borderRadius: 5,
-    },
-    space:{
-        width:300,
-        height:300
-    },
-    categoryFrame: {
-        resizeMode: 'contain',
-        alignSelf: 'center',
-        height: 40,
-        width: 300,
-        margin: 10,
         borderWidth: 1,
-        padding: 10,
+        // borderColor: Colors.buttonBorderPrimary,
+        margin: '2%',
     },
-    buttonText: {
-        fontSize: 20,
-        color: '#FFFFFF',
-    },
+    text: {
+        fontSize: 18,
+        color: 'white'
+    }
 });
 
 export default styles;
