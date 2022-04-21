@@ -228,7 +228,7 @@ const HomeScreen = ({ searchValue }) => {
   }, []);
   return (
     
-    <View style={[styles, (user.attributes['custom:University'] == 'Temple') ? SchoolColor.TempleBackgroundColor : SchoolColor.DrexelBackgroundColor]}>
+    <View style={[styles.page, (user.attributes['custom:University'] == 'Temple') ? SchoolColor.TempleBackgroundColor : SchoolColor.DrexelBackgroundColor]}>
       {/*Modal used to display filter tab*/}
       <Modal visible={modalOpen} animationType="none" presentationStyle="overFullScreen" transparent>
 

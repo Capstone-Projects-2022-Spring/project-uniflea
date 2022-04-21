@@ -4,9 +4,9 @@ import { scale, ScaledSheet } from "react-native-size-matters";
 
 const styles = ScaledSheet.create({
   page: {
-    flexDirection: "column",
+    // flexDirection: "column",
     flex: 1,
-    padding: 10,
+    width: '100%',
     // backgroundColor: Colors.mainBackground,
   },
 

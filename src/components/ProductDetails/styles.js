@@ -2,9 +2,11 @@ import { scale, ScaledSheet } from "react-native-size-matters";
 
 const styles = ScaledSheet.create({
     root: {
+        
         height: '100%',
         padding: '4%',
         backgroundColor: "#f2f2f2",
+        marginBottom: '20%',
     },
     titleContainer: {
         padding: '1%',
@@ -22,19 +24,22 @@ const styles = ScaledSheet.create({
         alignSelf: 'center'
     },
     descriptionContainer: {
-        padding: '1%',
+        backgroundColor: 'yellow',
+        padding: '0.5%',
         alignItems: 'center',
     },
     description: {
+    
         fontSize: '14@s',
         marginVertical: '5%',
         lineHeight: '20@s',
         textAlign: 'center',
     },
     buttonContainer: {
-        height:'80%',
         alignItems: 'center',
         marginVertical: '4%',
+    
+        bottom: '4%',
     },
     profileContainer: {
         alignSelf: 'center',
@@ -95,7 +100,7 @@ const styles = ScaledSheet.create({
         justifyContent: 'center',
         // backgroundColor:'#99182e',
         // backgroundColor: Colors.buttonbackgroundPrimary,
-        height: '7%',
+        height: '15%',
         width: '65%',
         borderRadius: 5,
         borderWidth: 1,

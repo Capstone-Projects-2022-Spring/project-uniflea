@@ -10,7 +10,6 @@ import CustomButton from "../../components/CustomButton";
 const EditProductScreen = ({route, navigation}) => {
 
     const{id, title, price, description} = route.params;
-   
     console.log("edit screen: " + id)
     console.log("edit screen: " + title)
     console.log("edit screen: " + price)
@@ -69,6 +68,7 @@ const EditProductScreen = ({route, navigation}) => {
             })
         )
         console.log("++++ changes saved ++++");
+        navigation.goBack(null);
     };
     
     useEffect( () => {downloadImage()}, []);
@@ -107,7 +107,7 @@ const EditProductScreen = ({route, navigation}) => {
             style={styles.text}
              
                 placeholder={'$'+ JSON.stringify(price)}
-                defaultValue = {price}
+                defaultValue = {JSON.stringify(price)}
                 onChangeText={ newPrice =>navigation.setParams({
                     price: newPrice
                 })}                      
