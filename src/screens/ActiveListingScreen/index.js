@@ -39,14 +39,14 @@ const ActiveListingScreen = ({route}) => {
         return () => subscription.unsubscribe();
       }, []);
   
-
+      
       return (
         <SafeAreaView style={styles.page}>
             
             <FlatList 
               data={items}
               renderItem={({item}) =>
-               
+          
                 <ActiveProductItem 
                   id={item.id}
                   title={item.title} 
@@ -58,6 +58,7 @@ const ActiveListingScreen = ({route}) => {
                   items={items}
                   setItems={setItems}
                 />
+    
 
             }
               keyExtractor={product => product.id}

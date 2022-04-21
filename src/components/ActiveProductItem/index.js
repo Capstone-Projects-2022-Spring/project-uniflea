@@ -1,23 +1,22 @@
 
-import { Text, View, Image, Pressable } from "react-native";
 import React, {useEffect, useContext} from "react";
+import { Text, View, Image, Pressable, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import AuthContext from "../../contexts/Authentication"
 import { useNavigation } from "@react-navigation/native";
 import { DataStore, Auth} from "aws-amplify";
 import { Product } from "../../models";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { FontAwesome, Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
 import { scale, ScaledSheet } from "react-native-size-matters"; 
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
+
 const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub, description, views }) => {
 
   const {user, setUser} = useContext(AuthContext);
-
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
-    navigation.navigate("ProductScreen", { id: id });
+    navigation.navigate("OtherProductDetails", { id: id });
   };
 
   const deleteItemById = async (id) => {
@@ -88,19 +87,18 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub, 
 
           <View style={styles.eyeContainer}> 
               <Text style={styles.eye}><MaterialIcons name="visibility" size={24} color="black" /></Text>
+
               <Text style={styles.eyeText}>{views}</Text>          
           </View>
-
+          
           <View style={styles.editContainer}>
            <EditButton userSub = {userSub}></EditButton>   
           </View>
 
           
-
-          
         <View style={styles.trashContainer}>
           <TouchableOpacity style={styles.trash} onPress={() => deleteItemById(id)}>
-            <FontAwesome name="trash-o" size={24} color="#bf1b36" />
+            <FontAwesome name="trash-o" size={scale(24)} color="#bf1b36" />
           </TouchableOpacity>
         </View>
         </View>
