@@ -10,6 +10,8 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import GetSchool from "../GetSchool";
+import { SchoolColor } from "../../styles/SchoolColors";
 
 const SavedProductItem = ({ id, image, title, price, displayName, productId, items, setItems }) => {
   const navigation = useNavigation();
@@ -68,7 +70,7 @@ const SavedProductItem = ({ id, image, title, price, displayName, productId, ite
           <MaterialCommunityIcons
             name="book-remove-multiple"
             size={28}
-            color="#bf1b36"
+            color= {(GetSchool == 'Temple') ? styles.TempleBackgroundColor : styles.DrexelBackgroundColor }
           />
         </TouchableOpacity>
       </View>

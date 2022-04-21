@@ -1,17 +1,22 @@
 
-import { Text, View, Image, Pressable } from "react-native";
+import React, {useEffect, useContext} from "react";
+import { Text, View, Image, Pressable, TouchableOpacity } from "react-native";
 import styles from "./styles";
+import AuthContext from "../../contexts/Authentication"
 import { useNavigation } from "@react-navigation/native";
-import { DataStore } from "aws-amplify";
+import { DataStore, Auth} from "aws-amplify";
 import { Product } from "../../models";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { FontAwesome, Ionicons, MaterialIcons, AntDesign } from "@expo/vector-icons";
+import { scale, ScaledSheet } from "react-native-size-matters"; 
 import { S3Image } from "aws-amplify-react-native/dist/Storage";
-const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
+
+const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub, description, views }) => {
+
+  const {user, setUser} = useContext(AuthContext);
   const navigation = useNavigation();
   const onPress = () => {
     // which exact product, passing params lets us send data, but we must also receive data in product details screen for proper function
-    navigation.navigate("ProductScreen", { id: id });
+    navigation.navigate("OtherProductDetails", { id: id });
   };
 
   const deleteItemById = async (id) => {
@@ -26,13 +31,36 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
     setItems(filteredData);
   };
 
+  function EditButton(props) {
+    const sub = props.userSub;
+    if(sub == user.attributes.sub){
+      console.log("userSub Matches")
+      return <View>
+          <TouchableOpacity onPress={ () => navigation.navigate("EditProductScreen",{
+            id: id, 
+            title: title, 
+            price: price, 
+            description: description
+            }
+            )}>
+              <Text ><AntDesign name="edit" size={scale(24)} color="black" />Edit Listing</Text>
+
+          </TouchableOpacity>
+      </View>;
+    } else{
+      console.log("UserSub does not match")
+      console.log(sub)
+      console.log(user.attributes.sub)
+      return <View></View>;
+    }
+  }
+
+
+  console.log("Active Product Item: " + description)
   return (
     // Need to change navigation for profile page
 <View style={styles.root}>
 
-
-   
-      
         <View style={styles.imageContainer}>
            <Pressable onPress={onPress} >  
           <S3Image style={styles.image} imgKey={ image }/>
@@ -59,18 +87,18 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems }) => {
 
           <View style={styles.eyeContainer}> 
               <Text style={styles.eye}><MaterialIcons name="visibility" size={24} color="black" /></Text>
-              <Text style={styles.eyeText}>30</Text>             
-          </View>
 
-          <View style={styles.editContainer}>
-              <Text><AntDesign name="edit" size={24} color="black" />Edit Listing</Text>
-
+              <Text style={styles.eyeText}>{views}</Text>          
           </View>
           
-        
+          <View style={styles.editContainer}>
+           <EditButton userSub = {userSub}></EditButton>   
+          </View>
+
+          
         <View style={styles.trashContainer}>
           <TouchableOpacity style={styles.trash} onPress={() => deleteItemById(id)}>
-            <FontAwesome name="trash-o" size={24} color="#bf1b36" />
+            <FontAwesome name="trash-o" size={scale(24)} color="#bf1b36" />
           </TouchableOpacity>
         </View>
         </View>

@@ -26,8 +26,10 @@ import { useChatContext } from 'stream-chat-expo';
 
 
 
+
 const OtherProfileScreen = ({route}) => {
 
+  
   const navigation = useNavigation();
 
   /*Setting the name of the user on the page */
@@ -41,9 +43,16 @@ const OtherProfileScreen = ({route}) => {
 
  const{client} = useChatContext();
 const [isLoading, setIsLoading] = useState(true);
+const [product, setProduct] = useState(null);
 
  const { userSub } = route.params;
-  const pullOtherUserInfo = async () => {
+
+//  const pullOtherProduct = async () =>{
+//   const prodRecord = await DataStore.query(Product, s => s.userSub("eq", userSub));
+//   setProduct(prodRecord);
+ 
+// };
+ const pullOtherUserInfo = async () => {
 
     setIsLoading(true);
     const userRecord = await DataStore.query(User, s => s.userSub("eq", userSub));
@@ -153,24 +162,26 @@ const [isLoading, setIsLoading] = useState(true);
         </Text>
       </View>
       <View style={styles.lowerContainer}>
-        <View style={styles.container}>
-          <View style={styles.row}>
+      <View style={styles.space} />
+      <View style={styles.space} />
+        <View style={styles.buttonContainer}>
+          
             <TouchableOpacity
-              onPress={() => navigation.navigate("ReviewScreen", {fromScreen:"OtherProfileScreen"})}
+              onPress={() => navigation.navigate("ActiveListingScreen",  {fromScreen:"OtherProfileScreen"})}
             >
-              <Circle text="Read Reviews"  />
+              <Circle text="Active Listings"  />
             </TouchableOpacity>
 
             <View style={styles.space} />
 
             <TouchableOpacity
-              onPress={() => navigation.navigate("ActiveListingScreen")}
-            >
-              <Circle text="Active Listings" />
+              
+           onPress={() => navigation.navigate("ReviewScreen", {fromScreen:"OtherProfileScreen"})} >
+              <Circle text="Read Reviews" />
             </TouchableOpacity>
-          </View>
+         
           <View style={styles.space} />
-          <View style={styles.row}>
+          
             <TouchableOpacity
               onPress={() => navigation.navigate("LeaveReviewScreen")}
             >
@@ -179,9 +190,9 @@ const [isLoading, setIsLoading] = useState(true);
 
             <View style={styles.space} />
 
-            <SendMessageItem userToMessage={otherUser}/>
+            {/* <SendMessageItem userToMessage={otherUser}/> */}
 
-          </View>
+          
         </View>
       </View>
     </SafeAreaView>

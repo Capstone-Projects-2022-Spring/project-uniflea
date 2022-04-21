@@ -24,7 +24,7 @@ const HeaderComponent = ({search, setSearch}) => {
                 <TextInput style={{ height: 40, marginLeft: 10}} placeholder='Search...' value={search} onChangeText={setSearch}/>
             </View>
 
-            <View style={{position: 'absolute', right: 5, top: 5,}}>
+            <View style={{position: 'absolute', right: 4, padding:2,}}>
                <SchoolLogo/> 
             </View>
 
@@ -54,6 +54,7 @@ const HomeStack = () => {
             <Stack.Screen name='ActiveListingScreen' component={ActiveListingScreen}/>
             <Stack.Screen name='LeaveReviewScreen' component={LeaveReviewScreen} />
             <Stack.Screen name="Chat" component={ChatScreen} options={{title:'Chat'}}/>
+            <Stack.Screen name="OtherProductDetails" component={ProductDetails} options={{title:'Product Detail'}}/>
             
             {/* <Stack.Screen component={NotificationsScreen} name={"Notifications"} options={{ title: 'Notifications' }} />  */}
         </Stack.Navigator>
