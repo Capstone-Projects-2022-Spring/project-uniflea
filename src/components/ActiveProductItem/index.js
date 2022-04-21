@@ -56,6 +56,24 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub, 
   }
 
 
+  function TrashCanButton(props) {
+    const sub = props.userSub;
+    if(sub  == user.attributes.sub) {
+      console.log("trash userSub Matches")
+      return <View>
+                  <TouchableOpacity onPress={() => deleteItemById(id)}>
+                    <FontAwesome name="trash-o" size={scale(24)} color="#bf1b36" />
+                  </TouchableOpacity>
+            </View>
+    } else {
+      console.log("trash UserSub does not match")
+      console.log(sub)
+      console.log(user.attributes.sub)
+      return <View></View>;
+    }
+  }
+
+
   console.log("Active Product Item: " + description)
   return (
     // Need to change navigation for profile page
@@ -97,9 +115,7 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub, 
 
           
         <View style={styles.trashContainer}>
-          <TouchableOpacity style={styles.trash} onPress={() => deleteItemById(id)}>
-            <FontAwesome name="trash-o" size={scale(24)} color="#bf1b36" />
-          </TouchableOpacity>
+          <TrashCanButton userSub = {userSub}></TrashCanButton>
         </View>
         </View>
       </View>
