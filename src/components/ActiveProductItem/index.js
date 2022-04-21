@@ -37,14 +37,14 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub, 
     if(sub == user.attributes.sub){
       console.log("userSub Matches")
       return <View>
-          <TouchableOpacity style={styles.editContainer}  onPress={ () => navigation.navigate("EditProductScreen",{
+          <TouchableOpacity onPress={ () => navigation.navigate("EditProductScreen",{
             id: id, 
             title: title, 
             price: price, 
             description: description
             }
             )}>
-              <Text ><AntDesign name="edit" size={scale(24)} color="blue" />Edit Listing</Text>
+              <Text ><AntDesign name="edit" size={scale(24)} color="black" />Edit Listing</Text>
 
           </TouchableOpacity>
       </View>;
@@ -91,7 +91,10 @@ const ActiveProductItem = ({ id, image, title, price, items, setItems, userSub, 
               <Text style={styles.eyeText}>{views}</Text>          
           </View>
 
-          <EditButton userSub = {userSub}></EditButton>   
+          <View style={styles.editContainer}>
+           <EditButton userSub = {userSub}></EditButton>   
+          </View>
+
           
 
           
