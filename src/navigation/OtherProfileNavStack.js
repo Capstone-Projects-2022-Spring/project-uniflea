@@ -14,15 +14,14 @@ const OtherProfileNavStack = createStackNavigator();
 const OtherProfileStack = () => {
 
     return(
-        <OtherProfileNavStack.Navigator screenOptions={{headerShown: true, title:''}}>
-        <OtherProfileNavStack.Screen name='OtherProfileScreen' component={OtherProfileScreen} options= {{title: ''}}/>
-        <OtherProfileNavStack.Screen name='ReportScreen' component={ReportScreen}/>
-        <OtherProfileNavStack.Screen name='ReviewScreen' component={ReviewScreen}/>
-        <OtherProfileNavStack.Screen name='ActiveListingScreen' component={ActiveListingScreen}/>
-        <OtherProfileNavStack.Screen name='LeaveReviewScreen' component={LeaveReviewScreen} />
-        <OtherProfileNavStack.Screen name="Chat" component={ChatScreen} options={{title:'Chat'}}/>
-        {/* <OtherProfileNavStack.Screen name=''/> */}
-    </OtherProfileNavStack.Navigator>
+        <OtherProfileNavStack.Navigator screenOptions={{headerShown: true}}>
+            <OtherProfileNavStack.Screen name='OtherProfileScreen' component={OtherProfileScreen} options= {{title: ''}}/>
+            <OtherProfileNavStack.Screen name='ReportScreen' component={ReportScreen}/>
+            <OtherProfileNavStack.Screen name='ReviewScreen' component={ReviewScreen} options={{title:'Reviews'}}/>
+            <OtherProfileNavStack.Screen name='ActiveListingScreen' component={ActiveListingScreen} options={{title:'Active Listings'}}/>
+            <OtherProfileNavStack.Screen name='LeaveReviewScreen' component={LeaveReviewScreen} options={{title:'Leave Review'}}/>
+            <OtherProfileNavStack.Screen name="Chat" component={ChatScreen} options={{title:'Chat'}}/>
+        </OtherProfileNavStack.Navigator>
     )
 
 }
