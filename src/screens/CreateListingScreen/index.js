@@ -133,9 +133,8 @@ const CreateListingScreen = () => {
         setTitleOfListing(null);
         setDescriptionOfListing(null);
         setPriceOfListing(null);
-        console.log("blah blah" + value);
         setValue(null);
-        console.log("blah blah blah" + value);
+        navigation.navigate("HomeScreen");
     }
 
     // had scroll view to permit tapping out of text boxes. try to find keyboard dismiss. also figure out how to keep default camera image on pickimage. implement multiople images as well. /clear fields after publishing successfully. require fileds too
@@ -211,7 +210,5 @@ const CreateListingScreen = () => {
         </TouchableWithoutFeedback>
     );
 };
-
-
 
 export default CreateListingScreen;
