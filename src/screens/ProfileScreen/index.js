@@ -58,7 +58,10 @@ const ProfilePage = () => {
     });
 
     console.log(result);
-
+    if (result.cancelled){
+      setIsLoading(false);
+      return;
+    }
     if (!result.cancelled) {
       setImage(result.uri);
     }

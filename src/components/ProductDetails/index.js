@@ -131,9 +131,9 @@ const ProductDetails = () => {
                     <View style={styles.buttonContainer}>
                         {/* <ScaledCustomButton onPress={addToSavedList} text='Save Listing' primary={true}/> */}
 
-                        <TouchableOpacity onPress= {addToSavedList}  style={ [styles.button, (GetSchool()) ? styles.TempleBackgroundColor : styles.DrexelBackgroundColor]}>
-                            <Text style={styles.text}>Save Listing</Text>
-                        </TouchableOpacity>
+                        <CustomButton onPress= {addToSavedList} text={"Save Listing"} style={ [styles.button, (GetSchool()) ? styles.TempleBackgroundColor : styles.DrexelBackgroundColor]}/>
+                           
+                        
                         <SendMessageItem userToMessage={sellingUser}/>
                         
                     </View>

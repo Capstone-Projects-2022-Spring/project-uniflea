@@ -30,7 +30,7 @@ const ProfileScreenStack = () => {
             <ProfileStack.Screen name="SignIn" component={SignInScreen} />
             <ProfileStack.Screen name='ReportScreen' component={ReportScreen}/>
 
-            <ProfileStack.Screen name="EditProductScreen" component={EditProductScreen} options={{title:'Edit Product'}}/>
+            <ProfileStack.Screen name="EditProductScreen" component={EditProductScreen} options={{title:''}}/>
 
             <ProfileStack.Screen name="OtherProductDetails" component={ProductDetails} options={{title:'Product Detail'}}/>
         </ProfileStack.Navigator>
