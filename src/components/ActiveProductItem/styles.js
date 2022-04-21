@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
+import { scale, ScaledSheet } from "react-native-size-matters"; 
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
 
   root: {
     borderColor: "#d1d1d1",
@@ -8,22 +8,22 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginVertical: 0.5,
     width: "100%",
-    height: 303,
+    height: scale(280),
     alignItems:'center',
   },
   bottomContainer: {
     width: '100%',
-    height: 100,
-    top:207,
+    height: scale(75),
+    top:scale(207),
     alignItems:'center',
   },
   title: {
-    fontSize: 18,
+    fontSize: '18@s',
     fontWeight: "bold",
   },
   titleContainer: {
     padding:2,
-    
+
     width: "100%",
     flexDirection: "row",
     justifyContent:'center'
@@ -31,23 +31,24 @@ const styles = StyleSheet.create({
   },
   actionContainer:{
     width: '100%',
-    height: 35,
+    height: scale(35),
     position: "absolute",
-    bottom:9,
+    bottom:scale(9),
     alignItems:'center',
-    justifyContent:'center'
+    justifyContent:'center',
+ 
     
   },
   priceContainer: {
-    bottom: 5,
-    padding:5,
+    bottom: scale(5),
+    padding:scale(5),
     left:'3%',
     alignItems:'flex-start',
     position: "absolute",
   
   },
   price: {
-    fontSize: 18,
+    fontSize: '16@s',
   },
  
   imageContainer: {
@@ -58,8 +59,8 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: 3,
-    width: 200,
-    height: 200,
+    width: scale(200),
+    height:scale( 200),
     resizeMode: "cover",
     alignItems: "center",
   },
@@ -72,28 +73,28 @@ const styles = StyleSheet.create({
     
   },
   trash: {
-    fontSize: 15,
+    fontSize: '15@s',
     fontWeight: "bold",
     
   },
   eyeContainer:{
-    bottom: 5,
+    bottom:scale( 5),
     padding:5,
     left:'40%',
     position: "absolute",
   },
   eye:{
-    right:25,
-    top:5,
+    right:scale(25),
+    top:scale(5),
   },
   eyeText:{
-    fontSize:15,
+    fontSize:'15@s',
     justifyContent:'center',
-    marginTop: -14 ,
-    marginStart: -1,
+    marginTop: scale(-14) ,
+    marginStart: scale(-1),
   },
   editContainer:{
-    bottom: 5,
+    bottom:scale(5),
     padding:5,
     left:'55%',
     position: "absolute",
