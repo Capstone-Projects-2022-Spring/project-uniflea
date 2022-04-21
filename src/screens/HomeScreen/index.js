@@ -296,7 +296,6 @@ const HomeScreen = ({ searchValue }) => {
             </View>
 
           </View>
-          </View>
         </View>
 
 
