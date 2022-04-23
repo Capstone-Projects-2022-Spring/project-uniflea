@@ -22,6 +22,10 @@ Hi everyone, this is the 4th and final release of our application, UniFlea. Ther
 - Report button now takes the user directly to the default email app.
 - No more multiple back buttons on the other user's profile.
 
+### **Known Bugs**
+- Keyboard will cover up text input in some pages.
+- Search bar functionality is case sensitive.
+
 
 # Installation Instructions
 <br>
