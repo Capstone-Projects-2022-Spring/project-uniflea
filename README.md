@@ -6,20 +6,21 @@ project-uniflea created by GitHub Classroom
 <br>
 UniFlea is a mobile application that serves as a marketplace platform for university students. It will be exclusively available to currently enrolled students at the university with a buffer period that permits recent graduates to also participate. The goal for UniFlea is to help students purchase or sell textbooks, equipment, electronics, furniture, clothing and more. Similar to applications such as Facebook Marketplace and Craigslist, UniFlea is unique in that it offers the comfort of safety through an authentication process that confirms transactions are being made by students. Features of UniFlea include authentication and verification upon creating an account, a personalized homepage catered to the individual student, search filters and categories, in app messaging, notifications, and a moderation and reporting system.
 
-# **Version 3.0 Release Notes**
-Hi everyone, this is the 3rd release of our application, UniFlea. There are many exciting features and quality of life fixes to go over.
+# **Final Version Release**
+Hi everyone, this is the 4th and final release of our application, UniFlea. There are many exciting features and quality of life fixes to go over.
 
 ### **New features in this release**
 
-- Users are now able to chat in the app with other users to set up meetings or negotiate prices. Currently, this can be accessed via the navigation bar or when you tap on a item to view item details.
-- Users can view the profiles of other users and see their rating and reviews, leave a rating, and their user bio. Users can do this when they tap on an item to view more details.
-- Users can to keep UniFlea safe and legitimate by using the report item or report user feature that is available on every item details screen and everyone's profile screen.
-- Users are now able to filter items that are available using multiple categories such as 'electronics' and 'textbooks' at the same time. They can further organize those items based on price or date.
+- Users can now see how many views an item has received and will update in real time.
+- Users will only be able to view the products that have been submitted by fellow students of the same university. For example, Temple students will be allowed to see other products made by other Temple students.
+- The theme of the application will now dynamically change depending the logged in user's university. For example, the theme for Temple is cherry and white and the theme for Drexel is gold and blue.
 
-### **Quality of Life Fixes**
+### **Quality of Life and Bug Fixes**
 
-- We removed half-star ratings so that users have an easier and more enjoyable time rating other users.
-- We changed the password guideline font color from red to blue, before it confused some users into thinking that they were incorrect when they were creating their new password.
+- Invalid email error will no longer pop up after every character change in the email field.
+- Reading reviews on another person's profile will not be populated with that user's reviews and not the signed in user's.
+- Report button now takes the user directly to the default email app.
+- No more multiple back buttons on the other user's profile.
 
 
 # Installation Instructions
@@ -46,31 +47,16 @@ If you would like to see the current offical published release on Expo, proceed 
 <br>
 Users can test the release in the following ways
 
-* Testing the chat feature
+* Testing the item views
   1. navigate to home screen (first tab)
   2. choose a product that you are interested in
-  3. tap 'Message <User>'
-  4. type out a message
+  3. tap the product
+  4. return to home screen
+  5. notice the view counter on the product card goes up
   
-* Testing other user's profile
-  1. navigate to home screen (first tab)
-  2. choose a product that you are interested in
-  3. tap on the profile icon 
-  4. Be able to view that user's profile picture and user bio
- 
-* Testing multiple filters
-  1. navigate to home screen (first tab)
-  2. click on the funnel icon
-  3. on dropdown menu select any amount of categories to act as filters.
-  4. tap the checkmark and the home page will show the products that are listed under those categories.
-
-* Test create listing 
-  1. navigate to listing screen (middle tab)
-  2. select an image
-  3. fill out the form
-  4. click submit
-  5. wait a few moments
-  6. navigate to the home screen and filter based on date: newest to see your product
+* Testing different university themes
+  1. sign into your temple uniflea account, notice the red colors
+  2. use this account to test for drexel colors: drexelstudenttheme@gmail.com, PW: Kasie1234!
 
 ## Contributors
 Dylan Dunda, Josh Hageman, Tuan Lam, Adam Lang, Kasie Madden, TJ Nguyen, Sameera Rachakonda
